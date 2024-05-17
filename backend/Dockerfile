@@ -10,7 +10,7 @@ ARG DATABASE_URL
 ARG SCHEMA
 ARG SECRET_KEY
 
-WORKDIR /backend/var/www
+WORKDIR /var/www/backend
 
 COPY requirements.txt .
 
