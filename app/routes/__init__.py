@@ -1,2 +1,2 @@
-from auth_routes import auth_routes
-from user_routes import user_routes
+from app.routes.auth import auth_routes
+from app.routes.user import user_routes
