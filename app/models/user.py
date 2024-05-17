@@ -19,9 +19,11 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now())
 
+    # Connects to itself (many-to-many Users -> Users relationship)
     friends = db.relationship('User', secondary='friends', back_populates='friends')
     payer_friends_expenses = db.relationship('FriendsExpense', back_populates='payer')
     receiver_friends_expenses = db.relationship('FriendsExpense', back_populates='receiver')
+    comments = db.relationship('Comment', back_populates='user')
     friends_payments = db.relationship('FriendsPayment', back_populates='user')
 
     @property

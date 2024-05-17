@@ -15,7 +15,7 @@ class FriendsExpense(db.Model):
     amount = db.Column(db.Integer, nullable=False)
     expense_date = db.Column(db.Date, nullable=False)
     settled = db.Column(db.Boolean, nullable=False)
-    notes = db.Column(db.String(200))
+    notes = db.Column(db.String(200), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now())
 
