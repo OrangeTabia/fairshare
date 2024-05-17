@@ -9,7 +9,7 @@ from .routes import user_routes, auth_routes
 from .seeds import seed_commands
 from .config import Config
 
-app = Flask(__name__, static_folder='../../frontend/dist', static_url_path='/')
+app = Flask(__name__, static_folder='../frontend/dist', static_url_path='/')
 
 # Setup login manager
 login = LoginManager(app)
