@@ -19,7 +19,7 @@ class FriendsExpense(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now())
 
-    payments = db.relationship('FriendsPayment', back_populates='expense')
+    payments = db.relationship('Payment', back_populates='expense')
     comments = db.relationship('Comment', back_populates='comments')
     payer = db.relationship('User', back_populates='payer_friends_expenses')
     receiver = db.relationship('User', back_populates='receiver_friends_expenses')
