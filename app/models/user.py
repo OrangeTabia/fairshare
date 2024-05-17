@@ -48,6 +48,6 @@ class User(db.Model, UserMixin):
         }
 
 friends = db.Table('friends',
-                   db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
-                   db.Column('friend_id', db.Integer, db.ForeignKey('users.id'), primary_key=True)
+                   db.Column('user_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True),
+                   db.Column('friend_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True)
                    )

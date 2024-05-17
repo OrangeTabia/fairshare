@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from .db import db, environment, SCHEMA
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 class FriendsExpense(db.Model):
     __tablename__ = 'friends_expenses'
@@ -9,8 +9,8 @@ class FriendsExpense(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    payer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    receiver_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    payer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    receiver_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     description = db.Column(db.String(1000), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
     expense_date = db.Column(db.Date, nullable=False)

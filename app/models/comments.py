@@ -1,7 +1,7 @@
 from datetime import datetime
 from sqlalchemy.ext.hybrid import hybrid_property
 
-from .db import db, environment, SCHEMA
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 
 class Comment(db.Model):
@@ -11,9 +11,9 @@ class Comment(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    friends_expense_id = db.Column(db.Integer, db.ForeignKey('friends_expenses.id'), nullable=True)
-    group_expense_id = db.Column(db.Integer, db.ForeignKey('group_expenses.id'), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    friends_expense_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('friends_expenses.id')), nullable=True)
+    group_expense_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('group_expenses.id')), nullable=True)
     comment = db.Column(db.String(200), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now())
