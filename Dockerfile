@@ -10,14 +10,14 @@ ARG DATABASE_URL
 ARG SCHEMA
 ARG SECRET_KEY
 
-WORKDIR /app
+WORKDIR /var/www
 
-COPY requirements.txt /app
+COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 RUN pip install psycopg2
 
-COPY . /app
+COPY . .
 
 RUN flask db upgrade
 RUN flask seed all
