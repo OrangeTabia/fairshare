@@ -19,8 +19,10 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now())
 
+    friends = db.relationship('User', secondary='friends', back_populates='friends')
     payer_friends_expenses = db.relationship('FriendsExpense', back_populates='payer')
     receiver_friends_expenses = db.relationship('FriendsExpense', back_populates='receiver')
+    friends_payments = db.relationship('FriendsPayment', back_populates='user')
 
     @property
     def password(self):
