@@ -22,5 +22,10 @@ class FriendsPayment(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'userId': self.user_id
+            'userId': self.user_id,
+            'expenseId': self.expense_id,
+            'amount': self.amount,
+            'paymentDate': self.payment_date,
+            'createdAt': self.created_at,
+            'updatedAt': self.updated_at
         }
