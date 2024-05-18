@@ -4,28 +4,6 @@ from faker import Faker
 
 fake = Faker()
 
-# demo_seeder =     {
-#         'id': 1,
-#         'name': fake.name(),
-#         'email': fake.email(),
-#         'profile_image': 'https://images.unsplash.com/photo-1612487528505-d2338264c821?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-#         'passord': 'demo_password'
-#     }
-
-# users_seeder = [
-#     {
-#         'id': index,
-#         'name': fake.name(),
-#         'email': fake.email(),
-#         'profile_image': 'https://images.unsplash.com/photo-1612487528505-d2338264c821?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-#         'passord': 'password'
-#     }
-#     for index in range(2, 100)
-# ]
-
-
-
-# Adds a demo user, you can add other users here if you want
 def seed_users():
     for _ in range(1, 100):
         seed_user = User(
@@ -38,14 +16,8 @@ def seed_users():
 
     demo = User(
         name='Demo User', email='demo@aa.io', profile_image = 'https://images.unsplash.com/photo-1612487528505-d2338264c821?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', hashed_password='demo_password')
-    # marnie = User(
-    #     username='marnie', email='marnie@aa.io', password='password')
-    # bobbie = User(
-    #     username='bobbie', email='bobbie@aa.io', password='password')
 
     db.session.add(demo)
-    # db.session.add(marnie)
-    # db.session.add(bobbie)
     db.session.commit()
 
 
