@@ -10,12 +10,12 @@ def seed_users():
                         name = fake.name(),
                         email = fake.email(),
                         profile_image = 'https://images.unsplash.com/photo-1612487528505-d2338264c821?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                        hashed_password = 'password'
+                        password = 'password'
                     )
         db.session.add(seed_user)
 
     demo = User(
-        name='Demo User', email='demo@aa.io', profile_image = 'https://images.unsplash.com/photo-1612487528505-d2338264c821?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', hashed_password='demo_password')
+        name='Demo User', email='demo@aa.io', profile_image = 'https://images.unsplash.com/photo-1612487528505-d2338264c821?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', password='demo_password')
 
     db.session.add(demo)
     db.session.commit()

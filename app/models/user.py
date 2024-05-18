@@ -20,7 +20,6 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now())
 
-    payer_friends_expenses = db.relationship('FriendsExpense', back_populates='payer')
     comments = db.relationship('Comment', back_populates='user')
     payments = db.relationship('Payment', back_populates='user')
 
