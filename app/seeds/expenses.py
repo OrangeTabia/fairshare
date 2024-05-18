@@ -46,12 +46,30 @@ def seed_expenses():
         expense_date=date(2023, 12, 12),
         settled=False,
         )
+    demo6 = FriendsExpense(
+        payer_id=100,
+        receiver_id=6,
+        description='Wine Tasting!',
+        amount=55,
+        expense_date=date(2023, 9, 8),
+        settled=False,
+        )
+    demo7 = FriendsExpense(
+        payer_id=100,
+        receiver_id=7,
+        description='Lazer tag',
+        amount=25,
+        expense_date=date(2023, 11, 12),
+        settled=False,
+        )
 
     db.session.add(demo1)
     db.session.add(demo2)
     db.session.add(demo3)
     db.session.add(demo4)
     db.session.add(demo5)
+    db.session.add(demo6)
+    db.session.add(demo7)
 
 
     db.session.commit()
