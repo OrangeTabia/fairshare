@@ -20,9 +20,11 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(db.DateTime, default=datetime.now())
 
     # Connects to itself (many-to-many Users -> Users relationship)
-    friends = db.relationship('User', secondary='friends', back_populates='friends')
+            # seeding could not determin join condition, adding another connection
+        # user = db.relationship('User', secondary='friends', back_populates='friends')
+        # friends = db.relationship('User', secondary='friends', back_populates='user')
     payer_friends_expenses = db.relationship('FriendsExpense', back_populates='payer')
-    receiver_friends_expenses = db.relationship('FriendsExpense', back_populates='receiver')
+        # receiver_friends_expenses = db.relationship('FriendsExpense', back_populates='receiver')
     comments = db.relationship('Comment', back_populates='user')
     payments = db.relationship('Payment', back_populates='user')
 
@@ -47,7 +49,7 @@ class User(db.Model, UserMixin):
             'updatedAt': self.updated_at
         }
 
-friends = db.Table('friends',
-                   db.Column('user_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True),
-                   db.Column('friend_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True)
-                   )
+# friends = db.Table('friends',
+#                    db.Column('user_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True),
+#                    db.Column('friend_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True)
+#                    )

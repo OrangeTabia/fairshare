@@ -1,8 +1,8 @@
-"""create all tables
+"""empty message
 
-Revision ID: 208becf1b605
+Revision ID: 0565960357af
 Revises: 
-Create Date: 2024-05-17 21:48:48.534162
+Create Date: 2024-05-17 22:18:09.347444
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '208becf1b605'
+revision = '0565960357af'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -29,17 +29,9 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
     )
-    op.create_table('friends',
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('friend_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['friend_id'], ['users.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('user_id', 'friend_id')
-    )
     op.create_table('friends_expenses',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('payer_id', sa.Integer(), nullable=False),
-    sa.Column('receiver_id', sa.Integer(), nullable=False),
     sa.Column('description', sa.String(length=1000), nullable=False),
     sa.Column('amount', sa.Integer(), nullable=False),
     sa.Column('expense_date', sa.Date(), nullable=False),
@@ -48,7 +40,6 @@ def upgrade():
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['payer_id'], ['users.id'], ),
-    sa.ForeignKeyConstraint(['receiver_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('comments',
@@ -82,6 +73,5 @@ def downgrade():
     op.drop_table('payments')
     op.drop_table('comments')
     op.drop_table('friends_expenses')
-    op.drop_table('friends')
     op.drop_table('users')
     # ### end Alembic commands ###
