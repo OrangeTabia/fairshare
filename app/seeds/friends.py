@@ -14,9 +14,9 @@ def seed_friends():
                 )
                 db.session.add(friendship)
 
-    for _ in range(1, 16):
+    for index in range(1, 16):
         demo = Friend(
-            user_id=100, friend_id=randint(1, 99)
+            user_id=100, friend_id=index
         )
         db.session.add(demo)
 

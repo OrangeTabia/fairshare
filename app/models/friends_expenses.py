@@ -9,6 +9,9 @@ class FriendsExpense(db.Model):
     if environment == 'production':
         __table_args__ = {'schema': SCHEMA}
 
+    # receiver is the one who originaly paid the expense and receives funds
+    # payer is the one who needs to pay funds
+
     id = db.Column(db.Integer, primary_key=True)
     payer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod(User.id)), nullable=False)
     receiver_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod(User.id)), nullable=False)

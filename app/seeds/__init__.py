@@ -1,7 +1,7 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
 # from .comments import seed_comments, undo_comments
-# from .expenses import seed_expenses, undo_expenses
+from .expenses import seed_expenses, undo_expenses
 from .friends import seed_friends, undo_friends
 # from .payments import seed_payments, undo_payments
 
@@ -22,12 +22,12 @@ def seed():
         # Make sure to add all your other model's undo functions below
             # undo_comments()
             # undo_payments()
-            # undo_expenses()
+        undo_expenses()
         undo_friends()
         undo_users()
     seed_users()
     seed_friends()
-        # seed_expenses()
+    seed_expenses()
         # seed_payments()
         # seed_comments()
     # Add other seed functions here
@@ -38,7 +38,7 @@ def seed():
 def undo():
         # undo_comments()
         # undo_payments()
-        # undo_expenses()
+    undo_expenses()
     undo_friends()
     undo_users()
     # Add other undo functions here
