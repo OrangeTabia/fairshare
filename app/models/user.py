@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 
+
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -19,12 +20,7 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now())
 
-    # Connects to itself (many-to-many Users -> Users relationship)
-            # seeding could not determin join condition, adding another connection
-        # user = db.relationship('User', secondary='friends', back_populates='friends')
-    # friends = db.relationship('User', secondary='friends', backref='friends')
     payer_friends_expenses = db.relationship('FriendsExpense', back_populates='payer')
-        # receiver_friends_expenses = db.relationship('FriendsExpense', back_populates='receiver')
     comments = db.relationship('Comment', back_populates='user')
     payments = db.relationship('Payment', back_populates='user')
 
@@ -49,7 +45,16 @@ class User(db.Model, UserMixin):
             'updatedAt': self.updated_at
         }
 
-friends = db.Table('friends',
-                   user_id = db.Column( db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'))),
-                   friend_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
-                   )
+
+class Friend(db.Model):
+    __tablename__ = 'friends'
+
+    if environment == 'production':
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod(User.id)), nullable=False)
+    friend_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod(User.id)), nullable=False)
+
+    user = db.relationship(User, foreign_keys='Friend.user_id', backref='user')
+    friend = db.relationship(User, foreign_keys='Friend.friend_id', backref='friend')
