@@ -24,8 +24,8 @@ mako = "==1.2.4"
 markupsafe = "==2.1.2"
 sqlalchemy = "==1.4.46"
 werkzeug = "==2.2.2"
-wtforms = "==3.0.1"
 faker = "*"
+wtforms = {extras = ["email"], version = "*"}
 
 [dev-packages]
 

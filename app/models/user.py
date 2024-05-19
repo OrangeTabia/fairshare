@@ -5,12 +5,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 
-
 class User(db.Model, UserMixin):
-    __tablename__ = 'users'
+    __tablename__ = "users"
 
-    if environment == 'production':
-        __table_args__ = {'schema': SCHEMA}
+    if environment == "production":
+        __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -20,8 +19,8 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now())
 
-    comments = db.relationship('Comment', back_populates='user')
-    payments = db.relationship('Payment', back_populates='user')
+    comments = db.relationship("Comment", back_populates="user")
+    payments = db.relationship("Payment", back_populates="user")
 
     @property
     def password(self):
@@ -36,24 +35,35 @@ class User(db.Model, UserMixin):
 
     def to_dict(self):
         return {
-            'id': self.id,
-            'name': self.name,
-            'email': self.email,
-            'profileImage': self.profile_image,
-            'createdAt': self.created_at,
-            'updatedAt': self.updated_at
+            "id": self.id,
+            "name": self.name,
+            "email": self.email,
+            "profileImage": self.profile_image,
+            # "createdAt": self.created_at,
+            # "updatedAt": self.updated_at,
         }
 
 
 class Friend(db.Model):
-    __tablename__ = 'friends'
+    __tablename__ = "friends"
 
-    if environment == 'production':
-        __table_args__ = {'schema': SCHEMA}
+    if environment == "production":
+        __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod(User.id)), nullable=False)
-    friend_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod(User.id)), nullable=False)
+    user_id = db.Column(
+        db.Integer, db.ForeignKey(add_prefix_for_prod(User.id)), nullable=False
+    )
+    friend_id = db.Column(
+        db.Integer, db.ForeignKey(add_prefix_for_prod(User.id)), nullable=False
+    )
 
-    user = db.relationship(User, foreign_keys='Friend.user_id', backref='user')
-    friend = db.relationship(User, foreign_keys='Friend.friend_id', backref='friend')
+    user = db.relationship(User, foreign_keys="Friend.user_id", backref="user")
+    friend = db.relationship(User, foreign_keys="Friend.friend_id", backref="friend")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "friend_id": self.friend_id,
+        }
