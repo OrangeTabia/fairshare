@@ -24,6 +24,9 @@ def friends_list():
 
 @friends_routes.route("/add_friend", methods=["GET", "POST"])
 def new_friend():
+    """
+    Add a friend by email to the current user's friends list
+    """
 
     form = AddFriendForm()
 
@@ -48,3 +51,17 @@ def new_friend():
         return new_friend.to_dict()
     else:
         return form.errors, 401
+
+
+@friends_routes.route("/<int:friendship_id>/delete")
+def delete_friend(friendship_id): 
+    """
+    Delete a friend by friendship ID (from table Friend.id) from the current user's friends list
+    """
+    
+    friendship_to_delete = Friend.query.get(friendship_id)
+
+    db.session.delete(friendship_to_delete)
+    db.session.commit()
+
+    return {"message": "Friend successfully deleted"}
