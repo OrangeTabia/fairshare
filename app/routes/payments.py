@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 from datetime import datetime
 
-from app.models import User, Friend, FriendsExpense, db
+from app.models import User, Friend, FriendsExpense, Payment, db
 from app.forms import CreateFriendsExpenseForm
 
 payments_routes = Blueprint("payments", __name__)
@@ -14,8 +14,9 @@ def all_payments():
     """
     Query for all current user's prior and pending payments
     """
-    friends_expenses_list_payer = list(FriendsExpense.query.filter_by(payer_id=current_user.id).order_by(FriendsExpense.expense_date))
-    friends_expenses_list_receiver = list(FriendsExpense.query.filter_by(receiver_id=current_user.id).order_by(FriendsExpense.expense_date))
+    payments = Payment.query.filter_by(user_id=current_user.id)
+    payments2 = 
+
 
     all_expenses = friends_expenses_list_payer + friends_expenses_list_receiver
 
