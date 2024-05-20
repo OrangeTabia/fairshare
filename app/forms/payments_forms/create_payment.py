@@ -15,8 +15,6 @@ def check_payment_amount(form, field):
     expense = FriendsExpense.query.get(expense_id)
     payments = expense.payments
 
-    print(f"\n\n{payments[0].to_dict()}\n\n")
-
     for payment in payments:
         total += payment.amount
 

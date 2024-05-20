@@ -8,7 +8,7 @@ from app.models import User, Friend, FriendsExpense, Payment, db
 payments_routes = Blueprint("payments", __name__)
 
 
-@payments_routes.route("/")
+@payments_routes.route("")
 @login_required
 def all_payments():
     """

@@ -2,13 +2,13 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 from datetime import datetime
 
-from app.models import FriendsExpense, db
+from app.models import FriendsExpense, Payment, db
 from app.forms import CreateFriendsExpenseForm
 
 friends_expenses_routes = Blueprint("friends_expenses", __name__)
 
 
-@friends_expenses_routes.route("/")
+@friends_expenses_routes.route("")
 @login_required
 def all_friends_expenses():
     """
@@ -19,6 +19,14 @@ def all_friends_expenses():
 
     receiver_friends_expenses = FriendsExpense.query.filter_by(receiver_id=current_user.id).order_by(FriendsExpense.expense_date).all()
     receiver_friends_expenses = [expense.to_dict() for expense in receiver_friends_expenses]
+
+
+    for expense in payer_friends_expenses:
+        for comment in expense.payments:
+            print('------------->>>>', comment.to_dict())
+
+
+
 
     return {
         'payerFriendsExpenses': payer_friends_expenses,
