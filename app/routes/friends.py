@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
 
 from app.models import User, Friend, db
@@ -7,7 +7,7 @@ from app.forms import AddFriendForm
 friends_routes = Blueprint("friends", __name__)
 
 
-@friends_routes.route("/")
+@friends_routes.route("")
 @login_required
 def friends_list():
     """
@@ -21,7 +21,7 @@ def friends_list():
 
     # sorted(friends_info, key=lambda friend: friend.to_dict()["name"])
 
-    return [friend.to_dict() for friend in friends_info]
+    return jsonify([friend.to_dict() for friend in friends_info])
 
 
 @friends_routes.route("/add_friend", methods=["GET", "POST"])

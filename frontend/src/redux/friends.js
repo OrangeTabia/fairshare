@@ -7,12 +7,8 @@ const loadFriends = (friends) => ({
 
 export const thunkLoadFriends = () => async (dispatch) => {
     const response = await fetch("/api/friends");
-    if (response.ok) {
-        const data = await response.json();
-        dispatch(loadFriends(data));
-    } else {
-        return { server: "Something went wrong. Please try again"}
-    }
+    const data = await response.json();
+    dispatch(loadFriends(data));
 }; 
 
 const initialState = {};
