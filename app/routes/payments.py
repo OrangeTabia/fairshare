@@ -14,13 +14,16 @@ def all_payments():
     """
     Query for all current user's prior and pending payments
     """
-    payments = Payment.query.filter_by(user_id=current_user.id)
-    payments2 = 
+    payments = Payment.query.filter_by(user_id=current_user.id).all()
+    payments = [payment ]
+
+    print(payments.to_dict())
+    return payments.to_dict()
 
 
-    all_expenses = friends_expenses_list_payer + friends_expenses_list_receiver
+    # all_expenses = friends_expenses_list_payer + friends_expenses_list_receiver
 
-    return {"Expenses": [expense.to_dict() for expense in all_expenses]}
+    # return {"Expenses": [expense.to_dict() for expense in all_expenses]}
 
 
 
