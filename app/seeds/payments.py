@@ -5,27 +5,18 @@ from datetime import date
 
 fake = Faker()
 
+
 def seed_payments():
 
     demo1 = Payment(
-        user_id=100,
-        friends_expense_id=6,
-        amount=55,
-        payment_date=date(2023, 9, 9)
+        user_id=100, friends_expense_id=6, amount=5500, payment_date=date(2023, 9, 9)
     )
     demo2 = Payment(
-        user_id=100,
-        friends_expense_id=7,
-        amount=25,
-        payment_date=date(2023, 11, 18)
+        user_id=100, friends_expense_id=7, amount=2500, payment_date=date(2023, 11, 18)
     )
     demo3 = Payment(
-        user_id=1,
-        friends_expense_id=1,
-        amount=40,
-        payment_date=date(2023, 5, 10)
+        user_id=1, friends_expense_id=1, amount=4000, payment_date=date(2023, 5, 10)
     )
-
 
     db.session.add(demo1)
     db.session.add(demo2)
@@ -42,7 +33,9 @@ def seed_payments():
 # it will reset the primary keys for you as well.
 def undo_payments():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.payments RESTART IDENTITY CASCADE;")
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.payments RESTART IDENTITY CASCADE;"
+        )
     else:
         db.session.execute(text("DELETE FROM payments"))
 
