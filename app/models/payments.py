@@ -67,7 +67,7 @@ class Payment(db.Model):
         return {
             "id": self.id,
             "userId": self.user_id,
-            "expenseId": self.expense_id,
+            "expenseId": self.friends_expense_id,
             "amount": self.amount,
             "paymentDate": self.payment_date,
             "createdAt": self.created_at,

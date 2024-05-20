@@ -5,12 +5,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 
-
 class User(db.Model, UserMixin):
-    __tablename__ = 'users'
+    __tablename__ = "users"
 
-    if environment == 'production':
-        __table_args__ = {'schema': SCHEMA}
+    if environment == "production":
+        __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(
         db.Integer,
@@ -64,20 +63,20 @@ class User(db.Model, UserMixin):
 
     def to_dict(self):
         return {
-            'id': self.id,
-            'name': self.name,
-            'email': self.email,
-            'profileImage': self.profile_image,
-            'createdAt': self.created_at,
-            'updatedAt': self.updated_at
+            "id": self.id,
+            "name": self.name,
+            "email": self.email,
+            "profileImage": self.profile_image,
+            # "createdAt": self.created_at,
+            # "updatedAt": self.updated_at,
         }
 
 
 class Friend(db.Model):
-    __tablename__ = 'friends'
+    __tablename__ = "friends"
 
-    if environment == 'production':
-        __table_args__ = {'schema': SCHEMA}
+    if environment == "production":
+        __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(
         db.Integer,

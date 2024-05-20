@@ -24,8 +24,13 @@ mako = "==1.2.4"
 markupsafe = "==2.1.2"
 sqlalchemy = "==1.4.46"
 werkzeug = "==2.2.2"
-wtforms = "==3.0.1"
 faker = "*"
+dnspython = "==2.6.1"
+email-validator = "==2.1.1"
+idna = "==3.7"
+importlib-metadata = "==7.1.0"
+wtforms = {extras = ["email"], version = "==3.1.2"}
+zipp = "==3.18.2"
 
 [dev-packages]
 

@@ -1,6 +1,6 @@
 from app.models import db, FriendsExpense, environment, SCHEMA
 from sqlalchemy.sql import text
-from datetime import date
+from datetime import datetime
 
 def seed_expenses():
 
@@ -9,7 +9,7 @@ def seed_expenses():
         receiver_id=100,
         description='Pizza night!',
         amount=40,
-        expense_date=date(2023, 5, 5),
+        expense_date=datetime(2023, 2, 28, 0, 0, 0),
         settled=False,
         notes='Extra peperoni for Stacy'
         )
@@ -18,7 +18,7 @@ def seed_expenses():
         receiver_id=100,
         description='Night on the Town!',
         amount=65,
-        expense_date=date(2023, 11, 22),
+        expense_date=datetime(2023, 2, 28, 0, 0, 0),
         settled=False,
         )
     demo3 = FriendsExpense(
@@ -26,7 +26,7 @@ def seed_expenses():
         receiver_id=100,
         description='Rent',
         amount=600,
-        expense_date=date(2023, 6, 12),
+        expense_date=datetime(2023, 2, 28, 0, 0, 0),
         settled=False,
         notes='May rent'
         )
@@ -35,7 +35,7 @@ def seed_expenses():
         receiver_id=4,
         description='Wine Tasting!',
         amount=55,
-        expense_date=date(2023, 10, 2),
+        expense_date=datetime(2023, 2, 28, 0, 0, 0),
         settled=False,
         )
     demo5 = FriendsExpense(
@@ -43,7 +43,7 @@ def seed_expenses():
         receiver_id=5,
         description='Lazer tag',
         amount=25,
-        expense_date=date(2023, 12, 12),
+        expense_date=datetime(2023, 2, 28, 0, 0, 0),
         settled=False,
         )
     demo6 = FriendsExpense(
@@ -51,7 +51,7 @@ def seed_expenses():
         receiver_id=6,
         description='Wine Tasting!',
         amount=55,
-        expense_date=date(2023, 9, 8),
+        expense_date=datetime(2023, 2, 28, 0, 0, 0),
         settled=False,
         )
     demo7 = FriendsExpense(
@@ -59,7 +59,7 @@ def seed_expenses():
         receiver_id=7,
         description='Lazer tag',
         amount=25,
-        expense_date=date(2023, 11, 12),
+        expense_date=datetime(2023, 2, 28, 0, 0, 0),
         settled=False,
         )
 
