@@ -37,8 +37,8 @@ def create_friends_expense():
         formatted_date = datetime.strptime(form.data["expense_date"], '%Y-%m-%d %H:%M:%S')
 
         new_friends_expense = FriendsExpense(
-            payer_id=form.data["payer_id"], 
-            receiver_id=form.data["receiver_id"], 
+            payer_id=form.data["payer_id"],
+            receiver_id=form.data["receiver_id"],
             description=form.data["description"],
             amount=form.data["amount"],
             expense_date=formatted_date,
@@ -63,36 +63,35 @@ def update_friends_expense(friends_expense_id):
     form["csrf_token"].data = request.cookies["csrf_token"]
 
     if form.validate_on_submit():
-        current_friends_expense = FriendsExpense.query.get(friends_expense_id)
 
         formatted_date = datetime.strptime(form.data["expense_date"], '%Y-%m-%d %H:%M:%S')
-        formatted_boolean = strtobool(form.data["settled"])
-        
 
-        print("========>", formatted_date)
-
-        current_friends_expense.payer_id=form.data["payer_id"], 
-        current_friends_expense.receiver_id=form.data["receiver_id"], 
-        current_friends_expense.description=form.data["description"],
-        current_friends_expense.amount=form.data["amount"],
-        # current_friends_expense.expense_date=formatted_date,
-        current_friends_expense.settled=formatted_boolean,
-        current_friends_expense.notes=form.data["notes"]
+        current_friends_expense = FriendsExpense.query.filter_by(id=friends_expense_id).update(dict(
+            payer_id=form.data["payer_id"],
+            receiver_id=form.data["receiver_id"],
+            description=form.data["description"],
+            amount=form.data["amount"],
+            expense_date=formatted_date,
+            settled=form.data['settled'],
+            notes=form.data["notes"]
+        ))
 
         db.session.commit()
 
-        return current_friends_expense.to_dict()
+        updated_friends_expense = FriendsExpense.query.get(friends_expense_id)
+
+        return updated_friends_expense.to_dict()
     else:
         return form.errors, 401
-    
+
 
 
 # @friends_routes.route("/<int:friendship_id>/delete")
-# def delete_friend(friendship_id): 
+# def delete_friend(friendship_id):
 #     """
 #     Delete a friend by friendship ID (from table Friend.id) from the current user's friends list
 #     """
-    
+
 #     friendship_to_delete = Friend.query.get(friendship_id)
 
 #     db.session.delete(friendship_to_delete)
