@@ -1,5 +1,5 @@
 from datetime import datetime
-# from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy.ext.hybrid import hybrid_property
 
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
@@ -51,6 +51,10 @@ class Comment(db.Model):
         back_populates="comments"
     )
     # group_expense = db.relationship('GroupExpense', back_populates='comments')
+
+    @property
+    def expense_id(self):
+        return self.friends_expense_id
 
     # @hybrid_property
     # def expense_id(self):

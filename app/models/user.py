@@ -50,6 +50,15 @@ class User(db.Model, UserMixin):
         back_populates='user'
     )
 
+    # friends = db.relationship(
+    #     'User',
+    #     secondary=friends,
+    #     # primaryjoin=(follows.c.follower_id == id),
+    #     # secondaryjoin=(follows.c.followed_id == id),
+    #     backref=db.backref("following", lazy="dynamic"),
+    #     lazy="dynamic"
+    # )
+
     @property
     def password(self):
         return self.hashed_password
@@ -103,3 +112,16 @@ class Friend(db.Model):
         foreign_keys='Friend.friend_id',
         backref='friend'
     )
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "userId": self.user_id,
+            "friendId": self.friend_id
+        }
+
+# friends = db.Table(
+#     "friends",
+#     db.Column("user_id", db.Integer, db.ForeignKey("users.id")),
+#     db.Column("friend_id", db.Integer, db.ForeignKey("users.id"))
+# )

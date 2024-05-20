@@ -44,9 +44,12 @@ def new_friend():
         if len(is_friend) >= 1:
             raise ValueError(f"You are already friends with {friend.name}")
 
+        # Creating two friendships will change if the model relationship changes
         new_friend = Friend(user_id=current_user.id, friend_id=friend.id)
+        new_friend_reversed = Friend(user_id=friend.id, friend_id=current_user.id)
 
         db.session.add(new_friend)
+        db.session.add(new_friend_reversed)
         db.session.commit()
 
         return new_friend.to_dict()
@@ -59,10 +62,12 @@ def delete_friend(friendship_id):
     """
     Delete a friend by friendship ID (from table Friend.id) from the current user's friends list
     """
-
+    #deleting two records at a time will change if the model  relationship changes
     friendship_to_delete = Friend.query.get(friendship_id)
+    friendship_to_delete_reversed = Friend.query.filter_by(user_id=friendship_to_delete.friend_id, friend_id=current_user.id).first()
 
     db.session.delete(friendship_to_delete)
+    db.session.delete(friendship_to_delete_reversed)
     db.session.commit()
 
     return {"message": "Friend successfully deleted"}
