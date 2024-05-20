@@ -42,7 +42,7 @@ def new_friend():
         )
 
         if len(is_friend) >= 1:
-            return {"message": f"You are already friends with {friend.name}"}
+            raise ValueError(f"You are already friends with {friend.name}")
 
         new_friend = Friend(user_id=current_user.id, friend_id=friend.id)
 
@@ -55,11 +55,11 @@ def new_friend():
 
 
 @friends_routes.route("/<int:friendship_id>/delete")
-def delete_friend(friendship_id): 
+def delete_friend(friendship_id):
     """
     Delete a friend by friendship ID (from table Friend.id) from the current user's friends list
     """
-    
+
     friendship_to_delete = Friend.query.get(friendship_id)
 
     db.session.delete(friendship_to_delete)
