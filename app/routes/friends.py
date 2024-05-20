@@ -20,8 +20,8 @@ def friends_list():
     ]
 
     # sorted(friends_info, key=lambda friend: friend.to_dict()["name"])
-
-    return jsonify([friend.to_dict() for friend in friends_info])
+    # return jsonify([friend.to_dict() for friend in friends_info])
+    return [friend.to_dict() for friend in friends_info]
 
 
 @friends_routes.route("/add_friend", methods=["GET", "POST"])
