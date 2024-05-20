@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField
+from wtforms import StringField, IntegerField, BooleanField
 from wtforms.validators import DataRequired, Length, NumberRange
 
 
@@ -9,8 +9,7 @@ class CreateFriendsExpenseForm(FlaskForm):
     description = StringField("description", validators=[Length(max=1000)])
     amount = IntegerField("amount", validators=[DataRequired(), NumberRange(min=0.01)])
     expense_date = StringField("expense_date", validators=[DataRequired()])
-    # settled = BooleanField("settled", false_values={False, "false", ""})
-    settled = StringField("settled")
+    settled = BooleanField("settled", false_values={False, "false", ""})
     notes = StringField("notes", validators=[Length(max=200)])
     # submit = SubmitField("Submit")
 

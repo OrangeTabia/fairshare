@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from datetime import date, datetime
+from distutils.util import strtobool
 
 from app.models import User, Friend, FriendsExpense, db
 from app.forms import CreateFriendsExpenseForm
@@ -65,6 +66,7 @@ def update_friends_expense(friends_expense_id):
         current_friends_expense = FriendsExpense.query.get(friends_expense_id)
 
         formatted_date = datetime.strptime(form.data["expense_date"], '%Y-%m-%d %H:%M:%S')
+        formatted_boolean = strtobool(form.data["settled"])
         
 
         print("========>", formatted_date)
@@ -74,7 +76,7 @@ def update_friends_expense(friends_expense_id):
         current_friends_expense.description=form.data["description"],
         current_friends_expense.amount=form.data["amount"],
         # current_friends_expense.expense_date=formatted_date,
-        current_friends_expense.settled=form.data["settled"],
+        current_friends_expense.settled=formatted_boolean,
         current_friends_expense.notes=form.data["notes"]
 
         db.session.commit()
