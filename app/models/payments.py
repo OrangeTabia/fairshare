@@ -10,24 +10,54 @@ class Payment(db.Model):
     if environment == "production":
         __table_args__ = {"schema": SCHEMA}
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
     user_id = db.Column(
-        db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
+        db.Integer,
+        db.ForeignKey(add_prefix_for_prod("users.id")),
+        nullable=False
     )
     friends_expense_id = db.Column(
         db.Integer,
         db.ForeignKey(add_prefix_for_prod("friends_expenses.id")),
         nullable=True,
     )
-    # group_expense_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('group_expenses.id')), nullable=True)
-    amount = db.Column(db.Integer, nullable=False)
-    payment_date = db.Column(db.Date, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.now())
-    updated_at = db.Column(db.DateTime, default=datetime.now())
+    # group_expense_id = db.Column(
+    #     db.Integer,
+    #     db.ForeignKey(add_prefix_for_prod('group_expenses.id')),
+    #     nullable=True
+    # )
+    amount = db.Column(
+        db.Integer,
+        nullable=False
+    )
+    payment_date = db.Column(
+        db.Date,
+        nullable=False
+    )
+    created_at = db.Column(
+        db.DateTime,
+        default=datetime.now()
+    )
+    updated_at = db.Column(
+        db.DateTime,
+        default=datetime.now()
+    )
 
-    user = db.relationship("User", back_populates="payments")
-    friends_expense = db.relationship("FriendsExpense", back_populates="payments")
-    # group_expense = db.relationship('GroupExpense', back_populates='payments')
+    user = db.relationship(
+        "User",
+        back_populates="payments"
+    )
+    friends_expense = db.relationship(
+        "FriendsExpense",
+        back_populates="payments"
+    )
+    # group_expense = db.relationship(
+        # 'GroupExpense',
+        # back_populates='payments'
+    # )
 
     # @hybrid_property
     # def expense_id(self):

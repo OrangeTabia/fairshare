@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy.ext.hybrid import hybrid_property
+# from sqlalchemy.ext.hybrid import hybrid_property
 
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
@@ -10,22 +10,46 @@ class Comment(db.Model):
     if environment == "production":
         __table_args__ = {"schema": SCHEMA}
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
     user_id = db.Column(
-        db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
+        db.Integer,
+        db.ForeignKey(add_prefix_for_prod("users.id")),
+        nullable=False
     )
     friends_expense_id = db.Column(
         db.Integer,
         db.ForeignKey(add_prefix_for_prod("friends_expenses.id")),
         nullable=True,
     )
-    # group_expense_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('group_expenses.id')), nullable=True)
-    comment = db.Column(db.String(200), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.now())
-    updated_at = db.Column(db.DateTime, default=datetime.now())
+    # group_expense_id = db.Column(
+    #     db.Integer,
+    #     db.ForeignKey(add_prefix_for_prod('group_expenses.id')),
+    #     nullable=True
+    # )
+    comment = db.Column(
+        db.String(200),
+        nullable=False
+    )
+    created_at = db.Column(
+        db.DateTime,
+        default=datetime.now()
+    )
+    updated_at = db.Column(
+        db.DateTime,
+        default=datetime.now()
+    )
 
-    user = db.relationship("User", back_populates="comments")
-    friends_expense = db.relationship("FriendsExpense", back_populates="comments")
+    user = db.relationship(
+        "User",
+        back_populates="comments"
+    )
+    friends_expense = db.relationship(
+        "FriendsExpense",
+        back_populates="comments"
+    )
     # group_expense = db.relationship('GroupExpense', back_populates='comments')
 
     # @hybrid_property

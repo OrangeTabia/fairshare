@@ -12,16 +12,44 @@ class User(db.Model, UserMixin):
     if environment == 'production':
         __table_args__ = {'schema': SCHEMA}
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(50), nullable=False, unique=True)
-    profile_image = db.Column(db.String(1000), nullable=False)
-    hashed_password = db.Column(db.String(255), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.now())
-    updated_at = db.Column(db.DateTime, default=datetime.now())
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+    name = db.Column(
+        db.String(100),
+        nullable=False
+    )
+    email = db.Column(
+        db.String(50),
+        nullable=False,
+        unique=True
+    )
+    profile_image = db.Column(
+        db.String(1000),
+        nullable=False
+    )
+    hashed_password = db.Column(
+        db.String(255),
+        nullable=False
+    )
+    created_at = db.Column(
+        db.DateTime,
+        default=datetime.now()
+    )
+    updated_at = db.Column(
+        db.DateTime,
+        default=datetime.now()
+    )
 
-    comments = db.relationship('Comment', back_populates='user')
-    payments = db.relationship('Payment', back_populates='user')
+    comments = db.relationship(
+        'Comment',
+        back_populates='user'
+    )
+    payments = db.relationship(
+        'Payment',
+        back_populates='user'
+    )
 
     @property
     def password(self):
@@ -51,9 +79,28 @@ class Friend(db.Model):
     if environment == 'production':
         __table_args__ = {'schema': SCHEMA}
 
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod(User.id)), nullable=False)
-    friend_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod(User.id)), nullable=False)
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey(add_prefix_for_prod(User.id)),
+        nullable=False
+    )
+    friend_id = db.Column(
+        db.Integer,
+        db.ForeignKey(add_prefix_for_prod(User.id)),
+        nullable=False
+    )
 
-    user = db.relationship(User, foreign_keys='Friend.user_id', backref='user')
-    friend = db.relationship(User, foreign_keys='Friend.friend_id', backref='friend')
+    user = db.relationship(
+        User,
+        foreign_keys='Friend.user_id',
+        backref='user'
+    )
+    friend = db.relationship(
+        User,
+        foreign_keys='Friend.friend_id',
+        backref='friend'
+    )
