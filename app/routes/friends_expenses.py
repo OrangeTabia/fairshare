@@ -54,7 +54,7 @@ def create_friends_expense():
 
 
 
-@friends_expenses_routes.route("/<int:friends_expense_id>/update", methods=["POST"])
+@friends_expenses_routes.route("/<int:friends_expense_id>/update", methods=["GET", "POST"])
 def update_friends_expense(friends_expense_id):
     """
     Update an expense between the current user and one of their friends
@@ -78,23 +78,21 @@ def update_friends_expense(friends_expense_id):
 
         db.session.commit()
 
-        updated_friends_expense = FriendsExpense.query.get(friends_expense_id)
-
-        return updated_friends_expense.to_dict()
+        return current_friends_expense
     else:
         return form.errors, 401
 
 
 
-# @friends_routes.route("/<int:friendship_id>/delete")
-# def delete_friend(friendship_id):
-#     """
-#     Delete a friend by friendship ID (from table Friend.id) from the current user's friends list
-#     """
+@friends_expenses_routes.route("/<int:friends_expense_id>/delete")
+def delete_friends_expense(friends_expense_id):
+    """
+    Delete a friends expense by friends_expense ID (from table FriendsExpenses) from the current user's expense list
+    """
 
-#     friendship_to_delete = Friend.query.get(friendship_id)
+    friends_expense_to_delete = FriendsExpense.query.get(friends_expense_id)
 
-#     db.session.delete(friendship_to_delete)
-#     db.session.commit()
+    db.session.delete(friends_expense_to_delete)
+    db.session.commit()
 
-#     return {"message": "Friend successfully deleted"}
+    return {"message": "Friends Expense successfully deleted"}
