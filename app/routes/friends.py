@@ -24,7 +24,8 @@ def friends_list():
     return [friend.to_dict() for friend in friends_info]
 
 
-@friends_routes.route("/add_friend", methods=["GET", "POST"])
+@friends_routes.route("/add", methods=["GET", "POST"])
+@login_required
 def new_friend():
     """
     Add a friend by email to the current user's friends list
@@ -52,12 +53,15 @@ def new_friend():
         db.session.add(new_friend_reversed)
         db.session.commit()
 
-        return new_friend.to_dict()
+        friends_info = User.query.get(new_friend.friend_id)
+
+        return friends_info.to_dict()
     else:
         return form.errors, 401
 
 
 @friends_routes.route("/<int:friendship_id>/delete")
+@login_required
 def delete_friend(friendship_id):
     """
     Delete a friend by friendship ID (from table Friend.id) from the current user's friends list
