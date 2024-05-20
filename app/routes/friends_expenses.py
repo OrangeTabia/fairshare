@@ -14,12 +14,16 @@ def all_friends_expenses():
     """
     Query for all current user's pending and settled expenses
     """
-    friends_expenses_list_payer = list(FriendsExpense.query.filter_by(payer_id=current_user.id).order_by(FriendsExpense.expense_date))
-    friends_expenses_list_receiver = list(FriendsExpense.query.filter_by(receiver_id=current_user.id).order_by(FriendsExpense.expense_date))
+    payer_friends_expenses = FriendsExpense.query.filter_by(payer_id=current_user.id).order_by(FriendsExpense.expense_date).all()
+    payer_friends_expenses = [expense.to_dict() for expense in payer_friends_expenses]
 
-    all_expenses = friends_expenses_list_payer + friends_expenses_list_receiver
+    receiver_friends_expenses = FriendsExpense.query.filter_by(receiver_id=current_user.id).order_by(FriendsExpense.expense_date).all()
+    receiver_friends_expenses = [expense.to_dict() for expense in receiver_friends_expenses]
 
-    return {"Expenses": [expense.to_dict() for expense in all_expenses]}
+    return {
+        'payerFriendsExpenses': payer_friends_expenses,
+        'receiverFriendsExpenses': receiver_friends_expenses
+    }
 
 
 
