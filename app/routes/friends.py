@@ -19,7 +19,9 @@ def friends_list():
         User.query.filter_by(id=friend.friend_id).first() for friend in friends
     ]
 
-    return {"friends": [friend.to_dict() for friend in friends_info]}
+    # sorted(friends_info, key=lambda friend: friend.to_dict()["name"])
+
+    return {"Friends": [friend.to_dict() for friend in friends_info]}
 
 
 @friends_routes.route("/add_friend", methods=["GET", "POST"])
@@ -29,7 +31,6 @@ def new_friend():
     """
 
     form = AddFriendForm()
-
     form["csrf_token"].data = request.cookies["csrf_token"]
 
     if form.validate_on_submit():
