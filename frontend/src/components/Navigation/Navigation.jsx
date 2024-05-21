@@ -4,24 +4,21 @@ import "./Navigation.css";
 
 function Navigation() {
   return (
-    <ul>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
-
-      <li>
-        <ProfileButton />
-      </li>
-      <li className="nav-li">
-        <a href='/api/friends'>Get all Friends</a>
-      </li>
-      <li className="nav-li">
-        <a href='/api/friends_expenses'>Get all friends expenses</a>
-      </li>
-      <li className="nav-li">
-        <a href='/api/payments'>Get all friends payments</a>
-      </li>
-    </ul>
+    <nav className="nav-header">
+      <a href="/api/friends">
+        <span className="animated-text-underline">friends</span>
+      </a>
+      <a href="/api/friends_expenses">
+        <span className="animated-text-underline">expenses</span>
+      </a>
+      <a href="/api/payments">
+        <span className="animated-text-underline">payments</span>
+      </a>
+      <NavLink to="/">
+        <span className="animated-text-underline">home</span>
+      </NavLink>
+      <ProfileButton />
+    </nav>
   );
 }
 
