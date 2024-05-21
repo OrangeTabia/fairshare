@@ -1,18 +1,63 @@
-from .db import db, environment, SCHEMA, add_prefix_for_prod
-from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
+
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 
 class User(db.Model, UserMixin):
-    __tablename__ = 'users'
+    __tablename__ = "users"
 
     if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
+        __table_args__ = {"schema": SCHEMA}
 
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(40), nullable=False, unique=True)
-    email = db.Column(db.String(255), nullable=False, unique=True)
-    hashed_password = db.Column(db.String(255), nullable=False)
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+    name = db.Column(
+        db.String(100),
+        nullable=False
+    )
+    email = db.Column(
+        db.String(50),
+        nullable=False,
+        unique=True
+    )
+    profile_image = db.Column(
+        db.String(1000),
+        nullable=False
+    )
+    hashed_password = db.Column(
+        db.String(255),
+        nullable=False
+    )
+    created_at = db.Column(
+        db.DateTime,
+        default=datetime.now()
+    )
+    updated_at = db.Column(
+        db.DateTime,
+        default=datetime.now()
+    )
+
+    comments = db.relationship(
+        'Comment',
+        back_populates='user'
+    )
+    payments = db.relationship(
+        'Payment',
+        back_populates='user'
+    )
+
+    # friends = db.relationship(
+    #     'User',
+    #     secondary=friends,
+    #     # primaryjoin=(follows.c.follower_id == id),
+    #     # secondaryjoin=(follows.c.followed_id == id),
+    #     backref=db.backref("following", lazy="dynamic"),
+    #     lazy="dynamic"
+    # )
 
     @property
     def password(self):
@@ -27,7 +72,56 @@ class User(db.Model, UserMixin):
 
     def to_dict(self):
         return {
-            'id': self.id,
-            'username': self.username,
-            'email': self.email
+            "id": self.id,
+            "name": self.name,
+            "email": self.email,
+            "profileImage": self.profile_image,
+            # "createdAt": self.created_at,
+            # "updatedAt": self.updated_at,
         }
+
+
+class Friend(db.Model):
+    __tablename__ = "friends"
+
+    if environment == "production":
+        __table_args__ = {"schema": SCHEMA}
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey(add_prefix_for_prod(User.id)),
+        nullable=False
+    )
+    friend_id = db.Column(
+        db.Integer,
+        db.ForeignKey(add_prefix_for_prod(User.id)),
+        nullable=False
+    )
+
+    user = db.relationship(
+        User,
+        foreign_keys='Friend.user_id',
+        backref='user'
+    )
+    friend = db.relationship(
+        User,
+        foreign_keys='Friend.friend_id',
+        backref='friend'
+    )
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "userId": self.user_id,
+            "friendId": self.friend_id
+        }
+
+# friends = db.Table(
+#     "friends",
+#     db.Column("user_id", db.Integer, db.ForeignKey("users.id")),
+#     db.Column("friend_id", db.Integer, db.ForeignKey("users.id"))
+# )
