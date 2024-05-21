@@ -42,11 +42,9 @@ def update_comment(comment_id):
 
     if form.validate_on_submit():
 
-        updated_comment = Comment.query.filter_by(id=comment_id).update(dict(
-            user_id=current_user.id,
-            friends_expense_id=form.data['friends_expense_id'],
-            comment=form.data['comment']
-        ))
+        updated_comment = Comment.query.get(comment_id)
+        updated_comment.comment = form.data['comment']
+    
 
         db.session.commit()
 
