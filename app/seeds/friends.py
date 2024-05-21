@@ -13,12 +13,20 @@ def seed_friends():
                     user_id=user_id, friend_id=num
                 )
                 db.session.add(friendship)
+                friendship2 = Friend(
+                    user_id=num, friend_id=user_id
+                )
+                db.session.add(friendship2)
 
     for index in range(1, 16):
         demo = Friend(
             user_id=100, friend_id=index
         )
         db.session.add(demo)
+        demo2 = Friend(
+            user_id=index, friend_id=100
+        )
+        db.session.add(demo2)
 
     db.session.commit()
 

@@ -15,27 +15,38 @@ def all_friends_expenses():
     Query for all current user's pending and settled expenses
     """
     payer_friends_expenses = FriendsExpense.query.filter_by(payer_id=current_user.id).order_by(FriendsExpense.expense_date).all()
-    payer_friends_expenses = [expense.to_dict() for expense in payer_friends_expenses]
 
-    receiver_friends_expenses = FriendsExpense.query.filter_by(receiver_id=current_user.id).order_by(FriendsExpense.expense_date).all()
-    receiver_friends_expenses = [expense.to_dict() for expense in receiver_friends_expenses]
-
+    updated_payer_expenses = []
 
     for expense in payer_friends_expenses:
-        for comment in expense.payments:
-            print('------------->>>>', comment.to_dict())
+        expense_comments = []
+        for comment in expense.comments:
+            expense_comments.append(comment.to_dict())
+        updated_expense=expense.to_dict()
+        updated_expense['comments']=expense_comments
+        updated_payer_expenses.append(updated_expense)
 
+    receiver_friends_expenses = FriendsExpense.query.filter_by(receiver_id=current_user.id).order_by(FriendsExpense.expense_date).all()
 
+    updated_receiver_expenses = []
 
+    for expense in receiver_friends_expenses:
+        expense_comments = []
+        for comment in expense.comments:
+            expense_comments.append(comment.to_dict())
+        updated_expense=expense.to_dict()
+        updated_expense['comments']=expense_comments
+        updated_receiver_expenses.append(updated_expense)
 
     return {
-        'payerFriendsExpenses': payer_friends_expenses,
-        'receiverFriendsExpenses': receiver_friends_expenses
+        'payerFriendsExpenses': updated_payer_expenses,
+        'receiverFriendsExpenses': updated_receiver_expenses
     }
 
 
 
 @friends_expenses_routes.route("/new", methods=["GET", "POST"])
+@login_required
 def create_friends_expense():
     """
     Create an expense between the current user and one of their friends
@@ -66,6 +77,7 @@ def create_friends_expense():
 
 
 @friends_expenses_routes.route("/<int:friends_expense_id>/update", methods=["GET", "POST"])
+@login_required
 def update_friends_expense(friends_expense_id):
     """
     Update an expense between the current user and one of their friends
@@ -96,6 +108,7 @@ def update_friends_expense(friends_expense_id):
 
 
 @friends_expenses_routes.route("/<int:friends_expense_id>/delete")
+@login_required
 def delete_friends_expense(friends_expense_id):
     """
     Delete a friends expense by friends_expense ID (from table FriendsExpenses) from the current user's expense list
