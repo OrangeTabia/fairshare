@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required, current_user
-from app.models import User, Friend
+from app.models import User
 
 user_routes = Blueprint("users", __name__)
 
@@ -21,6 +21,13 @@ def user(id):
     """
     Query for a user by id and returns that user in a dictionary
     """
+
+
+
     user = User.query.get(id)
+
+
+    print('----->', user.friends.all())
+
     print("user_routes", current_user)
     return user.to_dict()
