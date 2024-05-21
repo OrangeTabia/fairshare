@@ -89,19 +89,17 @@ def update_friends_expense(friends_expense_id):
 
         formatted_date = datetime.strptime(form.data["expense_date"], '%Y-%m-%d %H:%M:%S')
 
-        current_friends_expense = FriendsExpense.query.filter_by(id=friends_expense_id).update(dict(
-            payer_id=form.data["payer_id"],
-            receiver_id=form.data["receiver_id"],
-            description=form.data["description"],
-            amount=form.data["amount"],
-            expense_date=formatted_date,
-            settled=form.data['settled'],
-            notes=form.data["notes"]
-        ))
-
+    
+        current_friends_expense = FriendsExpense.query.get(friends_expense_id)
+        setattr(current_friends_expense, 'description', form.data["description"])
+        setattr(current_friends_expense, 'amount', form.data["amount"])
+        setattr(current_friends_expense, 'expense_date', formatted_date)
+        setattr(current_friends_expense, 'settled', form.data['settled'])
+        setattr(current_friends_expense, 'notes', form.data["notes"])
+    
         db.session.commit()
 
-        return current_friends_expense
+        return current_friends_expense.to_dict()
     else:
         return form.errors, 401
 

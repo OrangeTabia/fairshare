@@ -35,7 +35,7 @@ class FriendsExpense(db.Model):
         nullable=False
     )
     expense_date = db.Column(
-        db.Date,
+        db.DateTime,
         nullable=False
     )
     settled = db.Column(

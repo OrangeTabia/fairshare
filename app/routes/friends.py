@@ -24,7 +24,7 @@ def friends_list():
     return [friend.to_dict() for friend in friends_info]
 
 
-@friends_routes.route("/add", methods=["GET", "POST"])
+@friends_routes.route("/new", methods=["GET", "POST"])
 @login_required
 def new_friend():
     """

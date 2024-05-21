@@ -19,8 +19,6 @@ def check_payment_amount(form, field):
 
     difference = expense.amount - total
 
-    print({difference, total, amount})
-
     if expense.settled:
         raise ValidationError("This expense has been paid")
 
