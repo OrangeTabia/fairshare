@@ -1,9 +1,8 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from datetime import datetime
 
-from app.models import FriendsExpense, Comment, db
-from app.forms import CreateCommentForm
+from app.models import Comment, db
+from app.forms import CommentForm
 
 comments_routes = Blueprint("comments", __name__)
 
@@ -12,7 +11,7 @@ comments_routes = Blueprint("comments", __name__)
 @login_required
 def create_comment():
 
-    form = CreateCommentForm()
+    form = CommentForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
     if form.validate_on_submit():
@@ -38,7 +37,7 @@ def update_comment(comment_id):
     Edit a comment for an expense
     """
 
-    form = CreateCommentForm()
+    form = CommentForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
     if form.validate_on_submit():

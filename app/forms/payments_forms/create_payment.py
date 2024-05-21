@@ -2,7 +2,6 @@ from flask_wtf import FlaskForm
 from wtforms import IntegerField, StringField
 from wtforms.validators import DataRequired, NumberRange, ValidationError
 
-from app.models import Payment
 from app.models import FriendsExpense
 
 
