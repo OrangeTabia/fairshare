@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from datetime import datetime
 
 from app.forms import AddPaymentForm
-from app.models import User, Friend, FriendsExpense, Payment, db
+from app.models import User, FriendsExpense, Payment, db
 
 payments_routes = Blueprint("payments", __name__)
 
