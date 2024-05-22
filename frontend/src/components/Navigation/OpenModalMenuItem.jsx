@@ -15,7 +15,9 @@ function OpenModalMenuItem({
   };
 
   return (
-    <li onClick={onClick}>{itemText}</li>
+    <li onClick={onClick}>
+      <span className="animated-text-underline">{itemText}</span>
+    </li>
   );
 }
 

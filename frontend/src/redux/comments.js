@@ -70,7 +70,8 @@ function commentsReducer(state = initialState, action) {
         }
         case DELETE_COMMENT: {
             const newState = { ...state };
-            delete newState[action.commentId]
+            delete newState[action.commentId];
+            return newState;
         }
         default: 
             return state;

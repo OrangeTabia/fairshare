@@ -60,3 +60,48 @@ header {
 #site-name-2 {
     font-weight: 700;
 }
+
+.nav-header {
+    margin: 0;
+    padding: 0;
+  
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: right;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .nav-header a, 
+  .nav-header li {
+    font-size: 1rem;
+    font-weight: 500;
+    color: black;
+    text-decoration: none;
+    user-select: none;
+    cursor: pointer;
+  
+    display: inline-block;
+    position: relative;
+  }
+  
+  .animated-text-underline::after {
+    height: 4px;
+    width: 100%;
+  
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  
+    background-color: white;
+  
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.2s ease-out;
+  }
+  
+  .animated-text-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
