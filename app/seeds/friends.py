@@ -9,23 +9,9 @@ def seed_friends():
         friends_list = sample(range(1, 100), randint(1, 7))
         for num in friends_list:
             if num != user_id:
-                # insert(friends).values(user_id=user_id, friend_id=num)
-                # db.session.execute(
-                #     db.delete(friends).filter_by(
-                #         friend_id=friends_id, user_id=current_user.id
-                #     )
-                # )
-
-                db.session.execute(
-                    db.insert(friends),
-                    [
-                        {"user_id": user_id, "friend_id": num},
-                    ],
-                )
-
-                # friend = User.query.get(num)
-                # user.friends.append(friend)
-                # friend.friends.append(user)
+                friend = User.query.get(num)
+                user.friends.append(friend)
+                friend.friends.append(user)
 
                 # friendship = Friend(
                 #     user_id=user_id, friend_id=num
@@ -34,16 +20,9 @@ def seed_friends():
 
     demo_user = User.query.get(100)
     for index in range(1, 16):
-        db.session.execute(
-            db.insert(friends),
-            [
-                {"user_id": 100, "friend_id": index},
-            ],
-        )
-
-        # friend = User.query.get(index)
-        # demo_user.friends.append(friend)
-        # friend.friends.append(demo_user)
+        friend = User.query.get(index)
+        demo_user.friends.append(friend)
+        friend.friends.append(demo_user)
 
     #     demo = Friend(
     #         user_id=100, friend_id=index

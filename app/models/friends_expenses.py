@@ -18,12 +18,12 @@ class FriendsExpense(db.Model):
     )
     payer_id = db.Column(
         db.Integer,
-        db.ForeignKey(add_prefix_for_prod(User.id)),
+        db.ForeignKey(add_prefix_for_prod("users.id")),
         nullable=False
     )
     receiver_id = db.Column(
         db.Integer,
-        db.ForeignKey(add_prefix_for_prod(User.id)),
+        db.ForeignKey(add_prefix_for_prod("users.id")),
         nullable=False
     )
     description = db.Column(

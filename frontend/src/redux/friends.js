@@ -28,7 +28,7 @@ export const thunkLoadFriends = () => async (dispatch) => {
 };
 
 export const thunkAddFriend = (friendEmail) => async (dispatch) => {
-    const response = await fetch('/api/friends/add_friend', {
+    const response = await fetch('/api/friends/new', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: friendEmail })

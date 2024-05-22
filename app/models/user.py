@@ -4,11 +4,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
+FRIENDS_SCHEMA = SCHEMA if environment == 'production' else None
 
 friends = db.Table(
     "friends",
     db.Column("user_id", db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True),
-    db.Column("friend_id", db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True)
+    db.Column("friend_id", db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True),
+    schema=FRIENDS_SCHEMA,
+    postgresql_inherits="users"
 )
 
 
@@ -100,6 +103,9 @@ class User(db.Model, UserMixin):
 
 #     if environment == "production":
 #         __table_args__ = {"schema": SCHEMA}
+
+#    TODO:[Jonny] Remove ID columns, allow this to just have FK references
+#                 This standardizes the process through which we make tables and stuff
 
 #     id = db.Column(
 #         db.Integer,
