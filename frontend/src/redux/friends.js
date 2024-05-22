@@ -1,6 +1,7 @@
 const LOAD_FRIENDS = 'friends/loadFriends';
 const ADD_FRIEND = 'friends/addFriend';
 const DELETE_FRIEND = 'friends/deleteFriend';
+const CLEAR_FRIENDS = 'friends/clearFriends';
 
 const loadFriends = (friends) => ({
     type: LOAD_FRIENDS,
@@ -16,6 +17,11 @@ const deleteFriend = (friendId) => ({
     type: DELETE_FRIEND,
     friendId
 });
+
+export const clearFriends = () => ({
+    type: CLEAR_FRIENDS
+});
+
 
 export const thunkLoadFriends = () => async (dispatch) => {
     const response = await fetch('/api/friends');
@@ -70,6 +76,9 @@ function friendsReducer(state = initialState, action) {
             const newState = { ...state };
             delete newState[action.friendId];
             return newState;
+        }
+        case CLEAR_FRIENDS: {
+            return initialState;
         }
         default:
             return state;

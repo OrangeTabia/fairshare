@@ -1,6 +1,6 @@
 const LOAD_PAYMENTS = 'payments/loadPayments';
 const ADD_PAYMENT = 'payments/addPayment'; 
-
+const CLEAR_PAYMENTS = 'friends/clearPayments';
 
 const loadPayments = (payments) => ({
     type: LOAD_PAYMENTS,
@@ -11,6 +11,10 @@ const addPayment = (payment) => ({
     type: ADD_PAYMENT,
     payment
 });
+
+export const clearPayments = () => ({
+    type: CLEAR_PAYMENTS
+}); 
 
 
 export const thunkLoadPayments = () => async (dispatch) => {
@@ -58,6 +62,9 @@ function paymentsReducer(state = initialState, action) {
             const newState = { ...state };
             newState[action.payment.id] = action.payment;
             return newState;
+        }
+        case CLEAR_PAYMENTS: {
+            return initialState;
         }
         default: 
             return state;

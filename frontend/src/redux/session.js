@@ -1,5 +1,10 @@
+import { clearFriendsExpenses } from './friends_expenses'; 
+import { clearPayments } from './payments'; 
+import { clearFriends } from './friends'; 
+
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
+
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -60,7 +65,10 @@ export const thunkSignup = (user) => async (dispatch) => {
 
 export const thunkLogout = () => async (dispatch) => {
   await fetch("/api/auth/logout");
-  dispatch(removeUser());
+  await dispatch(removeUser());
+  await dispatch(clearFriendsExpenses());
+  await dispatch(clearPayments());
+  await dispatch(clearFriends()); 
 };
 
 const initialState = { user: null };

@@ -9,14 +9,12 @@ import sessionReducer from "./session";
 import friendsReducer from "./friends";
 import friendsExpensesReducer from "./friends_expenses";
 import paymentsReducer from "./payments";
-import commentsReducer from "./comments";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   friends: friendsReducer,
   friendsExpenses: friendsExpensesReducer,
-  payments: paymentsReducer,
-  comments: commentsReducer
+  payments: paymentsReducer
 });
 
 let enhancer;
