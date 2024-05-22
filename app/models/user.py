@@ -104,6 +104,9 @@ class User(db.Model, UserMixin):
 #     if environment == "production":
 #         __table_args__ = {"schema": SCHEMA}
 
+#    TODO:[Jonny] Remove ID columns, allow this to just have FK references
+#                 This standardizes the process through which we make tables and stuff
+
 #     id = db.Column(
 #         db.Integer,
 #         primary_key=True
