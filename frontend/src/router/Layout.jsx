@@ -33,13 +33,13 @@ export default function Layout() {
   return (
     <>
       <ModalProvider>
-        <header>
+        <header id="main-header">
           <div id="header-contents">
             <p id="site-name">
               <span id="site-name-1">fair</span>
               <span id="site-name-2">share</span>
             </p>
-            {user && isLoaded
+            {isLoaded && user
               ? <LoggedInNavigation />
               : <LandingNavigation />
             }

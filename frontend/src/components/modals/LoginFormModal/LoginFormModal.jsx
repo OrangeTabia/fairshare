@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { thunkLogin } from "../../redux/session";
+import { thunkLogin } from "../../../redux/session";
 import { useDispatch } from "react-redux";
-import { useModal } from "../../context/Modal";
+import { useModal } from "../../../context/Modal";
 import { useNavigate } from "react-router-dom";
 import "./LoginForm.css";
 

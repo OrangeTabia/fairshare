@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 
-import OpenModalMenuItem from "./OpenModalMenuItem";
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
+import OpenModalMenuItem from "../modals/OpenModalMenuItem";
+import LoginFormModal from "../modals/LoginFormModal";
+import SignupFormModal from "../modals/SignupFormModal";
 import "./Navigation.css";
 
 function LandingNavigation() {

@@ -16,10 +16,9 @@ html, body {
     margin: 0;
     padding: 0;
     position: fixed;
-    top: 42px; /* Adjust for header position */
 }
 
-header {
+#main-header {
     position: fixed;
     top: 0;
     left: 0;
@@ -61,23 +60,36 @@ header {
     font-weight: 700;
 }
 
-  .animated-text-underline::after {
-    height: 4px;
+.animated-text-underline::after {
+height: 4px;
+width: 100%;
+
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+
+background-color: white;
+
+transform: scaleX(0);
+transform-origin: bottom right;
+transition: transform 0.2s ease-out;
+}
+
+.animated-text-underline:hover::after {
+transform: scaleX(1);
+transform-origin: bottom left;
+}
+
+main {
     width: 100%;
+    position: fixed;
+    top: 42px; /* Adjust for nav bar */
+}
 
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-
-    background-color: white;
-
-    transform: scaleX(0);
-    transform-origin: bottom right;
-    transition: transform 0.2s ease-out;
-  }
-
-  .animated-text-underline:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
+.columns-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    gap: 20px;
+}

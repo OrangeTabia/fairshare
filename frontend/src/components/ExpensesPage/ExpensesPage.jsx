@@ -1,5 +1,11 @@
+import SecondaryNavigation from "../SecondaryNavigation";
+
 function ExpensesPage() {
-    return <h1>Expense Page</h1>
+    return (
+        <>
+            <SecondaryNavigation pageTitle="All Expenses" />
+        </>
+    )
 }
 
 export default ExpensesPage;
