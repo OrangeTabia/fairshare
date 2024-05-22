@@ -14,13 +14,33 @@ def friends_list():
     """
     Query for all current user's friends and returns them in a list of user dictionaries
     """
-    # user = User.query.get(current_user.id)
-    # friends = user.friends.all()
+    # print(help(friends.c.__getitem__("friend_id")))
+    added_by_friend = (
+        db.session.query(User)
+        .join(friends, User.id == friends.c.user_id)
+        .filter(friends.c.friend_id == 55)
+    ).all()
+    # added_by_friend = db.session.execute(
+    #     f"SELECT users.* FROM users JOIN friends ON users.id = friends.user_id WHERE friends.friend_id = {current_user.id};"
+    # ).all()
+    added_by_me = (
+        db.session.query(User)
+        .join(friends, User.id == friends.c.friend_id)
+        .filter(friends.c.user_id == 55)
+    ).all()
+    # added_by_me = db.session.execute(
+    #     f"SELECT users.* FROM users JOIN friends ON users.id = friends.friend_id WHERE friends.user_id = {current_user.id};"
+    # ).all()
+    # db.session.execute(f"TRUNCATE table {SCHEMA}.comments RESTART IDENTITY CASCADE;")
 
-    friends_lst = db.session.query(friends).filter_by(user_id=current_user.id)
+    user_55 = User.query.get(55)
 
-    return [friend.user for friend in friends_lst]
-    # return [dict(friend) for friend in friends_lst]
+    all_friends = added_by_friend + added_by_me
+
+    print("-------------->", user_55.name, all_friends)
+
+    # return [friend for friend in all_friends]
+    return [friend.to_dict() for friend in all_friends]
 
 
 @friends_routes.route("/new", methods=["GET", "POST"])
