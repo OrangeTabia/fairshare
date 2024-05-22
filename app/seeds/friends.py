@@ -16,6 +16,7 @@ def seed_friends():
                 user.friends.append(friend)
                 # friend.friends.append(user)
 
+
                 # friendship = Friend(
                 #     user_id=user_id, friend_id=num
                 # )
