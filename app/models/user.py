@@ -4,11 +4,13 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
+FRIENDS_SCHEMA = SCHEMA if environment == 'production' else None
 
 friends = db.Table(
     "friends",
     db.Column("user_id", db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True),
     db.Column("friend_id", db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True),
+    schema=FRIENDS_SCHEMA,
     postgresql_inherits="users"
 )
 
