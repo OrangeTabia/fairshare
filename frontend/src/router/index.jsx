@@ -1,20 +1,30 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./Layout";
-// import LandingPage from "./LandingPage";
+import LandingPage from "../components/LandingPage";
+import DashboardPage from "../components/DashboardPage";
+import ExpensesPage from "../components/ExpensesPage";
+import FriendPage from "../components/FriendPage/FriendPage";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
     element: <Layout />,
     children: [
       {
+        path: "/",
+        element: <LandingPage />,
+      },
+      {
         path: "/dashboard",
-        element: <h1>Dashboard Page</h1>,
+        element: <DashboardPage />,
       },
       {
         path: "/expenses",
-        element: <h1>Expenses Page</h1>,
+        element: <ExpensesPage />,
       },
+      {
+        path: "/friend/:friendId",
+        element: <FriendPage />,
+      }
     ],
   },
 ]);

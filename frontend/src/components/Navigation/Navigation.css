@@ -1,3 +1,28 @@
+
+.nav-header {
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: right;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-header a,
+.nav-header li {
+  font-size: 1rem;
+  font-weight: 500;
+  color: black;
+  text-decoration: none;
+  user-select: none;
+  cursor: pointer;
+
+  display: inline-block;
+  position: relative;
+}
+
 .profile-dropdown {
   position: absolute;
 }

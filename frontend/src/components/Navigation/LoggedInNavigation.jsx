@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 
-function Navigation() {
+function LoggedInNavigation() {
   return (
     <nav className="nav-header">
       <a href="/api/friends">
@@ -22,4 +22,4 @@ function Navigation() {
   );
 }
 
-export default Navigation;
+export default LoggedInNavigation;
