@@ -42,7 +42,7 @@ export const thunkAddFriend = (friendEmail) => async (dispatch) => {
 }
 
 export const thunkDeleteFriend = (friendId) => async (dispatch) => {
-    const response = await fetch(`/api/friends/:${friendId}/delete`);
+    const response = await fetch(`/api/friends/${friendId}/delete`);
     if (response.ok) {
         return dispatch(deleteFriend(friendId));
     } else {
