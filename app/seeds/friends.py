@@ -14,7 +14,7 @@ def seed_friends():
             if num != user_id:
                 friend = User.query.get(num)
                 user.friends.append(friend)
-                friend.friends.append(user)
+                # friend.friends.append(user)
 
                 # friendship = Friend(
                 #     user_id=user_id, friend_id=num
@@ -25,7 +25,7 @@ def seed_friends():
     for index in range(1, 16):
         friend = User.query.get(index)
         demo_user.friends.append(friend)
-        friend.friends.append(demo_user)
+        # friend.friends.append(demo_user)
 
     #     demo = Friend(
     #         user_id=100, friend_id=index
