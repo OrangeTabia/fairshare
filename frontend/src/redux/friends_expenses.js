@@ -49,7 +49,9 @@ export const thunkLoadFriendsExpenses = () => async (dispatch) => {
 };
 
 export const thunkAddFriendsExpense = (expense) => async (dispatch) => {
+  const paymentType = expense.type
   const response = await fetch("/api/friends_expenses/new", {
+
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -64,6 +66,7 @@ export const thunkAddFriendsExpense = (expense) => async (dispatch) => {
   });
   if (response.ok) {
     const data = await response.json();
+    data.type = paymentType
     return dispatch(addFriendsExpense(data));
   } else {
     return { server: "Something went wrong. Please try again" };
@@ -72,6 +75,7 @@ export const thunkAddFriendsExpense = (expense) => async (dispatch) => {
 
 export const thunkUpdateFriendsExpense =
   (expenseId, expense) => async (dispatch) => {
+    const paymentType = expense.type
     const response = await fetch(`/api/friends_expenses/${expenseId}/update`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -87,6 +91,7 @@ export const thunkUpdateFriendsExpense =
     });
     if (response.ok) {
       const data = await response.json();
+      data.type = paymentType
       return dispatch(addFriendsExpense(data));
     } else {
       return { server: "Something went wrong. Please try again" };
