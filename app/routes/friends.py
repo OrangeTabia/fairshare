@@ -14,10 +14,13 @@ def friends_list():
     """
     Query for all current user's friends and returns them in a list of user dictionaries
     """
-    user = User.query.get(current_user.id)
-    friends = user.friends.all()
+    # user = User.query.get(current_user.id)
+    # friends = user.friends.all()
 
-    return [friend.to_dict() for friend in friends]
+    friends_lst = db.session.query(friends).filter_by(user_id=current_user.id)
+
+    return [friend.user for friend in friends_lst]
+    # return [dict(friend) for friend in friends_lst]
 
 
 @friends_routes.route("/new", methods=["GET", "POST"])
