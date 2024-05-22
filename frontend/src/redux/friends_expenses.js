@@ -13,6 +13,11 @@ const addFriendsExpense = (friendsExpense) => ({
     friendsExpense
 });
 
+const updateFriendsExpense = (friendsExpense) => ({
+    type: UPDATE_FRIENDS_EXPENSE,
+    friendsExpense
+});
+
 const deleteFriendsExpense = (friendsExpenseId) => ({
     type: DELETE_FRIENDS_EXPENSE,
     friendsExpenseId
@@ -50,6 +55,28 @@ export const thunkAddFriendsExpense = (expense) => async (dispatch) => {
     }
 }
 
+export const thunkUpdateFriendsExpense = (expenseId, expense) => async (dispatch) => {
+    const response = await fetch(`/api/friends_expenses/${expenseId}/update`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            payer_id: expense.payerId,
+            receiver_id: expense.receiverId,
+            description: expense.description,
+            amount: expense.amount,
+            expense_date: expense.expenseDate,
+            settled: expense.settled,
+            notes: expense.notes
+        })
+    });
+    if (response.ok) {
+        const data = await response.json();
+        return dispatch(updateFriendsExpense(data));
+    } else {
+        return { server: "Something went wrong. Please try again" }
+    }
+}
+
 export const thunkDeleteFriendsExpense = (friendsExpenseId) => async (dispatch) => {
     const response = await fetch(`/api/friends_expenses/:${friendsExpenseId}/delete`);
     if (response.ok) {
@@ -71,6 +98,11 @@ function friendsExpensesReducer(state = initialState, action) {
             return newState;
         }
         case ADD_FRIENDS_EXPENSE: {
+            const newState = { ...state };
+            newState[action.friendsExpense.id] = action.friendsExpense;
+            return newState;
+        }
+        case UPDATE_FRIENDS_EXPENSE: {
             const newState = { ...state };
             newState[action.friendsExpense.id] = action.friendsExpense;
             return newState;
