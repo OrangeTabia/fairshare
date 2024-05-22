@@ -33,7 +33,7 @@ def new_friend():
     if form.validate_on_submit():
 
         user = User.query.get(current_user.id)
-        friend = User.query.filter_by(email=form.data['email']).first()
+        friend = User.query.filter_by(email=form.data["email"]).first()
         user.friends.append(friend)
         friend.friends.append(user)
 
@@ -53,8 +53,12 @@ def delete_friend(friends_id):
     Delete a friendship by friend ID and user ID from the current user's friends list, and the corresponding friends list
     """
 
-    db.session.execute(db.delete(friends).filter_by(friend_id=friends_id, user_id=current_user.id))
-    db.session.execute(db.delete(friends).filter_by(friend_id=current_user.id, user_id=friends_id))
+    db.session.execute(
+        db.delete(friends).filter_by(friend_id=friends_id, user_id=current_user.id)
+    )
+    db.session.execute(
+        db.delete(friends).filter_by(friend_id=current_user.id, user_id=friends_id)
+    )
 
     db.session.commit()
 

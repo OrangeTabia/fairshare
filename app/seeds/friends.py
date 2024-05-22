@@ -1,9 +1,6 @@
-from app.models import db, environment, SCHEMA, User
+from app.models import db, environment, SCHEMA, User, friends
 from sqlalchemy.sql import text
 from random import randint, sample
-
-
-
 
 
 def seed_friends():
@@ -12,10 +9,23 @@ def seed_friends():
         friends_list = sample(range(1, 100), randint(1, 7))
         for num in friends_list:
             if num != user_id:
-                friend = User.query.get(num)
-                user.friends.append(friend)
-                # friend.friends.append(user)
+                # insert(friends).values(user_id=user_id, friend_id=num)
+                # db.session.execute(
+                #     db.delete(friends).filter_by(
+                #         friend_id=friends_id, user_id=current_user.id
+                #     )
+                # )
 
+                db.session.execute(
+                    db.insert(friends),
+                    [
+                        {"user_id": user_id, "friend_id": num},
+                    ],
+                )
+
+                # friend = User.query.get(num)
+                # user.friends.append(friend)
+                # # friend.friends.append(user)
 
                 # friendship = Friend(
                 #     user_id=user_id, friend_id=num
@@ -24,9 +34,16 @@ def seed_friends():
 
     demo_user = User.query.get(100)
     for index in range(1, 16):
-        friend = User.query.get(index)
-        demo_user.friends.append(friend)
-        # friend.friends.append(demo_user)
+        db.session.execute(
+            db.insert(friends),
+            [
+                {"user_id": 100, "friend_id": index},
+            ],
+        )
+
+        # friend = User.query.get(index)
+        # demo_user.friends.append(friend)
+        # # friend.friends.append(demo_user)
 
     #     demo = Friend(
     #         user_id=100, friend_id=index
@@ -46,8 +63,6 @@ def seed_friends():
     # print('----->>>>', user.friends.all())
 
     db.session.commit()
-
-
 
 
 def undo_friends():
