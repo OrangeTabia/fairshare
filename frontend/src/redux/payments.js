@@ -28,6 +28,7 @@ export const thunkLoadPayments = () => async (dispatch) => {
 };
 
 export const thunkAddPayments = (payment) => async (dispatch) => {
+  const paymentType = payment.type
   const response = await fetch("/api/payments/new", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -40,6 +41,7 @@ export const thunkAddPayments = (payment) => async (dispatch) => {
   });
   if (response.ok) {
     const data = await response.json();
+    data.type = paymentType
     return dispatch(addPayment(data));
   } else {
     return { server: "Something went wrong. Please try again" };
