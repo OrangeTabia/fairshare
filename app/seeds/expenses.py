@@ -8,7 +8,7 @@ def seed_expenses():
         payer_id=1,
         receiver_id=100,
         description='Pizza night!',
-        amount=40,
+        amount=4000,
         expense_date=datetime(2023, 2, 28, 0, 0, 0),
         settled=False,
         notes='Extra peperoni for Stacy'
@@ -17,7 +17,7 @@ def seed_expenses():
         payer_id=2,
         receiver_id=100,
         description='Night on the Town!',
-        amount=65,
+        amount=6500,
         expense_date=datetime(2023, 2, 28, 0, 0, 0),
         settled=False,
         )
@@ -25,7 +25,7 @@ def seed_expenses():
         payer_id=3,
         receiver_id=100,
         description='Rent',
-        amount=600,
+        amount=60000,
         expense_date=datetime(2023, 2, 28, 0, 0, 0),
         settled=False,
         notes='May rent'
@@ -34,7 +34,7 @@ def seed_expenses():
         payer_id=100,
         receiver_id=4,
         description='Wine Tasting!',
-        amount=55,
+        amount=5500,
         expense_date=datetime(2023, 2, 28, 0, 0, 0),
         settled=False,
         )
@@ -42,7 +42,7 @@ def seed_expenses():
         payer_id=100,
         receiver_id=5,
         description='Lazer tag',
-        amount=25,
+        amount=2500,
         expense_date=datetime(2023, 2, 28, 0, 0, 0),
         settled=False,
         )
@@ -50,7 +50,7 @@ def seed_expenses():
         payer_id=100,
         receiver_id=6,
         description='Wine Tasting!',
-        amount=55,
+        amount=5500,
         expense_date=datetime(2023, 2, 28, 0, 0, 0),
         settled=False,
         )
@@ -58,7 +58,7 @@ def seed_expenses():
         payer_id=100,
         receiver_id=7,
         description='Lazer tag',
-        amount=25,
+        amount=2500,
         expense_date=datetime(2023, 2, 28, 0, 0, 0),
         settled=False,
         )

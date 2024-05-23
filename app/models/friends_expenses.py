@@ -57,10 +57,12 @@ class FriendsExpense(db.Model):
 
     payments = db.relationship(
         'Payment',
+        cascade="all, delete",
         back_populates='friends_expense'
     )
     comments = db.relationship(
         'Comment',
+        cascade="all, delete",
         back_populates='friends_expense'
     )
 

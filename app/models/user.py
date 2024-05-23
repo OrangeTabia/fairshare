@@ -39,8 +39,17 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now())
 
-    comments = db.relationship("Comment", back_populates="user")
-    payments = db.relationship("Payment", back_populates="user")
+    comments = db.relationship(
+        "Comment",
+        cascade="all, delete",
+        back_populates="user"
+        )
+
+    payments = db.relationship(
+        "Payment",
+        cascade="all, delete",
+        back_populates="user"
+        )
 
     friendsRel = db.relationship(
         "User",
