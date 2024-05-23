@@ -68,7 +68,7 @@ def delete_friend(friends_id):
 
     if added_by_me:
         db.session.execute(
-            db.delete(added_by_me).filter_by(
+            db.delete(friends).filter_by(
                 friend_id=friends_id, user_id=current_user.id
             )
         )
