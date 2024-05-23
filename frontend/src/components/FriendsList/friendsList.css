@@ -1,0 +1,18 @@
+.fiends-list-container {
+    width: 180px;
+}
+
+.friends-list {
+    height:200px;
+    overflow:scroll;
+    overflow-x:hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(128, 128, 128, 0.183) rgba(0, 0, 255, 0);
+}
+
+.friends-list-ele {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    list-style-type: none;
+}
