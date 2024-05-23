@@ -1,0 +1,25 @@
+.add-friend-input {
+    display: flex;
+    gap: 10px;
+    margin: 10px;
+}
+
+.list-user-email-item {
+    cursor: pointer;
+    line-height: 2;
+}
+
+.chosen-user-container {
+    /* border: 1px solid grey; */
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 4px;
+    margin: 10px;
+}
+
+.user-profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
