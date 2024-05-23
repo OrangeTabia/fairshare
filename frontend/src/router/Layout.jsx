@@ -34,7 +34,7 @@ export default function Layout() {
     <>
       <ModalProvider>
         <header id="main-header">
-          <div id="header-contents">
+          <div id="header-content">
             <p id="site-name">
               <span id="site-name-1">fair</span>
               <span id="site-name-2">share</span>
@@ -45,7 +45,7 @@ export default function Layout() {
             }
           </div>
         </header>
-        <main>
+        <main id="main-content">
           <Outlet />
         </main>
         <Modal />
