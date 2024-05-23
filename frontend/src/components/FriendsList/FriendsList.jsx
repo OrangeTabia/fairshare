@@ -15,7 +15,6 @@ function FriendsList({currFriend}) {
     const friends = useSelector(state => state.friends)
     const navigate = useNavigate()
     const [orderedFriends, setOrderedFriends] = useState([])
-    const [friendsPage, setFriendsPage] = useState(false)
 
     useEffect(() => {
         const sortedFriends = Object.values(friends).sort((friend1, friend2) => friend1.name > friend2.name ? 1 : friend1.name < friend2.name ? -1 : 0)
