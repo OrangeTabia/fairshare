@@ -11,7 +11,3 @@ class CreateFriendsExpenseForm(FlaskForm):
     expense_date = StringField("expense_date", validators=[DataRequired()])
     settled = BooleanField("settled", false_values={False, "false", ""})
     notes = StringField("notes", validators=[Length(max=200)])
-    # submit = SubmitField("Submit")
-
-
-

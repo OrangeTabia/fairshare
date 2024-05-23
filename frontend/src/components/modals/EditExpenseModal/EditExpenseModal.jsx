@@ -5,17 +5,14 @@ import { thunkUpdateFriendsExpense } from "../../../redux/friends_expenses";
 
 function EditExpenseModal({ expense }) {
   const dispatch = useDispatch();
-  const [description, setDescription] = useState("");
-  const [amount, setAmount] = useState("");
-  const [expenseDate, setExpenseDate] = useState("");
-  const [notes, setNotes] = useState("");
+  const [description, setDescription] = useState(expense.description);
+  const [amount, setAmount] = useState(expense.amount);
+  const [expenseDate, setExpenseDate] = useState(expense.expenseDate);
+  const [notes, setNotes] = useState(expense.notes);
   const [validations, setValidations] = useState({});
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const currentUser = useSelector((state) => state.session.user);
   const payer = useSelector((state) => state.friends)[expense.payerId];
   const { closeModal } = useModal();
-
-  console.log("=============>", payer);
 
   useEffect(() => {
     const frontValidations = {};
@@ -31,6 +28,7 @@ function EditExpenseModal({ expense }) {
       frontValidations.expenseDate = "Please enter a date for the expense";
     if (notes.length > 200)
       frontValidations.notes = "Note must be less than 200 characters";
+
     setValidations(frontValidations);
   }, [description, amount, expenseDate, notes]);
 
@@ -42,12 +40,15 @@ function EditExpenseModal({ expense }) {
     setHasSubmitted(true);
 
     const updatedExpense = {
+      payerId: expense.payerId,
+      receiverId: expense.receiverId,
       description,
       amount,
       expenseDate: newDate,
       settled: false,
       notes,
     };
+
     await dispatch(thunkUpdateFriendsExpense(expense.id, updatedExpense));
     closeModal();
   };
