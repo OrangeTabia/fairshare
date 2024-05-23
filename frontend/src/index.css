@@ -1,10 +1,19 @@
 :root {
-    --theme-white: #FAFAFA;
     --theme-l-gray: #DEDEDE;
     --theme-m-gray: #525252;
     --theme-d-gray: #1A1A1A;
+
+    --theme-xl-blue: #B4D5EB;
+    --theme-l-blue: #77BCEA;
     --theme-blue: #49AEF1;
+    --theme-d-blue: #2DA2EF;
+
+    --theme-xl-orange: #EFCEAD;
+    --theme-l-orange: #F1AD69;
     --theme-orange: #FD9934;
+    --theme-d-orange: #FD8A17;
+
+    --theme-error: #F12540;
 }
 
 * {

@@ -1,12 +1,26 @@
-import './SecondaryNavigation.css';
+import "./SecondaryNavigation.css";
+import OpenModalButton from "../modals/OpenModalButton/OpenModalButton";
+import AddExpenseModal from "../modals/AddExpenseModal/AddExpenseModal";
+import SettleUpModal from "../modals/SettleUpModal/SettleUpModal"; 
 
 function SecondaryNavigation({ pageTitle }) {
     return (
         <header id="secondary-nav-header">
-            <h2 id="page-title">{pageTitle}</h2>
+            <h1 id="page-title">{pageTitle}</h1>
             <nav>
-                <div>Add Expense Modal</div>
-                <div>Settle Up Modal</div>
+                <OpenModalButton
+                buttonText="Add Expense"
+                modalComponent={<AddExpenseModal />}
+                id="add-expense-modal-button"
+                className="modal-button"
+                />
+
+                <OpenModalButton
+                buttonText="Settle Up"
+                modalComponent={<SettleUpModal />}
+                id="settle-up-modal-button"
+                className="modal-button"
+                />
             </nav>
         </header>
     )

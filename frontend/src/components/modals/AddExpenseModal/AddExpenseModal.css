@@ -19,7 +19,7 @@
     line-height: 2rem;
 }
 
-#login-form {
+#add-expense-form{
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -37,7 +37,7 @@
     gap: 10px;
 }
 
-#login-form input {
+#add-expense-form input {
     width: 100%;
 
     background-color: var(--theme-white);
@@ -45,8 +45,21 @@
     border-radius: 2.5px;
 }
 
-.form-error {
-    color: var(--theme-error);
+.form-cancel {
+    width: 200px;
+    margin-top: 10px;
+    align-self: center;
+
+    font-size: 0.8rem;
+
+    background-color: blue;
+    border: 2px solid red;
+    border-radius: 5px;
+}
+
+.form-cancel:hover {
+    background-color: red;
+    border: 2px solid red;
 }
 
 .form-submit {
