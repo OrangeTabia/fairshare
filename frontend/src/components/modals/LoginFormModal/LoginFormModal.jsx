@@ -54,7 +54,7 @@ function LoginFormModal() {
       setValidations(serverResponse);
     } else {
       closeModal();
-      navigate("/dashboard");
+      navigate("/");
     }
   };
 

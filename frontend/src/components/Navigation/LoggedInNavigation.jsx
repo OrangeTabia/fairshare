@@ -14,7 +14,7 @@ function LoggedInNavigation() {
       <a href="/api/payments">
         <span className="animated-text-underline">payments</span>
       </a> */}
-      <NavLink to="/dashboard">
+      <NavLink to="/">
         <span className="animated-text-underline">Dashboard</span>
       </NavLink>
       <NavLink to="/expenses">

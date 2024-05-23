@@ -48,7 +48,7 @@ function SettleUpModal() {
     //   setErrors(serverResponse);
     // } else {
     //   closeModal();
-    //   navigate("/dashboard");
+    //   navigate("/");
     // }
   };
 

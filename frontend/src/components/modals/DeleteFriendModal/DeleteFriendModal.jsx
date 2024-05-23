@@ -20,7 +20,7 @@ function DeleteFriendModal({friend}) {
         await dispatch(thunkDeleteFriend(friendId));
 
         closeModal();
-        navigate("/dashboard");
+        navigate("/");
     }
 
     return (
