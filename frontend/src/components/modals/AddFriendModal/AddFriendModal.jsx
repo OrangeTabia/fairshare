@@ -12,14 +12,17 @@ function AddFriendModal() {
     const [email, setEmail] = useState('')
     const [suggestedFriends, setSuggestedFriends] = useState([])
     const [friendSelected, setFriendSelected] = useState('')
-    // const currFriends = useSelector(state => state.friends)
+    const currFriends = useSelector(state => state.friends)
     const allUsers = useSelector(state => state.userEmails)
+    const currUser = useSelector(state => state.session.user)
+
 
     useEffect(() => {
-        // need to remove all current friends from this list
-        // const filteredUsers = Object.values(Object.values(allUsers)).map(user => !Object.values(Object.values(currFriends)).includes(user))
-        // console.log('filtered', filteredUsers)
-        const suggested = Object.values(allUsers).filter(user => user.email.startsWith(email))
+        const removeIndex = Object.values(currFriends).map(friend => friend.name)
+        const removeCurrFriends = Object.values(allUsers).filter(user => !removeIndex.includes(user.name))
+        const removeSelf = Object.values(removeCurrFriends).filter(user => user.name !== currUser.name)
+
+        const suggested = Object.values(removeSelf).filter(user => user.email.startsWith(email))
         if (email) {
             setSuggestedFriends(suggested.slice(0, 5))
             setFriendSelected('')
@@ -42,7 +45,6 @@ function AddFriendModal() {
 
         closeModal();
         navigate(`friend/${friendSelected.id}`)
-
     }
 
     return (
