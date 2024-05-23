@@ -1,5 +1,9 @@
+import OpenModalButton from "../modals/OpenModalButton/OpenModalButton";
+import AddFriendModal from "../modals/AddFriendModal/AddFriendModal";
+import DeleteFriendModal from "../modals/DeleteFriendModal/DeleteFriendModal";
+
 import { useSelector } from "react-redux";
-import './friendsList.css'
+import './FriendsList.css'
 
 import { HiOutlineX } from "react-icons/hi";
 
@@ -8,18 +12,34 @@ import { HiOutlineX } from "react-icons/hi";
 function FriendsList() {
     const friends = useSelector(state => state.friends)
 
+
+    // const handleDelete = (friend) => {
+    //     alert
+    // }
+
     return (
         <div className="fiends-list-container">
-            <h3>FRIENDS</h3>
+
+            <h4 id="friends-list-title">FRIENDS</h4>
             <div className="friends-list">
                 {Object.values(friends).map(friend => (
                     <div key={friend.id} className="friends-list-ele">
                         <li >{friend.name}</li>
-                        <div className="delete-friend-button" onClick={() => alert(`Are you sure you want to remove ${friend.name} as a friend?`)}><HiOutlineX /></div>
+                        <OpenModalButton
+                        buttonText={<HiOutlineX />}
+                        modalComponent={<DeleteFriendModal friend={friend} />}
+                        id="delete-friend-modal-button"
+                        className="delete-friend-modal-button"
+                        />
                     </div>
                 ))}
             </div>
-            <button className="invite-friend" onClick={() => alert('opens an invite a friend modal')}>INVITE A FRIEND</button>
+            <OpenModalButton
+            buttonText='INVITE A FRIEND'
+            modalComponent={<AddFriendModal />}
+            id="delete-friend-modal-button"
+            className="delete-friend-modal-button"
+            />
         </div>
 
     )
