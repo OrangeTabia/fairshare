@@ -1,8 +1,12 @@
+import './ExpenseCard.css'
+
 function ExpenseCard({ expense }) {
   return (
-    <ul className={`expense-card ${expense.type}-expense`}>
-      {expense.description}
-    </ul>
+    <div className="expense-details-card">
+      <span>{expense.description}</span>
+      <span>{expense.amount}</span>
+      <span>{expense.expenseDate}</span>
+    </div>
   )
 }
 
