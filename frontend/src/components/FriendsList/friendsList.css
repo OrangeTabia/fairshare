@@ -1,0 +1,38 @@
+.fiends-list-container {
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px
+}
+
+.friends-list {
+    height:200px;
+    overflow:scroll;
+    overflow-x:hidden;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(128, 128, 128, 0.183) rgba(0, 0, 255, 0);
+}
+
+.friends-list-ele {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    list-style-type: none;
+}
+
+.delete-friend-button::after {
+    /* visibility: hidden; */
+}
+
+.delete-friend-button:hover {
+    color: orange;
+    visibility: visible
+}
+
+.friends-list::-webkit-scrollbar:vertical{
+    /* width: 5px;
+    height: 8px;
+    background-color: #aaa; /* or add it to the track */
+
+}
