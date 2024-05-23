@@ -94,10 +94,12 @@ export const thunkUpdateFriendsExpense =
     });
     if (response.ok) {
       const data = await response.json();
+      console.log("DATA ===> ", data)
       data.type = paymentType
       return dispatch(addFriendsExpense(data));
     } else {
       const errors = await response.json();
+      console.log("ERRORS ===> ", errors)
       return errors;
     }
   };

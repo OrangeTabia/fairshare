@@ -6,7 +6,7 @@ import { thunkAddFriendsExpense } from "../../../redux/friends_expenses";
 
 function AddExpenseModal() {
     const dispatch = useDispatch(); 
-    const [payer, setPayer] = useState({}); // payer owes current user money
+    const [payer, setPayer] = useState(null); // payer owes current user money
     const [description, setDescription] = useState("");
     const [amount, setAmount] = useState("");
     const [expenseDate, setExpenseDate] = useState("");
@@ -20,32 +20,36 @@ function AddExpenseModal() {
 
     useEffect(() => {
         const frontValidations = {};
-        if (!payer) frontValidations.payer = "Payer is required";
+        if (payer === null) frontValidations.payer = "Payer is required";
         if (!description) frontValidations.description = "A brief description of the expense is required";
         if (description.length > 200) frontValidations.description = "Description must be less than 200 characters";
         if (!amount || amount <= 0) frontValidations.amount = "Expense must have a minimum of $0.01"; 
         if (!expenseDate) frontValidations.expenseDate = "Please enter a date for the expense"; 
         if (notes.length > 200) frontValidations.notes = "Note must be less than 200 characters";
         setValidations(frontValidations); 
-    }, [payer, description, amount, expenseDate]); 
+    }, [payer, description, amount, expenseDate, notes]); 
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const newDate = new Date(expenseDate);
+        console.log("EXPENSE TYPE", typeof(expenseDate));
+        console.log("NEW DATE====>", typeof(newDate));
+
         setHasSubmitted(true); 
 
         const newExpense = {
-            payerId: payer.id,
+            payerId: payer,
             receiverId: currentUser.id,
             description,
             amount,
-            expenseDate,
+            expenseDate: newDate,
             settled: false,
             notes
         }
         const addExpense = await dispatch(thunkAddFriendsExpense(newExpense)); 
-
+        addExpense;
         // if (!addExpense.id) {
         //     const { errors } = await addExpense.json(); 
         //     setValidations(errors); 
@@ -66,13 +70,13 @@ function AddExpenseModal() {
                     <div className="form-label">
                         <select 
                             id="payer"
-                            value={payer.name}
+                            value={payer}
                             onChange={(e) => setPayer(e.target.value)}
                             required
                         >
                                 <option>Select friend</option>
                             {friendsListArray.map((friend) => (
-                                <option key={friend.id}>{friend.name}</option>
+                                <option value={friend.id} key={friend.id}>{friend.name}</option>
                             ))}
                         </select>
                         {validations.payer && hasSubmitted && (
@@ -108,6 +112,7 @@ function AddExpenseModal() {
                     <div className="form-label">
                         <input
                             id="expense_date"
+                            // type="datetime-local"
                             type="date"
                             value={expenseDate}
                             onChange={(e) => setExpenseDate(e.target.value)}
