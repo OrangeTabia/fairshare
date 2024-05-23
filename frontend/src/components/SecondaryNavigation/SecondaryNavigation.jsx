@@ -22,15 +22,15 @@ function SecondaryNavigation({ pageTitle, profileImage }) {
                 className="modal-button"
                 />
 
-                <OpenModalButton
-                buttonText="Settle Up"
-                modalComponent={<SettleUpModal />}
-                id="settle-up-modal-button"
-                className="modal-button"
-                />
-            </nav>
-        </header>
-    )
+        <OpenModalButton
+          buttonText="Settle Up"
+          modalComponent={<SettleUpModal />}
+          id="settle-up-modal-button"
+          className="modal-button"
+        />
+      </nav>
+    </header>
+  );
 }
 
 export default SecondaryNavigation;
