@@ -1,6 +1,7 @@
 import SecondaryNavigation from "../SecondaryNavigation";
 import FriendsList from "../FriendsList";
 import DevLinksList from "../DevLinksList";
+import './DashboardPage.css';
 
 function DashboardPage() {
   return (
@@ -10,7 +11,9 @@ function DashboardPage() {
       </section>
       <section className="middle-column">
         <SecondaryNavigation pageTitle="Dashboard" />
-        <p>Lorem Ipsum</p>
+        <main>
+
+        </main>
       </section>
       <section className="right-column">
         <DevLinksList />

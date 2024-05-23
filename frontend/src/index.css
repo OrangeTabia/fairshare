@@ -100,5 +100,42 @@ main {
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
-    gap: 20px;
+}
+
+.left-column,
+.middle-column,
+.right-column {
+    width: 100%;
+    padding: 5px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: start;
+
+    border: 1px solid var(--theme-l-gray);
+    border-radius: 5px;
+}
+
+.left-column,
+.right-column {
+    max-width: 30ch;
+    margin: 20px;
+
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.left-column {
+    align-items: end;
+}
+
+.right-column {
+    align-items: start;
+}
+
+.middle-column {
+    max-width: 100ch;
+    margin: 20px 0px;
+
+    align-items: center;
 }
