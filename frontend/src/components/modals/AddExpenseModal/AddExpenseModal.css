@@ -1,0 +1,80 @@
+#modal-content {
+    padding: 20px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    border: 2px solid var(--theme-d-gray);
+    border-radius: 10px;
+    background-clip: border-box;
+}
+
+#modal-content h2 {
+    margin: 0 0 10px;
+
+    font-size: 2rem;
+    line-height: 2rem;
+}
+
+#add-expense-form{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: left;
+    gap: 10px;
+}
+
+.form-label {
+    width: 30ch;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+}
+
+#add-expense-form input {
+    width: 100%;
+
+    background-color: var(--theme-white);
+    border: 1px solid var(--theme-m-gray);
+    border-radius: 2.5px;
+}
+
+.form-cancel {
+    width: 200px;
+    margin-top: 10px;
+    align-self: center;
+
+    font-size: 0.8rem;
+
+    background-color: blue;
+    border: 2px solid red;
+    border-radius: 5px;
+}
+
+.form-cancel:hover {
+    background-color: red;
+    border: 2px solid red;
+}
+
+.form-submit {
+    width: 200px;
+    margin-top: 10px;
+    align-self: center;
+
+    font-size: 0.8rem;
+
+    background-color: var(--theme-xl-blue);
+    border: 2px solid var(--theme-blue);
+    border-radius: 5px;
+}
+
+.form-submit:hover {
+    background-color: var(--theme-l-blue);
+    border: 2px solid var(--theme-d-blue);
+}
