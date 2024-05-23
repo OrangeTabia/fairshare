@@ -1,20 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { thunkLogin } from "../../../redux/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import { useNavigate } from "react-router-dom";
-import "./LoginForm.css";
+
+import { validateEmail } from "../../../utils/customValidators";
+import "./LoginFormModal.css";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { closeModal } = useModal();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
-  const { closeModal } = useModal();
-  const navigate = useNavigate();
+  const [validations, setValidations] = useState({});
+  // const [errors, setErrors] = useState({});
+  const [submitClass, setSubmitClass] = useState("form-submit");
+  const [submitDisabled, setSubmitDisabled] = useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+
+  const setSubmitDisabledStatus = (disabled) => {
+    (disabled)
+      ? setSubmitClass("form-submit disabled")
+      : setSubmitClass("form-submit");
+    setSubmitDisabled(disabled);
+  };
+
+  // Validation checking
+  useEffect(() => {
+    // Submit button disabled functionality subject to change
+    if (!hasSubmitted) return;
+
+    const newValidations = {};
+    if (!validateEmail(email)) newValidations.email = "Invalid Email Format";
+
+    setSubmitDisabledStatus(Object.keys(newValidations).length > 0);
+    setValidations(newValidations);
+  }, [hasSubmitted, email, password]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setHasSubmitted(true);
 
     const serverResponse = await dispatch(
       thunkLogin({
@@ -24,7 +51,7 @@ function LoginFormModal() {
     );
 
     if (serverResponse) {
-      setErrors(serverResponse);
+      setValidations(serverResponse);
     } else {
       closeModal();
       navigate("/dashboard");
@@ -41,8 +68,8 @@ function LoginFormModal() {
         <div>
           <div className="form-label">
             <label htmlFor="email">Email</label>
-            {errors.email && (
-              <span className="form-error">{errors.email}</span>
+            {validations.email && (
+              <span className="form-error">{validations.email}</span>
             )}
           </div>
           <input
@@ -56,8 +83,8 @@ function LoginFormModal() {
         <div>
           <div className="form-label">
             <label htmlFor="password">Password</label>
-            {errors.password && (
-              <span className="form-error">{errors.password}</span>
+            {validations.password && (
+              <span className="form-error">{validations.password}</span>
             )}
           </div>
           <input
@@ -68,7 +95,13 @@ function LoginFormModal() {
             required
           />
         </div>
-        <button className="form-submit" type="submit">Log In</button>
+        <button
+          className={submitClass}
+          disabled={submitDisabled}
+          type="submit"
+        >
+          Log In
+        </button>
       </form>
     </>
   );

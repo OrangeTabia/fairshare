@@ -28,8 +28,6 @@
 }
 
 .form-label {
-    width: 30ch;
-
     display: flex;
     flex-flow: row nowrap;
     justify-content: left;
@@ -64,4 +62,16 @@
 .form-submit:hover {
     background-color: var(--theme-l-blue);
     border: 2px solid var(--theme-d-blue);
+}
+
+.form-submit:hover {
+    background-color: var(--theme-l-blue);
+    border: 2px solid var(--theme-d-blue);
+}
+
+.form-submit.disabled,
+.form-submit.disabled:hover {
+    background-color: var(--theme-xl-gray);
+    border: 2px solid var(--theme-l-gray);
+    cursor: default;
 }

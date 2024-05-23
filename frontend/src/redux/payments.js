@@ -27,7 +27,7 @@ export const thunkLoadPayments = () => async (dispatch) => {
   }
 };
 
-export const thunkAddPayments = (payment) => async (dispatch) => {
+export const thunkAddPayment = (payment) => async (dispatch) => {
   const paymentType = payment.type
   const response = await fetch("/api/payments/new", {
     method: "POST",
@@ -36,7 +36,7 @@ export const thunkAddPayments = (payment) => async (dispatch) => {
       user_id: payment.userId,
       friends_expense_id: payment.expenseId,
       amount: payment.amount,
-      payment_date: payment.payment_date,
+      payment_date: payment.paymentDate,
     }),
   });
   if (response.ok) {

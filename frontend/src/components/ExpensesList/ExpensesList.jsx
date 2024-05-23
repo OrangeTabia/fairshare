@@ -11,7 +11,7 @@ function ExpensesList() {
   return (
     <ul id="expenses-list">
       {expenses && Object.values(expenses).map(expense => (
-        <ExpenseCard expense={expense}/>
+        <ExpenseCard key={expense.id} expense={expense}/>
       ))}
     </ul>
   )

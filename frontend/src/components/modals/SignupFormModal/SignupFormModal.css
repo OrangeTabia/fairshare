@@ -19,7 +19,7 @@
     line-height: 2rem;
 }
 
-#settle-up-form {
+#signup-form {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -35,7 +35,7 @@
     gap: 10px;
 }
 
-#settle-up-form input {
+#signup-form input {
     width: 100%;
 
     background-color: var(--theme-white);
@@ -43,45 +43,25 @@
     border-radius: 2.5px;
 }
 
-.form-buttons {
-    width: 100%;
-
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-.form-cancel {
-    width: 120px;
-    margin-top: 10px;
-    align-self: center;
-
-    font-size: 0.8rem;
-    cursor: pointer;
-
-    background-color: var(--theme-xl-orange);
-    border: 2px solid var(--theme-orange);
-    border-radius: 5px;
-}
-
-.form-cancel:hover {
-    background-color: var(--theme-l-orange);
-    border: 2px solid var(--theme-d-orange);
+.form-error {
+    color: var(--theme-error);
 }
 
 .form-submit {
-    width: 120px;
+    width: 200px;
     margin-top: 10px;
     align-self: center;
 
     font-size: 0.8rem;
-    cursor: pointer;
 
     background-color: var(--theme-xl-blue);
     border: 2px solid var(--theme-blue);
     border-radius: 5px;
+}
+
+.form-submit:hover {
+    background-color: var(--theme-l-blue);
+    border: 2px solid var(--theme-d-blue);
 }
 
 .form-submit:hover {
