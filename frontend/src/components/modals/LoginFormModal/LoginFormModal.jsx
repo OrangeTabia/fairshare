@@ -41,7 +41,9 @@ function LoginFormModal() {
         <div>
           <div className="form-label">
             <label htmlFor="email">Email</label>
-            {errors.email && <span className="form-error">{errors.email}</span>}
+            {errors.email && (
+              <span className="form-error">{errors.email}</span>
+            )}
           </div>
           <input
             id="email"
