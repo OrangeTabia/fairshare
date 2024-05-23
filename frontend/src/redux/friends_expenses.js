@@ -44,7 +44,8 @@ export const thunkLoadFriendsExpenses = () => async (dispatch) => {
     const data = await response.json();
     return dispatch(loadFriendsExpenses(data));
   } else {
-    return { server: "Something went wrong. Please try again" };
+    const errors = await response.json();
+    return errors;
   }
 };
 
@@ -67,9 +68,11 @@ export const thunkAddFriendsExpense = (expense) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     data.type = paymentType
-    return dispatch(addFriendsExpense(data));
+    dispatch(addFriendsExpense(data));
+    return data;
   } else {
-    return { server: "Something went wrong. Please try again" };
+    const errors = await response.json();
+    return errors;
   }
 };
 
@@ -94,7 +97,8 @@ export const thunkUpdateFriendsExpense =
       data.type = paymentType
       return dispatch(addFriendsExpense(data));
     } else {
-      return { server: "Something went wrong. Please try again" };
+      const errors = await response.json();
+      return errors;
     }
   };
 
@@ -106,7 +110,8 @@ export const thunkDeleteFriendsExpense =
     if (response.ok) {
       return dispatch(deleteFriendsExpense(friendsExpenseId));
     } else {
-      return { server: "Something went wrong. Please try again" };
+      const errors = await response.json();
+      return errors;
     }
   };
 
@@ -124,7 +129,8 @@ export const thunkAddComment = (comment) => async (dispatch) => {
     const data = await response.json();
     return dispatch(addComment(data));
   } else {
-    return { server: "Something went wrong. Please try again" };
+    const errors = await response.json();
+    return errors;
   }
 };
 
@@ -142,7 +148,8 @@ export const thunkUpdateComment = (comment) => async (dispatch) => {
     const data = await response.json();
     return dispatch(addComment(data));
   } else {
-    return { server: "Something went wrong. Please try again" };
+    const errors = await response.json();
+    return errors;
   }
 };
 
@@ -151,7 +158,8 @@ export const thunkDeleteComment = (comment) => async (dispatch) => {
   if (response.ok) {
     return dispatch(deleteComment(comment.id));
   } else {
-    return { server: "Something went wrong. Please try again" };
+    const errors = await response.json();
+    return errors;
   }
 };
 
