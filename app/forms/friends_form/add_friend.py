@@ -15,7 +15,6 @@ def user_is_valid(form, field):
     if not user:
         raise ValidationError("Email provided not found.")
 
-
     curr_user = User.query.get(current_user.id)
 
     friend = curr_user.friends.filter_by(email=form.data["email"]).first()
@@ -26,5 +25,3 @@ def user_is_valid(form, field):
 
 class AddFriendForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), user_is_valid])
-
-    # submit = SubmitField("Submit")
