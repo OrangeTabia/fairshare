@@ -29,7 +29,7 @@ function FriendsList() {
             <div className="friends-list">
                 {orderedFriends.map(friend => (
                     <div key={friend.id} className="friends-list-ele">
-                        <div onClick={() => navigate(`/friend/${friend.id}`)}>{friend.name}</div>
+                        <span className='animated-friend-underline' onClick={() => navigate(`/friend/${friend.id}`)}>{friend.name}</span>
                         <OpenModalButton
                         buttonText={<HiOutlineX />}
                         modalComponent={<DeleteFriendModal friend={friend} />}
