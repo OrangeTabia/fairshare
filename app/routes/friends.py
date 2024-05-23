@@ -14,32 +14,20 @@ def friends_list():
     """
     Query for all current user's friends and returns them in a list of user dictionaries
     """
-    # print(help(friends.c.__getitem__("friend_id")))
+
     added_by_friend = (
         db.session.query(User)
         .join(friends, User.id == friends.c.user_id)
-        .filter(friends.c.friend_id == 55)
+        .filter(friends.c.friend_id == current_user.id)
     ).all()
-    # added_by_friend = db.session.execute(
-    #     f"SELECT users.* FROM users JOIN friends ON users.id = friends.user_id WHERE friends.friend_id = {current_user.id};"
-    # ).all()
     added_by_me = (
         db.session.query(User)
         .join(friends, User.id == friends.c.friend_id)
-        .filter(friends.c.user_id == 55)
+        .filter(friends.c.user_id == current_user.id)
     ).all()
-    # added_by_me = db.session.execute(
-    #     f"SELECT users.* FROM users JOIN friends ON users.id = friends.friend_id WHERE friends.user_id = {current_user.id};"
-    # ).all()
-    # db.session.execute(f"TRUNCATE table {SCHEMA}.comments RESTART IDENTITY CASCADE;")
-
-    user_55 = User.query.get(55)
 
     all_friends = added_by_friend + added_by_me
 
-    print("-------------->", user_55.name, all_friends)
-
-    # return [friend for friend in all_friends]
     return [friend.to_dict() for friend in all_friends]
 
 
@@ -54,17 +42,13 @@ def new_friend():
     form["csrf_token"].data = request.cookies["csrf_token"]
 
     if form.validate_on_submit():
-
         user = User.query.get(current_user.id)
         friend = User.query.filter_by(email=form.data["email"]).first()
         user.friends.append(friend)
-        friend.friends.append(user)
 
         db.session.commit()
 
-        friends_info = User.query.get(friend.id)
-
-        return friends_info.to_dict()
+        return friend.to_dict()
     else:
         return form.errors, 401
 
@@ -76,12 +60,22 @@ def delete_friend(friends_id):
     Delete a friendship by friend ID and user ID from the current user's friends list, and the corresponding friends list
     """
 
-    db.session.execute(
-        db.delete(friends).filter_by(friend_id=friends_id, user_id=current_user.id)
+    added_by_me = (
+        db.session.query(friends)
+        .filter_by(user_id=current_user.id, friend_id=friends_id)
+        .first()
     )
-    db.session.execute(
-        db.delete(friends).filter_by(friend_id=current_user.id, user_id=friends_id)
-    )
+
+    if added_by_me:
+        db.session.execute(
+            db.delete(added_by_me).filter_by(
+                friend_id=friends_id, user_id=current_user.id
+            )
+        )
+    else:
+        db.session.execute(
+            db.delete(friends).filter_by(friend_id=current_user.id, user_id=friends_id)
+        )
 
     db.session.commit()
 
