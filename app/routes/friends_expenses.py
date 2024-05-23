@@ -7,6 +7,12 @@ from app.forms import CreateFriendsExpenseForm
 
 friends_expenses_routes = Blueprint("friends_expenses", __name__)
 
+def format_input_date(str): 
+    new_date = str.replace("T", " ").replace(".000Z", "")
+    return new_date
+
+
+
 
 @friends_expenses_routes.route("")
 @login_required
@@ -54,9 +60,10 @@ def create_friends_expense():
     form = CreateFriendsExpenseForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
+
     if form.validate_on_submit():
 
-        formatted_date = datetime.strptime(form.data["expense_date"], '%Y-%m-%d %H:%M:%S')
+        formatted_date = datetime.strptime(format_input_date(form.data["expense_date"]), '%Y-%m-%d %H:%M:%S')
 
         new_friends_expense = FriendsExpense(
             payer_id=form.data["payer_id"],
@@ -72,7 +79,7 @@ def create_friends_expense():
 
         return new_friends_expense.to_dict()
     else:
-        return form.errors, 401
+        return form.errors, 400
 
 
 
@@ -87,7 +94,7 @@ def update_friends_expense(friends_expense_id):
 
     if form.validate_on_submit():
 
-        formatted_date = datetime.strptime(form.data["expense_date"], '%Y-%m-%d %H:%M:%S')
+        formatted_date = datetime.strptime(format_input_date(form.data["expense_date"]), '%Y-%m-%d %H:%M:%S')
 
     
         current_friends_expense = FriendsExpense.query.get(friends_expense_id)
