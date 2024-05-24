@@ -14,6 +14,16 @@ function EditExpenseModal({ expense }) {
   const payer = useSelector((state) => state.friends)[expense.payerId];
   const { closeModal } = useModal();
 
+  const convertFloatToInteger = () => {
+    if (!amount.split(".")[1]) {
+      return amount + "00";
+    } else if (amount.split(".")[1].length === 1) {
+      return amount.split(".").join("") + "0";
+    } else if (amount.split(".")[1].length === 2) {
+      return amount.split(".").join("");
+    }
+  };
+
   useEffect(() => {
     const frontValidations = {};
     if (!description)
@@ -43,7 +53,7 @@ function EditExpenseModal({ expense }) {
       payerId: expense.payerId,
       receiverId: expense.receiverId,
       description,
-      amount,
+      amount: convertFloatToInteger(),
       expenseDate: newDate,
       settled: false,
       notes,

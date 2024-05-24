@@ -6,7 +6,7 @@ import "./Comments.css";
 
 function EditComment({ comments }) {
   const dispatch = useDispatch();
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState(comments.comment);
   const [errors, setErrors] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState("");
   const { closeModal } = useModal();
@@ -29,8 +29,6 @@ function EditComment({ comments }) {
       expenseId: comments.expenseId,
       comment,
     };
-
-    console.log("----->", comments.userId, comments, comment);
 
     await dispatch(thunkUpdateComment(updatedComment));
 

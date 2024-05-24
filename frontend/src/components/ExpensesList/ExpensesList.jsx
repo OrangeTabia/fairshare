@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import ExpenseCard from "./ExpenseCard";
 import "./ExpensesList.css";
@@ -9,15 +9,26 @@ function ExpensesList() {
   const [selectedExpense, setSelectedExpense] = useState("");
   const expenses = useSelector((state) => state.friendsExpenses);
 
+  const handleClick = (expenseId) => {
+    if (selectedExpense === expenseId) setSelectedExpense("")
+    else setSelectedExpense(expenseId);
+  };
+
   return (
     <ul id="expenses-list">
       {Object.values(expenses).map((expense) => (
-        <div key={expense.id} onClick={() => handleClick()}>
-          <span>{expense.description}</span>
-          <div>
-            <ExpenseCard expense={expense} />
+        <>
+          <div
+            key={expense.id}
+            onClick={() => handleClick(expense.id)}
+            className="expense-container"
+          >
+            <div className="expense-preview">
+              <p className="description">{expense.description}</p>
+            </div>
           </div>
-        </div>
+          {selectedExpense === expense.id && <ExpenseCard expense={expense} />}
+        </>
       ))}
     </ul>
   );

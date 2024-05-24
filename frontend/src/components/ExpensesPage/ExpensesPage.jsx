@@ -4,8 +4,6 @@ import DevLinksList from "../DevLinksList";
 import ExpensesList from "../ExpensesList";
 
 function ExpensesPage() {
-
-
   return (
     <div className="columns-wrapper">
       <section className="left-column">
