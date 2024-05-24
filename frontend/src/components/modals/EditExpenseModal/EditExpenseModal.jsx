@@ -26,7 +26,7 @@ function EditExpenseModal({ expense }) {
       frontValidations.amount = "Expense must have a minimum of $0.01";
     if (!expenseDate)
       frontValidations.expenseDate = "Please enter a date for the expense";
-    if (notes.length > 200)
+    if (notes?.length > 200)
       frontValidations.notes = "Note must be less than 200 characters";
 
     setValidations(frontValidations);
@@ -58,7 +58,7 @@ function EditExpenseModal({ expense }) {
       <h2>Edit an expense</h2>
       <form onSubmit={handleSubmit} id="edit-expense-form">
         <div>
-          <h3>With You and: {payer.name}</h3>
+          <h3>With You and: {payer?.name}</h3>
           <div className="form-label">
             <input
               id="description"
