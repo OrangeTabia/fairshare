@@ -19,7 +19,7 @@ function FriendsList({currFriend}) {
     useEffect(() => {
         const sortedFriends = Object.values(friends).sort((friend1, friend2) => friend1.name > friend2.name ? 1 : friend1.name < friend2.name ? -1 : 0)
         setOrderedFriends(sortedFriends)
-
+        console.log(currFriend)
     }, [friends])
 
     return (
@@ -29,7 +29,7 @@ function FriendsList({currFriend}) {
                 {orderedFriends.map(friend => (
                     <div key={friend.id} className="friends-list-ele">
                         <span
-                            className={currFriend && currFriend.name === friend.name ? 'on-friends-page':'animated-friend-underline'}
+                            className={currFriend && currFriend?.name === friend?.name ? 'on-friends-page':'animated-friend-underline'}
                             onClick={() => navigate(`/friend/${friend.id}`)}
                                 >{friend.name}
                         </span>

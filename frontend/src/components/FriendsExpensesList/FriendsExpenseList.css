@@ -1,9 +1,14 @@
 #expenses-list {
     margin: 0;
     padding: 0;
+    height: 750px;
     list-style: none;
     display: flex;
     flex-flow: column nowrap;
+    overflow:scroll;
+    overflow-x:hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(128, 128, 128, 0.183) rgba(0, 0, 255, 0);
 }
 
 .expense-card {
@@ -15,7 +20,8 @@
 
 /* Borders are temporary to show payer vs. receiver expense type */
 
-.friend-expense {
+.friend-expense,
+.friend-payments {
     border: 1px solid rgba(128, 128, 128, 0.228);
     padding: 8px;
     margin: 5px;
@@ -29,4 +35,16 @@
 .friends-expense-title {
     display: flex;
     justify-content: space-between;
+}
+
+
+.details-header {
+    margin: 16px;
+    border-bottom: 1px solid grey;
+    width: 50%
+}
+
+
+.a-payment {
+    font-size: 10px;
 }

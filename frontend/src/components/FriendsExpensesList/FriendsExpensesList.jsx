@@ -5,29 +5,42 @@ import { useSelector } from 'react-redux';
 import './FriendsExpenseList.css';
 
 function FriendsExpensesList() {
-  // TODO: Sort expenses by date and insert month dividers
-  // ... Separate expenses into arrays by month, then nest a loop?
   const { friendId } = useParams();
-  const currFriend = useSelector(state => state = state.friends[friendId])
+  // const currFriend = useSelector(state => state = state.friends[friendId])
+  // const [expensePayments, setExpensePayments] = useState([])
   const allExpenses = useSelector(state => state.friendsExpenses)
   const currUser = useSelector(state => state.session.user)
+
+  const allPayments = useSelector(state => state.payments)
   const [expenses, setExpenses] = useState([])
+  const [payments, setPayments] = useState([])
+
   const [openCards, setOpenCards] = useState([])
-  const payments = useSelector(state => Object.values(state.payments).filter(payment => payment.userId === currUser.id))
-  const [expensePayments, setExpensePayments] = useState([])
+
+
+
 
   useEffect(() => {
-    const friendReceiver = Object.values(allExpenses).filter(expense => expense.payerId === currUser.id && expense.receiverId === parseInt(friendId))
-    const friendPayer = Object.values(allExpenses).filter(expense => expense.payerId === parseInt(friendId) && expense.receiverId === currUser.id)
-    const friendExpenses = [...friendReceiver, ...friendPayer, ...payments]
+      const friendReceiver = Object.values(allExpenses).filter(expense => expense.payerId === currUser.id && expense.receiverId === parseInt(friendId))
+      const friendPayer = Object.values(allExpenses).filter(expense => expense.payerId === parseInt(friendId) && expense.receiverId === currUser.id)
 
-    setExpenses(friendExpenses)
+      const friendExpenses = [...friendReceiver, ...friendPayer]
+      //all payments with the specified user and all expenses with the specified user are added to expenses and payments
+      setExpenses(friendExpenses)
 
-  }, [allExpenses, currFriend, currUser])
+  }, [allExpenses, friendId])
 
-  // useEffect(() => {
-  //   payments.forEach(payment => console.log(new Date(payment.paymentDate).getTime()))
-  // }, [])
+  useEffect(() => {
+    const myPayments = Object.values(allPayments).filter(payment => payment.userId === currUser.id)
+    const expenseIds = expenses.map(expense => expense.id)
+    const currPayments = myPayments.filter(payment => expenseIds.includes(payment.expenseId) )
+
+    setPayments(currPayments)
+  }, [allPayments, expenses])
+
+  useEffect(() => {
+    setOpenCards([])
+  }, [friendId])
 
   const handleClick  = (idx) => {
     if (!openCards.includes(idx)) {
@@ -37,32 +50,40 @@ function FriendsExpensesList() {
     }
   }
 
-  // get a list of payments, mix it with the list of expenses
-  // if payments, set up the card this way, check by if it has a payment.expenseId
-  // if expense, set up that way
-  // send through to card,
-  // if payment, do this way
-  // ifexpense do that way
-  // if paid off do this way
-  // if not paid do that way
-
   return (
-    <ul id="expenses-list">
+    <section id="expenses-list">
+      <h3>Expenses:</h3>
       {Object.values(expenses).map((expense, idx)=> (
-        <div key={expense.id} className='friend-expense' onClick={() => handleClick(idx)}>
-          <div className="friends-expense-title">
-            <span>{expense.description ? expense.description : `paid: ${expense.paymentDate}`}</span>
-            {/* change this to the last payment date */}
-            <span>{expense.settled ? `paid ${expense.expenseDate}`: ''}</span>
+        <div key={idx} className='friend-expense'>
+          <div className="friends-expense-title" onClick={() => handleClick(idx)}>
+            <div >{expense.description}</div>
+            <div >{`$${(expense.amount).toString().slice(0, -2)}.${(expense.amount).toString().slice(-2)}`}</div>
+            <span>{expense.settled? `Expense Settled` : ''}</span>
           </div>
           {openCards.includes(idx)
-            ? <div className="">
-                  <FriendsExpenseCard expense={expense}/>
+            ? <div><FriendsExpenseCard  expenseId={expense.id} /></div>
+            : '' }
+        </div>
+      ))}
+
+      <h3>Payments:</h3>
+      {Object.values(payments).map((expense, idx)=> (
+        <div key={idx + 200} className='friend-payments'>
+          <div className="friends-expense-title" onClick={() => handleClick(idx + 200)}>
+            <div >{`paid: `}</div>
+            <div>{expense.paymentDate}</div>
+          </div>
+          {openCards.includes(idx + 200)
+            ? <div className="a-payment">
+                  <div>
+                    <p>{`Payment of $${(expense.amount).toString().slice(0, -2)}.${(expense.amount).toString().slice(-2)}`}</p>
+                    <p>{`Paid on ${expense.paymentDate.slice(0, -12)}`}</p>
+                  </div>
               </div>
             : '' }
         </div>
       ))}
-    </ul>
+    </section>
   );
 }
 
