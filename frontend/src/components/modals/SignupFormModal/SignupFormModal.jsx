@@ -51,7 +51,7 @@ function SignupFormModal() {
       setErrors(serverResponse); // Change to reflect LoginFormModal later
     } else {
       closeModal();
-      navigate("/dashboard");
+      navigate("/");
     }
   };
 

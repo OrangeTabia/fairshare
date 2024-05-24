@@ -54,9 +54,15 @@ function LoginFormModal() {
       setValidations(serverResponse);
     } else {
       closeModal();
-      navigate("/dashboard");
+      navigate("/");
     }
   };
+
+  const handleDemo = () => {
+    setEmail('demo@aa.io')
+    setPassword('demo_password')
+    handleSubmit()
+  }
 
   return (
     <>
@@ -101,6 +107,12 @@ function LoginFormModal() {
           type="submit"
         >
           Log In
+        </button>
+        <button
+          className={submitClass}
+          onClick={handleDemo}
+        >
+          Demo User
         </button>
       </form>
     </>

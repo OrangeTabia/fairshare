@@ -1,5 +1,26 @@
-function LandingPage() {
-    return <h1>Landing Page</h1>
-}
+import { ModalProvider, Modal } from "../../context/Modal";
 
-export default LandingPage;
+import LandingNavigation from "../../components/Navigation/LandingNavigation";
+
+export default function LandingPage() {
+
+  return (
+    <>
+      <ModalProvider>
+        <header id="main-header">
+          <div id="header-content">
+            <p id="site-name">
+              <span id="site-name-1">fair</span>
+              <span id="site-name-2">share</span>
+            </p>
+            <LandingNavigation />
+          </div>
+        </header>
+        <main id="main-content">
+          <h1>Landing Page</h1>
+        </main>
+        <Modal />
+      </ModalProvider>
+    </>
+  );
+}
