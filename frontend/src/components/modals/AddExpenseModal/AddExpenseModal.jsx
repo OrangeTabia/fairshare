@@ -39,8 +39,6 @@ function AddExpenseModal() {
     e.preventDefault();
 
     const newDate = new Date(expenseDate);
-    console.log("EXPENSE TYPE", typeof expenseDate);
-    console.log("NEW DATE====>", typeof newDate);
 
     setHasSubmitted(true);
 
