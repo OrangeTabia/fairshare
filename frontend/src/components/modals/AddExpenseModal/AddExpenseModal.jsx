@@ -13,9 +13,12 @@ function AddExpenseModal() {
     const [notes, setNotes] = useState(""); 
     const [validations, setValidations] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false); 
+    const [suggestedFriends, setSuggestedFriends] = useState([])
+    const [friendSelected, setFriendSelected] = useState("")
     const currentUser = useSelector(state => state.session.user);
+    const currentFriends = useSelector(state => state.friends);
+    const allUsers = useSelector(state => state.userEmails);
     const friendsList = useSelector(state => state.friends); 
-    const friendsListArray = Object.values(friendsList); 
     const { closeModal } = useModal();
 
     useEffect(() => {
@@ -30,13 +33,30 @@ function AddExpenseModal() {
     }, [payer, description, amount, expenseDate, notes]); 
 
 
+    useEffect(() => {
+        const removeIndex = Object.values(currentFriends).map(friend => friend.name);
+        const removeCurrentFriends = Object.values(allUsers).filter(user => !removeIndex.includes(user.name));
+        const removeSelf = Object.values(removeCurrentFriends).filter(user => user.name !== currentUser.name);
+        const suggested = Object.values(removeSelf).filter(user => user.name.startsWith(name)); 
+        if (name) {
+            setSuggestedFriends(suggested.slice(0, 5))
+            setFriendSelected('')
+        } else {
+            setSuggestedFriends([])
+        }
+    }, [name])
+
+    const selectingUser = (friend) => {
+        setFriendSelected(friend)
+        setSuggestedFriends([])
+        setName('')
+    }
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const newDate = new Date(expenseDate);
-        console.log("EXPENSE TYPE", typeof(expenseDate));
-        console.log("NEW DATE====>", typeof(newDate));
-
         setHasSubmitted(true); 
 
         const newExpense = {
@@ -68,17 +88,19 @@ function AddExpenseModal() {
             >
                 <div>
                     <div className="form-label">
-                        <select 
-                            id="payer"
+                        {suggestedFriends.map(friend => (
+                            <div key={friend.id}>
+                                <div className='list-user-email-item' onClick={() => selectingUser(friend)} >{friend.email}</div>
+                            </div>
+                        ))}
+                        <div
+                            type='text'
                             value={payer}
+                            placeholder="Enter a payer name"
                             onChange={(e) => setPayer(e.target.value)}
-                            required
-                        >
-                                <option>Select friend</option>
-                            {friendsListArray.map((friend) => (
-                                <option value={friend.id} key={friend.id}>{friend.name}</option>
-                            ))}
-                        </select>
+                            >
+                                <div className='chosen-user-container' hidden={!friendSelected}></div>
+                        </div>
                         {validations.payer && hasSubmitted && (
                         <span className="form-error">{validations.payer}</span>
                         )}
