@@ -78,7 +78,6 @@ function AddExpenseModal() {
     }
 
 
-
     return (
         <>
             <h2>Add an expense</h2>
@@ -87,7 +86,7 @@ function AddExpenseModal() {
                 id="add-expense-form"
             >
                 <div>
-                    <div className="form-label">
+                    {/* <div className="form-label">
                         {suggestedFriends.map(friend => (
                             <div key={friend.id}>
                                 <div className='list-user-email-item' onClick={() => selectingUser(friend)} >{friend.email}</div>
@@ -104,8 +103,15 @@ function AddExpenseModal() {
                         {validations.payer && hasSubmitted && (
                         <span className="form-error">{validations.payer}</span>
                         )}
-                    </div>
+                    </div> */}
                     <div className="form-label">
+                        {/* <selelct 
+                        id="friends"
+                        >
+                        {friendsList.map((friend) => (
+                            <option key={friend.id}>{friend.name}</option>
+                        ))}
+                         </selelct> */}
                         <input
                             id="description"
                             type="text"
@@ -134,7 +140,6 @@ function AddExpenseModal() {
                     <div className="form-label">
                         <input
                             id="expense_date"
-                            // type="datetime-local"
                             type="date"
                             value={expenseDate}
                             onChange={(e) => setExpenseDate(e.target.value)}
