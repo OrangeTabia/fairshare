@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { thunkUpdateComment } from "../../redux/friends_expenses";
 import { useModal } from "../../context/Modal";
 import "./Comments.css";
 
-function EditComment({ comments, expense }) {
+function EditComment({ comments }) {
   const dispatch = useDispatch();
   const [comment, setComment] = useState("");
   const [errors, setErrors] = useState("");
@@ -24,12 +24,17 @@ function EditComment({ comments, expense }) {
     setHasSubmitted(true);
 
     const updatedComment = {
-      userId: expense.receiverId,
-      friendsExpenseId: comments,
+      id: comments.id,
+      userId: comments.userId,
+      expenseId: comments.expenseId,
       comment,
     };
 
+    console.log("----->", comments.userId, comments, comment);
+
     await dispatch(thunkUpdateComment(updatedComment));
+
+    closeModal();
   };
 
   return (

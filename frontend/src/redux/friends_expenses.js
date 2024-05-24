@@ -141,7 +141,7 @@ export const thunkUpdateComment = (comment) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       user_id: comment.userId,
-      friends_expense_id: comment.friendsExpenseId,
+      friends_expense_id: comment.expenseId,
       comment: comment.comment,
     }),
   });
@@ -192,7 +192,14 @@ function friendsExpensesReducer(state = initialState, action) {
     }
     case ADD_COMMENT: {
       const newState = { ...state };
-      newState[action.comment.expenseId].comments.push(action.comment);
+
+      const comments = newState[action.comment.expenseId].comments;
+
+      comments[
+        comments.indexOf(comments.find((e) => e.id == action.comment.id))
+      ] = action.comment;
+
+      // newState[action.comment.expenseId].comments;
       return newState;
     }
     case DELETE_COMMENT: {
