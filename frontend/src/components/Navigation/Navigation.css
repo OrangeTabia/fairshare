@@ -23,12 +23,14 @@
 
 .profile-dropdown {
   margin: 0;
-  padding: 10px 20px;
+  padding: 10px;
   position: fixed;
   top: 45px;
 
   display: flex;
   flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
   gap: 5px;
 
   list-style: none;
@@ -37,8 +39,28 @@
   border-radius: 2.5px;
 }
 
-.profile-dropdown button {
+.profile-dropdown li {
+  width: 100%;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-dropdown button {
+  width: 100%;
+
+  font-size: 0.8rem;
+  cursor: pointer;
+
+  background-color: var(--theme-xl-orange);
+  border: 2px solid var(--theme-orange);
+  border-radius: 5px;
+}
+
+.profile-dropdown button:hover {
+  background-color: var(--theme-l-orange);
+  border: 2px solid var(--theme-d-orange);
 }
 
 .profile-button {
