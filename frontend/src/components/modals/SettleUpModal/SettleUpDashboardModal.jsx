@@ -42,7 +42,7 @@ function SettleUpModal() {
       const receiverExpenses = Object.values(allExpenses).filter(expense => expense.payerId === parseInt(friendId) && expense.receiverId === currUser.id && expense.settled === false)
       const payerExpenses = Object.values(allExpenses).filter(expense => expense.payerId === currUser.id && expense.receiverId === parseInt(friendId) && expense.settled === false)
       const myExpenses = [receiverExpenses, payerExpenses]
-      console.log(myExpenses)
+      // console.log(myExpenses)
       setExpenseSelection(...myExpenses)
     }else {
       const receiverExpenses = Object.values(allExpenses).filter(expense => expense.receiverId === currUser.id)
