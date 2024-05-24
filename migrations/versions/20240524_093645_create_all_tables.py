@@ -1,14 +1,8 @@
 """create all tables
 
-<<<<<<<< HEAD:migrations/versions/20240524_113407_.py
-Revision ID: 6c999c60f184
-Revises: 
-Create Date: 2024-05-24 11:34:07.592505
-========
 Revision ID: 76d9907223b4
-Revises: 
+Revises:
 Create Date: 2024-05-24 09:36:45.283653
->>>>>>>> dev:migrations/versions/20240524_093645_create_all_tables.py
 
 """
 from alembic import op
@@ -16,11 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-<<<<<<<< HEAD:migrations/versions/20240524_113407_.py
-revision = '6c999c60f184'
-========
 revision = '76d9907223b4'
->>>>>>>> dev:migrations/versions/20240524_093645_create_all_tables.py
 down_revision = None
 branch_labels = None
 depends_on = None
