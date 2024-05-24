@@ -50,7 +50,7 @@ export const thunkLoadFriendsExpenses = () => async (dispatch) => {
 };
 
 export const thunkAddFriendsExpense = (expense) => async (dispatch) => {
-  const paymentType = expense['type'];
+  const paymentType = expense["type"];
   const response = await fetch("/api/friends_expenses/new", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -134,12 +134,14 @@ export const thunkAddComment = (comment) => async (dispatch) => {
 };
 
 export const thunkUpdateComment = (comment) => async (dispatch) => {
+  console.log("----------", comment);
+
   const response = await fetch(`/api/comments/${comment.id}/update`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       user_id: comment.userId,
-      friends_expense_id: comment.friendsExpenseId,
+      friends_expense_id: comment.expenseId,
       comment: comment.comment,
     }),
   });
@@ -155,7 +157,7 @@ export const thunkUpdateComment = (comment) => async (dispatch) => {
 export const thunkDeleteComment = (comment) => async (dispatch) => {
   const response = await fetch(`/api/comments/${comment.id}/delete`);
   if (response.ok) {
-    return dispatch(deleteComment(comment.id));
+    return dispatch(deleteComment(comment));
   } else {
     const errors = await response.json();
     return errors;
@@ -190,13 +192,24 @@ function friendsExpensesReducer(state = initialState, action) {
     }
     case ADD_COMMENT: {
       const newState = { ...state };
-      newState[action.comment.friendsExpenseId].comments.push(action.comment);
+
+      const comments = newState[action.comment.expenseId].comments;
+
+      comments[
+        comments.indexOf(comments.find((e) => e.id == action.comment.id))
+      ] = action.comment;
+
+      // newState[action.comment.expenseId].comments;
       return newState;
     }
     case DELETE_COMMENT: {
       const newState = { ...state };
-      delete newState[action.comment.friendsExpenseId].comments.find(
-        (e) => e.id == action.comment.id
+
+      const comments = newState[action.comment.expenseId].comments;
+
+      comments.splice(
+        comments.indexOf(comments.find((e) => e.id == action.comment.id)),
+        1
       );
       return newState;
     }

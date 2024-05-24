@@ -6,6 +6,7 @@ import { thunkAuthenticate } from "../redux/session";
 // import { useNavigate } from "react-router-dom";
 
 import LoggedInNavigation from "../components/Navigation/LoggedInNavigation";
+import ProfileButton from "../components/Navigation/ProfileButton";
 import loadState from "../utils/loadData";
 
 export default function Layout() {
@@ -34,11 +35,18 @@ export default function Layout() {
       <ModalProvider>
         <header id="main-header">
           <div id="header-content">
-            <p id="site-name">
-              <span id="site-name-1">fair</span>
-              <span id="site-name-2">share</span>
-            </p>
-            <LoggedInNavigation />
+            <div className="header-container hc-1">
+              <p id="site-name">
+                <span id="site-name-1">fair</span>
+                <span id="site-name-2">share</span>
+              </p>
+            </div>
+            <div className="header-container hc-2">
+              <LoggedInNavigation />
+            </div>
+            <div className="header-container hc-3">
+              <ProfileButton />
+            </div>
           </div>
         </header>
         <main id="main-content">
