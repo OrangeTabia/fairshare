@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
 import { thunkAddPayment } from "../../../redux/payments";
-import { useParams } from "react-router-dom";
 
 import './SettleUpModal.css';
 import { useSelector } from "react-redux";
@@ -13,7 +12,6 @@ function SettleUpModal() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { closeModal } = useModal();
-  const { friendId } = useParams();
 
   const [amount, setAmount] = useState('');
   const [paymentDate, setPaymentDate] = useState('');
@@ -21,8 +19,8 @@ function SettleUpModal() {
   const [amountDue, setAmountDue] = useState(0)
   const [submitClass, setSubmitClass] = useState("form-submit disabled");
   const [submitDisabled, setSubmitDisabled] = useState(true);
-  // const [expenseSelection, setExpenseSelection] = useState([]);
-  // const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
   const allExpenses = useSelector(state => state.friendsExpenses);
   const currUser = useSelector(state => state.session.user);
   const paymentsMade = useSelector(state => state.payments);
@@ -41,22 +39,25 @@ function SettleUpModal() {
   };
 
 
-  // useEffect(() => {
-  //   if (friendId) {
-  //     const receiverExpenses = Object.values(allExpenses).filter(expense => expense.payerId === parseInt(friendId) && expense.receiverId === currUser.id && expense.settled === false)
-  //     const payerExpenses = Object.values(allExpenses).filter(expense => expense.payerId === currUser.id && expense.receiverId === parseInt(friendId) && expense.settled === false)
-  //     const myExpenses = [receiverExpenses, payerExpenses]
+  useEffect(() => {
+    const validationErrors = {};
+    if (parseInt(amount) <= 0) {
+      validationErrors.amount = 'Payment must be more than 0'
+    }
+    if (parseInt(amount) > amountDue) {
+      validationErrors.amount = 'Payment must be the same or less than what is owed'
+    }
+    let date = new Date(paymentDate)
+    let today = new Date()
+    if (paymentDate) {
+      if (date.getTime() < today.getTime()) {
+        validationErrors.paymentDate = 'Payment date must be in the future'
+      }
+    }
+    setErrors(validationErrors)
+  }, [amount, paymentDate, amountDue]);
 
-  //     setExpenseSelection(...myExpenses)
-  //   }else {
-  //     const receiverExpenses = Object.values(allExpenses).filter(expense => expense.receiverId === currUser.id)
-  //     const payerExpenses = Object.values(allExpenses).filter(expense => expense.receiverId === parseInt(friendId))
-  //     const myExpenses = [receiverExpenses, payerExpenses]
 
-  //     setExpenseSelection(...myExpenses)
-  //   }
-
-  // }, [friendId])
 
   useEffect(() => {
     let totalPaid = 0
@@ -75,7 +76,15 @@ function SettleUpModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setHasSubmitted(true);
+    
+    if(Object.values(errors).length) return;
+    setHasSubmitted(false)
+
+    let adjustedAmount = amount;
+
+    if (amount.indexOf('.') >= 0) {
+      adjustedAmount = parseInt(amount.toString().slice(0, amount.indexOf('.')) + amount.toString().slice(amount.indexOf('.') + 1))
+    }
 
     await dispatch(
       thunkAddPayment({
@@ -105,12 +114,12 @@ function SettleUpModal() {
       ).then(() => {
         setExpense('')
         closeModal();
-        navigate('/dashboard');
+        navigate('/');
       })
     }
     setExpense('')
     closeModal();
-    navigate('/dashboard');
+    navigate('/');
   };
 
   return (
@@ -120,7 +129,7 @@ function SettleUpModal() {
         ? <h3>All your expenses are settled!</h3>
         :
       <form
-      // onSubmit={handleSubmit}
+      onSubmit={handleSubmit}
       id="settle-up-form"
       >
         <div>
@@ -138,7 +147,7 @@ function SettleUpModal() {
         </div>
 
         <div>
-        This is where the friend drop down shows up
+        This is where the friend shows up
         </div> 
 
         <div>
@@ -148,7 +157,7 @@ function SettleUpModal() {
               type="number"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              placeholder={expense ? `You owe $${amountDue}` : 'amount'}
+              placeholder={expense ? `You owe $${amountDue.toString().slice(0, -2)}.${amountDue.toString().slice(-2)}` : 'amount'}
               required
             >
             </input>
