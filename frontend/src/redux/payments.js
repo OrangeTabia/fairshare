@@ -28,7 +28,7 @@ export const thunkLoadPayments = () => async (dispatch) => {
 };
 
 export const thunkAddPayment = (payment) => async (dispatch) => {
-  const paymentType = payment.type
+  const paymentType = payment['type']
   const response = await fetch("/api/payments/new", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
