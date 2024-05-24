@@ -58,10 +58,10 @@ function LoginFormModal() {
     }
   };
 
-  const handleDemo = () => {
+  const handleDemo = (e) => {
     setEmail('demo@aa.io')
     setPassword('demo_password')
-    handleSubmit()
+    handleSubmit(e)
   }
 
   return (
