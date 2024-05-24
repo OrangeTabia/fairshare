@@ -54,3 +54,7 @@
     margin: none;
     margin-left: 40px;
 }
+
+.friends-expense-title {
+    cursor: pointer;
+}

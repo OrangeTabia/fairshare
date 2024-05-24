@@ -27,9 +27,8 @@ function FriendsList({currFriend}) {
             <h4 id="friends-list-title">FRIENDS</h4>
             <div className="friends-list">
                 {orderedFriends.map(friend => (
-                    <div key={friend.id} className="friends-list-ele">
+                    <div key={friend.id} className={currFriend && currFriend?.name === friend?.name ? 'on-friends-page':'friends-list-ele'}>
                         <span
-                            className={currFriend && currFriend?.name === friend?.name ? 'on-friends-page':'animated-friend-underline'}
                             onClick={() => navigate(`/friend/${friend.id}`)}
                                 >{friend.name}
                         </span>
