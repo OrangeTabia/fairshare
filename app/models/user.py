@@ -21,9 +21,8 @@ friends = db.Table(
         primary_key=True,
     ),
     schema=FRIENDS_SCHEMA,
-    postgresql_inherits="users",
+    # postgresql_inherits="users.id",
 )
-
 
 class User(db.Model, UserMixin):
     __tablename__ = "users"
@@ -87,6 +86,8 @@ class User(db.Model, UserMixin):
             # "createdAt": self.created_at,
             # "updatedAt": self.updated_at,
         }
+
+
 
 
 # class Friend(db.Model):
