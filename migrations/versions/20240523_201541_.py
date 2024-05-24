@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: cf1cadc89c06
+Revision ID: 73a998597fec
 Revises: 
-Create Date: 2024-05-18 14:53:31.787036
+Create Date: 2024-05-23 20:15:41.622547
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'cf1cadc89c06'
+revision = '73a998597fec'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -30,12 +30,12 @@ def upgrade():
     sa.UniqueConstraint('email')
     )
     op.create_table('friends',
-    sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('friend_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['friend_id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('user_id', 'friend_id'),
+    postgresql_inherits='users'
     )
     op.create_table('friends_expenses',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -43,7 +43,7 @@ def upgrade():
     sa.Column('receiver_id', sa.Integer(), nullable=False),
     sa.Column('description', sa.String(length=1000), nullable=False),
     sa.Column('amount', sa.Integer(), nullable=False),
-    sa.Column('expense_date', sa.Date(), nullable=False),
+    sa.Column('expense_date', sa.DateTime(), nullable=False),
     sa.Column('settled', sa.Boolean(), nullable=False),
     sa.Column('notes', sa.String(length=200), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
