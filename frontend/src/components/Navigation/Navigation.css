@@ -9,6 +9,7 @@
   gap: 10px;
 }
 
+.nav-header li,
 .nav-header a {
   font-size: 1rem;
   font-weight: 500;
