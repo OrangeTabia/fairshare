@@ -5,7 +5,7 @@ import { useModal } from "../../../context/Modal";
 import { thunkDeleteFriendsExpense } from "../../../redux/friends_expenses";
 
 function DeleteFriendsExpenseModal({ expense }) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
