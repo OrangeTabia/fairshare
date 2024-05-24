@@ -17,18 +17,18 @@ function ExpensesList() {
   return (
     <ul id="expenses-list">
       {Object.values(expenses).map((expense) => (
-        <div
-          key={expense.id}
-          onClick={() => handleClick(expense.id)}
-          className="expense-container"
-        >
-          <div className="expense-preview">
-            <p className="description">{expense.description}</p>
+        <>
+          <div
+            key={expense.id}
+            onClick={() => handleClick(expense.id)}
+            className="expense-container"
+          >
+            <div className="expense-preview">
+              <p className="description">{expense.description}</p>
+            </div>
           </div>
-          <div>
-            {selectedExpense === expense.id && <ExpenseCard expense={expense} />}
-          </div>
-        </div>
+          {selectedExpense === expense.id && <ExpenseCard expense={expense} />}
+        </>
       ))}
     </ul>
   );

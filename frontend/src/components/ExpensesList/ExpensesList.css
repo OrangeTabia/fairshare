@@ -1,22 +1,24 @@
 #expenses-list {
     margin: 0;
     padding: 0;
-    list-style: none;
+
     display: flex;
     flex-flow: column nowrap;
+    list-style: none;
 }
 
 .expense-container {
-    background-color: var(--theme-xl-blue);
+    border-bottom: 1px solid var(--theme-l-gray);
 }
 
 .expense-preview {
-    height: 30px;
+    height: 40px;
+    padding: 0px 5px;
+
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--theme-xl-orange);
 }
 
 .expense-preview .description {
@@ -26,6 +28,7 @@
 
 .expense-card {
     padding: 5px;
+
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
