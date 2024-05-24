@@ -78,7 +78,6 @@ function AddExpenseModal() {
     }
 
 
-
     return (
         <>
             <h2>Add an expense</h2>
@@ -134,7 +133,6 @@ function AddExpenseModal() {
                     <div className="form-label">
                         <input
                             id="expense_date"
-                            // type="datetime-local"
                             type="date"
                             value={expenseDate}
                             onChange={(e) => setExpenseDate(e.target.value)}

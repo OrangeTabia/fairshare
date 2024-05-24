@@ -1,0 +1,13 @@
+#existing-note {
+    margin: 10px;
+    border: 1px solid grey;
+}
+
+#note-label {
+    text-decoration: underline;
+}
+
+#existing-and-new-comments {
+    margin: 10px;
+    border: 1px solid grey;
+}
