@@ -45,27 +45,28 @@ function AddComment({ comments, expense }) {
       </div>
       <div id="existing-and-new-comments">
         <div id="existing-comments">
-          {comments.map((comment) => (
-            <div key={comment.id}>
-              {comment.comment} - {comment.createdAt}
-              <span>
-                <OpenModalButton
-                  id="delete-expense-modal-button"
-                  buttonText={<HiOutlineX />}
-                  modalComponent={<DeleteComment comments={comment} />}
-                />
+          {comments &&
+            comments.map((comment) => (
+              <div key={comment.id}>
+                {comment.comment} - {comment.createdAt}
+                <span>
+                  <OpenModalButton
+                    id="delete-expense-modal-button"
+                    buttonText={<HiOutlineX />}
+                    modalComponent={<DeleteComment comments={comment} />}
+                  />
 
-                <OpenModalButton
-                  id="edit-expense-modal-button"
-                  className="modal-button"
-                  buttonText={<PiNotePencilBold />}
-                  modalComponent={
-                    <EditComment comments={comment} expense={expense} />
-                  }
-                />
-              </span>
-            </div>
-          ))}
+                  <OpenModalButton
+                    id="edit-expense-modal-button"
+                    className="modal-button"
+                    buttonText={<PiNotePencilBold />}
+                    modalComponent={
+                      <EditComment comments={comment} expense={expense} />
+                    }
+                  />
+                </span>
+              </div>
+            ))}
         </div>
         <div className="new-comment"></div>
         <div className="form-label">

@@ -5,6 +5,7 @@ import { thunkAddFriendsExpense } from "../../../redux/friends_expenses";
 
 function AddExpenseModal() {
   const dispatch = useDispatch();
+
   const [payer, setPayer] = useState(null); // payer owes current user money
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
@@ -16,6 +17,16 @@ function AddExpenseModal() {
   const friendsList = useSelector((state) => state.friends);
   const friendsListArray = Object.values(friendsList);
   const { closeModal } = useModal();
+
+  const convertFloatToInteger = () => {
+    if (!amount.split(".")[1]) {
+      return amount + "00";
+    } else if (amount.split(".")[1].length === 1) {
+      return amount.split(".").join("") + "0";
+    } else if (amount.split(".")[1].length === 2) {
+      return amount.split(".").join("");
+    }
+  };
 
   useEffect(() => {
     const frontValidations = {};
@@ -46,13 +57,13 @@ function AddExpenseModal() {
       payerId: payer,
       receiverId: currentUser.id,
       description,
-      amount,
+      amount: convertFloatToInteger(),
       expenseDate: newDate,
       settled: false,
       notes,
     };
-    const addExpense = await dispatch(thunkAddFriendsExpense(newExpense));
-    addExpense;
+    await dispatch(thunkAddFriendsExpense(newExpense));
+
     // if (!addExpense.id) {
     //     const { errors } = await addExpense.json();
     //     setValidations(errors);
