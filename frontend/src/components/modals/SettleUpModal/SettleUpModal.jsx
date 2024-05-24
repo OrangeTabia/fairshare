@@ -18,17 +18,20 @@ function SettleUpModal() {
   const [amount, setAmount] = useState('');
   const [paymentDate, setPaymentDate] = useState('');
   const [expense, setExpense] = useState('')
-  const [expenseSelection, setExpenseSelection] = useState([])
   const [amountDue, setAmountDue] = useState(0)
-  const [errors, setErrors] = useState({})
-  // const [validations, setValiations] = useState({})
   const [submitClass, setSubmitClass] = useState("form-submit disabled");
   const [submitDisabled, setSubmitDisabled] = useState(true);
+  // const [expenseSelection, setExpenseSelection] = useState([]);
   // const [hasSubmitted, setHasSubmitted] = useState(false);
-  const allExpenses = useSelector(state => state.friendsExpenses)
-  const currUser = useSelector(state => state.session.user)
-  const currFriend = useSelector(state => state.userEmails[parseInt(friendId)])
-  const paymentsMade = useSelector(state => state.payments)
+  const allExpenses = useSelector(state => state.friendsExpenses);
+  const currUser = useSelector(state => state.session.user);
+  const paymentsMade = useSelector(state => state.payments);
+  const friends = useSelector(state => state.friends);
+  const payerExpenses = Object.values(allExpenses).filter((expense) => expense.payerId === currUser.id && expense.settled === false);
+  const friendsArray = Object.values(friends);
+
+  console.log("FRIENDS", friendsArray)
+  console.log("PAYER EXPENSES", payerExpenses)
 
   const setSubmitDisabledStatus = (disabled) => {
     (disabled)
@@ -37,26 +40,23 @@ function SettleUpModal() {
     setSubmitDisabled(disabled);
   };
 
-  // find all expenses where current user OWES MONEY 
-  // find WHO I need to pay 
-  
 
-  useEffect(() => {
-    if (friendId) {
-      const receiverExpenses = Object.values(allExpenses).filter(expense => expense.payerId === parseInt(friendId) && expense.receiverId === currUser.id && expense.settled === false)
-      const payerExpenses = Object.values(allExpenses).filter(expense => expense.payerId === currUser.id && expense.receiverId === parseInt(friendId) && expense.settled === false)
-      const myExpenses = [receiverExpenses, payerExpenses]
-      console.log(myExpenses)
-      setExpenseSelection(...myExpenses)
-    }else {
-      const receiverExpenses = Object.values(allExpenses).filter(expense => expense.receiverId === currUser.id)
-      const payerExpenses = Object.values(allExpenses).filter(expense => expense.receiverId === parseInt(friendId))
-      const myExpenses = [receiverExpenses, payerExpenses]
-      console.log(myExpenses)
-      setExpenseSelection(...myExpenses)
-    }
+  // useEffect(() => {
+  //   if (friendId) {
+  //     const receiverExpenses = Object.values(allExpenses).filter(expense => expense.payerId === parseInt(friendId) && expense.receiverId === currUser.id && expense.settled === false)
+  //     const payerExpenses = Object.values(allExpenses).filter(expense => expense.payerId === currUser.id && expense.receiverId === parseInt(friendId) && expense.settled === false)
+  //     const myExpenses = [receiverExpenses, payerExpenses]
 
-  }, [friendId])
+  //     setExpenseSelection(...myExpenses)
+  //   }else {
+  //     const receiverExpenses = Object.values(allExpenses).filter(expense => expense.receiverId === currUser.id)
+  //     const payerExpenses = Object.values(allExpenses).filter(expense => expense.receiverId === parseInt(friendId))
+  //     const myExpenses = [receiverExpenses, payerExpenses]
+
+  //     setExpenseSelection(...myExpenses)
+  //   }
+
+  // }, [friendId])
 
   useEffect(() => {
     let totalPaid = 0
@@ -98,7 +98,6 @@ function SettleUpModal() {
         settled: true,
         notes: expense.notes,
       }
-      console.log(settledExpense)
 
 
       await dispatch(
@@ -106,60 +105,53 @@ function SettleUpModal() {
       ).then(() => {
         setExpense('')
         closeModal();
-        navigate(`/friend/${friendId}`);
+        navigate('/dashboard');
       })
     }
     setExpense('')
     closeModal();
-    navigate(`/friend/${friendId}`);
+    navigate('/dashboard');
   };
 
   return (
     <>
       <h2>Settle up</h2>
-      {friendId && expenseSelection.length <= 0
-        ? <h3>{`You currently have no expenses with ${currFriend?.name}`}</h3>
-        : !friendId && expenseSelection.length <= 0
+      {payerExpenses.length <= 0
         ? <h3>All your expenses are settled!</h3>
         :
       <form
-        onSubmit={handleSubmit}
-        id="settle-up-form"
+      // onSubmit={handleSubmit}
+      id="settle-up-form"
       >
         <div>
-          <div>
-            {/* set you and friend name in spans so we can make them clickable to change in the future */}
-            <p>Between <span>you</span> and <span>{currFriend.name}</span></p>
-          </div>
-          <div>
-            <label htmlFor='expense'>Which Expense?</label>
-            {console.log(expenseSelection)}
+          <label htmlFor='expense'>Which Expense?</label>
             <select
-              value={expense ? expense.name : ''}
-              onChange={(e) => setExpense(Object.values(allExpenses).find(expense => expense.description === e.target.value))}>
+              value={expense}
+              onChange={(e) => setExpense(payerExpenses.find(expense => `$${expense.amount} - ${expense.description}` === e.target.value))}>
               <option value={''} disabled>Select an expense</option>
-              {expenseSelection
-                ? expenseSelection.map(expense => (
-                  <option key={expense.id} >{expense.description}</option>
+              {payerExpenses
+                ? payerExpenses.map(expense => (
+                  <option key={expense.id} >${expense.amount} - {expense.description}</option>
                   ))
                 : ''}
             </select>
+        </div>
 
-          </div>
-          <div className="form-label">
-            <label htmlFor="amount">Amount</label>
-            {/* {validations.amount && (
-              <span className="form-error">{validations.amount}</span>
-            )} */}
-          </div>
-          <input
-            id="amount"
-            type="number"
-            value={amount}
-            onChange={e => setAmount(e.target.value)}
-            placeholder={expense ? `You owe $${amountDue}` : 'amount'}
-            required
-          />
+        <div>
+        This is where the friend drop down shows up
+        </div> 
+
+        <div>
+          <label htmlFor="amount-owed"></label>
+            <input
+              id="amount"
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              placeholder={expense ? `You owe $${amountDue}` : 'amount'}
+              required
+            >
+            </input>
         </div>
         <div>
           <div className="form-label">
@@ -177,8 +169,7 @@ function SettleUpModal() {
             required
           />
         </div>
-        <div>
-          <div className="form-buttons">
+        <div className="form-buttons">
             <button
               className={submitClass}
               disabled={submitDisabled}
@@ -188,7 +179,6 @@ function SettleUpModal() {
             </button>
             <button className="form-cancel">Cancel</button>
           </div>
-        </div>
       </form>
       }
     </>
