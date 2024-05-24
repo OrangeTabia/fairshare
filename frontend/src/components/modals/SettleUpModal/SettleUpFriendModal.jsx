@@ -42,13 +42,13 @@ function SettleUpModal() {
       const receiverExpenses = Object.values(allExpenses).filter(expense => expense.payerId === parseInt(friendId) && expense.receiverId === currUser.id && expense.settled === false)
       const payerExpenses = Object.values(allExpenses).filter(expense => expense.payerId === currUser.id && expense.receiverId === parseInt(friendId) && expense.settled === false)
       const myExpenses = [receiverExpenses, payerExpenses]
-      console.log(myExpenses)
+
       setExpenseSelection(...myExpenses)
     }else {
       const receiverExpenses = Object.values(allExpenses).filter(expense => expense.receiverId === currUser.id)
       const payerExpenses = Object.values(allExpenses).filter(expense => expense.receiverId === parseInt(friendId))
       const myExpenses = [receiverExpenses, payerExpenses]
-      console.log(myExpenses)
+
       setExpenseSelection(...myExpenses)
     }
 
@@ -64,6 +64,10 @@ function SettleUpModal() {
   }, [expense])
 
   useEffect(() => {
+    console.log('========>>>>', amount.indexOf('.') >= 0)
+  }, [amount])
+
+  useEffect(() => {
     // TEMP IMPLEMENTATION
     // Should disable submit button based on frontend validations
     setSubmitDisabledStatus(amount === null || paymentDate === null);
@@ -73,16 +77,22 @@ function SettleUpModal() {
     e.preventDefault();
     // setHasSubmitted(true);
 
-    await dispatch(
+    let adjustedAmount = amount
+    if (amount.indexOf('.') >= 0) {
+      adjustedAmount = parseInt(amount.toString().slice(0, amount.indexOf('.')) + amount.toString().slice(amount.indexOf('.') + 1))
+    }
+
+
+    const addPayment = await dispatch(
       thunkAddPayment({
         userId: currUser.id,
         expenseId: expense.id,
-        amount: amount,
+        amount: adjustedAmount,
         paymentDate: `${paymentDate} 00:00:00`,
       })
     );
-
-    if (amountDue - amount <= 0) {
+// do not set to settled if the payment doesnt go through
+    if (addPayment && amountDue - amount <= 0) {
       const newDate = new Date(expense.expenseDate);
 
       const settledExpense = {
@@ -94,8 +104,6 @@ function SettleUpModal() {
         settled: true,
         notes: expense.notes,
       }
-      console.log(settledExpense)
-
 
       await dispatch(
         thunkUpdateFriendsExpense(expense.id, settledExpense)
@@ -129,7 +137,6 @@ function SettleUpModal() {
           </div>
           <div>
             <label htmlFor='expense'>Which Expense?</label>
-            {console.log(expenseSelection)}
             <select
               value={expense ? expense.name : ''}
               onChange={(e) => setExpense(Object.values(allExpenses).find(expense => expense.description === e.target.value))}>
@@ -153,7 +160,7 @@ function SettleUpModal() {
             type="number"
             value={amount}
             onChange={e => setAmount(e.target.value)}
-            placeholder={expense ? `You owe $${amountDue}` : 'amount'}
+            placeholder={expense ? `You owe $${amountDue.toString().slice(0, -2)}.${amountDue.toString().slice(-2)}` : 'amount'}
             required
           />
         </div>
