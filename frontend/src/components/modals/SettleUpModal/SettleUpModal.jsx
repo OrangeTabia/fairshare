@@ -3,21 +3,28 @@ import { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
 // import { thunkAddPayments } from "../../../redux/payments";
+import { useParams } from "react-router-dom";
 
 import './SettleUpModal.css';
+import { useSelector } from "react-redux";
 
 function SettleUpModal() {
   // const dispatch = useDispatch();
   // const navigate = useNavigate();
   const { closeModal } = useModal();
+  const { friendId } = useParams();
 
-  const [amount, setAmount] = useState(null);
-  const [paymentDate, setPaymentDate] = useState(null);
+  const [amount, setAmount] = useState('');
+  const [paymentDate, setPaymentDate] = useState('');
+  const [expense, setExpenses] = useState('')
+  const [expenseSelection, setExpenseSelection] = useState([])
   // const [errors, setErrors] = useState({})
   // const [validations, setValiations] = useState({})
   const [submitClass, setSubmitClass] = useState("form-submit disabled");
   const [submitDisabled, setSubmitDisabled] = useState(true);
   // const [hasSubmitted, setHasSubmitted] = useState(false);
+  const allExpenses = useSelector(state => state.friendsExpenses)
+  const currUser = useSelector(state => state.session.user)
 
   const setSubmitDisabledStatus = (disabled) => {
     (disabled)
@@ -25,6 +32,21 @@ function SettleUpModal() {
       : setSubmitClass("form-submit");
     setSubmitDisabled(disabled);
   };
+
+  useEffect(() => {
+    if (friendId) {
+      const receiverExpenses = Object.values(allExpenses).map(expense => expense.payerId === parseInt(friendId) && expense.receiverId === currUser.id)
+      const payerExpenses = Object.values(allExpenses).map(expense => expense.payerId === currUser.id && expense.receiverId === parseInt(friendId))
+      const myExpenses = [...receiverExpenses, ...payerExpenses]
+      setExpenseSelection(...myExpenses)
+    } else {
+      const receiverExpenses = Object.values(allExpenses).map(expense => expense.receiverId === currUser.id)
+      const payerExpenses = Object.values(allExpenses).map(expense => expense.receiverId === parseInt(friendId))
+      const myExpenses = [...receiverExpenses, ...payerExpenses]
+      setExpenseSelection(...myExpenses)
+    }
+
+  }, [friendId])
 
   useEffect(() => {
     // TEMP IMPLEMENTATION
@@ -60,6 +82,19 @@ function SettleUpModal() {
         id="settle-up-form"
       >
         <div>
+          <div>
+            <label htmlFor='expense'>Which Expense?</label>
+            {console.log(expenseSelection)}
+            <select
+              value={expense}
+              onChange={(e) => e.target.value}>
+              <option value={''} disabled>Select an expense</option>
+              {expenseSelection ? expenseSelection.map(expense => (
+                <option key={expense.id} >{expense.description}</option>
+              )) : ''}
+            </select>
+
+          </div>
           <div className="form-label">
             <label htmlFor="amount">Amount</label>
             {/* {validations.amount && (
