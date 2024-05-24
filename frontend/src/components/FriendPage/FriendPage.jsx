@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import SecondaryNavigation from "../SecondaryNavigation";
+import SecondaryNavigationFriends from "../SecondaryNavigation/SecondaryNavigationFriends";
 import FriendsList from "../FriendsList";
 import DevLinksList from "../DevLinksList";
 import { useSelector } from "react-redux";
@@ -17,7 +17,7 @@ function FriendPage() {
             <FriendsList currFriend={currFriend}/>
           </section>
           <section className="middle-column">
-            <SecondaryNavigation profileImage={currFriend?.profileImage} pageTitle={currFriend?.name} />
+            <SecondaryNavigationFriends profileImage={currFriend?.profileImage} pageTitle={currFriend?.name} />
             <main>
                 <FriendsExpensesList />
             </main>

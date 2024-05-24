@@ -37,6 +37,10 @@ function SettleUpModal() {
     setSubmitDisabled(disabled);
   };
 
+  // find all expenses where current user OWES MONEY 
+  // find WHO I need to pay 
+  
+
   useEffect(() => {
     if (friendId) {
       const receiverExpenses = Object.values(allExpenses).filter(expense => expense.payerId === parseInt(friendId) && expense.receiverId === currUser.id && expense.settled === false)
