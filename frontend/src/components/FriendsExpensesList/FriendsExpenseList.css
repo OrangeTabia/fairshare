@@ -48,3 +48,9 @@
 .a-payment {
     font-size: 10px;
 }
+
+.no-expenses,
+.no-payments {
+    margin: none;
+    margin-left: 40px;
+}

@@ -58,11 +58,10 @@ function LoginFormModal() {
     }
   };
 
-  const handleDemo = (e) => {
+  const handleDemo = () => {
     setEmail('demo@aa.io')
     setPassword('demo_password')
-    handleSubmit(e)
-  }
+  };
 
   return (
     <>
@@ -111,6 +110,7 @@ function LoginFormModal() {
         <button
           className={submitClass}
           onClick={handleDemo}
+          type="submit"
         >
           Demo User
         </button>
