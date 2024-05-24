@@ -1,0 +1,32 @@
+#expenses-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.expense-card {
+    padding: 5px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+/* Borders are temporary to show payer vs. receiver expense type */
+
+.friend-expense {
+    border: 1px solid rgba(128, 128, 128, 0.228);
+    padding: 8px;
+    margin: 5px;
+}
+
+.receiver-expense {
+    border: 1px solid var(--theme-blue);
+}
+
+
+.friends-expense-title {
+    display: flex;
+    justify-content: space-between;
+}

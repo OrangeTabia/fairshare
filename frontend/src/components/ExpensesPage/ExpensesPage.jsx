@@ -2,10 +2,9 @@ import SecondaryNavigation from "../SecondaryNavigation";
 import FriendsList from "../FriendsList";
 import DevLinksList from "../DevLinksList";
 import ExpensesList from "../ExpensesList";
-import { useSelector } from "react-redux";
 
 function ExpensesPage() {
-  const expenses = useSelector(state => state.friendsExpenses);
+
 
   return (
     <div className="columns-wrapper">
@@ -15,7 +14,7 @@ function ExpensesPage() {
       <section className="middle-column">
         <SecondaryNavigation pageTitle="All Expenses" />
         <main>
-          <ExpensesList expenses={expenses} />
+          <ExpensesList />
         </main>
       </section>
       <section className="right-column">
