@@ -32,7 +32,10 @@ function FriendsExpenseCard({ expenseId }) {
   return (
     <div className="expense-details-card">
       <div className="details-header">
-        <span>{amountDue.length <= 3 ? `This expense is all paid up` : `You still owe: ${amountDue}`}</span>
+        {expense.receiverId !== currUser.id
+          ? <span>{amountDue.length <= 3 ? `This expense is all paid up` : `You still owe: ${amountDue}`}</span>
+        : <span>{amountDue.length <= 3 ? `This expense is all paid up` : `You are owed: ${amountDue}`}</span> }
+
       </div>
 
       <span>{expense.expenseDate}</span>
