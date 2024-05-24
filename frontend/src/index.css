@@ -41,6 +41,8 @@ html, body {
 
     background-color: var(--theme-orange);
     border-bottom: 2px solid black;
+
+    z-index: 100;
 }
 
 #header-content {
@@ -55,7 +57,25 @@ html, body {
     align-items: center;
 }
 
+.header-container {
+    width: 30%;
+    display: flex;
+}
+
+.hc-1 {
+    justify-content: left
+}
+
+.hc-2 {
+    justify-content: center;
+}
+
+.hc-3 {
+    justify-content: right;
+}
+
 #site-name {
+    margin: 0;
     font-size: 2rem;
     line-height: 2rem;
     color: black;
@@ -146,8 +166,10 @@ html, body {
     width: 100%;
 }
 
-.profile-image {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+#modal-background {
+    z-index: 200;
+}
+
+#modal-content {
+    z-index: 210;
 }
