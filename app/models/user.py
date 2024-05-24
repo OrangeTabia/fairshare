@@ -21,7 +21,7 @@ friends = db.Table(
         primary_key=True,
     ),
     schema=FRIENDS_SCHEMA,
-    postgresql_inherits="users",
+    # postgresql_inherits="users",
 )
 
 
