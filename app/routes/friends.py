@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
 from sqlalchemy import select, delete
 
-from app.models import User, db, friends
+from app.models import User, db, friends, FriendsExpense
 from app.forms import AddFriendForm
 
 friends_routes = Blueprint("friends", __name__)
@@ -76,6 +76,17 @@ def delete_friend(friends_id):
         db.session.execute(
             db.delete(friends).filter_by(friend_id=current_user.id, user_id=friends_id)
         )
+
+    # Because of the structure of the join table I do not know how to set a cascade on delete
+    # This is brute force code - to change in the future
+    # When an expense is deleted, all corresponding payments and comments are deleted
+    payerExpenses = FriendsExpense.query.filter_by(payer_id=current_user.id, receiver_id=friends_id).all()
+    receiverExpenses = FriendsExpense.query.filter_by(payer_id=friends_id, receiver_id=current_user.id).all()
+
+    for expense in payerExpenses:
+        db.session.delete(expense)
+    for expense in receiverExpenses:
+        db.session.delete(expense)
 
     db.session.commit()
 

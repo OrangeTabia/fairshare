@@ -30,7 +30,7 @@ function AddFriendModal() {
             setSuggestedFriends([])
         }
 
-    }, [email])
+    }, [email, allUsers, currFriends, currUser])
 
     const selectingUser = (friend) => {
         setFriendSelected(friend)
