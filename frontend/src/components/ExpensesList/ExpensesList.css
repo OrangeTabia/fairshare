@@ -6,19 +6,27 @@
     flex-flow: column nowrap;
 }
 
+.expense-container {
+    background-color: var(--theme-xl-blue);
+}
+
+.expense-preview {
+    height: 30px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--theme-xl-orange);
+}
+
+.expense-preview .description {
+    margin: 0;
+    font-weight: 600;
+}
+
 .expense-card {
     padding: 5px;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-}
-
-/* Borders are temporary to show payer vs. receiver expense type */
-
-.payer-expense {
-    border: 1px solid var(--theme-orange);
-}
-
-.receiver-expense {
-    border: 1px solid var(--theme-blue);
 }
