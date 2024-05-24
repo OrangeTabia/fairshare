@@ -2,6 +2,7 @@ import SecondaryNavigation from "../SecondaryNavigation";
 import FriendsList from "../FriendsList";
 import DevLinksList from "../DevLinksList";
 import './DashboardPage.css';
+import FriendsSummary from "./FriendsSummary";
 
 function DashboardPage() {
   return (
@@ -12,7 +13,7 @@ function DashboardPage() {
       <section className="middle-column">
         <SecondaryNavigation pageTitle="Dashboard" />
         <main>
-
+          <FriendsSummary />
         </main>
       </section>
       <section className="right-column">
