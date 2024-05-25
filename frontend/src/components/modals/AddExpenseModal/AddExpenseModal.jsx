@@ -77,7 +77,7 @@ function AddExpenseModal({ friendName }) {
       <form onSubmit={handleSubmit} id="add-expense-form">
         <div>
           <div className="form-label">
-          {friendName ? <h4>{friendName}</h4> : 
+          {friendName ? <span>With you and: <span>{friendName}</span></span> : 
             <select
               id="payer"
               value={payer}
