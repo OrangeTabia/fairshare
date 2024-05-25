@@ -134,8 +134,6 @@ export const thunkAddComment = (comment) => async (dispatch) => {
 };
 
 export const thunkUpdateComment = (comment) => async (dispatch) => {
-  console.log("----------", comment);
-
   const response = await fetch(`/api/comments/${comment.id}/update`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
