@@ -93,6 +93,7 @@ export const thunkUpdateFriendsExpense =
     });
     if (response.ok) {
       const data = await response.json();
+    
       // data.type = paymentType;
       return dispatch(addFriendsExpense(data));
     } else {
