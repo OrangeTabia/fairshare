@@ -45,9 +45,9 @@ function FriendsExpensesList() {
 
   const handleClick  = (idx) => {
     if (!openCards.includes(idx)) {
-      setOpenCards([...openCards, idx])
+      setOpenCards([idx])
     } else {
-      setOpenCards(openCards.filter(index => index !== idx))
+      setOpenCards([])
     }
   }
 

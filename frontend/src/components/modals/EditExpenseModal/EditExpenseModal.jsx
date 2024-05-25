@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import { thunkUpdateFriendsExpense } from "../../../redux/friends_expenses";
+import { centsToUSD } from '../../../utils/formatters'
 
 function EditExpenseModal({ expense }) {
   const originalDate = () => {
@@ -21,7 +22,7 @@ function EditExpenseModal({ expense }) {
 
   const dispatch = useDispatch();
   const [description, setDescription] = useState(expense.description);
-  const [amount, setAmount] = useState(expense.amount);
+  const [amount, setAmount] = useState(centsToUSD(expense.amount).slice(1));
   const [expenseDate, setExpenseDate] = useState(originalDate);
   const [notes, setNotes] = useState(expense.notes);
   const [validations, setValidations] = useState({});
@@ -29,15 +30,15 @@ function EditExpenseModal({ expense }) {
   const payer = useSelector((state) => state.friends)[expense.payerId];
   const { closeModal } = useModal();
 
-  const convertFloatToInteger = () => {
-    if (!String(amount).split(".").length < 2) {
-      return amount + "00";
-    } else if (String(amount).split(".")[1].length === 1) {
-      return String(amount).split(".").join("") + "0";
-    } else if (String(amount).split(".")[1].length === 2) {
-      return String(amount).split(".").join("");
-    }
-  };
+  // const convertFloatToInteger = () => {
+  //   if (!String(amount).split(".").length < 2) {
+  //     return String(amount) + "00";
+  //   } else if (String(amount).split(".")[1].length === 1) {
+  //     return String(amount).split(".").join("") + "0";
+  //   } else if (String(amount).split(".")[1].length === 2) {
+  //     return String(amount).split(".").join("");
+  //   }
+  // };
 
   useEffect(() => {});
 
@@ -66,11 +67,22 @@ function EditExpenseModal({ expense }) {
 
     setHasSubmitted(true);
 
+    let adjustedAmount = amount;
+
+    if (amount.indexOf('.') >= 0) {
+      adjustedAmount = parseInt(amount.toString().slice(0, amount.indexOf('.')) + amount.toString().slice(amount.indexOf('.') + 1))
+      if (amount.toString().slice(amount.indexOf('.') + 1).length === 1) {
+        adjustedAmount = parseInt(adjustedAmount.toString() + '0')
+      }
+    } else {
+      adjustedAmount = parseInt(amount.toString() + '00')
+    }
+
     const updatedExpense = {
       payerId: expense.payerId,
       receiverId: expense.receiverId,
       description,
-      amount: convertFloatToInteger(),
+      amount: adjustedAmount,
       expenseDate: newDate,
       settled: false,
       notes,

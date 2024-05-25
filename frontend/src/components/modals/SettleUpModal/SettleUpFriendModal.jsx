@@ -92,6 +92,11 @@ function SettleUpFriendModal() {
 
     if (amount.indexOf('.') >= 0) {
       adjustedAmount = parseInt(amount.toString().slice(0, amount.indexOf('.')) + amount.toString().slice(amount.indexOf('.') + 1))
+      if (amount.toString().slice(amount.indexOf('.') + 1).length === 1) {
+        adjustedAmount = parseInt(adjustedAmount.toString() + '0')
+      }
+    } else {
+      adjustedAmount = parseInt(amount.toString() + '00')
     }
 
     let addPayment = await dispatch(

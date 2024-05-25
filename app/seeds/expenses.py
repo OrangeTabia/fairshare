@@ -43,7 +43,7 @@ def seed_expenses():
         receiver_id=5,
         description='Lazer tag',
         amount=2500,
-        expense_date=datetime(2023, 2, 28, 0, 0, 0),
+        expense_date=datetime(2023, 4, 28, 0, 0, 0),
         settled=False,
         )
     demo6 = FriendsExpense(
@@ -51,7 +51,7 @@ def seed_expenses():
         receiver_id=6,
         description='Wine Tasting!',
         amount=5500,
-        expense_date=datetime(2023, 2, 28, 0, 0, 0),
+        expense_date=datetime(2023, 5, 28, 0, 0, 0),
         settled=True,
         )
     demo7 = FriendsExpense(

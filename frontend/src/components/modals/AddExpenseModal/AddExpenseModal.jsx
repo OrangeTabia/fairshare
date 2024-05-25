@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import { thunkAddFriendsExpense } from "../../../redux/friends_expenses";
+import { useParams } from "react-router-dom";
 
 function AddExpenseModal({ friendName }) {
   const dispatch = useDispatch();
-
+  const { friendId } = useParams();
   const [payer, setPayer] = useState(""); // payer owes current user money
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
@@ -27,6 +28,13 @@ function AddExpenseModal({ friendName }) {
       return amount.split(".").join("");
     }
   };
+
+  useEffect(() => {
+    if (friendName) {
+      let selectedFriend = friendsListArray.find(friend => friend.id === parseInt(friendId))
+      setPayer(selectedFriend.id)
+    }
+  }, [friendName])
 
   useEffect(() => {
     const frontValidations = {};
@@ -77,7 +85,7 @@ function AddExpenseModal({ friendName }) {
       <form onSubmit={handleSubmit} id="add-expense-form">
         <div>
           <div className="form-label">
-          {friendName ? <span>With you and: <span>{friendName}</span></span> : 
+          {friendName ? <span >With you and: <span>{friendName}</span></span> :
             <select
               id="payer"
               value={payer}
