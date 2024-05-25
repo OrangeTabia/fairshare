@@ -4,10 +4,25 @@ import { useModal } from "../../../context/Modal";
 import { thunkUpdateFriendsExpense } from "../../../redux/friends_expenses";
 
 function EditExpenseModal({ expense }) {
+  const originalDate = () => {
+    const year = new Date(expense?.expenseDate).getFullYear();
+    const month = new Date(expense?.expenseDate).getMonth() + 1; // added + 1 here due to month and date subtracting when read
+    const day = new Date(expense?.expenseDate).getDate() + 1; // added + 1 here due to month and date subtracting when read
+
+    let format = `${year}`;
+
+    if (month > 9) format = `${format}-${month}`;
+    else format = format + "-0" + String(month);
+    if (day > 9) format = `${format}-${day}`;
+    else format = format + "-0" + String(day);
+
+    return format;
+  };
+
   const dispatch = useDispatch();
   const [description, setDescription] = useState(expense.description);
   const [amount, setAmount] = useState(expense.amount);
-  const [expenseDate, setExpenseDate] = useState(expense.expenseDate);
+  const [expenseDate, setExpenseDate] = useState(originalDate);
   const [notes, setNotes] = useState(expense.notes);
   const [validations, setValidations] = useState({});
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -15,14 +30,16 @@ function EditExpenseModal({ expense }) {
   const { closeModal } = useModal();
 
   const convertFloatToInteger = () => {
-    if (!amount.split(".")[1]) {
+    if (!String(amount).split(".").length < 2) {
       return amount + "00";
-    } else if (amount.split(".")[1].length === 1) {
-      return amount.split(".").join("") + "0";
-    } else if (amount.split(".")[1].length === 2) {
-      return amount.split(".").join("");
+    } else if (String(amount).split(".")[1].length === 1) {
+      return String(amount).split(".").join("") + "0";
+    } else if (String(amount).split(".")[1].length === 2) {
+      return String(amount).split(".").join("");
     }
   };
+
+  useEffect(() => {});
 
   useEffect(() => {
     const frontValidations = {};
