@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import './SettleUpModal.css';
 import { useSelector } from "react-redux";
 import { thunkUpdateFriendsExpense } from "../../../redux/friends_expenses";
+import { centsToUSD } from "../../../utils/formatters";
 
 function SettleUpFriendModal() {
   const dispatch = useDispatch();
@@ -67,6 +68,7 @@ function SettleUpFriendModal() {
   useEffect(() => {
     let totalPaid = 0
     const myPayments = Object.values(paymentsMade).filter(payment => payment.expenseId === expense.id)
+    console.log("MY PAYMENT", myPayments)
     if (myPayments.length) {
       myPayments.forEach(payment => totalPaid += payment.amount)
     }
@@ -83,7 +85,6 @@ function SettleUpFriendModal() {
     e.preventDefault();
 
     if(Object.values(errors).length) {
-      setErrors('')
       return;
     }
     setHasSubmitted(false)
@@ -107,8 +108,13 @@ function SettleUpFriendModal() {
         paymentDate: `${paymentDate} 00:00:00`,
       })
     );
+
+    if (addPayment.server) {
+      return;
+    }
+
 // will go through if the above goes through.  add validations
-    if (!addPayment.errors && amountDue - amount <= 0) {
+    if (amountDue - amount <= 0) {
       const newDate = new Date(expense.expenseDate);
 
       const settledExpense = {
@@ -159,7 +165,7 @@ function SettleUpFriendModal() {
               <option value={''} disabled>Select an expense</option>
               {expenseSelection
                 ? expenseSelection.map(expense => (
-                  <option key={expense.id} >{expense.description}</option>
+                  <option key={expense.id}>{expense.description}</option>
                   ))
                 : ''}
             </select>
@@ -174,7 +180,7 @@ function SettleUpFriendModal() {
             type="number"
             value={amount}
             onChange={e => setAmount(e.target.value)}
-            placeholder={expense ? `You owe $${amountDue.toString().slice(0, -2)}.${amountDue.toString().slice(-2)}` : 'amount'}
+            placeholder={expense ? `You owe ${centsToUSD(amountDue)}` : 'amount'}
             required
           />
         </div>

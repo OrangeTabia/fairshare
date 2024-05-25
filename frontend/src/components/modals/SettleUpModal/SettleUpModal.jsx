@@ -16,7 +16,7 @@ function SettleUpModal() {
   const [amount, setAmount] = useState('');
   const [paymentDate, setPaymentDate] = useState('');
   // Store an ID instead of storing an empty string
-  const [selectedExpenseId, setExpense] = useState(null)
+  const [selectedExpenseId, setExpense] = useState('');
   const [amountDue, setAmountDue] = useState(0)
   const [submitClass, setSubmitClass] = useState("form-submit disabled");
   const [expenseSelection, setExpenseSelection] = useState([])
@@ -90,7 +90,6 @@ function SettleUpModal() {
     e.preventDefault();
     
     if(Object.values(errors).length) {
-      setErrors('')
       return;
     }
     setHasSubmitted(false)
@@ -110,9 +109,12 @@ function SettleUpModal() {
       })
     );
 
-    console.log("ERRORS", addPayment.errors)
+    // console.log("ERRORS", addPayment.server)
+    if (addPayment.server) {
+      return;
+    }
 
-    if (!addPayment.errors && amountDue - amount <= 0) {
+    if (amountDue - amount <= 0) {
       const newDate = new Date(selectedExpense.expenseDate);
 
       const settledExpense = {
@@ -142,7 +144,7 @@ function SettleUpModal() {
   return (
     <>
       <h2>Settle up</h2>
-      {payerExpenses.length <= 0
+      {expenseSelection.length <= 0
         ? <h3>All your expenses are settled!</h3>
         :
       <form
@@ -154,16 +156,12 @@ function SettleUpModal() {
             <select
               value={selectedExpenseId}
               placeholder={'Select an expense'}
-              defaultValue={'Select an expense'}
               onChange={(e) => {
                 setExpense(e.target.value)
               }
             }
             >
-              {
-              // This is the null state, there is no way to get back to it since it's disabled
-              }
-              <option value={null} disabled>Select an expense</option>
+              <option value={''} disabled>Select an expense</option>
               {payerExpenses?.map((expense) => {
                   let expenseLabel = `${expense.description}`;
                   return (
@@ -177,7 +175,6 @@ function SettleUpModal() {
               )
               }
               </select>
-
         </div>
 
         <div>
@@ -197,6 +194,7 @@ function SettleUpModal() {
             >
             </input>
         </div>
+        <div>{hasSubmitted && errors.amount ? `${errors.amount}` : ''}</div>
         <div>
           <div className="form-label">
             <label htmlFor="payment-date">Payment Date</label>
@@ -213,6 +211,7 @@ function SettleUpModal() {
             required
           />
         </div>
+        <div>{hasSubmitted && errors.paymentDate ? `${errors.paymentDate}` : ''}</div>
         <div className="form-buttons">
             <button
               className={submitClass}

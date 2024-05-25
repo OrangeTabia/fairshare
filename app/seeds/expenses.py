@@ -49,15 +49,15 @@ def seed_expenses():
     demo6 = FriendsExpense(
         payer_id=100,
         receiver_id=6,
-        description='Wine Tasting!',
+        description='Hiking!',
         amount=5500,
         expense_date=datetime(2023, 5, 28, 0, 0, 0),
-        settled=True,
+        settled=False,
         )
     demo7 = FriendsExpense(
         payer_id=100,
         receiver_id=7,
-        description='Lazer tag',
+        description='Brunch!',
         amount=2500,
         expense_date=datetime(2023, 2, 28, 0, 0, 0),
         settled=True,
