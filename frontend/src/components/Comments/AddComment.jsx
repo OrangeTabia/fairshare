@@ -34,6 +34,7 @@ function AddComment({ comments, expense }) {
     };
 
     await dispatch(thunkAddComment(newComment));
+    setComment(''); 
   };
 
   return (
