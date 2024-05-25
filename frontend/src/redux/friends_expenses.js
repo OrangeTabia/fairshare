@@ -194,12 +194,20 @@ function friendsExpensesReducer(state = initialState, action) {
       const newState = { ...state };
 
       const comments = newState[action.comment.expenseId].comments;
+      const currentCommentToUpdate = comments.find(
+        (e) => e.id == action.comment.id
+      );
 
-      comments[
-        comments.indexOf(comments.find((e) => e.id == action.comment.id))
-      ] = action.comment;
+      if (currentCommentToUpdate) {
+        comments.splice(
+          comments.indexOf(comments.find((e) => e.id == action.comment.id)),
+          1,
+          action.comment
+        );
+      } else {
+        comments.push(action.comment);
+      }
 
-      // newState[action.comment.expenseId].comments;
       return newState;
     }
     case DELETE_COMMENT: {
