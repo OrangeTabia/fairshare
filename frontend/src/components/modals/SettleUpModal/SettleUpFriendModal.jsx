@@ -9,7 +9,7 @@ import './SettleUpModal.css';
 import { useSelector } from "react-redux";
 import { thunkUpdateFriendsExpense } from "../../../redux/friends_expenses";
 
-function SettleUpModal() {
+function SettleUpFriendModal() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { closeModal } = useModal();
@@ -204,4 +204,4 @@ function SettleUpModal() {
   )
 }
 
-export default SettleUpModal;
+export default SettleUpFriendModal;
