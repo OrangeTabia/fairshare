@@ -82,7 +82,10 @@ function SettleUpModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(Object.values(errors).length) return;
+    if(Object.values(errors).length) {
+      setErrors('')
+      return;
+    }
     setHasSubmitted(false)
 
     let adjustedAmount = amount;
@@ -91,8 +94,7 @@ function SettleUpModal() {
       adjustedAmount = parseInt(amount.toString().slice(0, amount.indexOf('.')) + amount.toString().slice(amount.indexOf('.') + 1))
     }
 
-
-    await dispatch(
+    let addPayment = await dispatch(
       thunkAddPayment({
         userId: currUser.id,
         expenseId: expense.id,
@@ -101,7 +103,7 @@ function SettleUpModal() {
       })
     );
 // will go through if the above goes through.  add validations
-    if (amountDue - amount <= 0) {
+    if (!addPayment.errors && amountDue - amount <= 0) {
       const newDate = new Date(expense.expenseDate);
 
       const settledExpense = {

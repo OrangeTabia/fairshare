@@ -41,7 +41,7 @@ function FriendsExpensesList() {
 
   useEffect(() => {
     setOpenCards([])
-  }, [friendId])
+  }, [friendId, allPayments])
 
   const handleClick  = (idx) => {
     if (!openCards.includes(idx)) {
@@ -61,7 +61,7 @@ function FriendsExpensesList() {
                     <div className="friends-expense-title" onClick={() => handleClick(idx)}>
                       <div >{expense.description}</div>
                       <div >{`$${(expense.amount).toString().slice(0, -2)}.${(expense.amount).toString().slice(-2)}`}</div>
-                      <span>{expense.settled? `Expense Settled` : ''}</span>
+                      <span hidden={!expense.settled}>Expense Settled</span>
                     </div>
                     {openCards.includes(idx)
                       ? <div><FriendsExpenseCard  expenseId={expense.id} /></div>
@@ -69,7 +69,7 @@ function FriendsExpensesList() {
                   </div>
                 ))}
               </div>
-          : <span className='no-expenses' >{`No current or past expenses with ${currFriend?.name}`}</span> }
+          : <div className='no-expenses' >{`No current or past expenses with ${currFriend?.name}`}</div> }
 
       <h3>Payments:</h3>
           {payments.length
@@ -91,7 +91,7 @@ function FriendsExpensesList() {
                 </div>
               ))}
           </div>
-          : <span className='no-expenses' >{`No current or past payments to ${currFriend?.name}`}</span> }
+          : <div className='no-expenses' >{`No current or past payments to ${currFriend?.name}`}</div> }
     </section>
   );
 }
