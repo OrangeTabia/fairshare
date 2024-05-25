@@ -31,7 +31,7 @@ function EditExpenseModal({ expense }) {
 
   const convertFloatToInteger = () => {
     if (!String(amount).split(".").length < 2) {
-      return amount + "00";
+      return String(amount) + "00";
     } else if (String(amount).split(".")[1].length === 1) {
       return String(amount).split(".").join("") + "0";
     } else if (String(amount).split(".")[1].length === 2) {
@@ -70,7 +70,7 @@ function EditExpenseModal({ expense }) {
       payerId: expense.payerId,
       receiverId: expense.receiverId,
       description,
-      amount: convertFloatToInteger(),
+      amount: amount,
       expenseDate: newDate,
       settled: false,
       notes,
