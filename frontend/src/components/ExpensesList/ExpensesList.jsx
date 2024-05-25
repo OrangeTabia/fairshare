@@ -14,23 +14,29 @@ function ExpensesList() {
     else setSelectedExpense(expenseId);
   };
 
+
   return (
-    <ul id="expenses-list">
-      {Object.values(expenses).map((expense) => (
-        <>
-          <div
-            key={expense.id}
-            onClick={() => handleClick(expense.id)}
-            className="expense-container"
-          >
-            <div className="expense-preview">
-              <p className="description">{expense.description}</p>
+    <section id="expenses-list-container">
+      {Object.values(expenses).length
+        ? <div>
+        {Object.values(expenses).map((expense) => (
+          <div key={expense.id} className='all-expenses' >
+            <div
+              onClick={() => handleClick(expense.id)}
+              className="expense-container"
+            >
+              <div >{expense.description}</div>
+              <div >{`$${(expense.amount).toString().slice(0, -2)}.${(expense.amount).toString().slice(-2)}`}</div>
+              <span hidden={!expense.settled}>Expense Settled</span>
             </div>
+            {selectedExpense === expense.id && <ExpenseCard expenseId={expense.id} />}
           </div>
-          {selectedExpense === expense.id && <ExpenseCard expense={expense} />}
-        </>
-      ))}
-    </ul>
+        ))}
+      </div>
+      : <div className='no-expenses' >No current or past expenses</div>
+      }
+    </section>
+
   );
 }
 

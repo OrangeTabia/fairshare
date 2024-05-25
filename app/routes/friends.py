@@ -50,7 +50,7 @@ def new_friend():
 
         return friend.to_dict()
     else:
-        return form.errors, 401
+        return form.errors, 400
 
 
 @friends_routes.route("/<int:friends_id>/delete")

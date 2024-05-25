@@ -1,4 +1,4 @@
-#expenses-list {
+#expenses-list-container {
     margin: 0;
     padding: 0;
     height: 750px;
@@ -22,28 +22,40 @@
 
 .friend-expense,
 .friend-payments {
-    border: 1px solid rgba(128, 128, 128, 0.228);
-    padding: 8px;
-    margin: 5px;
+    border: 2px solid rgba(75, 74, 74, 0.228);
+    border-radius: 3px;
+    padding: 16px;
+    margin: 14px;
 }
 
 .receiver-expense {
     border: 1px solid var(--theme-blue);
 }
 
-
 .friends-expense-title {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding-bottom: 16px;
+}
+
+.expense-details-card {
+    border: 2px solid rgba(99, 98, 98, 0.228);
+    border-radius: 3px;
 }
 
 
 .details-header {
     margin: 16px;
-    border-bottom: 1px solid grey;
-    width: 50%
+    padding: 6px 20px
 }
 
+.owed-or-still-owe {
+    border-bottom: 1px solid rgba(99, 98, 98, 0.228);
+    width: 45%;
+    margin-bottom: 10px
+}
 
 .a-payment {
     font-size: 10px;
@@ -51,6 +63,40 @@
 
 .no-expenses,
 .no-payments {
-    margin: none;
-    margin-left: 40px;
+    margin: 14px;
+    border: 2px solid rgba(99, 98, 98, 0.228);
+    border-radius: 3px;
+    padding: 16px;
+}
+
+.friends-expense-title {
+    cursor: pointer;
+}
+
+#expense-set-by-you {
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+}
+
+#expense-set-by-you > div > button {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+#expense-set-by-you > div > button:hover {
+    color: orange
+}
+
+.expense-set-by-you-delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+
+.expense-set-by-you-delete  > p {
+    margin: 0px;
 }

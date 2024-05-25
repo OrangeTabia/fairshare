@@ -25,7 +25,6 @@ function AddFriendModal() {
         const suggested = Object.values(removeSelf).filter(user => user.email.startsWith(email))
         if (email) {
             setSuggestedFriends(suggested.slice(0, 5))
-            setFriendSelected('')
         } else {
             setSuggestedFriends([])
         }
@@ -43,6 +42,7 @@ function AddFriendModal() {
 
         await dispatch(thunkAddFriend(friendSelected.email));
 
+        setFriendSelected('')
         closeModal();
         navigate(`friend/${friendSelected.id}`)
     }
@@ -51,7 +51,7 @@ function AddFriendModal() {
         <div>
             <form onSubmit={handleAddFriend}>
                 <div className="add-friend-input">
-                    <label>Add a Friend</label>
+                    <label>Search for a Friend: </label>
                     <input
                         type='text'
                         value={email}
@@ -60,16 +60,20 @@ function AddFriendModal() {
                         >
                     </input>
                 </div>
-                {suggestedFriends.map(friend => (
-                    <div key={friend.id}>
-                        <div className='list-user-email-item' onClick={() => selectingUser(friend)} >{friend.email}</div>
-                    </div>
-                ))}
+
+                <div className='select-a-friend'>
+                    <p className="select-friend-small-label">click email to select</p>
+                    {suggestedFriends.map(friend => (
+                        <div key={friend.id}>
+                            <div className='list-user-email-item' onClick={() => selectingUser(friend)} >{friend.email}</div>
+                        </div>
+                    ))}
+                </div>
                 <div className='chosen-user-container' hidden={!friendSelected}>
                     <img className='user-profile-image' src={friendSelected.profileImage} hidden={!friendSelected}/>
                     <div hidden={!friendSelected} >add {friendSelected.name} as a friend?</div>
                 </div>
-                <button type="submit">Add Friend</button>
+                <button disabled={!friendSelected} type="submit">Add Friend</button>
             </form>
         </div>
     )

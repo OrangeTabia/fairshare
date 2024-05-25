@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import { thunkAddFriendsExpense } from "../../../redux/friends_expenses";
 
-function AddExpenseModal() {
+function AddExpenseModal({ friendName }) {
   const dispatch = useDispatch();
 
-  const [payer, setPayer] = useState(null); // payer owes current user money
+  const [payer, setPayer] = useState(""); // payer owes current user money
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
   const [expenseDate, setExpenseDate] = useState("");
@@ -30,7 +30,7 @@ function AddExpenseModal() {
 
   useEffect(() => {
     const frontValidations = {};
-    if (payer === null) frontValidations.payer = "Payer is required";
+    if (!payer) frontValidations.payer = "Payer is required";
     if (!description)
       frontValidations.description =
         "A brief description of the expense is required";
@@ -77,6 +77,7 @@ function AddExpenseModal() {
       <form onSubmit={handleSubmit} id="add-expense-form">
         <div>
           <div className="form-label">
+          {friendName ? <span>With you and: <span>{friendName}</span></span> : 
             <select
               id="payer"
               value={payer}
@@ -87,9 +88,10 @@ function AddExpenseModal() {
               {friendsListArray.map((friend) => (
                 <option value={friend.id} key={friend.id}>
                   {friend.name}
-                </option>
+              </option>
               ))}
             </select>
+            }
             {validations.payer && hasSubmitted && (
               <span className="form-error">{validations.payer}</span>
             )}

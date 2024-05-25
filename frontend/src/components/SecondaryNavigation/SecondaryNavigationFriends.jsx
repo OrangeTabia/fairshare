@@ -17,7 +17,7 @@ function SecondaryNavigation({ pageTitle, profileImage }) {
             <nav>
                 <OpenModalButton
                 buttonText="Add Expense"
-                modalComponent={<AddExpenseModal />}
+                modalComponent={<AddExpenseModal friendName={pageTitle}/>}
                 id="add-expense-modal-button"
                 className="modal-button"
                 />

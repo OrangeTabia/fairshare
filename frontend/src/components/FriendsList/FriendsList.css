@@ -40,7 +40,7 @@
 
 .friends-list-ele > button {
     background-color: white;
-    color: rgba(128, 128, 128, 0.137);
+    color: rgba(128, 128, 128, 0.416);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,18 +51,41 @@
 
 .friends-list-ele > button:hover {
     color: #FD8A17;
-
+    border: 1px solid orange;
 }
 
 #delete-friend-modal-button {
     background-color: white;
 }
 
+#delete-friend-modal-button:hover {
+    border: 1px solid orange
+}
+
 .delete-friend-modal-button:hover {
     color: orange;
-    visibility: visible
 }
 
 .on-friends-page {
-    color: #2DA2EF
+    width: 100%;
+    color: #2DA2EF;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.on-friends-page > button {
+    background-color: white;
+    color: #2DA2EF;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+.on-friends-page > button:hover {
+    border: 1px solid #2DA2EF;
+    color: orange;
 }

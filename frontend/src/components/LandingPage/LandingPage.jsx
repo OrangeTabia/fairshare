@@ -1,6 +1,7 @@
 import { ModalProvider, Modal } from "../../context/Modal";
 
 import LandingNavigation from "../../components/Navigation/LandingNavigation";
+import LandingPageLayout from './LandingPageLayout'
 
 export default function LandingPage() {
 
@@ -17,7 +18,7 @@ export default function LandingPage() {
           </div>
         </header>
         <main id="main-content">
-          <h1>Landing Page</h1>
+          <LandingPageLayout />
         </main>
         <Modal />
       </ModalProvider>
