@@ -19,6 +19,7 @@ function SettleUpModal() {
   const [selectedExpenseId, setExpense] = useState(null)
   const [amountDue, setAmountDue] = useState(0)
   const [submitClass, setSubmitClass] = useState("form-submit disabled");
+  const [expenseSelection, setExpenseSelection] = useState([])
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
@@ -29,10 +30,10 @@ function SettleUpModal() {
   const payerExpenses = Object.values(allExpenses).filter((expense) => expense.payerId === currUser.id && expense.settled === false);
   const friendsArray = Object.values(friends);
 
-  console.log("FRIENDS", friendsArray)
-  console.log("PAYER EXPENSES", payerExpenses)
+  // console.log("PAYER EXPENSES", payerExpenses); 
+
   
-  // Select our expense from all of the expenses and then find the receiving party
+  // Select our expense from all of the expenses and then find the receiving friend 
   let selectedExpense = payerExpenses.find((expense) => expense.id == selectedExpenseId);
   let receiver = friendsArray.find((friend) => friend.id == selectedExpense?.receiverId);
 
@@ -63,6 +64,11 @@ function SettleUpModal() {
   }, [amount, paymentDate, amountDue]);
 
 
+  useEffect(() => {
+    const payerExpensesList = Object.values(allExpenses).filter((expense) => expense.payerId === currUser.id && expense.settled === false);
+    setExpenseSelection(payerExpensesList)
+  }, [allExpenses])
+
   // Storing all of my payments
   useEffect(() => {
     let totalPaid = 0
@@ -71,7 +77,7 @@ function SettleUpModal() {
       myPayments.forEach(payment => totalPaid += payment.amount)
     }
     setAmountDue(selectedExpense?.amount - totalPaid)
-  }, [selectedExpense])
+  }, [selectedExpense, paymentsMade])
 
   useEffect(() => {
     // TEMP IMPLEMENTATION
@@ -79,10 +85,14 @@ function SettleUpModal() {
     setSubmitDisabledStatus(amount === null || paymentDate === null);
   }, [amount, paymentDate]);
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if(Object.values(errors).length) return;
+    if(Object.values(errors).length) {
+      setErrors('')
+      return;
+    }
     setHasSubmitted(false)
 
     let adjustedAmount = amount;
@@ -91,16 +101,18 @@ function SettleUpModal() {
       adjustedAmount = parseInt(amount.toString().slice(0, amount.indexOf('.')) + amount.toString().slice(amount.indexOf('.') + 1))
     }
 
-    await dispatch(
+    let addPayment = await dispatch(
       thunkAddPayment({
         userId: currUser.id,
         expenseId: selectedExpense?.id,
-        amount: amount,
+        amount: adjustedAmount,
         paymentDate: `${paymentDate} 00:00:00`,
       })
     );
 
-    if (amountDue - amount <= 0) {
+    console.log("ERRORS", addPayment.errors)
+
+    if (!addPayment.errors && amountDue - amount <= 0) {
       const newDate = new Date(selectedExpense.expenseDate);
 
       const settledExpense = {
@@ -152,12 +164,12 @@ function SettleUpModal() {
               // This is the null state, there is no way to get back to it since it's disabled
               }
               <option value={null} disabled>Select an expense</option>
-              {
-                payerExpenses?.map((expense) => {
-                  let expenseLabel = `$${expense.amount} - ${expense.description}`;
+              {payerExpenses?.map((expense) => {
+                  let expenseLabel = `${expense.description}`;
                   return (
-                    // We must make the value the ID of the expense since these will be unique across many 'similar' payments
+                    // We must make the value the ID of the expense since these will be unique across many 'similar' named payments
                   <option 
+                    key={expense.id}
                     value={expense.id} 
                     label={expenseLabel}
                   />)
@@ -206,10 +218,15 @@ function SettleUpModal() {
               className={submitClass}
               disabled={submitDisabled}
               type='submit'
+              onClick={() => setHasSubmitted(true)}
             >
               Settle Up
             </button>
-            <button className="form-cancel">Cancel</button>
+            <button 
+            className="form-cancel"
+            onClick={closeModal}
+            >
+              Cancel</button>
           </div>
       </form>
       }

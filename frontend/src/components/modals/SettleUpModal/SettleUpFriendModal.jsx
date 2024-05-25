@@ -197,7 +197,11 @@ function SettleUpFriendModal() {
             >
               Settle Up
             </button>
-            <button className="form-cancel">Cancel</button>
+            <button 
+            className="form-cancel"
+            onClick={closeModal}
+            >
+              Cancel</button>
           </div>
         </div>
       </form>
