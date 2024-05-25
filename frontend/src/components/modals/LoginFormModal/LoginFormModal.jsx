@@ -14,8 +14,9 @@ function LoginFormModal() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [validations, setValidations] = useState({});
-  // const [errors, setErrors] = useState({});
+
   const [submitClass, setSubmitClass] = useState("form-submit");
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -37,7 +38,7 @@ function LoginFormModal() {
 
     setSubmitDisabledStatus(Object.keys(newValidations).length > 0);
     setValidations(newValidations);
-  }, [hasSubmitted, email, password]);
+  }, [email, password, hasSubmitted]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -108,7 +109,7 @@ function LoginFormModal() {
           Log In
         </button>
         <button
-          className={submitClass}
+          className="form-submit"
           onClick={handleDemo}
           type="submit"
         >
