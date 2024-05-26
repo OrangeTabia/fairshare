@@ -181,14 +181,14 @@ function EditExpenseModal({ expense }) {
           </div>
 
           <div>
-            <button className="form-cancel" onClick={closeModal}>
-              Cancel
-            </button>
             <button
               className={submitClass}
               disabled={submitDisabled}
             >
               Save
+            </button>
+            <button className="form-cancel" onClick={closeModal}>
+              Cancel
             </button>
           </div>
         </div>
