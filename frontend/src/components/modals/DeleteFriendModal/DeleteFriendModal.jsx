@@ -34,15 +34,6 @@ function DeleteFriendModal({ friend }) {
         </div>
 
     )
-  return (
-    <div>
-      <p>Are you sure you want to remove {friend.name} as a friend?</p>
-      <div>
-        <button onClick={deleteFriend}>Yes</button>
-        <button onClick={doNotDelete}>No</button>
-      </div>
-    </div>
-  )
-}
+  }
 
-export default DeleteFriendModal;
+  export default DeleteFriendModal;
