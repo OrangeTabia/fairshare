@@ -13,7 +13,12 @@ function AddComment({ comments, expense }) {
   const [comment, setComment] = useState("");
   const [errors, setErrors] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState("");
+
+  const friendsFlattened = useSelector((state) => state.friends);
+  const friends = Object.values(friendsFlattened);
   const currentUser = useSelector((state) => state.session.user);
+
+  // console.log(friends[0]);
 
   useEffect(() => {
     const errors = {};
@@ -34,7 +39,7 @@ function AddComment({ comments, expense }) {
     };
 
     await dispatch(thunkAddComment(newComment));
-    setComment(''); 
+    setComment("");
   };
 
   return (
@@ -49,6 +54,12 @@ function AddComment({ comments, expense }) {
           {comments &&
             comments.map((comment) => (
               <div key={comment.id}>
+                <h4>
+                  {comment.userId === currentUser.id
+                    ? currentUser.name
+                    : friends?.find((friend) => friend.id === comment?.userId)
+                        ?.name}
+                </h4>
                 {comment.comment} - {comment.createdAt}
                 <span>
                   <OpenModalButton
