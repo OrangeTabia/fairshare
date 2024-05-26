@@ -9,20 +9,21 @@ fake = Faker()
 def seed_payments():
 
     demo1 = Payment(
-        user_id=100, friends_expense_id=6, amount=4000, payment_date=date(2023, 9, 9)
-    )
-    demo2 = Payment(
-        user_id=100, friends_expense_id=7, amount=2500, payment_date=date(2023, 11, 18)
-    )
-    demo3 = Payment(
         user_id=1, friends_expense_id=1, amount=1000, payment_date=date(2023, 5, 10)
     )
-    demo4 = Payment(
-        user_id=100, friends_expense_id=6, amount=1000, payment_date=date(2023, 5, 10)
-    )
-    demo5 = Payment(
+    demo2 = Payment(
         user_id=3, friends_expense_id=3, amount=1000, payment_date=date(2023, 5, 10)
     )
+    demo3 = Payment(
+        user_id=100, friends_expense_id=6, amount=1000, payment_date=date(2023, 5, 10)
+    )
+    demo4 = Payment(
+        user_id=100, friends_expense_id=6, amount=4000, payment_date=date(2023, 9, 9)
+    )
+    demo5 = Payment(
+        user_id=100, friends_expense_id=7, amount=2500, payment_date=date(2023, 11, 18)
+    )
+
 
     db.session.add(demo1)
     db.session.add(demo2)

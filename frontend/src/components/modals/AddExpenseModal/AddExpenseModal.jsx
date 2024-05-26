@@ -96,7 +96,7 @@ function AddExpenseModal({ friendName }) {
               onChange={(e) => setPayer(e.target.value)}
               required
             >
-              <option>Select friend</option>
+              <option value={''} disabled>Select a Friend</option>
               {friendsListArray.map((friend) => (
                 <option value={friend.id} key={friend.id}>
                   {friend.name}
