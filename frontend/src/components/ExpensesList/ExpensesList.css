@@ -16,7 +16,6 @@
     border-radius: 3px;
     padding: 16px;
     margin: 14px;
-
 }
 
 .expense-container {
@@ -52,7 +51,6 @@
 
 .expense-card {
     padding: 5px;
-
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
