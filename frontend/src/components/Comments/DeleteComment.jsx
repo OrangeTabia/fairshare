@@ -16,9 +16,9 @@ function DeleteComment({ comments }) {
   return (
     <div>
       <p>Are you sure you want to remove this comment?</p>
-      <div>
-        <button onClick={deleteComment}>Yes</button>
-        <button onClick={closeModal}>No</button>
+      <div id="delete-comment-buttons">
+        <button onClick={deleteComment} className="form-submit">Yes</button>
+        <button onClick={closeModal} className="form-cancel">No</button>
       </div>
     </div>
   );

@@ -36,11 +36,15 @@ function EditComment({ comments }) {
   };
 
   return (
-    <>
+    <div>
       <h3>Edit Comment</h3>
-      <form onSubmit={handleSubmit} id="edit-comments-form">
+      <form 
+      onSubmit={handleSubmit} 
+      id="edit-comments-form"
+      >
         <textarea
-          id="comment"
+          id="comment-text-area"
+          cols="35"
           type="text"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
@@ -49,12 +53,14 @@ function EditComment({ comments }) {
           <span className="form-error">{errors.comment}</span>
         )}
         <br></br>
-        <button className="form-cancel" onClick={closeModal}>
-          Cancel
-        </button>
-        <button className="form-submit">Save</button>
+        <div id="edit-comment-buttons">
+          <button className="form-cancel" onClick={closeModal}>
+            Cancel
+          </button>
+          <button className="form-submit">Save</button>
+        </div>
       </form>
-    </>
+    </div>
   );
 }
 
