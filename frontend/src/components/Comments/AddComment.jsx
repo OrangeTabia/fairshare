@@ -90,18 +90,18 @@ function AddComment({ comments, expense }) {
             <form onSubmit={handleSubmit} id="add-comment-form">
               <textarea
                 id="comment-box"
-                rows="3" 
+                rows="3"
                 cols="45"
                 type="text"
                 placeholder="Add a comment"
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
               />
-              {errors.comment && hasSubmitted && (
-                <span className="form-error">{errors.comment}</span>
-              )}
+              {errors.comment ?
+                <span className="form-error">{errors.comment}</span> :
+                '' }
               <br></br>
-              <button className="form-submit">Submit</button>
+              <button disabled={!comment || errors.comment} className="form-submit">Submit</button>
             </form>
           </div>
         </div>
