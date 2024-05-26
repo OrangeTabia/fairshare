@@ -15,5 +15,13 @@
 }
 
 .dev-name {
-    margin-top: 5px;
+    margin-top: 20px;
+}
+
+.linkedin-icon, .github-icon {
+    max-width: 20px;
+}
+
+.linkedin-icon:hover, .github-icon:hover {
+    cursor: pointer;
 }
