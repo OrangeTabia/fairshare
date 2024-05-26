@@ -73,7 +73,9 @@ function AddFriendModal() {
                     <img className='user-profile-image' src={friendSelected.profileImage} hidden={!friendSelected}/>
                     <div hidden={!friendSelected} >add {friendSelected.name} as a friend?</div>
                 </div>
-                <button disabled={!friendSelected} type="submit">Add Friend</button>
+                <div className="add-friend-button">
+                    <button className="form-submit add-friend-btn" disabled={!friendSelected} type="submit">Add Friend</button>
+                </div>
             </form>
         </div>
     )

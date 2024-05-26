@@ -42,3 +42,15 @@
     border-bottom: .5px solid rgb(204, 204, 204);
     margin: 0px;
 }
+
+.add-friend-button {
+    display: flex;
+    justify-content: center;
+}
+
+
+.add-friend-btn:disabled {
+    background-color: rgb(223, 219, 219);
+    border: 2px solid grey;
+    cursor: default;
+}

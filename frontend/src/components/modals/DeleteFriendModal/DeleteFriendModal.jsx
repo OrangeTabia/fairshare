@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
 import { thunkDeleteFriend } from "../../../redux/friends";
 import { useDispatch } from "react-redux";
+import './DeleteFriendModal.css'
 
 function DeleteFriendModal({friend}) {
     const navigate = useNavigate();
@@ -26,9 +27,9 @@ function DeleteFriendModal({friend}) {
     return (
         <div>
             <p>Are you sure you want to remove {friend.name} as a friend?</p>
-            <div>
-                <button onClick={deleteFriend}>Yes</button>
-                <button onClick={doNotDelete}>No</button>
+            <div className="delete-friend-buttons">
+                <button className="form-submit" onClick={deleteFriend}>Yes</button>
+                <button className="form-cancel" onClick={doNotDelete}>No</button>
             </div>
         </div>
 
