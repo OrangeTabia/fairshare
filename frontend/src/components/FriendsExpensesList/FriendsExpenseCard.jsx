@@ -32,7 +32,7 @@ function FriendsExpenseCard({ expenseId }) {
   return (
     <div className="expense-details-card">
       <div className="details-header">
-        {expense.receiverId !== currUser.id
+        {expense?.receiverId !== currUser.id
           ? <div className="owed-or-still-owe">{amountDue.length <= 3 ? `This expense is all paid up` : `You still owe: ${amountDue}`}</div>
           :  <div className="owed-or-still-owe-container">
                 <div className="owed-or-still-owe">{amountDue.length <= 3 ? `This expense is all paid up` : `You are owed: ${amountDue}`}</div>
@@ -53,14 +53,12 @@ function FriendsExpenseCard({ expenseId }) {
                       />
                   </div>
                 </div>
-
-
             </div>
           }
       </div>
       <br></br>
-        {expense.comments ? <div className="comments-card">
-          <AddComment comments={expense.comments} expense={expense}/>
+        {expense?.comments ? <div className="comments-card">
+          <AddComment comments={expense?.comments} expense={expense}/>
         </div>
         : '' }
 

@@ -2,7 +2,6 @@ import OpenModalButton from "../modals/OpenModalButton/OpenModalButton";
 import EditExpenseModal from "../modals/EditExpenseModal";
 import "./ExpensesList.css";
 
-
 import DeleteFriendsExpenseModal from "../modals/DeleteFriendsExpenseModal";
 import AddComment from "../Comments/AddComment";
 import { useSelector } from "react-redux";
@@ -52,7 +51,6 @@ function ExpenseCard({ expenseId }) {
                       />
                   </div>
                 </div>
-
 
             </div>
           }

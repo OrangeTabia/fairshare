@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import { thunkSignup } from "../../../redux/session";
 import { useNavigate } from "react-router-dom";
 
-// import { validateEmail } from "../../../utils/customValidators";
+import { validateEmail } from "../../../utils/customValidators";
 import "./SignupFormModal.css";
 
 function SignupFormModal() {
@@ -16,27 +16,56 @@ function SignupFormModal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState({});
-  // const [submitClass, setSubmitClass] = useState("form-submit");
-  // const [submitDisabled, setSubmitDisabled] = useState(false);
-  // const [hasSubmitted, setHasSubmitted] = useState(false);
 
-  // const setSubmitDisabledStatus = (disabled) => {
-  //   (disabled)
-  //     ? setSubmitClass("form-submit disabled")
-  //     : setSubmitClass("form-submit");
-  //   setSubmitDisabled(disabled);
-  // };
+  const [errors, setErrors] = useState({});
+  const [validations, setValidations] = useState({});
+
+  const [submitClass, setSubmitClass] = useState("form-submit");
+  const [submitDisabled, setSubmitDisabled] = useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+
+  const setSubmitDisabledStatus = (disabled) => {
+    (disabled)
+      ? setSubmitClass("form-submit disabled")
+      : setSubmitClass("form-submit");
+    setSubmitDisabled(disabled);
+  };
+
+  const getValidations = useCallback(() => {
+    const newValidations = {};
+
+    if (!name) {
+      newValidations.name = "Name is required";
+    }
+    if (!email) {
+      newValidations.email = "Email is required";
+    } else if (!validateEmail(email)) {
+      newValidations.email = "Invalid Email Format";
+    }
+    if (password.length < 8) {
+      newValidations.password = "Password must be at least 8 characters"
+    }
+    if (password !== confirmPassword) {
+      newValidations.confirmPassword = "Confirm password must match password"
+    }
+
+    return newValidations;
+  }, [name, email, password, confirmPassword]);
+
+  useEffect(() => {
+    if (!hasSubmitted) return;
+    const newValidations = getValidations();
+    setSubmitDisabledStatus(Object.keys(newValidations).length > 0);
+    setValidations(newValidations);
+  }, [hasSubmitted, getValidations])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setHasSubmitted(true);
 
-    if (password !== confirmPassword) {
-      return setErrors({
-        confirmPassword:
-          "Confirm Password field must be the same as the Password field",
-      });
+    if (!hasSubmitted) {
+      setHasSubmitted(true);
+      const newValidations = getValidations();
+      if (Object.keys(newValidations).length) return;
     }
 
     const serverResponse = await dispatch(
@@ -58,7 +87,7 @@ function SignupFormModal() {
   return (
     <>
       <h2>Sign Up</h2>
-      {errors.server && <p>{errors.server}</p>}
+      {validations.server && <p>{validations.server}</p>}
       <form
         onSubmit={handleSubmit}
         id="signup-form"
@@ -66,11 +95,11 @@ function SignupFormModal() {
         <div>
           <div className="form-label">
             <label htmlFor="name">Name</label>
-            {errors.name && (
+            {validations.name && (
+              <span className="form-error">{validations.name}</span>
+            ) || errors.name && (
               <span className="form-error">{errors.name}</span>
             )}
-            {/* Edit this later to reflect LoginFormModal
-            changes to validation and error checking */}
           </div>
           <input
             id="name"
@@ -83,11 +112,11 @@ function SignupFormModal() {
         <div>
           <div className="form-label">
             <label htmlFor="email">Email</label>
-            {errors.email && (
+            {validations.email && (
+              <span className="form-error">{validations.email}</span>
+            ) || errors.email && (
               <span className="form-error">{errors.email}</span>
             )}
-            {/* Edit this later to reflect LoginFormModal
-            changes to validation and error checking */}
           </div>
           <input
             id="email"
@@ -104,9 +133,9 @@ function SignupFormModal() {
             </label>
             {errors.password && (
               <span className="form-error">{errors.password}</span>
+            ) || validations.password && (
+              <span className="form-error">{validations.password}</span>
             )}
-            {/* Edit this later to reflect LoginFormModal
-            changes to validation and error checking */}
           </div>
           <input
             id="password"
@@ -119,11 +148,9 @@ function SignupFormModal() {
         <div>
           <div className="form-label">
             <label htmlFor="confirm-password">Confirm Password</label>
-            {errors.confirmPassword && (
-              <span className="form-error">{errors.confirmPassword}</span>
+            {validations.confirmPassword && (
+              <span className="form-error">{validations.confirmPassword}</span>
             )}
-            {/* Edit this later to reflect LoginFormModal
-            changes to validation and error checking */}
           </div>
         <input
           id="confirm-password"
@@ -134,10 +161,9 @@ function SignupFormModal() {
         />
         </div>
         <button
-          className="form-submit"
-          // className={submitClass}
+          className={submitClass}
           type="submit"
-          // disabled={disabled}
+          disabled={submitDisabled}
         >
           Sign Up
         </button>

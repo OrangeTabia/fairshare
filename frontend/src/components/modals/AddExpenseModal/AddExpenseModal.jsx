@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../../context/Modal";
-import { thunkAddFriendsExpense } from "../../../redux/friends_expenses";
+import { thunkAddFriendsExpense, thunkLoadFriendsExpenses } from "../../../redux/friends_expenses";
 import { useParams } from "react-router-dom";
 
 function AddExpenseModal({ friendName }) {
@@ -57,10 +57,11 @@ function AddExpenseModal({ friendName }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Store todays date and update the submitted state
     const newDate = new Date(expenseDate);
-
     setHasSubmitted(true);
 
+    // Request to make a new friends expense and then load the new state with the expense + comments
     const newExpense = {
       payerId: payer,
       receiverId: currentUser.id,
@@ -70,7 +71,10 @@ function AddExpenseModal({ friendName }) {
       settled: false,
       notes,
     };
+
     await dispatch(thunkAddFriendsExpense(newExpense));
+    await dispatch(thunkLoadFriendsExpenses());
+
 
     // if (!addExpense.id) {
     //     const { errors } = await addExpense.json();
@@ -133,7 +137,6 @@ function AddExpenseModal({ friendName }) {
           <div className="form-label">
             <input
               id="expense_date"
-              // type="datetime-local"
               type="date"
               value={expenseDate}
               onChange={(e) => setExpenseDate(e.target.value)}
