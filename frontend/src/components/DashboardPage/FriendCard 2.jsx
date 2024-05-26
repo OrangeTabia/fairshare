@@ -12,7 +12,8 @@ function FriendCard({ friend }) {
         ? centsToUSD(friend.netAmount)
         : centsToUSD(friend.netAmount * -1);
 
-    return <li className="friend-card">
+    return (
+    <li className="friend-card">
         <div className="friend-info">
             <img src={friend.profileImage} className="friend-profile-image" />
             <div className="friend-info-text">
@@ -24,6 +25,7 @@ function FriendCard({ friend }) {
             </div>
         </div>
     </li>
+    )
 }
 
 export default FriendCard;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ExpenseCard from "./ExpenseCard";
 import { centsToUSD } from "../../utils/formatters";
@@ -12,6 +12,7 @@ function ExpensesList() {
   const currUser = useSelector(state => state.session.user)
   const allFriends = useSelector((state) => state.friends)
   const allPayments = useSelector((state) => state.payments)
+
 
 
   const handleClick = (expenseId) => {

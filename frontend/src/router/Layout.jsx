@@ -38,7 +38,7 @@ export default function Layout() {
             <div className="header-container hc-1">
               <p id="site-name">
                 <span id="site-name-1">fair</span>
-                <span id="site-name-2">Share</span>
+                <span id="site-name-2">share</span>
               </p>
             </div>
             <div className="header-container hc-2">

@@ -163,7 +163,7 @@ function SettleUpFriendModal() {
             <p>Between <span>you</span> and <span>{currFriend.name}</span></p>
           </div>
           <div>
-            <label htmlFor='expense'>Which Expense?</label>
+            <label htmlFor='expense'>Which Expense?&nbsp;&nbsp;&nbsp;</label>
             <select
               value={expense}
               onChange={(e) => setExpense(e.target.value)}
@@ -180,14 +180,17 @@ function SettleUpFriendModal() {
               <span className="form-error">{validations.amount}</span>
             )}
           </div>
-          <input
-            id="amount"
-            type="number"
-            value={amount}
-            onChange={e => setAmount(e.target.value)}
-            placeholder={expense ? `You owe ${centsToUSD(amountDue)}` : 'amount'}
-            required
-          />
+          <div className="dollarsign-for-amount">
+            <div>$</div>
+            <input
+              id="amount"
+              type="number"
+              value={amount}
+              onChange={e => setAmount(e.target.value)}
+              placeholder={expense ? `You owe ${centsToUSD(amountDue)}` : 'amount'}
+              required
+            />
+          </div>
         </div>
         <div>
           <div className="form-label">

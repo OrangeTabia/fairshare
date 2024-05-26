@@ -23,9 +23,9 @@ function DeleteFriendsExpenseModal({ expense }) {
   return (
     <div>
       <p>Are you sure you want to remove this expense?</p>
-      <div>
-        <button onClick={deleteExpense}>Yes</button>
-        <button onClick={closeModal}>No</button>
+      <div className="submit-cancel-btns">
+        <button onClick={deleteExpense} className="form-submit">Yes</button>
+        <button onClick={closeModal} className="form-cancel">No</button>
       </div>
     </div>
   );
