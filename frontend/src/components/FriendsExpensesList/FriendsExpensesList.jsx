@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import FriendsExpenseCard from './FriendsExpenseCard';
 import { useSelector } from 'react-redux';
-import { centsToUSDs } from "../../utils/formatters";
+import { centsToUSD } from "../../utils/formatters";
 import './FriendsExpenseList.css';
 
 function FriendsExpensesList() {
