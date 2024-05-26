@@ -41,8 +41,8 @@
 }
 
 .expense-details-card {
-    /* border-top: 2px solid rgba(99, 98, 98, 0.228); */
-    border: 1px solid red;
+    border-top: 2px solid rgba(99, 98, 98, 0.228);
+    /* border: 1px solid red; */
     border-radius: 3px;
     display: flex;
     flex-direction: row;
@@ -60,7 +60,7 @@
     width: 100%;
     margin-bottom: 10px;
     font-weight: bold;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 }
 
 .a-payment {
@@ -83,7 +83,7 @@
     width: 100%;
     display: flex;
     justify-content: space-around;
-    border: 1px solid orange;
+    /* border: 1px solid orange; */
 }
 
 #expense-set-by-you > div > button {

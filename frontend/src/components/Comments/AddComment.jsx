@@ -83,22 +83,23 @@ function AddComment({ comments, expense }) {
               </div>
             ))}
         </div>
-        <div className="new-comment"></div>
-        <div className="form-label">
-          <form onSubmit={handleSubmit} id="add-comment-form">
-            <textarea
-              id="comment"
-              type="text"
-              placeholder="Add a comment"
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-            />
-            {errors.comment && hasSubmitted && (
-              <span className="form-error">{errors.comment}</span>
-            )}
-            <br></br>
-            <button className="form-submit">Submit</button>
-          </form>
+        <div id="new-comment">
+          <div className="form-label">
+            <form onSubmit={handleSubmit} id="add-comment-form">
+              <textarea
+                id="comment"
+                type="text"
+                placeholder="Add a comment"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+              />
+              {errors.comment && hasSubmitted && (
+                <span className="form-error">{errors.comment}</span>
+              )}
+              <br></br>
+              <button className="form-submit">Submit</button>
+            </form>
+          </div>
         </div>
       </div>
     </>
