@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import FriendsExpenseCard from './FriendsExpenseCard';
 import { useSelector } from 'react-redux';
+import { centsToUSDs } from "../../utils/formatters";
 import './FriendsExpenseList.css';
 
 function FriendsExpensesList() {
@@ -41,7 +42,7 @@ function FriendsExpensesList() {
 
   useEffect(() => {
     setOpenCards([])
-  }, [friendId, allPayments])
+  }, [friendId, allPayments, allExpenses])
 
   const handleClick  = (idx) => {
     if (!openCards.includes(idx)) {
@@ -60,7 +61,7 @@ function FriendsExpensesList() {
                   <div key={idx} className='friend-expense'>
                     <div className="friends-expense-title" onClick={() => handleClick(idx)}>
                       <div >{expense.description}</div>
-                      <div >{`$${(expense.amount).toString().slice(0, -2)}.${(expense.amount).toString().slice(-2)}`}</div>
+                      <div >{centsToUSD(expense.amount)}</div>
                       <span hidden={!expense.settled}>Expense Settled</span>
                     </div>
                     {openCards.includes(idx)
