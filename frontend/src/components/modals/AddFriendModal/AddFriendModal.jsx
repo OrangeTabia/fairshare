@@ -1,82 +1,91 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import { thunkAddFriend } from "../../../redux/friends";
 import { useModal } from "../../../context/Modal";
-import { useNavigate } from "react-router-dom";
 import './AddFriendModal.css'
 
 function AddFriendModal() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const { closeModal } = useModal();
-    const [email, setEmail] = useState('')
-    const [suggestedFriends, setSuggestedFriends] = useState([])
-    const [friendSelected, setFriendSelected] = useState('')
-    const currFriends = useSelector(state => state.friends)
-    const allUsers = useSelector(state => state.userEmails)
-    const currUser = useSelector(state => state.session.user)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { closeModal } = useModal();
 
+  const currFriends = useSelector(state => state.friends);
+  const allUsers = useSelector(state => state.userEmails);
+  const currUser = useSelector(state => state.session.user);
 
-    useEffect(() => {
-        const removeIndex = Object.values(currFriends).map(friend => friend.name)
-        const removeCurrFriends = Object.values(allUsers).filter(user => !removeIndex.includes(user.name))
-        const removeSelf = Object.values(removeCurrFriends).filter(user => user.name !== currUser.name)
+  const [email, setEmail] = useState('');
+  const [suggestedFriends, setSuggestedFriends] = useState([]);
+  const [friendSelected, setFriendSelected] = useState('');
 
-        const suggested = Object.values(removeSelf).filter(user => user.email.startsWith(email))
-        if (email) {
-            setSuggestedFriends(suggested.slice(0, 5))
-        } else {
-            setSuggestedFriends([])
-        }
+  useEffect(() => {
+    const removeIndex = Object.values(currFriends)
+      .map(friend => friend.name);
 
-    }, [email, allUsers, currFriends, currUser])
+    const removeCurrFriends = Object.values(allUsers)
+      .filter(user => !removeIndex.includes(user.name));
 
-    const selectingUser = (friend) => {
-        setFriendSelected(friend)
-        setSuggestedFriends([])
-        setEmail('')
-    }
+    const removeSelf = Object.values(removeCurrFriends)
+      .filter(user => user.name !== currUser.name);
 
-    const handleAddFriend = async (e) => {
-        e.preventDefault();
+    const suggested = Object.values(removeSelf)
+      .filter(user => user.email.startsWith(email));
 
-        await dispatch(thunkAddFriend(friendSelected.email));
+    setSuggestedFriends((email) ? suggested.slice(0, 5) : []);
+  }, [email, allUsers, currFriends, currUser]);
 
-        setFriendSelected('')
-        closeModal();
-        navigate(`friend/${friendSelected.id}`)
-    }
+  const selectingUser = (friend) => {
+    setFriendSelected(friend)
+    setSuggestedFriends([])
+    setEmail('')
+  };
 
-    return (
-        <div>
-            <form onSubmit={handleAddFriend}>
-                <div className="add-friend-input">
-                    <label>Search for a Friend: </label>
-                    <input
-                        type='text'
-                        value={email}
-                        placeholder="Enter an email"
-                        onChange={(e) => setEmail(e.target.value)}
-                        >
-                    </input>
-                </div>
+  const handleAddFriend = async (e) => {
+    e.preventDefault();
+    await dispatch(thunkAddFriend(friendSelected.email));
+    setFriendSelected('');
+    closeModal();
+    navigate(`friend/${friendSelected.id}`);
+  };
 
-                <div className='select-a-friend'>
-                    <p className="select-friend-small-label">click email to select</p>
-                    {suggestedFriends.map(friend => (
-                        <div key={friend.id}>
-                            <div className='list-user-email-item' onClick={() => selectingUser(friend)} >{friend.email}</div>
-                        </div>
-                    ))}
-                </div>
-                <div className='chosen-user-container' hidden={!friendSelected}>
-                    <img className='user-profile-image' src={friendSelected.profileImage} hidden={!friendSelected}/>
-                    <div hidden={!friendSelected} >add {friendSelected.name} as a friend?</div>
-                </div>
-                <button disabled={!friendSelected} type="submit">Add Friend</button>
-            </form>
+  return (
+    <div>
+      <form onSubmit={handleAddFriend}>
+        <div className="add-friend-input">
+          <label>Search for a Friend: </label>
+          <input
+            type='text'
+            value={email}
+            placeholder="Enter an email"
+            onChange={(e) => setEmail(e.target.value)}
+            >
+          </input>
         </div>
-    )
+
+        <div className='select-a-friend'>
+          <p className="select-friend-small-label">click email to select</p>
+          {suggestedFriends.map(friend => (
+            <div key={friend.id}>
+              <div className='list-user-email-item' onClick={() => selectingUser(friend)} >{friend.email}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className='chosen-user-container' hidden={!friendSelected}>
+          <img className='user-profile-image' src={friendSelected.profileImage} hidden={!friendSelected}/>
+          <div hidden={!friendSelected} >add {friendSelected.name} as a friend?</div>
+        </div>
+
+        <button
+          disabled={!friendSelected}
+          type="submit"
+        >
+          Add Friend
+        </button>
+      </form>
+    </div>
+  )
 }
 
 export default AddFriendModal;
