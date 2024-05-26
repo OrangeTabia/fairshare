@@ -16,7 +16,7 @@ function LandingPageLayout () {
             <div className='elements-landing-container'>
                 <div className='landingPage-moto-container'>
                     <div id="landing-mottos">
-                        <h1 className='first-mot-line'>You want to $hare?</h1>
+                        <h1 className='first-mot-line'>You want to share?</h1>
                         <h1 className='second-mot-line'>We make it fair!</h1>
                     </div>
                     <div id="landing-icons">

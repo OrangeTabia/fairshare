@@ -39,11 +39,14 @@ function FriendsList({currFriend}) {
                     </div>
                 ))}
             </div>
+        <div className="invite-friend-btn-container">
             <OpenModalButton
             buttonText='INVITE A FRIEND'
             modalComponent={<AddFriendModal />}
             id="add-friend-modal-button"
             />
+        </div>
+
         </div>
 
     )

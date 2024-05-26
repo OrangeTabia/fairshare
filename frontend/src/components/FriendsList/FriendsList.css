@@ -39,7 +39,7 @@
 }
 
 .friends-list-ele > button {
-    background-color: white;
+    background-color: #FAFAFA;
     color: rgba(128, 128, 128, 0.416);
     display: flex;
     justify-content: center;
@@ -52,10 +52,6 @@
 .friends-list-ele > button:hover {
     color: #FD8A17;
     border: 1px solid orange;
-}
-
-#delete-friend-modal-button {
-    background-color: white;
 }
 
 #delete-friend-modal-button:hover {
@@ -75,7 +71,7 @@
 }
 
 .on-friends-page > button {
-    background-color: white;
+    background-color: #FAFAFA;
     color: #2DA2EF;
     display: flex;
     align-items: center;
@@ -92,4 +88,17 @@
 
 button {
     cursor: pointer;
+}
+
+.invite-friend-btn-container > button {
+    width: 100%;
+    font-size: 0.8rem;
+    background-color: var(--theme-xl-blue);
+    border: 2px solid var(--theme-blue);
+    border-radius: 5px;
+}
+
+.invite-friend-btn-container > button:hover {
+    background-color: var(--theme-l-blue);
+    border: 2px solid var(--theme-d-blue);
 }

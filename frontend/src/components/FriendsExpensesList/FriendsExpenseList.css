@@ -60,11 +60,12 @@
     width: 100%;
     margin-bottom: 10px;
     font-weight: bold;
-    /* border: 1px solid blue; */
+    font-size: 18px;
+    padding-bottom: 6px;
 }
 
 .a-payment {
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .no-expenses,
@@ -75,35 +76,20 @@
     padding: 16px;
 }
 
-.friends-expense-title {
-    cursor: pointer;
-}
-
 #expense-set-by-you {
     width: 100%;
     display: flex;
     justify-content: space-around;
-    /* border: 1px solid orange; */
 }
 
 #expense-set-by-you > div > button {
-    background-color: white;
+    background-color: #FAFAFA;
     border: none;
     cursor: pointer;
     font-size: 15px;
+    margin: 10px
 }
 
 #expense-set-by-you > div > button:hover {
-    color: orange
-}
-
-.expense-set-by-you-delete {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-}
-
-.expense-set-by-you-delete  > p {
-    margin: 0px;
+    color: orange;
 }

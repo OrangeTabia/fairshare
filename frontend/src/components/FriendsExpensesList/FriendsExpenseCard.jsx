@@ -30,11 +30,11 @@ function FriendsExpenseCard({ expenseId }) {
   }, [expenseId])
 
   const whatsLeftToPay = (expense) => {
-    const currPayments = payments.filter(payment => payment.expenseId === expense.id)
+    const currPayments = payments.filter(payment => payment.expenseId === expense?.id)
     let total = 0;
 
     currPayments.forEach(payment => total += payment.amount)
-    let adjustTotal = (expense.amount - total).toString()
+    let adjustTotal = (expense?.amount - total).toString()
     let due = '$' + adjustTotal.slice(0, -2) + '.' + adjustTotal.slice(-2)
     return due
   }
@@ -51,9 +51,9 @@ function FriendsExpenseCard({ expenseId }) {
     <div className="expense-details-card">
       <div className="details-header">
         {expense?.receiverId !== currUser.id
-          ? <div className="owed-or-still-owe">{expense.settled ? `This expense is all paid up` : `You still owe: ${whatsLeftToPay(expense)}`}</div>
+          ? <div className="owed-or-still-owe">{expense?.settled ? `This expense is all paid up` : `You still owe: ${whatsLeftToPay(expense)}`}</div>
           :  <div className="owed-or-still-owe-container">
-                <div className="owed-or-still-owe">{expense.settled ? `This expense is all paid up` : `You are owed: ${whatsLeftToPay(expense)}`}</div>
+                <div className="owed-or-still-owe">{expense?.settled ? `This expense is all paid up` : `You are owed: ${whatsLeftToPay(expense)}`}</div>
                 <div id='expense-set-by-you'>
                   <div className="expense-set-by-you-delete">
                       <OpenModalButton

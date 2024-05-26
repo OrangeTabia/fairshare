@@ -97,6 +97,7 @@ function FriendsExpensesList() {
                     ? <div className="a-payment">
                           <div>
                             <p>{`Payment of ${centsToUSD(payment.amount)}`}</p>
+                            <p>{payment.userId === currUser.id ? `Paid by you` : `Paid by ${currFriend.name}`}</p>
                             <p>{`Paid on ${payment.paymentDate.slice(0, -12)}`}</p>
                           </div>
                       </div>
