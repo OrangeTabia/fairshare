@@ -44,8 +44,8 @@ function FriendsList({currFriend}) {
             <OpenModalButton
             buttonText='INVITE A FRIEND'
             modalComponent={<AddFriendModal />}
-            id="delete-friend-modal-button"
-            className="delete-friend-modal-button"
+            id="add-friend-modal-button"
+            className="add-friend-modal-button"
             />
         </div>
 

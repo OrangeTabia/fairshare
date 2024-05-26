@@ -34,7 +34,7 @@
     line-height: 1.7;
 }
 
-.animated-friend-underline:hover {
+.friends-list-ele:hover {
     color: #2DA2EF
 }
 
@@ -88,4 +88,8 @@
 .on-friends-page > button:hover {
     border: 1px solid #2DA2EF;
     color: orange;
+}
+
+button {
+    cursor: pointer;
 }
