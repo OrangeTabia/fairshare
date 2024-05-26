@@ -16,7 +16,6 @@ function LoginFormModal() {
   const [password, setPassword] = useState("");
 
   const [validations, setValidations] = useState({});
-
   const [submitClass, setSubmitClass] = useState("form-submit");
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);

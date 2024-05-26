@@ -1,10 +1,27 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { useModal } from "../../../context/Modal";
 import { thunkUpdateFriendsExpense } from "../../../redux/friends_expenses";
 import { centsToUSD } from '../../../utils/formatters'
+import "./EditExpenseModal.css";
 
 function EditExpenseModal({ expense }) {
+  const dispatch = useDispatch();
+  const { closeModal } = useModal();
+
+  const payer = useSelector((state) => state.friends)[expense.payerId];
+
+  const [description, setDescription] = useState(expense.description);
+  const [amount, setAmount] = useState(centsToUSD(expense.amount).slice(1));
+  const [expenseDate, setExpenseDate] = useState(originalDate);
+  const [notes, setNotes] = useState(expense.notes);
+
+  const [validations, setValidations] = useState({});
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [submitClass, setSubmitClass] = useState("form-submit");
+  const [submitDisabled, setSubmitDisabled] = useState(false);
+
   const originalDate = () => {
     const year = new Date(expense?.expenseDate).getFullYear();
     const month = new Date(expense?.expenseDate).getMonth() + 1; // added + 1 here due to month and date subtracting when read
@@ -20,16 +37,6 @@ function EditExpenseModal({ expense }) {
     return format;
   };
 
-  const dispatch = useDispatch();
-  const [description, setDescription] = useState(expense.description);
-  const [amount, setAmount] = useState(centsToUSD(expense.amount).slice(1));
-  const [expenseDate, setExpenseDate] = useState(originalDate);
-  const [notes, setNotes] = useState(expense.notes);
-  const [validations, setValidations] = useState({});
-  const [hasSubmitted, setHasSubmitted] = useState(false);
-  const payer = useSelector((state) => state.friends)[expense.payerId];
-  const { closeModal } = useModal();
-
   // const convertFloatToInteger = () => {
   //   if (!String(amount).split(".").length < 2) {
   //     return String(amount) + "00";
@@ -40,32 +47,51 @@ function EditExpenseModal({ expense }) {
   //   }
   // };
 
-  useEffect(() => {});
+  const setSubmitDisabledStatus = (disabled) => {
+    (disabled)
+      ? setSubmitClass("form-submit disabled")
+      : setSubmitClass("form-submit");
+    setSubmitDisabled(disabled);
+  };
+
+  const getValidations = useCallback(() => {
+    const newValidations = {};
+
+    if (!description) {
+      newValidations.description = "Description is required";
+    } else if (description.length > 200) {
+      newValidations.description = "Description must be less than 200 characters";
+    }
+    if (amount <= 0) {
+      newValidations.amount = "Expense must have a minimum of $0.01";
+    }
+    if (!expenseDate) {
+      newValidations.expenseDate = "Please enter a date for the expense";
+    }
+    if (notes?.length > 200) {
+      newValidations.notes = "Note must be less than 200 characters";
+    }
+
+    return newValidations;
+  }, [description, amount, expenseDate, notes]);
 
   useEffect(() => {
-    const frontValidations = {};
-    if (!description)
-      frontValidations.description =
-        "A brief description of the expense is required";
-    if (description.length > 200)
-      frontValidations.description =
-        "Description must be less than 200 characters";
-    if (!amount || amount <= 0)
-      frontValidations.amount = "Expense must have a minimum of $0.01";
-    if (!expenseDate)
-      frontValidations.expenseDate = "Please enter a date for the expense";
-    if (notes?.length > 200)
-      frontValidations.notes = "Note must be less than 200 characters";
-
-    setValidations(frontValidations);
-  }, [description, amount, expenseDate, notes]);
+    if (!hasSubmitted) return;
+    const newValidations = getValidations();
+    setSubmitDisabledStatus(Object.keys(newValidations).length > 0);
+    setValidations(newValidations);
+  }, [hasSubmitted, getValidations]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newDate = new Date(expenseDate);
 
-    setHasSubmitted(true);
+    if (!hasSubmitted) {
+      setHasSubmitted(true);
+      const newValidations = getValidations();
+      if (Object.keys(newValidations).length) return;
+    }
 
     let adjustedAmount = amount;
 
@@ -98,6 +124,7 @@ function EditExpenseModal({ expense }) {
       <form onSubmit={handleSubmit} id="edit-expense-form">
         <div>
           <h3>With You and: {payer?.name}</h3>
+
           <div className="form-label">
             <input
               id="description"
@@ -111,6 +138,7 @@ function EditExpenseModal({ expense }) {
               <span className="form-error">{validations.description}</span>
             )}
           </div>
+
           <div className="form-label">
             <input
               id="amount"
@@ -124,6 +152,7 @@ function EditExpenseModal({ expense }) {
               <span className="form-error">{validations.amount}</span>
             )}
           </div>
+
           <div className="form-label">
             <input
               id="expense_date"
@@ -136,6 +165,7 @@ function EditExpenseModal({ expense }) {
               <span className="form-error">{validations.expenseDate}</span>
             )}
           </div>
+
           <div className="form-label">
             <input
               id="notes"
@@ -152,7 +182,12 @@ function EditExpenseModal({ expense }) {
             <button className="form-cancel" onClick={closeModal}>
               Cancel
             </button>
-            <button className="form-submit">Save</button>
+            <button
+              className={submitClass}
+              disabled={submitDisabled}
+            >
+              Save
+            </button>
           </div>
         </div>
       </form>

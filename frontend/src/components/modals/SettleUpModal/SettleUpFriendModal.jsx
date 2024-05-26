@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
@@ -16,20 +16,23 @@ function SettleUpFriendModal() {
   const { closeModal } = useModal();
   const { friendId } = useParams();
 
+  const allExpenses = useSelector(state => state.friendsExpenses);
+  const currUser = useSelector(state => state.session.user);
+  const currFriend = useSelector(state => state.userEmails[parseInt(friendId)]);
+  const paymentsMade = useSelector(state => state.payments);
+
   const [amount, setAmount] = useState('');
   const [paymentDate, setPaymentDate] = useState('');
   const [expense, setExpense] = useState('')
   const [expenseSelection, setExpenseSelection] = useState([])
   const [amountDue, setAmountDue] = useState(0)
-  const [errors, setErrors] = useState({})
   const [chosenExpense, setChosenExpense] = useState('')
+
+  const [errors, setErrors] = useState({});
+  const [validations, setValidations] = useState({});
+  const [hasSubmitted, setHasSubmitted] = useState(false);
   const [submitClass, setSubmitClass] = useState("form-submit disabled");
   const [submitDisabled, setSubmitDisabled] = useState(true);
-  const [hasSubmitted, setHasSubmitted] = useState(false);
-  const allExpenses = useSelector(state => state.friendsExpenses)
-  const currUser = useSelector(state => state.session.user)
-  const currFriend = useSelector(state => state.userEmails[parseInt(friendId)])
-  const paymentsMade = useSelector(state => state.payments)
 
 
 
@@ -41,31 +44,42 @@ function SettleUpFriendModal() {
     setSubmitDisabled(disabled);
   };
 
-  useEffect(() => {
-    const validationErrors = {};
+  const getValidations = useCallback(() => {
+    const newValidations = {};
+
     if (parseInt(amount) <= 0) {
-      validationErrors.amount = 'Payment must be more than 0'
+      newValidations.amount = 'Payment must be more than 0'
     }
     if (removeDecimals(amount) > amountDue) {
-      validationErrors.amount = 'Payment must be the same or less than what is owed'
+      newValidations.amount = 'Payment must be the same or less than what is owed'
     }
     let date = new Date(paymentDate)
     let today = new Date()
     if (paymentDate) {
       if (date.getTime() < today.getTime()) {
-        validationErrors.paymentDate = 'Payment date must be in the future'
+        newValidations.paymentDate = 'Payment date must be in the future'
       }
     }
-    setErrors(validationErrors)
-  }, [amount, paymentDate, amountDue])
 
+  }, []);
+
+  useEffect(() => {
+    const newValidations = {};
+
+    setValidations(newValidations)
+  }, [amount, paymentDate, amountDue]);
 
   useEffect(() => {
     if (friendId) {
-      const payerExpenses = Object.values(allExpenses).filter(expense => expense.payerId === currUser.id && expense.receiverId === parseInt(friendId) && expense.settled === false)
+      const payerExpenses = Object.values(allExpenses).filter(expense => {
+        (expense.payerId === currUser.id)
+        && (expense.receiverId === parseInt(friendId))
+        && (expense.settled === false)
+      });
+
       setExpenseSelection(payerExpenses)
     }
-  }, [friendId, allExpenses])
+  }, [friendId, allExpenses]);
 
   useEffect(() => {
     const findExpense = Object.values(allExpenses).find(thisExpense => thisExpense.id === parseInt(expense))
@@ -143,9 +157,9 @@ function SettleUpFriendModal() {
   return (
     <>
       <h2>Settle up</h2>
-      {friendId && expenseSelection.length <= 0
+      {friendId && (expenseSelection.length <= 0)
         ? <h3>{`You do not currently owe ${currFriend?.name} any money`}</h3>
-        : !friendId && expenseSelection.length <= 0
+        : !friendId && (expenseSelection.length <= 0)
         ? <h3>All your expenses are settled!</h3>
         :
       <form
@@ -172,6 +186,7 @@ function SettleUpFriendModal() {
           </div>
           <div className="form-label">
             <label htmlFor="amount">Amount</label>
+            {hasSubmitted && errors.amount ? <span className="form-error">{errors.amount}</span> : ''}
           </div>
           <input
             id="amount"
@@ -181,7 +196,6 @@ function SettleUpFriendModal() {
             placeholder={expense ? `You owe ${centsToUSD(amountDue)}` : 'amount'}
             required
           />
-          {hasSubmitted && errors.amount ? <span className="form-error">{errors.amount}</span> : ''}
         </div>
         <div>
           <div className="form-label">

@@ -20,7 +20,6 @@ function AddExpenseModal({ friendName }) {
   const [notes, setNotes] = useState("");
 
   const [validations, setValidations] = useState({});
-
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [submitClass, setSubmitClass] = useState("form-submit");
   const [submitDisabled, setSubmitDisabled] = useState(false);
@@ -71,7 +70,7 @@ function AddExpenseModal({ friendName }) {
     }
 
     return newValidations;
-  }, [payer, description, amount, expenseDate, notes])
+  }, [payer, description, amount, expenseDate, notes]);
 
   useEffect(() => {
     if (!hasSubmitted) return;
