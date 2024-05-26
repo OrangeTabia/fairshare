@@ -10,7 +10,7 @@ def seed_expenses():
         description='Pizza night!',
         amount=4000,
         expense_date=datetime(2023, 2, 28, 0, 0, 0),
-        settled=True,
+        settled=False,
         notes='Extra peperoni for Stacy'
         )
     demo2 = FriendsExpense(
@@ -62,6 +62,30 @@ def seed_expenses():
         expense_date=datetime(2023, 2, 28, 0, 0, 0),
         settled=True,
         )
+    demo8 = FriendsExpense(
+        payer_id=100,
+        receiver_id=8,
+        description='Zoo Visit',
+        amount=4300,
+        expense_date=datetime(2023, 2, 28, 0, 0, 0),
+        settled=True,
+        )
+    demo9 = FriendsExpense(
+        payer_id=100,
+        receiver_id=9,
+        description='Party!',
+        amount=8700,
+        expense_date=datetime(2023, 2, 28, 0, 0, 0),
+        settled=True,
+        )
+    demo10 = FriendsExpense(
+        payer_id=100,
+        receiver_id=12,
+        description='Beach trip',
+        amount=12400,
+        expense_date=datetime(2023, 2, 28, 0, 0, 0),
+        settled=True,
+        )
 
     db.session.add(demo1)
     db.session.add(demo2)
@@ -70,6 +94,9 @@ def seed_expenses():
     db.session.add(demo5)
     db.session.add(demo6)
     db.session.add(demo7)
+    db.session.add(demo8)
+    db.session.add(demo9)
+    db.session.add(demo10)
 
 
     db.session.commit()
