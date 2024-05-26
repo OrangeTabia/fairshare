@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
@@ -14,100 +14,91 @@ function SettleUpModal() {
   const navigate = useNavigate();
   const { closeModal } = useModal();
 
-  const [amount, setAmount] = useState('');
-  const [paymentDate, setPaymentDate] = useState('');
-  // Store an ID instead of storing an empty string
-  const [expense, setExpense] = useState('');
-  const [amountDue, setAmountDue] = useState(0)
-  const [submitClass, setSubmitClass] = useState("form-submit disabled");
-  const [expenseSelection, setExpenseSelection] = useState([])
-  const [submitDisabled, setSubmitDisabled] = useState(true);
-  const [hasSubmitted, setHasSubmitted] = useState(false);
-  const [errors, setErrors] = useState({});
   const allExpenses = useSelector(state => state.friendsExpenses);
   const currUser = useSelector(state => state.session.user);
   const paymentsMade = useSelector(state => state.payments);
   const friends = useSelector(state => state.friends);
-  const payerExpenses = Object.values(allExpenses).filter((expense) => expense.payerId === currUser.id && expense.settled === false);
   const friendsArray = Object.values(friends);
-  const [chosenExpense, setChosenExpense] = useState('')
-  const [receiver, setReceiver] = useState('')
+  const payerExpenses = Object.values(allExpenses).filter((expense) => expense.payerId === currUser.id && expense.settled === false);
 
+  const [amount, setAmount] = useState('');
+  const [amountDue, setAmountDue] = useState(0);
+  const [paymentDate, setPaymentDate] = useState('');
+  // Store an ID instead of storing an empty string
+  const [expense, setExpense] = useState('');
+  const [expenseSelection, setExpenseSelection] = useState([]);
+  const [chosenExpense, setChosenExpense] = useState('');
+  const [receiver, setReceiver] = useState('');
+
+  const [validations, setValidations] = useState({});
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [submitClass, setSubmitClass] = useState("form-submit disabled");
+  const [submitDisabled, setSubmitDisabled] = useState(true);
 
   const setSubmitDisabledStatus = (disabled) => {
     (disabled)
-      ? setSubmitClass("form-submit disabled")
-      : setSubmitClass("form-submit");
+    ? setSubmitClass("form-submit disabled")
+    : setSubmitClass("form-submit");
     setSubmitDisabled(disabled);
   };
 
-    // Select our expense from all of the expenses and then find the receiving friend
+  const getValidations = useCallback(() => {
+    const newValidations = {};
+
+    if (parseInt(removeDecimals(amount)) <= 0) {
+      newValidations.amount = 'Payment must be more than 0';
+    }
+    if (removeDecimals(amount) > amountDue) {
+      newValidations.amount = 'Payment must be the same or less than what is owed';
+    }
+  }, [amount, amountDue]);
+
+  useEffect(() => {
+    if (!hasSubmitted) return;
+    const newValidations = getValidations();
+    setSubmitDisabledStatus(Object.keys(newValidations).length > 0);
+    setValidations(newValidations);
+  }, [hasSubmitted, getValidations]);
+
+  // Select our expense from all of the expenses and then find the receiving friend
   useEffect(() => {
     const findExpense = payerExpenses.find(thisExpense => thisExpense.id === parseInt(expense))
     setChosenExpense(findExpense)
-  }, [expense])
+  }, [payerExpenses, expense]);
 
   useEffect(() => {
     setReceiver(friendsArray.find((friend) => friend.id == chosenExpense?.receiverId))
-  }, [expense, chosenExpense])
-
-
-
-
-  useEffect(() => {
-    const validationErrors = {};
-    if (parseInt(amount) <= 0) {
-      validationErrors.amount = 'Payment must be more than 0'
-    }
-    if (removeDecimals(amount) > amountDue) {
-      validationErrors.amount = 'Payment must be the same or less than what is owed'
-    }
-    let date = new Date(paymentDate)
-    let today = new Date()
-    if (paymentDate) {
-      if (date.getTime() < today.getTime()) {
-        validationErrors.paymentDate = 'Payment date must be in the future'
-      }
-    }
-    setErrors(validationErrors)
-  }, [amount, paymentDate, amountDue]);
-
+  }, [friendsArray, chosenExpense]);
 
   useEffect(() => {
     const payerExpensesList = Object.values(allExpenses).filter((expense) => expense.payerId === currUser.id && expense.settled === false);
     setExpenseSelection(payerExpensesList)
-  }, [allExpenses])
+  }, [currUser, allExpenses]);
 
   // Storing all of my payments
   useEffect(() => {
     let totalPaid = 0
     const myPayments = Object.values(paymentsMade).filter(payment => payment.expenseId === parseInt(expense))
     if (myPayments.length) {
-      myPayments.forEach(payment => totalPaid += payment.amount)
+      myPayments.forEach(payment => totalPaid += payment.amount);
     }
     if (chosenExpense) {
-      setAmountDue(chosenExpense.amount - totalPaid)
+      setAmountDue(chosenExpense.amount - totalPaid);
     }
   }, [expense, chosenExpense, paymentsMade])
-
-  useEffect(() => {
-    // TEMP IMPLEMENTATION
-    // Should disable submit button based on frontend validations
-    setSubmitDisabledStatus(amount === null || paymentDate === null);
-  }, [amount, paymentDate]);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(Object.values(errors).length) {
-      return;
+    if (!hasSubmitted) {
+      setHasSubmitted(true);
+      const newValidations = getValidations();
+      if (Object.keys(newValidations).length) return;
     }
-    setHasSubmitted(false)
 
-    let adjustedAmount = removeDecimals(amount);
+    const adjustedAmount = removeDecimals(amount);
 
-    let addPayment = await dispatch(
+    const addPayment = await dispatch(
       thunkAddPayment({
         userId: currUser.id,
         expenseId: chosenExpense.id,
@@ -133,16 +124,15 @@ function SettleUpModal() {
         notes: chosenExpense.notes,
       }
 
-
       await dispatch(
         thunkUpdateFriendsExpense(chosenExpense.id, settledExpense)
       ).then(() => {
         setExpense('')
         closeModal();
         navigate('/');
-      })
+      });
     }
-    setExpense('')
+    setExpense('');
     closeModal();
     navigate('/');
   };
@@ -161,10 +151,7 @@ function SettleUpModal() {
           <label htmlFor='expense'>Which Expense?</label>
             <select
               value={expense}
-              onChange={(e) => {
-                setExpense(e.target.value)
-              }
-            }
+              onChange={(e) => setExpense(e.target.value)}
             >
               <option value={''} disabled>Select an expense</option>
               {payerExpenses.map((expense) => (
@@ -174,27 +161,38 @@ function SettleUpModal() {
         </div>
 
         <div>
-        <img className='user-profile-image' src={receiver?.profileImage} hidden={receiver == null}/>
-        <span> {receiver?.name}</span>
+          <img
+            className='user-profile-image'
+            src={receiver?.profileImage}
+            hidden={receiver == null}
+          />
+          <span>{receiver?.name}</span>
         </div>
 
         <div>
-          <label htmlFor="amount-owed"></label>
-            <input
-              id="amount"
-              type="number"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              placeholder={expense ? `You owe $${amountDue.toString().slice(0, -2)}.${amountDue.toString().slice(-2)}` : 'amount'}
-              required
-            >
-            </input>
+          <div className="form-label">
+            <label htmlFor="amount"></label>
+            {validations.amount && (
+              <span className="form-error">{validations.amount}</span>
+            )}
+          </div>
+          <input
+            id="amount"
+            type="number"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            placeholder={expense ? `You owe $${amountDue.toString().slice(0, -2)}.${amountDue.toString().slice(-2)}` : 'amount'}
+            required
+          >
+          </input>
         </div>
-        {hasSubmitted && errors.amount ? <span className="form-error">{errors.amount}</span> : ''}
+
         <div>
           <div className="form-label">
             <label htmlFor="payment-date">Payment Date</label>
-            {hasSubmitted && errors.paymentDate ? <span className="form-error">{errors.paymentDate}</span> : ''}
+            {validations.paymentDate && (
+              <span className="form-error">{validations.paymentDate}</span>
+            )}
           </div>
           <input
             id="payment-date"
@@ -205,22 +203,21 @@ function SettleUpModal() {
             required
           />
         </div>
-        <div>{hasSubmitted && errors.paymentDate ? `${errors.paymentDate}` : ''}</div>
+
         <div className="form-buttons">
-            <button
-              className={submitClass}
-              disabled={submitDisabled}
-              type='submit'
-              onClick={() => setHasSubmitted(true)}
-            >
-              Settle Up
-            </button>
-            <button
+          <button
+            className={submitClass}
+            disabled={submitDisabled}
+            type='submit'
+          >
+            Settle Up
+          </button>
+          <button
             className="form-cancel"
             onClick={closeModal}
-            >
-              Cancel</button>
-          </div>
+          >
+            Cancel</button>
+        </div>
       </form>
       }
     </>
