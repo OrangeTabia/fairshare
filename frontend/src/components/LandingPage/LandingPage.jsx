@@ -12,7 +12,7 @@ export default function LandingPage() {
           <div id="header-content">
             <p id="site-name">
               <span id="site-name-1">fair</span>
-              <span id="site-name-2">share</span>
+              <span id="site-name-2">$hare</span>
             </p>
             <LandingNavigation />
           </div>
