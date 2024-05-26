@@ -7,6 +7,7 @@ import DeleteComment from "./DeleteComment";
 import "./Comments.css";
 import { HiOutlineX } from "react-icons/hi";
 import { PiNotePencilBold } from "react-icons/pi";
+import { FaComment } from "react-icons/fa6";
 
 function AddComment({ comments, expense }) {
   const dispatch = useDispatch();
@@ -44,23 +45,25 @@ function AddComment({ comments, expense }) {
 
   return (
     <>
-      <h5>NOTES AND COMMENTS</h5>
+      <div id="comments-and-notes-title"><FaComment /> NOTES AND COMMENTS</div>
       <div id="existing-note">
         <label id="note-label">Notes</label>
-        <div>{expense?.notes}</div>
+        <div id="expense-note">{expense?.notes}</div>
       </div>
       <div id="existing-and-new-comments">
         <div id="existing-comments">
           {comments &&
             comments.map((comment) => (
               <div key={comment.id}>
-                <h4>
+                <p id="commenter-name">
                   {comment.userId === currentUser.id
                     ? currentUser.name
                     : friends?.find((friend) => friend.id === comment?.userId)
                         ?.name}
-                </h4>
-                {comment.comment} - {comment.createdAt}
+                </p>
+                <div id="comment">
+                  {comment.comment} - {comment.createdAt}
+                </div>
                 <span>
                   <OpenModalButton
                     id="delete-expense-modal-button"

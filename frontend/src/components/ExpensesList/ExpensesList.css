@@ -55,3 +55,10 @@
     flex-flow: row nowrap;
     justify-content: space-between;
 }
+
+.comments-card {
+    border: 1px solid green;
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}

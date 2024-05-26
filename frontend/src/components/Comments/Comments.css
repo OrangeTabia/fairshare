@@ -1,13 +1,42 @@
+#comments-and-notes-title {
+    padding-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
 #existing-note {
     margin: 10px;
-    border: 1px solid grey;
+    border: 2px solid #6362623a;
+    border-radius: 5px;
+    padding: 10px;
 }
 
 #note-label {
-    text-decoration: underline;
+    font-size: 13px;
+    font-weight: 550;
+}
+
+#expense-note {
+    font-size: 13px;
+    margin-top: 8px;
 }
 
 #existing-and-new-comments {
     margin: 10px;
-    border: 1px solid grey;
+    border: 2px solid #6362623a;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#commenter-name {
+    margin-top: 5px;
+    font-size: 13px;
+    font-weight: 550;
+}
+
+#comment {
+    font-size: 14px;
+    margin-top: 0px;
 }
