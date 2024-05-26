@@ -1,5 +1,3 @@
-
-
 Generally, you will put your README on your frontend repo if you have separate backend and frontend. To organize your README, you can link to a documentation page that contains all the individual links, or link sections from the README. You can also use GitHub's Wiki feature if you would like. Your README should have an index with the following links:
 
 Feature list document
