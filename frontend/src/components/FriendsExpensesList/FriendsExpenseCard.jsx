@@ -19,6 +19,7 @@ function FriendsExpenseCard({ expenseId }) {
 
   useEffect(() => {
     const currPayments = payments.filter(payment => payment.expenseId === expenseId)
+    console.log(currPayments)
     let total = 0;
 
     currPayments.forEach(payment => total += payment.amount)
