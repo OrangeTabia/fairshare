@@ -53,11 +53,11 @@ function EditComment({ comments }) {
           <span className="form-error">{errors.comment}</span>
         )}
         <br></br>
-        <div id="edit-comment-buttons">
+        <div className="submit-cancel-btns">
+          <button className="form-submit">Save</button>
           <button className="form-cancel" onClick={closeModal}>
             Cancel
           </button>
-          <button className="form-submit">Save</button>
         </div>
       </form>
     </div>

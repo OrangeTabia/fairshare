@@ -182,7 +182,7 @@ function AddExpenseModal({ friendName }) {
               <span className="form-error">{validations.notes}</span>
             )}
           </div>
-          <div className="Submit-cancle-btns">
+          <div className="submit-cancel-btns">
             <button
               className={submitClass}
               disabled={submitDisabled}

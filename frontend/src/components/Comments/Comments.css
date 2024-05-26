@@ -61,8 +61,9 @@
     border-radius: 5px;
 }
 
-#delete-comment-buttons, #edit-comment-buttons {
+.submit-cancel-btns {
     display: flex;
+<<<<<<< HEAD
     flex-direction: row;
     justify-content: space-evenly;
 }
@@ -70,4 +71,7 @@
 .char-count {
     font-size: 12px;
     margin: 0px;
+=======
+    justify-content: space-around;
+>>>>>>> landing
 }

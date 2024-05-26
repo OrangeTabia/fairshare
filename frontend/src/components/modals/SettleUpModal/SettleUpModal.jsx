@@ -167,7 +167,7 @@ function SettleUpModal() {
             </select>
         </div>
 
-        <div>
+        <div id="settle-up-name-img">
           <img
             className='user-profile-image'
             src={receiver?.profileImage}

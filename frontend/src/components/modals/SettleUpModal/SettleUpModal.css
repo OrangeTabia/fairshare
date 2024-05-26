@@ -99,3 +99,12 @@
 #settle-expense-option:hover {
     cursor: pointer;
 }
+
+#settle-up-name-img {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-weight: 660;
+}
