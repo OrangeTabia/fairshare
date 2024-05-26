@@ -48,7 +48,7 @@ function ExpenseCard({ expenseId }) {
                   <div className="expense-set-by-you-delete">
                       <OpenModalButton
                         id="edit-expense-modal-button"
-                        className="modal-button"
+                        // className="modal-button"
                         buttonText="Edit Expense"
                         modalComponent={<EditExpenseModal expense={expense} />}
                       />
