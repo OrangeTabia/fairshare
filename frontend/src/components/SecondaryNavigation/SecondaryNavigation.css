@@ -52,3 +52,23 @@
     height: 40px;
     border-radius: 50%;
 }
+
+
+.secondary-nav-buttons {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px
+}
+
+.secondary-nav-buttons > button {
+    font-size: 0.8rem;
+    background-color: var(--theme-xl-blue);
+    border: 2px solid var(--theme-blue);
+    border-radius: 5px;
+}
+
+.secondary-nav-buttons > button:hover {
+    background-color: var(--theme-l-blue);
+    border: 2px solid var(--theme-d-blue);
+}
