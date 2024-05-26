@@ -5,14 +5,15 @@ body {
 #landingPage-main-container {
     margin: auto;
     width: 80%;
-    height: 800px;
+    /* height: 800px; */
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     /* border: 1px solid red; */
 }
 
-.elements-landing-container {
+.elements-landing-container1, .elements-landing-container2, .elements-landing-container3 {
     padding: 40px;
     display: flex;
     justify-content: center;
@@ -27,8 +28,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 30px;
-    border: 1px solid green;
+    gap: 40px;
+    /* border: 1px solid green; */
 }
 
 .landingPage-moto-container > h1 {
@@ -48,6 +49,7 @@ body {
 
 .second-mot-line {
     margin-top: 0px;
+    margin-bottom: 0px;
     color: #525252;
 }
 
@@ -55,7 +57,7 @@ body {
     width: 45%;
     height: auto;
     object-fit: contain;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .landingPage-image {
@@ -77,8 +79,7 @@ body {
     text-align: center;
     font-weight: bold;
     margin-bottom: 20px;
-    /* color: #525252; */
-    /* border: 1px solid red; */
+    color: #525252;
 }
 
 .big-signup-button {
