@@ -31,9 +31,9 @@ function ExpenseCard({ expenseId }) {
     <div className="expense-details-card">
       <div className="details-header">
         {expense.receiverId !== currUser.id
-          ? <div className="owed-or-still-owe">{amountDue.length <= 3 ? `This expense is all paid up` : `You still owe: ${amountDue}`}</div>
+          ? <div className="owed-or-still-owe">{expense.settled ? `This expense is all paid up` : `You still owe: ${amountDue}`}</div>
           :  <div className="owed-or-still-owe-container">
-                <div className="owed-or-still-owe">{amountDue.length <= 3 ? `This expense is all paid up` : `You are owed: ${amountDue}`}</div>
+                <div className="owed-or-still-owe">{expense.settled ? `This expense is all paid up` : `You are owed: ${amountDue}`}</div>
                 <div id='expense-set-by-you'>
                   <div className="expense-set-by-you-delete">
                       <OpenModalButton

@@ -1,5 +1,6 @@
 import OpenModalButton from "../modals/OpenModalButton/OpenModalButton";
 import EditExpenseModal from "../modals/EditExpenseModal";
+import { centsToUSD } from "../../utils/formatters";
 import "./FriendsExpenseList.css";
 
 
@@ -28,13 +29,31 @@ function FriendsExpenseCard({ expenseId }) {
 
   }, [expenseId])
 
+  const whatsLeftToPay = (expense) => {
+    const currPayments = payments.filter(payment => payment.expenseId === expense.id)
+    let total = 0;
+
+    currPayments.forEach(payment => total += payment.amount)
+    let adjustTotal = (expense.amount - total).toString()
+    let due = '$' + adjustTotal.slice(0, -2) + '.' + adjustTotal.slice(-2)
+    return due
+  }
+
+  const handleClick  = (idx) => {
+    if (!openCards.includes(idx)) {
+      setOpenCards([idx])
+    } else {
+      setOpenCards([])
+    }
+  }
+
   return (
     <div className="expense-details-card">
       <div className="details-header">
         {expense?.receiverId !== currUser.id
-          ? <div className="owed-or-still-owe">{amountDue.length <= 3 ? `This expense is all paid up` : `You still owe: ${amountDue}`}</div>
+          ? <div className="owed-or-still-owe">{expense.settled ? `This expense is all paid up` : `You still owe: ${whatsLeftToPay(expense)}`}</div>
           :  <div className="owed-or-still-owe-container">
-                <div className="owed-or-still-owe">{amountDue.length <= 3 ? `This expense is all paid up` : `You are owed: ${amountDue}`}</div>
+                <div className="owed-or-still-owe">{expense.settled ? `This expense is all paid up` : `You are owed: ${whatsLeftToPay(expense)}`}</div>
                 <div id='expense-set-by-you'>
                   <div className="expense-set-by-you-delete">
                       <OpenModalButton

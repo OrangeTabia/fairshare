@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import { thunkAddFriendsExpense, thunkLoadFriendsExpenses } from "../../../redux/friends_expenses";
 import { useParams } from "react-router-dom";
+import './AddExpenseModal.css'
 
 function AddExpenseModal({ friendName }) {
   const dispatch = useDispatch();
@@ -102,7 +103,7 @@ function AddExpenseModal({ friendName }) {
       notes,
     };
     await dispatch(thunkAddFriendsExpense(newExpense));
-    await dispatch(thunkLoadFriendsExpenses);
+    await dispatch(thunkLoadFriendsExpenses());
     closeModal();
   };
 
@@ -180,7 +181,7 @@ function AddExpenseModal({ friendName }) {
               <span className="form-error">{validations.notes}</span>
             )}
           </div>
-          <div>
+          <div className="Submit-cancle-btns">
             <button
               className={submitClass}
               disabled={submitDisabled}

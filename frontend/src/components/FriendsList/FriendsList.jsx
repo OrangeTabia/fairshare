@@ -19,7 +19,6 @@ function FriendsList({currFriend}) {
     useEffect(() => {
         const sortedFriends = Object.values(friends).sort((friend1, friend2) => friend1.name > friend2.name ? 1 : friend1.name < friend2.name ? -1 : 0)
         setOrderedFriends(sortedFriends)
-        console.log(currFriend)
     }, [friends])
 
     return (
@@ -44,8 +43,8 @@ function FriendsList({currFriend}) {
             <OpenModalButton
             buttonText='INVITE A FRIEND'
             modalComponent={<AddFriendModal />}
-            id="delete-friend-modal-button"
-            className="delete-friend-modal-button"
+            id="add-friend-modal-button"
+            className="add-friend-modal-button"
             />
         </div>
 

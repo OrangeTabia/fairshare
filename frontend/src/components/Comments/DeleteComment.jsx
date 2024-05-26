@@ -6,7 +6,6 @@ import { thunkDeleteComment } from "../../redux/friends_expenses";
 function DeleteComment({ comments }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-  console.log("COMMENT ID", comments.id);
 
   const deleteComment = async (e) => {
     e.preventDefault();

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import ExpenseCard from "./ExpenseCard";
+import { centsToUSD } from "../../utils/formatters";
 import "./ExpensesList.css";
 
 function ExpensesList() {
@@ -8,11 +9,36 @@ function ExpensesList() {
   // ... Separate expenses into arrays by month, then nest a loop?
   const [selectedExpense, setSelectedExpense] = useState("");
   const expenses = useSelector((state) => state.friendsExpenses);
+  const currUser = useSelector(state => state.session.user)
+  const allFriends = useSelector((state) => state.friends)
+  const allPayments = useSelector((state) => state.payments)
+
 
   const handleClick = (expenseId) => {
     if (selectedExpense === expenseId) setSelectedExpense("")
     else setSelectedExpense(expenseId);
   };
+
+  const getCurrFriend = (expense) => {
+    let currFriend;
+    if (expense.receiverId === currUser.id) {
+      currFriend = Object.values(allFriends).find(friend => friend.id === expense.payerId)
+    }
+    if (expense.payerId === currUser.id) {
+      currFriend = Object.values(allFriends).find(friend => friend.id === expense.receiverId)
+    }
+    return currFriend.name
+  }
+
+  const whatsLeftToPay = (expense) => {
+    const currPayments = Object.values(allPayments).filter(payment => payment.expenseId === expense.id)
+    let total = 0;
+
+    currPayments.forEach(payment => total += payment.amount)
+    let adjustTotal = (expense.amount - total).toString()
+    let due = '$' + adjustTotal.slice(0, -2) + '.' + adjustTotal.slice(-2)
+    return due
+  }
 
 
   return (
@@ -26,8 +52,10 @@ function ExpensesList() {
               className="expense-container"
             >
               <div >{expense.description}</div>
-              <div >{`$${(expense.amount).toString().slice(0, -2)}.${(expense.amount).toString().slice(-2)}`}</div>
-              <span hidden={!expense.settled}>Expense Settled</span>
+              {!expense.settled
+                      ? <div>{expense.receiverId === currUser.id ? `${getCurrFriend(expense)} still owes you: ` : `You still owe ${getCurrFriend(expense)} : `}{whatsLeftToPay(expense)}</div>
+                      : <div hidden={!expense.settled}>Expense Settled</div> }
+              <div >{centsToUSD(expense.amount)}</div>
             </div>
             {selectedExpense === expense.id && <ExpenseCard expenseId={expense.id} />}
           </div>

@@ -60,7 +60,7 @@ def seed_expenses():
         description='Brunch!',
         amount=2500,
         expense_date=datetime(2023, 2, 28, 0, 0, 0),
-        settled=False,
+        settled=True,
         )
     demo8 = FriendsExpense(
         payer_id=100,
