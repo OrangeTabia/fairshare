@@ -45,18 +45,24 @@ function SettleUpModal() {
   const getValidations = useCallback(() => {
     const newValidations = {};
 
-    if (parseInt(removeDecimals(amount)) <= 0) {
+    if (removeDecimals(amount) <= 0) {
       newValidations.amount = 'Payment must be more than 0';
     }
     if (removeDecimals(amount) > amountDue) {
       newValidations.amount = 'Payment must be the same or less than what is owed';
     }
-  }, [amount, amountDue]);
+    const date = new Date(paymentDate)
+    const today = new Date()
+    if (paymentDate && (date.getTime() < today.getTime())) {
+      newValidations.paymentDate = 'Payment date must be in the future';
+    }
+    return newValidations
+  }, [amount, amountDue, paymentDate]);
 
   useEffect(() => {
     if (!hasSubmitted) return;
-    const newValidations = getValidations(); 
-    setSubmitDisabledStatus(Object.keys(newValidations).length > 0);
+    const newValidations = getValidations();
+    setSubmitDisabledStatus(Object.keys(newValidations).length);
     setValidations(newValidations);
   }, [hasSubmitted, getValidations]);
 
@@ -73,7 +79,7 @@ function SettleUpModal() {
   useEffect(() => {
     const payerExpensesList = Object.values(allExpenses).filter((expense) => expense.payerId === currUser.id && expense.settled === false);
     setExpenseSelection(payerExpensesList)
-  }, [currUser, allExpenses]);
+  }, [currUser, allExpenses, expense]);
 
   // Storing all of my payments
   useEffect(() => {
@@ -92,7 +98,7 @@ function SettleUpModal() {
 
     if (!hasSubmitted) {
       setHasSubmitted(true);
-      const newValidations = getValidations();
+      const newValidations = getValidations()
       if (Object.keys(newValidations).length) return;
     }
 

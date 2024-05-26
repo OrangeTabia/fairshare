@@ -50,13 +50,13 @@ function SettleUpFriendModal() {
     if (removeDecimals(amount) > amountDue) {
       newValidations.amount = 'Payment must be the same or less than what is owed';
     }
-    // if (paymentDate && (date.getTime() < today.getTime())) {
-    //   newValidations.paymentDate = 'Payment date must be in the future';
-    // }
-
-    // Add paymentDate back to dependency array if uncommented
+    const date = new Date(paymentDate)
+    const today = new Date()
+    if (paymentDate && (date.getTime() < today.getTime())) {
+      newValidations.paymentDate = 'Payment date must be in the future';
+    }
     return newValidations;
-  }, [amount, amountDue]);
+  }, [amount, amountDue, paymentDate]);
 
   useEffect(() => {
     if (!hasSubmitted) return;
