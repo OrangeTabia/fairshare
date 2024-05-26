@@ -1,0 +1,19 @@
+#dev-list-title {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.605);
+    width: 135px;
+    padding: 5px;
+    margin: 0px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: black;
+}
+
+.dev-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.dev-name {
+    margin-top: 5px;
+}
