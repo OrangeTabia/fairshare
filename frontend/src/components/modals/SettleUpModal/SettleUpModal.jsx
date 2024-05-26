@@ -32,8 +32,8 @@ function SettleUpModal() {
 
   const [validations, setValidations] = useState({});
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const [submitClass, setSubmitClass] = useState("form-submit disabled");
-  const [submitDisabled, setSubmitDisabled] = useState(true);
+  const [submitClass, setSubmitClass] = useState("form-submit");
+  const [submitDisabled, setSubmitDisabled] = useState(false);
 
   const setSubmitDisabledStatus = (disabled) => {
     (disabled)
