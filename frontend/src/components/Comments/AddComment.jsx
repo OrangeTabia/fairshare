@@ -61,20 +61,19 @@ function AddComment({ comments, expense }) {
                     : friends?.find((friend) => friend.id === comment?.userId)
                         ?.name}
                         <span id="comment-createdAt"> - {comment.createdAt}</span>
-                        <span>
-                        <OpenModalButton
-                          id="delete-expense-modal-button"
-                          buttonText={<HiOutlineX />}
-                          modalComponent={<DeleteComment comments={comment} />}
-                        />
-
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <OpenModalButton
                           id="edit-expense-modal-button"
-                          className="modal-button"
                           buttonText={<PiNotePencilBold />}
                           modalComponent={
                             <EditComment comments={comment} expense={expense} />
                           }
+                        />
+                        &nbsp;&nbsp;
+                        <OpenModalButton
+                          id="delete-expense-modal-button"
+                          buttonText={<HiOutlineX />}
+                          modalComponent={<DeleteComment comments={comment} />}
                         />
                   </span>
                 </p>

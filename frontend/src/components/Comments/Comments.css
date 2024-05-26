@@ -23,34 +23,32 @@
     margin-top: 8px;
 }
 
+
 #existing-comments {
     margin: 10px;
-    /* border: 2px solid #6362623a; */
-    border: 1px solid red;
+    border: 2px solid #6362623a;
     border-radius: 5px;
     padding: 10px;
 }
 
 #commenter-name {
-    margin-top: 5px;
+    margin: 10px 0 10px 0;
     font-size: 13px;
     font-weight: 550;
 }
 
 #comment-createdAt {
-    margin-top: 0px;
     font-size: 11px;
     font-weight: 500;
 }
 
 #comment {
     margin-top: 0px;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 #comment-edit-delete {
-    /* border: 1px solid red; */
-    padding-top: 10px;
+    padding-top: 12px;
     border-bottom: 2px solid #6362623a;
 }
 
