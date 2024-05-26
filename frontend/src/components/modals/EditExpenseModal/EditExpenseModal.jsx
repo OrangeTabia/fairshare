@@ -125,7 +125,7 @@ function EditExpenseModal({ expense }) {
       <h2>Edit an expense</h2>
       <form onSubmit={handleSubmit} id="edit-expense-form">
         <div>
-          <h3>With You and: {payer?.name}</h3>
+          <div>With You and: {payer?.name}</div>
 
           <div className="form-label">
             <input
@@ -180,14 +180,17 @@ function EditExpenseModal({ expense }) {
             )}
           </div>
 
-          <div>
+          <div className="submit-cancel-btns">
             <button
               className={submitClass}
               disabled={submitDisabled}
             >
               Save
             </button>
-            <button className="form-cancel" onClick={closeModal}>
+            <button 
+              className="form-cancel" 
+              onClick={closeModal}
+            >
               Cancel
             </button>
           </div>

@@ -78,3 +78,7 @@
 
   cursor: pointer;
 }
+
+.profile-button:hover {
+  background-color: #DEDEDE;
+}

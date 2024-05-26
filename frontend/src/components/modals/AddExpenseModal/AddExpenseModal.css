@@ -46,41 +46,7 @@
     border-radius: 2.5px;
 }
 
-.form-cancel {
-    width: 200px;
-    margin-top: 10px;
-    align-self: center;
-
-    font-size: 0.8rem;
-
-    background-color: blue;
-    border: 2px solid red;
-    border-radius: 5px;
-}
-
-.form-cancel:hover {
-    background-color: red;
-    border: 2px solid red;
-}
-
-.form-submit {
-    width: 200px;
-    margin-top: 10px;
-    align-self: center;
-
-    font-size: 0.8rem;
-
-    background-color: var(--theme-xl-blue);
-    border: 2px solid var(--theme-blue);
-    border-radius: 5px;
-}
-
-.form-submit:hover {
-    background-color: var(--theme-l-blue);
-    border: 2px solid var(--theme-d-blue);
-}
-
-.Submit-cancle-btns {
+.submit-cancel-btns {
     display: flex;
     justify-content: space-around;
 }

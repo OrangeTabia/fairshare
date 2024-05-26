@@ -61,8 +61,7 @@
     border-radius: 5px;
 }
 
-#delete-comment-buttons, #edit-comment-buttons {
+.submit-cancel-btns {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }

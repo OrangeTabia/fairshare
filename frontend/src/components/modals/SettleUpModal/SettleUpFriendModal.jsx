@@ -163,7 +163,7 @@ function SettleUpFriendModal() {
             <p>Between <span>you</span> and <span>{currFriend.name}</span></p>
           </div>
           <div>
-            <label htmlFor='expense'>Which Expense?</label>
+            <label htmlFor='expense'>Which Expense?&nbsp;&nbsp;&nbsp;</label>
             <select
               value={expense}
               onChange={(e) => setExpense(e.target.value)}
