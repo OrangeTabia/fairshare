@@ -1,14 +1,13 @@
-import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useModal } from "../../../context/Modal";
-import { thunkAddPayment } from "../../../redux/payments";
 import { useParams } from "react-router-dom";
 
-import './SettleUpModal.css';
-import { useSelector } from "react-redux";
-import { thunkUpdateFriendsExpense } from "../../../redux/friends_expenses";
 import { centsToUSD, removeDecimals } from "../../../utils/formatters";
+import { useModal } from "../../../context/Modal";
+import { thunkAddPayment } from "../../../redux/payments";
+import { thunkLoadFriendsExpenses, thunkUpdateFriendsExpense } from "../../../redux/friends_expenses";
+import './SettleUpModal.css';
 
 function SettleUpFriendModal() {
   const dispatch = useDispatch();
@@ -16,92 +15,97 @@ function SettleUpFriendModal() {
   const { closeModal } = useModal();
   const { friendId } = useParams();
 
+  const allExpenses = useSelector(state => state.friendsExpenses);
+  const currUser = useSelector(state => state.session.user);
+  const currFriend = useSelector(state => state.userEmails[parseInt(friendId)]);
+  const paymentsMade = useSelector(state => state.payments);
+
   const [amount, setAmount] = useState('');
   const [paymentDate, setPaymentDate] = useState('');
-  const [expense, setExpense] = useState('')
-  const [expenseSelection, setExpenseSelection] = useState([])
-  const [amountDue, setAmountDue] = useState(0)
-  const [errors, setErrors] = useState({})
-  const [chosenExpense, setChosenExpense] = useState('')
-  const [submitClass, setSubmitClass] = useState("form-submit disabled");
-  const [submitDisabled, setSubmitDisabled] = useState(true);
+  const [expense, setExpense] = useState('');
+  const [expenseSelection, setExpenseSelection] = useState([]);
+  const [amountDue, setAmountDue] = useState(0);
+  const [chosenExpense, setChosenExpense] = useState('');
+
+  const [validations, setValidations] = useState({});
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const allExpenses = useSelector(state => state.friendsExpenses)
-  const currUser = useSelector(state => state.session.user)
-  const currFriend = useSelector(state => state.userEmails[parseInt(friendId)])
-  const paymentsMade = useSelector(state => state.payments)
-
-
-
+  const [submitClass, setSubmitClass] = useState("form-submit");
+  const [submitDisabled, setSubmitDisabled] = useState(false);
 
   const setSubmitDisabledStatus = (disabled) => {
     (disabled)
-      ? setSubmitClass("form-submit disabled")
-      : setSubmitClass("form-submit");
+    ? setSubmitClass("form-submit disabled")
+    : setSubmitClass("form-submit");
     setSubmitDisabled(disabled);
   };
 
-  useEffect(() => {
-    const validationErrors = {};
-    if (parseInt(amount) <= 0) {
-      validationErrors.amount = 'Payment must be more than 0'
+  const getValidations = useCallback(() => {
+    const newValidations = {};
+    // const date = new Date(paymentDate);
+    // const today = new Date();
+
+    if (parseInt(removeDecimals(amount)) <= 0) {
+      newValidations.amount = 'Payment must be more than 0';
     }
     if (removeDecimals(amount) > amountDue) {
-      validationErrors.amount = 'Payment must be the same or less than what is owed'
+      newValidations.amount = 'Payment must be the same or less than what is owed';
     }
-    let date = new Date(paymentDate)
-    let today = new Date()
-    if (paymentDate) {
-      if (date.getTime() < today.getTime()) {
-        validationErrors.paymentDate = 'Payment date must be in the future'
-      }
-    }
-    setErrors(validationErrors)
-  }, [amount, paymentDate, amountDue])
+    // if (paymentDate && (date.getTime() < today.getTime())) {
+    //   newValidations.paymentDate = 'Payment date must be in the future';
+    // }
 
+    // Add paymentDate back to dependency array if uncommented
+    return newValidations;
+  }, [amount, amountDue]);
+
+  useEffect(() => {
+    if (!hasSubmitted) return;
+    const newValidations = getValidations();
+    setSubmitDisabledStatus(Object.keys(newValidations).length);
+    setValidations(newValidations);
+  }, [hasSubmitted, getValidations]);
 
   useEffect(() => {
     if (friendId) {
-      const payerExpenses = Object.values(allExpenses).filter(expense => expense.payerId === currUser.id && expense.receiverId === parseInt(friendId) && expense.settled === false)
-      setExpenseSelection(payerExpenses)
+      const payerExpenses = Object.values(allExpenses).filter(expense => {
+        return (expense.payerId === currUser.id)
+        && (expense.receiverId === parseInt(friendId))
+        && (expense.settled === false);
+      });
+      setExpenseSelection(payerExpenses);
     }
-  }, [friendId, allExpenses])
+  }, [friendId, allExpenses, expense, currUser]);
 
   useEffect(() => {
     const findExpense = Object.values(allExpenses).find(thisExpense => thisExpense.id === parseInt(expense))
-    setChosenExpense(findExpense)
-  }, [expense])
+    setChosenExpense(findExpense);
+  }, [allExpenses, expense]);
 
   useEffect(() => {
-    let totalPaid = 0
+    let totalPaid = 0;
     // const currExpense = Object.values(allExpenses).find(thisExpense => thisExpense.id === parseInt(expense))
     const myPayments = Object.values(paymentsMade).filter(payment => payment.expenseId === parseInt(expense))
     if (myPayments.length) {
-      myPayments.forEach(payment => totalPaid += payment.amount)
+      myPayments.forEach(payment => totalPaid += payment.amount);
     }
     if (chosenExpense) {
-      setAmountDue(chosenExpense.amount - totalPaid)
+      setAmountDue(chosenExpense.amount - totalPaid);
     }
-  }, [expense, paymentsMade, chosenExpense])
+  }, [expense, paymentsMade, chosenExpense]);
 
-
-  useEffect(() => {
-    // TEMP IMPLEMENTATION
-    // Should disable submit button based on frontend validations
-    setSubmitDisabledStatus(amount === null || paymentDate === null);
-  }, [amount, paymentDate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(Object.values(errors).length) {
-      return;
+    if (!hasSubmitted) {
+      setHasSubmitted(true);
+      const newValidations = getValidations();
+      if (Object.keys(newValidations).length) return;
     }
-    setHasSubmitted(false)
 
-    let adjustedAmount = removeDecimals(amount);
+    const adjustedAmount = removeDecimals(amount);
 
-    let addPayment = await dispatch(
+    const addPayment = await dispatch(
       thunkAddPayment({
         userId: currUser.id,
         expenseId: chosenExpense.id,
@@ -113,7 +117,7 @@ function SettleUpFriendModal() {
     if (addPayment.server) {
       return
     }
-// will go through if the above goes through.  add validations
+    // will go through if the above goes through.  add validations
     if (amountDue - adjustedAmount <= 0) {
       const newDate = new Date(chosenExpense.expenseDate);
 
@@ -134,6 +138,7 @@ function SettleUpFriendModal() {
         closeModal();
         navigate(`/friend/${friendId}`);
       })
+      await dispatch(thunkLoadFriendsExpenses());
     }
     setExpense('')
     closeModal();
@@ -143,9 +148,9 @@ function SettleUpFriendModal() {
   return (
     <>
       <h2>Settle up</h2>
-      {friendId && expenseSelection.length <= 0
+      {friendId && (expenseSelection.length <= 0)
         ? <h3>{`You do not currently owe ${currFriend?.name} any money`}</h3>
-        : !friendId && expenseSelection.length <= 0
+        : !friendId && (expenseSelection.length <= 0)
         ? <h3>All your expenses are settled!</h3>
         :
       <form
@@ -162,16 +167,18 @@ function SettleUpFriendModal() {
             <select
               value={expense}
               onChange={(e) => setExpense(e.target.value)}
-              >
+            >
               <option value={''} disabled>Select an expense</option>
               {expenseSelection.map(expense => (
-                  <option key={expense.id} value={expense.id} >{expense.description}</option>
-                  ))}
+                <option key={expense.id} value={expense.id} >{expense.description}</option>
+              ))}
             </select>
-
           </div>
           <div className="form-label">
             <label htmlFor="amount">Amount</label>
+            {validations.amount && (
+              <span className="form-error">{validations.amount}</span>
+            )}
           </div>
           <input
             id="amount"
@@ -181,12 +188,13 @@ function SettleUpFriendModal() {
             placeholder={expense ? `You owe ${centsToUSD(amountDue)}` : 'amount'}
             required
           />
-          {hasSubmitted && errors.amount ? <span className="form-error">{errors.amount}</span> : ''}
         </div>
         <div>
           <div className="form-label">
             <label htmlFor="payment-date">Payment Date</label>
-            {hasSubmitted && errors.paymentDate ? <span className="form-error">{errors.paymentDate}</span> : ''}
+            {validations.paymentDate && (
+              <span className="form-error">{validations.paymentDate}</span>
+            )}
           </div>
           <input
             id="payment-date"
@@ -203,13 +211,12 @@ function SettleUpFriendModal() {
               className={submitClass}
               disabled={submitDisabled}
               type='submit'
-              onClick={() => setHasSubmitted(true)}
             >
               Settle Up
             </button>
             <button
-            className="form-cancel"
-            onClick={closeModal}
+              className="form-cancel"
+              onClick={closeModal}
             >
               Cancel</button>
           </div>

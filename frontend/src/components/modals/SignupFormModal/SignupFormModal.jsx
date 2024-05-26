@@ -19,10 +19,9 @@ function SignupFormModal() {
 
   const [errors, setErrors] = useState({});
   const [validations, setValidations] = useState({});
-
+  const [hasSubmitted, setHasSubmitted] = useState(false);
   const [submitClass, setSubmitClass] = useState("form-submit");
   const [submitDisabled, setSubmitDisabled] = useState(false);
-  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const setSubmitDisabledStatus = (disabled) => {
     (disabled)
@@ -57,7 +56,7 @@ function SignupFormModal() {
     const newValidations = getValidations();
     setSubmitDisabledStatus(Object.keys(newValidations).length > 0);
     setValidations(newValidations);
-  }, [hasSubmitted, getValidations])
+  }, [hasSubmitted, getValidations]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
