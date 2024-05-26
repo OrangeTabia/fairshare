@@ -173,6 +173,7 @@ function AddExpenseModal({ friendName }) {
           <div className="form-label">
             <input
               id="notes"
+              placeholder="Leave a note!"
               type="text"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}

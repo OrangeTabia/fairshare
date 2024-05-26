@@ -95,3 +95,7 @@
     border: 2px solid var(--theme-l-gray);
     cursor: default;
 }
+
+#settle-expense-option:hover {
+    cursor: pointer;
+}

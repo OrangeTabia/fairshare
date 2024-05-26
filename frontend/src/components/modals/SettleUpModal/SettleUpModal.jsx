@@ -148,8 +148,9 @@ function SettleUpModal() {
       id="settle-up-form"
       >
         <div>
-          <label htmlFor='expense'>Which Expense?</label>
+          <label htmlFor='expense'>Which Expense?&nbsp;&nbsp;&nbsp;</label>
             <select
+              id="settle-expense-option"
               value={expense}
               onChange={(e) => setExpense(e.target.value)}
             >
@@ -195,11 +196,10 @@ function SettleUpModal() {
             )}
           </div>
           <input
-            id="payment-date"
+            id="settle-payment-date"
             type="date"
             value={paymentDate}
             onChange={e => setPaymentDate(e.target.value)}
-            placeholder="Payment Date"
             required
           />
         </div>
