@@ -2,8 +2,11 @@ import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useModal } from "../../../context/Modal";
-import { thunkUpdateFriendsExpense, thunkLoadFriendsExpenses } from "../../../redux/friends_expenses";
-import { centsToUSD } from '../../../utils/formatters'
+import {
+  thunkUpdateFriendsExpense,
+  thunkLoadFriendsExpenses,
+} from "../../../redux/friends_expenses";
+import { centsToUSD } from "../../../utils/formatters";
 import "./EditExpenseModal.css";
 
 function EditExpenseModal({ expense }) {
@@ -49,7 +52,7 @@ function EditExpenseModal({ expense }) {
   // };
 
   const setSubmitDisabledStatus = (disabled) => {
-    (disabled)
+    disabled
       ? setSubmitClass("form-submit disabled")
       : setSubmitClass("form-submit");
     setSubmitDisabled(disabled);
@@ -61,7 +64,8 @@ function EditExpenseModal({ expense }) {
     if (!description) {
       newValidations.description = "Description is required";
     } else if (description.length > 200) {
-      newValidations.description = "Description must be less than 200 characters";
+      newValidations.description =
+        "Description must be less than 200 characters";
     }
     if (amount <= 0) {
       newValidations.amount = "Expense must have a minimum of $0.01";
@@ -71,6 +75,12 @@ function EditExpenseModal({ expense }) {
     }
     if (notes?.length > 200) {
       newValidations.notes = "Note must be less than 200 characters";
+    }
+    if (
+      String(amount).includes(".") &&
+      String(amount).split(".")[1].length > 2
+    ) {
+      newValidations.amount = "Expense allows only up to 2 decimal places";
     }
 
     return newValidations;
@@ -96,13 +106,29 @@ function EditExpenseModal({ expense }) {
 
     let adjustedAmount = amount;
 
-    if (amount.indexOf('.') >= 0) {
-      adjustedAmount = parseInt(amount.toString().slice(0, amount.indexOf('.')) + amount.toString().slice(amount.indexOf('.') + 1))
-      if (amount.toString().slice(amount.indexOf('.') + 1).length === 1) {
-        adjustedAmount = parseInt(adjustedAmount.toString() + '0')
+    console.log("----------->", adjustedAmount);
+
+    if (adjustedAmount.indexOf(".") >= 0) {
+      adjustedAmount = parseFloat(
+        amount.toString().slice(0, amount.indexOf(".")) +
+          amount.toString().slice(amount.indexOf(".") + 1)
+      );
+      if (amount.toString().slice(amount.indexOf(".") + 1).length === 1) {
+        adjustedAmount = parseFloat(adjustedAmount.toString() + "0");
       }
+      // if (String(adjustedAmount).split(".")[1].length === 1)
+      //   adjustedAmount = parseInt(
+      //     String(adjustedAmount).split(".")[0] +
+      //       String(adjustedAmount).split(".")[1] +
+      //       "0"
+      //   );
+      // else if (String(adjustedAmount).split(".")[1].length === 2)
+      //   adjustedAmount = parseInt(
+      //     String(adjustedAmount).split(".")[0] +
+      //       String(adjustedAmount).split(".")[1]
+      //   );
     } else {
-      adjustedAmount = parseInt(amount.toString() + '00')
+      adjustedAmount = parseInt(amount.toString() + "00");
     }
 
     const updatedExpense = {
@@ -181,10 +207,7 @@ function EditExpenseModal({ expense }) {
           </div>
 
           <div>
-            <button
-              className={submitClass}
-              disabled={submitDisabled}
-            >
+            <button className={submitClass} disabled={submitDisabled}>
               Save
             </button>
             <button className="form-cancel" onClick={closeModal}>
