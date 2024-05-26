@@ -103,7 +103,7 @@ function AddExpenseModal({ friendName }) {
       notes,
     };
     await dispatch(thunkAddFriendsExpense(newExpense));
-    await dispatch(thunkLoadFriendsExpenses);
+    await dispatch(thunkLoadFriendsExpenses());
     closeModal();
   };
 

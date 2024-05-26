@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useModal } from "../../../context/Modal";
-import { thunkUpdateFriendsExpense } from "../../../redux/friends_expenses";
+import { thunkUpdateFriendsExpense, thunkLoadFriendsExpenses } from "../../../redux/friends_expenses";
 import { centsToUSD } from '../../../utils/formatters'
 import "./EditExpenseModal.css";
 
@@ -14,7 +14,6 @@ function EditExpenseModal({ expense }) {
 
   const [description, setDescription] = useState(expense.description);
   const [amount, setAmount] = useState(centsToUSD(expense.amount).slice(1));
-  const [expenseDate, setExpenseDate] = useState(originalDate);
   const [notes, setNotes] = useState(expense.notes);
 
   const [validations, setValidations] = useState({});
@@ -36,6 +35,8 @@ function EditExpenseModal({ expense }) {
 
     return format;
   };
+
+  const [expenseDate, setExpenseDate] = useState(originalDate);
 
   // const convertFloatToInteger = () => {
   //   if (!String(amount).split(".").length < 2) {
@@ -115,6 +116,7 @@ function EditExpenseModal({ expense }) {
     };
 
     await dispatch(thunkUpdateFriendsExpense(expense.id, updatedExpense));
+    await dispatch(thunkLoadFriendsExpenses());
     closeModal();
   };
 
