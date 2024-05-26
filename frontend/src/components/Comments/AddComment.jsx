@@ -60,26 +60,29 @@ function AddComment({ comments, expense }) {
                     ? currentUser.name
                     : friends?.find((friend) => friend.id === comment?.userId)
                         ?.name}
+                        <span id="comment-createdAt"> - {comment.createdAt}</span>
                 </p>
                 <div id="comment">
-                  {comment.comment} - {comment.createdAt}
+                  {comment.comment}
                 </div>
-                <span>
-                  <OpenModalButton
-                    id="delete-expense-modal-button"
-                    buttonText={<HiOutlineX />}
-                    modalComponent={<DeleteComment comments={comment} />}
-                  />
+                <div id="comment-edit-delete">
+                  <span>
+                    <OpenModalButton
+                      id="delete-expense-modal-button"
+                      buttonText={<HiOutlineX />}
+                      modalComponent={<DeleteComment comments={comment} />}
+                    />
 
-                  <OpenModalButton
-                    id="edit-expense-modal-button"
-                    className="modal-button"
-                    buttonText={<PiNotePencilBold />}
-                    modalComponent={
-                      <EditComment comments={comment} expense={expense} />
-                    }
-                  />
-                </span>
+                    <OpenModalButton
+                      id="edit-expense-modal-button"
+                      className="modal-button"
+                      buttonText={<PiNotePencilBold />}
+                      modalComponent={
+                        <EditComment comments={comment} expense={expense} />
+                      }
+                    />
+                  </span>
+                </div>
               </div>
             ))}
         </div>
@@ -87,7 +90,9 @@ function AddComment({ comments, expense }) {
           <div className="form-label">
             <form onSubmit={handleSubmit} id="add-comment-form">
               <textarea
-                id="comment"
+                id="comment-box"
+                rows="3" 
+                cols="45"
                 type="text"
                 placeholder="Add a comment"
                 value={comment}
