@@ -19,7 +19,6 @@ function FriendsList({currFriend}) {
     useEffect(() => {
         const sortedFriends = Object.values(friends).sort((friend1, friend2) => friend1.name > friend2.name ? 1 : friend1.name < friend2.name ? -1 : 0)
         setOrderedFriends(sortedFriends)
-        console.log(currFriend)
     }, [friends])
 
     return (

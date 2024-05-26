@@ -46,7 +46,6 @@ function FriendsExpensesList() {
 
   const whatsLeftToPay = (expense) => {
     const currPayments = Object.values(allPayments).filter(payment => payment.expenseId === expense.id)
-    console.log(currPayments)
     let total = 0;
 
     currPayments.forEach(payment => total += payment.amount)
