@@ -101,6 +101,10 @@ function AddComment({ comments, expense }) {
                 <span className="form-error">{errors.comment}</span> :
                 '' }
               <br></br>
+              <p className="char-count"
+              >{comment && comment.length <= 200
+                  ? `You have ${200 - comment.length} characters left`
+                  : ``}</p>
               <button disabled={!comment || errors.comment} className="form-submit">Submit</button>
             </form>
           </div>

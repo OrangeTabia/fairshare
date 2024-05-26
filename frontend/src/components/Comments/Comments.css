@@ -66,3 +66,7 @@
     flex-direction: row;
     justify-content: space-evenly;
 }
+
+.char-count {
+    font-size: 12px;
+}
