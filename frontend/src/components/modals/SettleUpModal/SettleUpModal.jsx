@@ -55,7 +55,7 @@ function SettleUpModal() {
 
   useEffect(() => {
     if (!hasSubmitted) return;
-    const newValidations = getValidations();
+    const newValidations = getValidations(); 
     setSubmitDisabledStatus(Object.keys(newValidations).length > 0);
     setValidations(newValidations);
   }, [hasSubmitted, getValidations]);

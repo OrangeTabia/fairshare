@@ -1,4 +1,5 @@
-import './LandingPage.css'
+import './LandingPage.css'; 
+import LandingPageImg from '../../../images/landing-page-img.png';
 
 function LandingPageLayout () {
     return (
@@ -7,9 +8,11 @@ function LandingPageLayout () {
                 <div className='landingPage-moto-container'>
                     <h1 className='first-mot-line'>You want to share?</h1>
                     <h1 className='second-mot-line'>We make it fair!</h1>
+                    <p>Keep track of your shared expenses and balances with housemates, trips, groups, friends, and family.</p>
+                    <button>Sign up</button>
                 </div>
                 <div className='landingPage-image-container'>
-                    <img className='landingPage-image' src='https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg' />
+                    <img className='landingPage-image' src={LandingPageImg} />
                 </div>
             </div>
 
