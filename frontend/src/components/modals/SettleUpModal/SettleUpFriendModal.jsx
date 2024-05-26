@@ -180,14 +180,17 @@ function SettleUpFriendModal() {
               <span className="form-error">{validations.amount}</span>
             )}
           </div>
-          <input
-            id="amount"
-            type="number"
-            value={amount}
-            onChange={e => setAmount(e.target.value)}
-            placeholder={expense ? `You owe ${centsToUSD(amountDue)}` : 'amount'}
-            required
-          />
+          <div className="dollarsign-for-amount">
+            <div>$</div>
+            <input
+              id="amount"
+              type="number"
+              value={amount}
+              onChange={e => setAmount(e.target.value)}
+              placeholder={expense ? `You owe ${centsToUSD(amountDue)}` : 'amount'}
+              required
+            />
+          </div>
         </div>
         <div>
           <div className="form-label">

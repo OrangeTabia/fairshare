@@ -108,3 +108,8 @@
     gap: 15px;
     font-weight: 660;
 }
+
+.dollarsign-for-amount {
+    display: flex;
+    gap: 6px;
+}

@@ -187,8 +187,8 @@ function EditExpenseModal({ expense }) {
             >
               Save
             </button>
-            <button 
-              className="form-cancel" 
+            <button
+              className="form-cancel"
               onClick={closeModal}
             >
               Cancel
