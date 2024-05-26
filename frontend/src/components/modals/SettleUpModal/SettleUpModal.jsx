@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
 import { thunkAddPayment } from "../../../redux/payments";
+import { removeDecimals } from "../../../utils/formatters";
 
 import './SettleUpModal.css';
 import { useSelector } from "react-redux";
@@ -16,7 +17,7 @@ function SettleUpModal() {
   const [amount, setAmount] = useState('');
   const [paymentDate, setPaymentDate] = useState('');
   // Store an ID instead of storing an empty string
-  const [selectedExpenseId, setExpense] = useState('');
+  const [expense, setExpense] = useState('');
   const [amountDue, setAmountDue] = useState(0)
   const [submitClass, setSubmitClass] = useState("form-submit disabled");
   const [expenseSelection, setExpenseSelection] = useState([])
@@ -29,13 +30,9 @@ function SettleUpModal() {
   const friends = useSelector(state => state.friends);
   const payerExpenses = Object.values(allExpenses).filter((expense) => expense.payerId === currUser.id && expense.settled === false);
   const friendsArray = Object.values(friends);
+  const [chosenExpense, setChosenExpense] = useState('')
+  const [receiver, setReceiver] = useState('')
 
-  // console.log("PAYER EXPENSES", payerExpenses); 
-
-  
-  // Select our expense from all of the expenses and then find the receiving friend 
-  let selectedExpense = payerExpenses.find((expense) => expense.id == selectedExpenseId);
-  let receiver = friendsArray.find((friend) => friend.id == selectedExpense?.receiverId);
 
   const setSubmitDisabledStatus = (disabled) => {
     (disabled)
@@ -44,13 +41,25 @@ function SettleUpModal() {
     setSubmitDisabled(disabled);
   };
 
+    // Select our expense from all of the expenses and then find the receiving friend
+  useEffect(() => {
+    const findExpense = payerExpenses.find(thisExpense => thisExpense.id === parseInt(expense))
+    setChosenExpense(findExpense)
+  }, [expense])
+
+  useEffect(() => {
+    setReceiver(friendsArray.find((friend) => friend.id == chosenExpense?.receiverId))
+  }, [expense, chosenExpense])
+
+
+
 
   useEffect(() => {
     const validationErrors = {};
     if (parseInt(amount) <= 0) {
       validationErrors.amount = 'Payment must be more than 0'
     }
-    if (parseInt(amount) > amountDue) {
+    if (removeDecimals(amount) > amountDue) {
       validationErrors.amount = 'Payment must be the same or less than what is owed'
     }
     let date = new Date(paymentDate)
@@ -72,12 +81,14 @@ function SettleUpModal() {
   // Storing all of my payments
   useEffect(() => {
     let totalPaid = 0
-    const myPayments = Object.values(paymentsMade).filter(payment => payment.expenseId === selectedExpense?.id)
+    const myPayments = Object.values(paymentsMade).filter(payment => payment.expenseId === parseInt(expense))
     if (myPayments.length) {
       myPayments.forEach(payment => totalPaid += payment.amount)
     }
-    setAmountDue(selectedExpense?.amount - totalPaid)
-  }, [selectedExpense, paymentsMade])
+    if (chosenExpense) {
+      setAmountDue(chosenExpense.amount - totalPaid)
+    }
+  }, [expense, chosenExpense, paymentsMade])
 
   useEffect(() => {
     // TEMP IMPLEMENTATION
@@ -85,51 +96,46 @@ function SettleUpModal() {
     setSubmitDisabledStatus(amount === null || paymentDate === null);
   }, [amount, paymentDate]);
 
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if(Object.values(errors).length) {
       return;
     }
     setHasSubmitted(false)
 
-    let adjustedAmount = amount;
-
-    if (amount.indexOf('.') >= 0) {
-      adjustedAmount = parseInt(amount.toString().slice(0, amount.indexOf('.')) + amount.toString().slice(amount.indexOf('.') + 1))
-    }
+    let adjustedAmount = removeDecimals(amount);
 
     let addPayment = await dispatch(
       thunkAddPayment({
         userId: currUser.id,
-        expenseId: selectedExpense?.id,
+        expenseId: chosenExpense.id,
         amount: adjustedAmount,
         paymentDate: `${paymentDate} 00:00:00`,
       })
     );
 
-    // console.log("ERRORS", addPayment.server)
     if (addPayment.server) {
       return;
     }
 
-    if (amountDue - amount <= 0) {
-      const newDate = new Date(selectedExpense.expenseDate);
+    if (amountDue - adjustedAmount <= 0) {
+      const newDate = new Date(chosenExpense.expenseDate);
 
       const settledExpense = {
-        payerId: selectedExpense.payerId,
-        receiverId: selectedExpense.receiverId,
-        description: selectedExpense.description,
-        amount: selectedExpense?.amount,
-        selectedExpense: newDate,
+        payerId: chosenExpense.payerId,
+        receiverId: chosenExpense.receiverId,
+        description: chosenExpense.description,
+        amount: chosenExpense?.amount,
+        expenseDate: newDate,
         settled: true,
-        notes: selectedExpense.notes,
+        notes: chosenExpense.notes,
       }
 
 
       await dispatch(
-        thunkUpdateFriendsExpense(selectedExpense?.id, settledExpense)
+        thunkUpdateFriendsExpense(chosenExpense.id, settledExpense)
       ).then(() => {
         setExpense('')
         closeModal();
@@ -154,33 +160,23 @@ function SettleUpModal() {
         <div>
           <label htmlFor='expense'>Which Expense?</label>
             <select
-              value={selectedExpenseId}
-              placeholder={'Select an expense'}
+              value={expense}
               onChange={(e) => {
                 setExpense(e.target.value)
               }
             }
             >
               <option value={''} disabled>Select an expense</option>
-              {payerExpenses?.map((expense) => {
-                  let expenseLabel = `${expense.description}`;
-                  return (
-                    // We must make the value the ID of the expense since these will be unique across many 'similar' named payments
-                  <option 
-                    key={expense.id}
-                    value={expense.id} 
-                    label={expenseLabel}
-                  />)
-                }
-              )
-              }
-              </select>
+              {payerExpenses.map((expense) => (
+                  <option key={expense.id} value={expense.id} >{expense.description}</option>
+                ))}
+            </select>
         </div>
 
         <div>
         <img className='user-profile-image' src={receiver?.profileImage} hidden={receiver == null}/>
         <span> {receiver?.name}</span>
-        </div> 
+        </div>
 
         <div>
           <label htmlFor="amount-owed"></label>
@@ -189,18 +185,16 @@ function SettleUpModal() {
               type="number"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              placeholder={selectedExpense ? `You owe $${amountDue.toString().slice(0, -2)}.${amountDue.toString().slice(-2)}` : 'amount'}
+              placeholder={expense ? `You owe $${amountDue.toString().slice(0, -2)}.${amountDue.toString().slice(-2)}` : 'amount'}
               required
             >
             </input>
         </div>
-        <div>{hasSubmitted && errors.amount ? `${errors.amount}` : ''}</div>
+        {hasSubmitted && errors.amount ? <span className="form-error">{errors.amount}</span> : ''}
         <div>
           <div className="form-label">
             <label htmlFor="payment-date">Payment Date</label>
-            {/* {validations.paymentDate && (
-              <span className="form-error">{validations.paymentDate}</span>
-            )} */}
+            {hasSubmitted && errors.paymentDate ? <span className="form-error">{errors.paymentDate}</span> : ''}
           </div>
           <input
             id="payment-date"
@@ -221,7 +215,7 @@ function SettleUpModal() {
             >
               Settle Up
             </button>
-            <button 
+            <button
             className="form-cancel"
             onClick={closeModal}
             >

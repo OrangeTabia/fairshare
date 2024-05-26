@@ -113,20 +113,20 @@ function AddExpenseModal({ friendName }) {
       <form onSubmit={handleSubmit} id="add-expense-form">
         <div>
           <div className="form-label">
-            {friendName ? <span >With you and: <span>{friendName}</span></span> :
-              <select
-                id="payer"
-                value={payer}
-                onChange={(e) => setPayer(e.target.value)}
-                required
-              >
-                <option>Select friend</option>
-                {friendsListArray.map((friend) => (
-                  <option value={friend.id} key={friend.id}>
-                    {friend.name}
-                </option>
-                ))}
-              </select>
+          {friendName ? <span >With you and: <span>{friendName}</span></span> :
+            <select
+              id="payer"
+              value={payer}
+              onChange={(e) => setPayer(e.target.value)}
+              required
+            >
+              <option value={''} disabled>Select a Friend</option>
+              {friendsListArray.map((friend) => (
+                <option value={friend.id} key={friend.id}>
+                  {friend.name}
+              </option>
+              ))}
+            </select>
             }
             {validations.payer && (
               <span className="form-error">{validations.payer}</span>
