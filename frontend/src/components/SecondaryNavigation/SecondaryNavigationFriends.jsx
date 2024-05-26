@@ -19,14 +19,14 @@ function SecondaryNavigation({ pageTitle, profileImage }) {
                 buttonText="Add Expense"
                 modalComponent={<AddExpenseModal friendName={pageTitle}/>}
                 id="add-expense-modal-button"
-                className="modal-button"
+                // className="modal-button"
                 />
 
         <OpenModalButton
           buttonText="Settle Up"
           modalComponent={<SettleUpFriendModal />}
           id="settle-up-modal-button"
-          className="modal-button"
+          // className="modal-button"
         />
       </nav>
     </header>

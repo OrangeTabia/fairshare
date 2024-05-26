@@ -35,7 +35,6 @@ function FriendsList({currFriend}) {
                         buttonText={<HiOutlineX />}
                         modalComponent={<DeleteFriendModal friend={friend} />}
                         id="delete-friend-modal-button"
-                        className="delete-friend-modal-button"
                         />
                     </div>
                 ))}
@@ -44,7 +43,6 @@ function FriendsList({currFriend}) {
             buttonText='INVITE A FRIEND'
             modalComponent={<AddFriendModal />}
             id="add-friend-modal-button"
-            className="add-friend-modal-button"
             />
         </div>
 
