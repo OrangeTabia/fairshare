@@ -17,7 +17,6 @@ function SecondaryNavigation({ pageTitle, profileImage }) {
             <nav>
               <div className="secondary-nav-buttons">
                 <OpenModalButton
-<<<<<<< HEAD
                   buttonText="Add Expense"
                   modalComponent={<AddExpenseModal friendName={pageTitle}/>}
                   id="add-expense-modal-button"
@@ -31,21 +30,6 @@ function SecondaryNavigation({ pageTitle, profileImage }) {
                   />
               </div>
             </nav>
-=======
-                buttonText="Add Expense"
-                modalComponent={<AddExpenseModal friendName={pageTitle}/>}
-                id="add-expense-modal-button"
-                // className="modal-button"
-                />
-
-        <OpenModalButton
-          buttonText="Settle Up"
-          modalComponent={<SettleUpFriendModal />}
-          id="settle-up-modal-button"
-          // className="modal-button"
-        />
-      </nav>
->>>>>>> landing
     </header>
   );
 }
