@@ -1,45 +1,44 @@
 .friend-card {
-    display: flex;
-    flex-flow: column nowrap;
-    list-style: none;
+  display: flex;
+  flex-flow: column nowrap;
+  list-style: none;
 }
 
 .friend-info {
-    width: 100%;
+  width: 100%;
 
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: left;
-    align-self: start;
-
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: left;
+  align-self: start;
 }
 
 .friend-info-text {
-    height: 40px;
-    margin-left: 5px;
+  height: 40px;
+  margin-left: 5px;
 
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-around;
-    align-items: start;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  align-items: start;
 }
 
 .friend-name,
 .net-amount {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1rem;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1rem;
 }
 
 .friend-profile-image {
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
 }
 
 .positive {
-    color: var(--theme-d-blue);
+  color: var(--theme-d-blue);
 }
 
 .negative {
-    color: var(--theme-d-orange);
+  color: var(--theme-d-orange);
 }
