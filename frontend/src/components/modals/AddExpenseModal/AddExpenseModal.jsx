@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import { thunkAddFriendsExpense, thunkLoadFriendsExpenses } from "../../../redux/friends_expenses";
@@ -6,20 +6,33 @@ import { useParams } from "react-router-dom";
 
 function AddExpenseModal({ friendName }) {
   const dispatch = useDispatch();
+  const { closeModal } = useModal();
   const { friendId } = useParams();
+
+  const currentUser = useSelector((state) => state.session.user);
+  const friendsList = useSelector((state) => state.friends);
+  const friendsListArray = Object.values(friendsList);
+
   const [payer, setPayer] = useState(""); // payer owes current user money
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
   const [expenseDate, setExpenseDate] = useState("");
   const [notes, setNotes] = useState("");
-  const [validations, setValidations] = useState({});
-  const [hasSubmitted, setHasSubmitted] = useState(false);
-  const currentUser = useSelector((state) => state.session.user);
-  const friendsList = useSelector((state) => state.friends);
-  const friendsListArray = Object.values(friendsList);
-  const { closeModal } = useModal();
 
-  const convertFloatToInteger = () => {
+  const [validations, setValidations] = useState({});
+
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [submitClass, setSubmitClass] = useState("form-submit");
+  const [submitDisabled, setSubmitDisabled] = useState(false);
+
+  const setSubmitDisabledStatus = (disabled) => {
+    (disabled)
+      ? setSubmitClass("form-submit disabled")
+      : setSubmitClass("form-submit");
+    setSubmitDisabled(disabled);
+  };
+
+  const getIntegerAmount = () => {
     if (!amount.split(".")[1]) {
       return amount + "00";
     } else if (amount.split(".")[1].length === 1) {
@@ -34,52 +47,63 @@ function AddExpenseModal({ friendName }) {
       let selectedFriend = friendsListArray.find(friend => friend.id === parseInt(friendId))
       setPayer(selectedFriend.id)
     }
-  }, [friendName])
+  }, [friendName, friendsListArray, friendId])
+
+  const getValidations = useCallback(() => {
+    const newValidations = {};
+
+    if (!payer) {
+      newValidations.payer = "Payer is required";
+    }
+    if (!description) {
+      newValidations.description = "Description is required";
+    } else if (description.length > 200) {
+      newValidations.description = "Description must be less than 200 characters";
+    }
+    if (amount <= 0) {
+      newValidations.amount = "Amount must be at least $0.01";
+    }
+    if (!expenseDate) {
+      newValidations.expenseDate = "Please enter an expense date";
+    }
+    if (notes.length > 200){
+      newValidations.notes = "Notes must be less than 200 characters";
+    }
+
+    return newValidations;
+  }, [payer, description, amount, expenseDate, notes])
 
   useEffect(() => {
-    const frontValidations = {};
-    if (!payer) frontValidations.payer = "Payer is required";
-    if (!description)
-      frontValidations.description =
-        "A brief description of the expense is required";
-    if (description.length > 200)
-      frontValidations.description =
-        "Description must be less than 200 characters";
-    if (!amount || amount <= 0)
-      frontValidations.amount = "Expense must have a minimum of $0.01";
-    if (!expenseDate)
-      frontValidations.expenseDate = "Please enter a date for the expense";
-    if (notes.length > 200)
-      frontValidations.notes = "Note must be less than 200 characters";
-    setValidations(frontValidations);
-  }, [payer, description, amount, expenseDate, notes]);
+    if (!hasSubmitted) return;
+    const newValidations = getValidations();
+    setSubmitDisabledStatus(Object.keys(newValidations).length > 0);
+    setValidations(newValidations);
+  }, [hasSubmitted, getValidations]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Store todays date and update the submitted state
     const newDate = new Date(expenseDate);
-    setHasSubmitted(true);
+
+    if (!hasSubmitted) {
+      setHasSubmitted(true);
+      const newValidations = getValidations();
+      if (Object.keys(newValidations).length) return;
+    }
 
     // Request to make a new friends expense and then load the new state with the expense + comments
     const newExpense = {
       payerId: payer,
       receiverId: currentUser.id,
       description,
-      amount: convertFloatToInteger(),
+      amount: getIntegerAmount(),
       expenseDate: newDate,
       settled: false,
       notes,
     };
-
     await dispatch(thunkAddFriendsExpense(newExpense));
-    await dispatch(thunkLoadFriendsExpenses());
-
-
-    // if (!addExpense.id) {
-    //     const { errors } = await addExpense.json();
-    //     setValidations(errors);
-    // }
+    await dispatch(thunkLoadFriendsExpenses);
     closeModal();
   };
 
@@ -89,22 +113,22 @@ function AddExpenseModal({ friendName }) {
       <form onSubmit={handleSubmit} id="add-expense-form">
         <div>
           <div className="form-label">
-          {friendName ? <span >With you and: <span>{friendName}</span></span> :
-            <select
-              id="payer"
-              value={payer}
-              onChange={(e) => setPayer(e.target.value)}
-              required
-            >
-              <option>Select friend</option>
-              {friendsListArray.map((friend) => (
-                <option value={friend.id} key={friend.id}>
-                  {friend.name}
-              </option>
-              ))}
-            </select>
+            {friendName ? <span >With you and: <span>{friendName}</span></span> :
+              <select
+                id="payer"
+                value={payer}
+                onChange={(e) => setPayer(e.target.value)}
+                required
+              >
+                <option>Select friend</option>
+                {friendsListArray.map((friend) => (
+                  <option value={friend.id} key={friend.id}>
+                    {friend.name}
+                </option>
+                ))}
+              </select>
             }
-            {validations.payer && hasSubmitted && (
+            {validations.payer && (
               <span className="form-error">{validations.payer}</span>
             )}
           </div>
@@ -117,7 +141,7 @@ function AddExpenseModal({ friendName }) {
               onChange={(e) => setDescription(e.target.value)}
               required
             />
-            {validations.description && hasSubmitted && (
+            {validations.description && (
               <span className="form-error">{validations.description}</span>
             )}
           </div>
@@ -130,7 +154,7 @@ function AddExpenseModal({ friendName }) {
               onChange={(e) => setAmount(e.target.value)}
               required
             />
-            {validations.amount && hasSubmitted && (
+            {validations.amount && (
               <span className="form-error">{validations.amount}</span>
             )}
           </div>
@@ -142,7 +166,7 @@ function AddExpenseModal({ friendName }) {
               onChange={(e) => setExpenseDate(e.target.value)}
               required
             />
-            {validations.expenseDate && hasSubmitted && (
+            {validations.expenseDate && (
               <span className="form-error">{validations.expenseDate}</span>
             )}
           </div>
@@ -153,16 +177,23 @@ function AddExpenseModal({ friendName }) {
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
             />
-            {validations.notes && hasSubmitted && (
+            {validations.notes && (
               <span className="form-error">{validations.notes}</span>
             )}
           </div>
-
           <div>
-            <button className="form-cancel" onClick={closeModal}>
+            <button
+              className={submitClass}
+              disabled={submitDisabled}
+            >
+              Save
+            </button>
+            <button
+              className="form-cancel"
+              onClick={closeModal}
+            >
               Cancel
             </button>
-            <button className="form-submit">Save</button>
           </div>
         </div>
       </form>

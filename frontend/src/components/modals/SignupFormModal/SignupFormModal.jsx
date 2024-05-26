@@ -20,9 +20,9 @@ function SignupFormModal() {
   const [errors, setErrors] = useState({});
   const [validations, setValidations] = useState({});
 
+  const [hasSubmitted, setHasSubmitted] = useState(false);
   const [submitClass, setSubmitClass] = useState("form-submit");
   const [submitDisabled, setSubmitDisabled] = useState(false);
-  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const setSubmitDisabledStatus = (disabled) => {
     (disabled)
