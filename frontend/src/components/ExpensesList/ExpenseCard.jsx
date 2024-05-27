@@ -6,7 +6,7 @@ import "./ExpensesList.css";
 import DeleteFriendsExpenseModal from "../modals/DeleteFriendsExpenseModal";
 import AddComment from "../Comments/AddComment";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+// import { useEffect } from "react";
 
 
 
@@ -15,18 +15,18 @@ function ExpenseCard({ expenseId }) {
 
   const expense = useSelector(state => state.friendsExpenses[parseInt(expenseId)])
   const payments = useSelector(state => Object.values(state.payments))
-  const [amountDue, setAmountDue] = useState('')
+  // const [amountDue, setAmountDue] = useState('')
 
-  useEffect(() => {
-    const currPayments = payments.filter(payment => payment.userId === currUser.id && payment.expenseId === expenseId)
-    let total = 0;
+  // useEffect(() => {
+  //   const currPayments = payments.filter(payment => payment.userId === currUser.id && payment.expenseId === expenseId)
+  //   let total = 0;
 
-    currPayments.forEach(payment => total += payment.amount)
-    let adjustTotal = (expense.amount - total).toString()
-    let due = '$' + adjustTotal.slice(0, -2) + '.' + adjustTotal.slice(-2)
-    setAmountDue(due)
+  //   currPayments.forEach(payment => total += payment.amount)
+  //   let adjustTotal = (expense.amount - total).toString()
+  //   let due = '$' + adjustTotal.slice(0, -2) + '.' + adjustTotal.slice(-2)
+  //   setAmountDue(due)
 
-  }, [])
+  // }, [])
 
   const whatsLeftToPay = (expense) => {
     const currPayments = payments.filter(payment => payment.expenseId === expense.id)

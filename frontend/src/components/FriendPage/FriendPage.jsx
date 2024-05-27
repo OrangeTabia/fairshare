@@ -5,7 +5,6 @@ import DevLinksList from "../DevLinksList";
 import { useSelector } from "react-redux";
 import FriendsExpensesList from "../FriendsExpensesList";
 import './FriendPage.css'
-import { useEffect, useState } from "react";
 
 function FriendPage() {
     const { friendId } = useParams();

@@ -13,7 +13,7 @@ function AddComment({ comments, expense }) {
   const dispatch = useDispatch();
   const [comment, setComment] = useState("");
   const [errors, setErrors] = useState("");
-  const [hasSubmitted, setHasSubmitted] = useState("");
+  // const [hasSubmitted, setHasSubmitted] = useState("");
 
   const friendsFlattened = useSelector((state) => state.friends);
   const friends = Object.values(friendsFlattened);
@@ -31,7 +31,7 @@ function AddComment({ comments, expense }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setHasSubmitted(true);
+    // setHasSubmitted(true);
 
     const newComment = {
       userId: currentUser.id,

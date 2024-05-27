@@ -18,7 +18,7 @@ function AddFriendModal() {
   const [email, setEmail] = useState('');
   const [suggestedFriends, setSuggestedFriends] = useState([]);
   const [friendSelected, setFriendSelected] = useState('');
-  const [submitClass, setSubmitClass] = useState("form-submit");
+  // const [submitClass, setSubmitClass] = useState("form-submit");
 
   useEffect(() => {
     const removeIndex = Object.values(currFriends)
@@ -79,7 +79,7 @@ function AddFriendModal() {
         </div>
 
         <button
-          className={submitClass}
+          className="form-submit"
           disabled={!friendSelected}
           type="submit"
         >
