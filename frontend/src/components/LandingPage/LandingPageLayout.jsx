@@ -39,6 +39,9 @@ function LandingPageLayout () {
                 </div>
                 <div className='landingPage-image-container'>
                     <img className='landingPage-image' src={LandingPageImg} />
+                    <p>Payments can be made through Venmo, PayPal, or your bank account.</p>
+                    <p>Android and iOS application features coming soon!</p>
+
                 </div>
             </div>
         </div>

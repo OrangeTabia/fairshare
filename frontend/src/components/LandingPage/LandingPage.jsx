@@ -2,6 +2,7 @@ import { ModalProvider, Modal } from "../../context/Modal";
 
 import LandingNavigation from "../../components/Navigation/LandingNavigation";
 import LandingPageLayout from './LandingPageLayout'
+import './LandingPage.css'; 
 
 export default function LandingPage() {
 

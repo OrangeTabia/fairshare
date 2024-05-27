@@ -174,8 +174,9 @@ function SettleUpFriendModal() {
               ))}
             </select>
           </div>
+          <br></br>
           <div className="form-label">
-            <label htmlFor="amount">Amount</label>
+            <label htmlFor="amount"></label>
             {validations.amount && (
               <span className="form-error">{validations.amount}</span>
             )}

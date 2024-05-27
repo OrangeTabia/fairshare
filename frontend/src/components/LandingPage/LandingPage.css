@@ -2,9 +2,10 @@ body {
     background-color: #FAFAFA;
 }
 
+
 #landingPage-main-container {
     margin: auto;
-    background: linear-gradient(454deg, #49AEF1, #FD9934);
+    background: linear-gradient(400deg, #49aef17d, #fd99344e);
     /* margin-top: 50px; */
     /* width: 100%; */
     /* height: 800px; */
@@ -30,7 +31,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 40px;
-    border: 1px solid green;
+    /* border: 1px solid green; */
 }
 
 .landingPage-moto-container > h1 {
@@ -53,14 +54,24 @@ body {
 }
 
 .landingPage-image-container {
-    /* height: auto;
-    object-fit: contain; */
-    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 25px;
+    width: 25%;
+    /* border: 1px solid red; */
+}
+
+.landingPage-image-container > p {
+    /* padding-left: 30px;
+    padding-right: 30px; */
+    text-align: center;
+    font-weight: bold;
 }
 
 .landingPage-image {
-    width: 90%;
-    height: 90%;
+    margin-top: 25px;
 }
 
 #landing-icons {
