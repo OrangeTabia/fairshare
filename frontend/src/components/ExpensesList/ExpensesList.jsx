@@ -53,7 +53,14 @@ function ExpensesList() {
             >
               <div >{expense.description}</div>
               {!expense.settled
-                      ? <div>{expense.receiverId === currUser.id ? `${getCurrFriend(expense)} still owes you: ` : `You still owe ${getCurrFriend(expense)} : `}{whatsLeftToPay(expense)}</div>
+                      ? <div className={expense.payerId === currUser.id
+                        ? 'all-expenses-payer'
+                        : 'all-expenses-receiver'}
+                        >
+                          {expense.receiverId === currUser.id
+                            ? `${getCurrFriend(expense)} still owes you: `
+                            : `You still owe ${getCurrFriend(expense)}: `}{whatsLeftToPay(expense)}
+                        </div>
                       : <div hidden={!expense.settled}>Expense Settled</div> }
               <div >{centsToUSD(expense.amount)}</div>
             </div>

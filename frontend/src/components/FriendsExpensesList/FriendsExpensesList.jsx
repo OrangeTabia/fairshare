@@ -71,7 +71,14 @@ function FriendsExpensesList() {
                     <div className="friends-expense-title" onClick={() => handleClick(idx)}>
                       <div>{expense.description}</div>
                       {!expense.settled
-                      ? <div>{expense.receiverId === currUser.id ? `${currFriend.name} still owes you: ` : `You still owe ${currFriend.name} : `}{whatsLeftToPay(expense)}</div>
+                      ? <div className={expense.payerId === currUser.id
+                        ? 'all-expenses-payer'
+                        : 'all-expenses-receiver'}
+                        >
+                        {expense.receiverId === currUser.id
+                          ? `${currFriend.name} still owes you: `
+                          : `You still owe ${currFriend.name} : `}{whatsLeftToPay(expense)}
+                        </div>
                       : <div hidden={!expense.settled}>Expense Settled</div> }
                       <div >{`Total: ${centsToUSD(expense.amount)}`}</div>
                     </div>

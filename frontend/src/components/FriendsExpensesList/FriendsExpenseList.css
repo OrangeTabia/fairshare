@@ -93,3 +93,11 @@
 #expense-set-by-you > div > button:hover {
     color: orange;
 }
+
+.all-expenses-payer {
+    color: #F1AD69;
+}
+
+.all-expenses-receiver {
+    color: #2DA2EF;
+}

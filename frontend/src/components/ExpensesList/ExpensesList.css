@@ -12,10 +12,18 @@
 }
 
 .all-expenses {
-    border: 2px solid rgba(75, 74, 74, 0.228);
+    border: 2px solid rgba(99, 98, 98, 0.228);;
     border-radius: 3px;
     padding: 16px;
     margin: 14px;
+}
+
+.all-expenses-payer {
+    color: #F1AD69;
+}
+
+.all-expenses-receiver {
+    color: #2DA2EF;
 }
 
 .expense-container {
