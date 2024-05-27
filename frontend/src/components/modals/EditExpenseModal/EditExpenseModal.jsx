@@ -104,38 +104,37 @@ function EditExpenseModal({ expense }) {
       if (Object.keys(newValidations).length) return;
     }
 
-    let adjustedAmount = amount;
+    let newAmount;
+    let currAmount = amount
+    let adjustedAmount = '';
 
-    console.log("----------->", adjustedAmount);
+    if (currAmount.includes(',')) {
+      let amountArray = currAmount.split(',')
+      amountArray.forEach(ele => {adjustedAmount += ele})
+    } else {
+      adjustedAmount = amount
+    }
 
     if (adjustedAmount.indexOf(".") >= 0) {
-      adjustedAmount = parseFloat(
-        amount.toString().slice(0, amount.indexOf(".")) +
-          amount.toString().slice(amount.indexOf(".") + 1)
+      newAmount = parseFloat(
+        adjustedAmount.toString().slice(0, adjustedAmount.indexOf(".")) +
+          adjustedAmount.toString().slice(adjustedAmount.indexOf(".") + 1)
+
       );
-      if (amount.toString().slice(amount.indexOf(".") + 1).length === 1) {
-        adjustedAmount = parseFloat(adjustedAmount.toString() + "0");
+      if (adjustedAmount.toString().slice(adjustedAmount.indexOf(".") + 1).length === 1) {
+        newAmount = parseFloat(adjustedAmount.toString() + "0");
       }
-      // if (String(adjustedAmount).split(".")[1].length === 1)
-      //   adjustedAmount = parseInt(
-      //     String(adjustedAmount).split(".")[0] +
-      //       String(adjustedAmount).split(".")[1] +
-      //       "0"
-      //   );
-      // else if (String(adjustedAmount).split(".")[1].length === 2)
-      //   adjustedAmount = parseInt(
-      //     String(adjustedAmount).split(".")[0] +
-      //       String(adjustedAmount).split(".")[1]
-      //   );
     } else {
-      adjustedAmount = parseInt(amount.toString() + "00");
+      newAmount = parseInt(adjustedAmount.toString() + "00");
     }
+
+    console.log(newAmount)
 
     const updatedExpense = {
       payerId: expense.payerId,
       receiverId: expense.receiverId,
       description,
-      amount: adjustedAmount,
+      amount: newAmount,
       expenseDate: newDate,
       settled: false,
       notes,
