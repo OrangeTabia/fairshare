@@ -28,9 +28,8 @@ function LandingPageLayout () {
                     <div id="landing-sentence">
                         <span>Keep track of your shared expenses and balances <br></br>with <span className="icons">housemates</span>, <span className="icons">trips</span>, <span className="icons">groups</span>, <span className="icons">friends</span>, and <span className="icons">family</span>.</span>
                     </div>
-                    <div>
+                    <div className="big-signup">
                         <OpenModalButton
-                            id="big-signup-button"
                             buttonText="Sign Up"
                             onItemClick={closeModal}
                             modalComponent={<SignupFormModal />}
