@@ -1,5 +1,6 @@
 import OpenModalButton from "../modals/OpenModalButton/OpenModalButton";
 import EditExpenseModal from "../modals/EditExpenseModal";
+import { centsToUSD } from "../../utils/formatters";
 import "./ExpensesList.css";
 
 import DeleteFriendsExpenseModal from "../modals/DeleteFriendsExpenseModal";
@@ -33,8 +34,7 @@ function ExpenseCard({ expenseId }) {
 
     currPayments.forEach(payment => total += payment.amount)
     let adjustTotal = (expense.amount - total).toString()
-    let due = '$' + adjustTotal.slice(0, -2) + '.' + adjustTotal.slice(-2)
-    return due
+    return centsToUSD(adjustTotal)
   }
 
   return (

@@ -35,8 +35,7 @@ function FriendsExpenseCard({ expenseId }) {
 
     currPayments.forEach(payment => total += payment.amount)
     let adjustTotal = (expense?.amount - total).toString()
-    let due = '$' + adjustTotal.slice(0, -2) + '.' + adjustTotal.slice(-2)
-    return due
+    return centsToUSD(adjustTotal)
   }
 
   const handleClick  = (idx) => {
