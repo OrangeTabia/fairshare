@@ -50,10 +50,18 @@ function SettleUpFriendModal() {
     if (removeDecimals(amount) > amountDue) {
       newValidations.amount = 'Payment must be the same or less than what is owed';
     }
-    const date = new Date(paymentDate)
-    const today = new Date()
-    if (paymentDate && (date.getTime() < today.getTime())) {
-      newValidations.paymentDate = 'Payment date must be in the future';
+    const date = new Date(paymentDate.split("-").join(" "));
+    const today = new Date(Date.now());
+
+    date.setHours(1);
+    date.setMinutes(10);
+    date.setMilliseconds(1);
+    today.setHours(1);
+    today.setMinutes(1);
+    today.setMilliseconds(1);
+
+    if (date < today) {
+      newValidations.paymentDate = "Payment date must be in the future";
     }
     return newValidations;
   }, [amount, amountDue, paymentDate]);
