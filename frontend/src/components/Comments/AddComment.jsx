@@ -6,7 +6,7 @@ import EditComment from "./EditComment";
 import DeleteComment from "./DeleteComment";
 import "./Comments.css";
 import { HiOutlineX } from "react-icons/hi";
-import { PiNotePencilBold } from "react-icons/pi";
+import { TfiPencilAlt } from "react-icons/tfi";
 import { FaComment } from "react-icons/fa6";
 
 function AddComment({ comments, expense }) {
@@ -19,7 +19,7 @@ function AddComment({ comments, expense }) {
   const friends = Object.values(friendsFlattened);
   const currentUser = useSelector((state) => state.session.user);
 
-  // console.log(friends[0]);
+  console.log("EXPENSE", expense);
 
   useEffect(() => {
     const errors = {};
@@ -46,37 +46,43 @@ function AddComment({ comments, expense }) {
   return (
     <>
       <div id="comments-and-notes-title"><FaComment /> NOTES AND COMMENTS</div>
+      {expense.notes ? 
       <div id="existing-note">
         <label id="note-label">Notes</label>
         <div id="expense-note">{expense?.notes}</div>
       </div>
+      : '' }
+
+      
       <div id="existing-and-new-comments">
+        {expense.comments.length ? 
         <div id="existing-comments">
           {comments &&
             comments.map((comment) => (
               <div key={comment.id}>
-                <p id="commenter-name">
+                <div id="comment-name-date-buttons">
+                  <div id="name-and-date">
                   {comment.userId === currentUser.id
                     ? currentUser.name
                     : friends?.find((friend) => friend.id === comment?.userId)
                         ?.name}
                         <span id="comment-createdAt"> - {comment.createdAt}</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <OpenModalButton
-                          id="edit-expense-modal-button"
-                          buttonText={<PiNotePencilBold />}
-                          modalComponent={
-                            <EditComment comments={comment} expense={expense} />
-                          }
-                        />
-                        &nbsp;&nbsp;
-                        <OpenModalButton
-                          id="delete-expense-modal-button"
-                          buttonText={<HiOutlineX />}
-                          modalComponent={<DeleteComment comments={comment} />}
-                        />
-                  </span>
-                </p>
+                  </div>
+                  <div id="comment-edit-delete-btns">
+                  <OpenModalButton
+                    id="edit-expense-modal-button"
+                    buttonText={<TfiPencilAlt style={{fontSize: '19px'}}/>}
+                    modalComponent={
+                      <EditComment comments={comment} expense={expense} />
+                    }
+                  />
+                  <OpenModalButton
+                    id="delete-expense-modal-button"
+                    buttonText={<HiOutlineX style={{fontSize: '19px'}}/>}
+                    modalComponent={<DeleteComment comments={comment} />}
+                  />
+                </div>
+                </div>
                 <div id="comment">
                   {comment.comment}
                 </div>
@@ -85,6 +91,7 @@ function AddComment({ comments, expense }) {
               </div>
             ))}
         </div>
+        : '' }
         <div id="new-comment">
           <div className="form-label">
             <form onSubmit={handleSubmit} id="add-comment-form">

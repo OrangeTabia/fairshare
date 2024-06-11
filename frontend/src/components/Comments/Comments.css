@@ -31,10 +31,27 @@
     padding: 10px;
 }
 
-#commenter-name {
+#comment-name-date-buttons {
     margin: 10px 0 10px 0;
     font-size: 13px;
     font-weight: 550;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#comment-edit-delete-btns {
+    display: flex;
+}
+
+#comment-edit-delete-btns > button {
+    background-color: transparent;
+    border: none;
+}
+
+#comment-edit-delete-btns > button:hover {
+    color: var(--theme-d-orange);
 }
 
 #comment-createdAt {
