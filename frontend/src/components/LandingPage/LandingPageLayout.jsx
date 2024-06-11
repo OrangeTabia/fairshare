@@ -37,15 +37,23 @@ function LandingPageLayout () {
                     </div>
 
                 </div>
-                <div className='landingPage-image-container'>
+                <div className='landing-image-container'>
+                </div>
+            </div>
+            <div className='elements-landing-container'>
+                <div className='landing-motto-container'>
+                    <div id="landing-mottos">
+                        <h1 className='first-mot-line'>You want to share?</h1>
+                        <h1 className='second-mot-line'>We make it fair!</h1>
+                    </div>
+
+                </div>
+                <div className='landing-image-container'>
                     <img className='landingPage-image' src={LandingPageImg} />
                     <p>Payments can be made through Venmo, PayPal, or your bank account.</p>
                     <p>Android and iOS application features coming soon!</p>
 
                 </div>
-            </div>
-            <div>
-                <div style={{height: '1000px'}}>MORE LANDING CONTENT</div>
             </div>
         </div>
     )

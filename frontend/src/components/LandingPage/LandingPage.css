@@ -13,7 +13,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 80px;
-    /* border: 1px solid blue; */
+    margin-top: 30px;
 }
 
 .landing-motto-container {
@@ -22,7 +22,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 40px;
-    /* border: 1px solid green; */
+    border: 1px solid green;
 }
 
 .landing-motto-container > h1 {
@@ -44,13 +44,14 @@ body {
     margin-bottom: 0px;
 }
 
-.landingPage-image-container {
+.landing-image-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     gap: 25px;
     width: 25%;
+    border: 1px solid red;
 }
 
 .landingPage-image-container > p {
@@ -115,7 +116,7 @@ body {
 #developers-container {
     display: flex;
     flex-direction: row;
-    gap: 100px;
+    gap: 300px;
 }
 
 #footer-name {

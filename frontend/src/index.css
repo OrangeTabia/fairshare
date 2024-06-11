@@ -114,7 +114,7 @@ html, body {
 #main-content {
     width: 100%;
     /* position: fixed; */
-    top: 42px; /* Adjust for nav bar */
+    margin-top: 42px;
 }
 
 .columns-wrapper {

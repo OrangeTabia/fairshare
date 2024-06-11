@@ -8,7 +8,6 @@ import { thunkAuthenticate } from "../redux/session";
 import LoggedInNavigation from "../components/Navigation/LoggedInNavigation";
 import ProfileButton from "../components/Navigation/ProfileButton";
 import loadState from "../utils/loadData";
-import './Layout.css';
 
 export default function Layout() {
   const dispatch = useDispatch();
