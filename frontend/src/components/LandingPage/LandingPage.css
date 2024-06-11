@@ -2,30 +2,28 @@ body {
     background-color: #FAFAFA;
 }
 
-#landingPage-main-container {
-    margin: auto;
-    background: linear-gradient(400deg, #49aef17d, #fd99344e);
-    /* border: 1px solid red; */
+#landing-main-container {
+    background: linear-gradient(400deg, #49aef1a1, #fd99344e);
 }
 
-.elements-landing-container {
+.landing-elements-container1 {
     padding: 40px;
     display: flex;
+    flex-direction: row;
     justify-content: center;
     gap: 80px;
-    /* border: 1px solid blue; */
+    margin-top: 30px;
 }
 
-.landing-motto-container {
+#left-container1 {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 40px;
-    /* border: 1px solid green; */
 }
 
-.landing-motto-container > h1 {
+.left-container > h1 {
     font-size: 50px;
 }
 
@@ -44,13 +42,11 @@ body {
     margin-bottom: 0px;
 }
 
-.landingPage-image-container {
+#right-container1 {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
-    gap: 25px;
-    width: 25%;
+    justify-content: center;
 }
 
 .landingPage-image-container > p {
@@ -80,7 +76,7 @@ body {
 
 .icons:hover {
     color: #FAFAFA;
-    cursor: pointer;
+    cursor: default;
 }
 
 .big-signup > button {
@@ -94,9 +90,101 @@ body {
 }
 
 #main-footer {
-    border: 1px solid red;
-    position: absolute;
-    bottom: 0;
     width: 100%;
-    height: 2.5rem;
+    height: 100px;
+    border-top: 2px solid black;
+    background-color: var(--theme-orange);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
+
+.landing-elements-container2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 200px;
+    padding-bottom: 50px;
+    padding-top: 25px;
+    border: 1px solid blue;
+}
+
+.landing-elements-container3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 200px;
+    padding-bottom: 50px;
+    padding-top: 25px;
+    border: 1px solid yellow;
+}
+
+#left-container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    margin-left: 200px;
+    border: 1px solid green;
+}
+
+#right-container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    margin-right: 200px;
+    border: 1px solid red;
+}
+
+#left-container2 > h2, #right-container2 > h2 {
+    margin-bottom: 0px;
+}
+
+#left-container2 > p, #right-container2 > p {
+    font-weight: 660;
+}
+
+#footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+#developers-container {
+    display: flex;
+    flex-direction: row;
+    gap: 300px;
+}
+
+#footer-name {
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.footer-devs > a {
+    font-size: 14px;
+    color: black;
+    text-decoration: none;
+}
+
+.footer-devs > a:hover {
+    color: white;
+    text-decoration: underline;
+}
+<<<<<<< HEAD
+=======
+
+
+
+
+
+>>>>>>> polish-comments
