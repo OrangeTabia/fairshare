@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import { thunkSignup } from "../../../redux/session";
 import { useNavigate } from "react-router-dom";
+import WalkthroughModal from "../WalkthroughModal/WalkthroughModal";
 
 import { validateEmail } from "../../../utils/customValidators";
 import "./SignupFormModal.css";
@@ -10,7 +11,7 @@ import "./SignupFormModal.css";
 function SignupFormModal() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { closeModal } = useModal();
+  const { closeModal, setModalContent } = useModal();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -58,6 +59,7 @@ function SignupFormModal() {
     setValidations(newValidations);
   }, [hasSubmitted, getValidations]);
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -79,7 +81,7 @@ function SignupFormModal() {
       setErrors(serverResponse); // Change to reflect LoginFormModal later
     } else {
       closeModal();
-      navigate("/");
+      navigate('/');
     }
   };
 

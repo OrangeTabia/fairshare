@@ -4,7 +4,9 @@ import DevLinksList from "../DevLinksList";
 import './DashboardPage.css';
 import FriendsSummary from "./FriendsSummary";
 
+
 function DashboardPage() {
+
   return (
     <div className="columns-wrapper">
       <section className="left-column">
@@ -22,5 +24,6 @@ function DashboardPage() {
     </div>
   )
 }
+1718126892000
 
 export default DashboardPage;
