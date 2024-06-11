@@ -2,6 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import FriendCard from "./FriendCard";
 import "./FriendsSummary.css";
+import { useEffect, useState } from "react";
+import { thunkLoadFriendsExpenses } from "../../redux/friends_expenses";
+import { thunkLoadPayments } from "../../redux/payments";
+import LoadingScreen from "../LoadingScreen/LoadingScreen";
 
 function FriendsSummary() {
     const dispatch = useDispatch();
@@ -9,12 +13,14 @@ function FriendsSummary() {
     const friends = useSelector(state => state.friends);
     const friendsExpenses = useSelector(state => state.friendsExpenses);
     const payments = useSelector(state => state.payments);
-// want to make two loading states here -
-    //  one to update the state within the thunks
-    // and another to let the code blocks below run within useEffects
-    // after those are both loaded we can show the actual screen
+    const [loading, setLoading] = useState(true)
 
-// May want to add an isLoaded state later to prevent excessive rerendering
+// A set timeout to give all the functions below a chance to run before rendering the page
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false);
+        }, 500)
+    }, [])
 
     const friendsOwedBy = [];
     const friendsOwedTo = [];
@@ -35,7 +41,9 @@ function FriendsSummary() {
 // I think we are only pulling in the payments the user has made and not all payments
     Object.values(payments).forEach(payment => {
         console.log(payment)
-        friendsExpenses[payment.expenseId].remainingAmount -= payment.amount;
+        if (friendsExpenses[payment.expenseId]) {
+            friendsExpenses[payment.expenseId].remainingAmount -= payment.amount;
+        }
     });
 
 
@@ -68,18 +76,25 @@ function FriendsSummary() {
         }
     });
 
-    return <div className="friends-summary-container">
-        <ul className="friends-owed-by">
-            {friendsOwedBy.map(friend => (
-                <FriendCard key={friend.id} friend={friend} />  // these are the cards that do not adjust
-            ))}
-        </ul>
-        <ul className="friends-owed-to">
-            {friendsOwedTo.map(friend => (
-                <FriendCard key={friend.id} friend={friend} />
-            ))}
-        </ul>
-    </div>
+// return the loading screen before returning
+    if (loading) {
+        return <LoadingScreen />
+    }
+
+    return (
+        <div className="friends-summary-container">
+            <ul className="friends-owed-by">
+                {friendsOwedBy.map(friend => (
+                    <FriendCard key={friend.id} friend={friend} />  // these are the cards that do not adjust
+                ))}
+            </ul>
+            <ul className="friends-owed-to">
+                {friendsOwedTo.map(friend => (
+                    <FriendCard key={friend.id} friend={friend} />
+                ))}
+            </ul>
+        </div>
+    )
 }
 
 export default FriendsSummary;

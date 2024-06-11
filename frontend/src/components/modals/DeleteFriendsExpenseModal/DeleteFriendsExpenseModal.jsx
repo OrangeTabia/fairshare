@@ -2,7 +2,8 @@
 import { useDispatch } from "react-redux";
 
 import { useModal } from "../../../context/Modal";
-import { thunkDeleteFriendsExpense } from "../../../redux/friends_expenses";
+import { thunkDeleteFriendsExpense, thunkLoadFriendsExpenses } from "../../../redux/friends_expenses";
+import { thunkLoadPayments } from "../../../redux/payments";
 
 function DeleteFriendsExpenseModal({ expense }) {
   // const navigate = useNavigate();
@@ -17,6 +18,8 @@ function DeleteFriendsExpenseModal({ expense }) {
   const deleteExpense = async (e) => {
     e.preventDefault();
     await dispatch(thunkDeleteFriendsExpense(expense.id));
+    await dispatch(thunkLoadFriendsExpenses());
+    await dispatch(thunkLoadPayments());
     closeModal();
   };
 
