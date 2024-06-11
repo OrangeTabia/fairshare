@@ -1,9 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../../context/Modal";
-import { thunkAddFriendsExpense, thunkLoadFriendsExpenses } from "../../../redux/friends_expenses";
+import {
+  thunkAddFriendsExpense,
+  thunkLoadFriendsExpenses,
+} from "../../../redux/friends_expenses";
 import { useParams } from "react-router-dom";
-import './AddExpenseModal.css'
+import "./AddExpenseModal.css";
 
 function AddExpenseModal({ friendName }) {
   const dispatch = useDispatch();
@@ -26,7 +29,7 @@ function AddExpenseModal({ friendName }) {
   const [submitDisabled, setSubmitDisabled] = useState(false);
 
   const setSubmitDisabledStatus = (disabled) => {
-    (disabled)
+    disabled
       ? setSubmitClass("form-submit disabled")
       : setSubmitClass("form-submit");
     setSubmitDisabled(disabled);
@@ -44,10 +47,12 @@ function AddExpenseModal({ friendName }) {
 
   useEffect(() => {
     if (friendName) {
-      let selectedFriend = friendsListArray.find(friend => friend.id === parseInt(friendId))
-      setPayer(selectedFriend.id)
+      let selectedFriend = friendsListArray.find(
+        (friend) => friend.id === parseInt(friendId)
+      );
+      setPayer(selectedFriend.id);
     }
-  }, [friendName, friendsListArray, friendId])
+  }, [friendName, friendsListArray, friendId]);
 
   const getValidations = useCallback(() => {
     const newValidations = {};
@@ -58,7 +63,8 @@ function AddExpenseModal({ friendName }) {
     if (!description) {
       newValidations.description = "Description is required";
     } else if (description.length > 200) {
-      newValidations.description = "Description must be less than 200 characters";
+      newValidations.description =
+        "Description must be less than 200 characters";
     }
     if (amount <= 0) {
       newValidations.amount = "Amount must be at least $0.01";
@@ -66,7 +72,7 @@ function AddExpenseModal({ friendName }) {
     if (!expenseDate) {
       newValidations.expenseDate = "Please enter an expense date";
     }
-    if (notes.length > 200){
+    if (notes.length > 200) {
       newValidations.notes = "Notes must be less than 200 characters";
     }
 
@@ -113,21 +119,27 @@ function AddExpenseModal({ friendName }) {
       <form onSubmit={handleSubmit} id="add-expense-form">
         <div>
           <div className="form-label">
-          {friendName ? <span >With you and: <span id="add-expense-name">{friendName}</span></span> :
-            <select
-              id="payer"
-              value={payer}
-              onChange={(e) => setPayer(e.target.value)}
-              required
-            > 
-              <option value={''} disabled>Select a Friend</option>
-              {friendsListArray.map((friend) => (
-                <option value={friend.id} key={friend.id}>
-                  {friend.name}
+            {friendName ? (
+              <span>
+                With you and: <span id="add-expense-name">{friendName}</span>
+              </span>
+            ) : (
+              <select
+                id="payer"
+                value={payer}
+                onChange={(e) => setPayer(e.target.value)}
+                required
+              >
+                <option value={""} disabled>
+                  Select a Friend
                 </option>
-              ))}
-            </select>
-            }
+                {friendsListArray.map((friend) => (
+                  <option value={friend.id} key={friend.id}>
+                    {friend.name}
+                  </option>
+                ))}
+              </select>
+            )}
             {validations.payer && (
               <span className="form-error">{validations.payer}</span>
             )}
@@ -147,10 +159,12 @@ function AddExpenseModal({ friendName }) {
             )}
           </div>
           <div className="form-label">
+            <label htmlFor="amount"></label>
             $
             <input
               id="amount"
               type="text"
+              inputMode="decimal"
               value={amount}
               placeholder="amount"
               onChange={(e) => setAmount(e.target.value)}
@@ -185,16 +199,10 @@ function AddExpenseModal({ friendName }) {
             )}
           </div>
           <div className="submit-cancel-btns">
-            <button
-              className={submitClass}
-              disabled={submitDisabled}
-            >
+            <button className={submitClass} disabled={submitDisabled}>
               Save
             </button>
-            <button
-              className="form-cancel"
-              onClick={closeModal}
-            >
+            <button className="form-cancel" onClick={closeModal}>
               Cancel
             </button>
           </div>

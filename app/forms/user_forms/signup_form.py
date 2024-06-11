@@ -9,7 +9,7 @@ def user_exists(form, field):
     email = field.data
     user = User.query.filter(User.email == email).first()
     if user:
-        raise ValidationError('Email address is already in use.')
+        raise ValidationError("Email address is already in use.")
 
 
 # def name_exists(form, field):
@@ -21,7 +21,15 @@ def user_exists(form, field):
 
 
 class SignUpForm(FlaskForm):
-    name = StringField('name', validators=[DataRequired()])
-    email = EmailField('email', validators=[DataRequired(), Email(), user_exists])
-    password = StringField('password', validators=[DataRequired(), Length(min=8)])
-    profile_image = StringField('profile_image', default='https://nationwidecoins.com/cdn/shop/articles/shutterstock_1914066904.jpg')
+    name = StringField("name", validators=[DataRequired(), Length(min=2, max=100)])
+    email = EmailField(
+        "email", validators=[DataRequired(), Length(max=50), Email(), user_exists]
+    )
+    password = StringField(
+        "password", validators=[DataRequired(), Length(min=8, max=255)]
+    )
+    profile_image = StringField(
+        "profile_image",
+        default="https://nationwidecoins.com/cdn/shop/articles/shutterstock_1914066904.jpg",
+        validators=[Length(max=1000)],
+    )
