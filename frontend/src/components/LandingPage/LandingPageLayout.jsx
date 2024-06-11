@@ -12,7 +12,7 @@ import Friends from '../../../images/friends.png';
 function LandingPageLayout () {
     const { closeModal } = useModal();
     return (
-        <div id='landingPage-main-container'>
+        <div id='landing-main-container'>
             <div className='elements-landing-container'>
                 <div className='landing-motto-container'>
                     <div id="landing-mottos">
@@ -44,9 +44,9 @@ function LandingPageLayout () {
 
                 </div>
             </div>
-            <footer id='main-footer'>
-            <h1>footer here</h1>
-            </footer>
+            <div>
+                <div style={{height: '1000px'}}>MORE LANDING CONTENT</div>
+            </div>
         </div>
     )
 }
