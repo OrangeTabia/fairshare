@@ -11,10 +11,13 @@ const WalkthroughModal = () => {
     }
 
     return (
-        <div>
+        <div className='walkthrough-modal-container'>
             <h1>Welcome to FairShare!</h1>
-            <p>Click next to continue.</p>
             <div>
+                <p>Let us walk you through a bit of what our site has to offer!</p>
+                <p>Click next to continue.</p>
+            </div>
+            <div className='walkthrough-modal-btn'>
                 <button onClick={handleModalSwap}>Next</button>
                 <p>1/6</p>
             </div>
@@ -35,12 +38,15 @@ const WalkthroughModal2 = () => {
     }
 
     return (
-        <div>
+        <div className='walkthrough-modal-container' >
             <h1>Dashboard and Expenses</h1>
-
-            <p>If you would like to easily see how much you owe each of your friends or how much they each owe you, check out the Dashboard tab</p>
-            <p>If you are looking for a more indepth description of the expenses you are connected to check out the Expenses tab.</p>
             <div>
+                <p>If you would like to easily see how much you owe each of your friends or how much they
+                    each owe you, check out the Dashboard tab in the navigation bar above.</p>
+                <p>If you are looking for details on each of your expenses, check out the Expenses
+                    tab in the navigation bar above.</p>
+            </div>
+            <div className='walkthrough-modal-btn'>
                 <button onClick={handleModalSwap}>Next</button>
                 <p>2/6</p>
             </div>
@@ -59,14 +65,15 @@ const WalkthroughModal3 = () => {
 
 
     return (
-        <div>
+        <div className='walkthrough-modal-container' >
             <h1>Friends</h1>
-
-            <p>On the your left you will find a list of all your friends</p>
-            <p>You can add more friends by clicking the 'Invite a Friend' button below, or you can click on a
-                friend you already have to receive a detailed outline of any open or closed expenses you are a
-                part of. Or view any payments you have made </p>
             <div>
+                <p>On the your left you will find a list of all your friends</p>
+                <p>You can add more friends by clicking the 'Invite a Friend' button below. Or, you can click on a
+                    friend to see details about all the expenses and payments there are between you and
+                    your selected friend</p>
+            </div>
+            <div className='walkthrough-modal-btn'>
                 <button onClick={handleModalSwap}>Next</button>
                 <p>3/6</p>
             </div>
@@ -84,13 +91,14 @@ const WalkthroughModal4 = () => {
     }
 
     return (
-        <div>
+        <div className='walkthrough-modal-container' >
             <h1>Add an Expense</h1>
-
-            <p>To add an expense between you and a friend, click the 'Add Expense' button.</p>
-            <p>fill out a short form and your friend will be notified they still owe you for that slice of pizza
-                you bought them last week.</p>
             <div>
+                <p>To add an expense between you and a friend, click the 'Add Expense' button in the upper middle section of the page.</p>
+                <p>fill out a short form and your friend will be notified they still owe you for that slice of pizza
+                    you bought them last week.</p>
+            </div>
+            <div className='walkthrough-modal-btn'>
                 <button onClick={handleModalSwap}>Next</button>
                 <p>4/6</p>
             </div>
@@ -108,13 +116,14 @@ const WalkthroughModal5 = () => {
     }
 
     return (
-        <div>
+        <div className='walkthrough-modal-container' >
             <h1>Settle Up</h1>
-
-            <p>Ready to pay someone back, click the 'Settle Up' button above.</p>
-            <p>Select which expense you would like to pay towards, how much you are going to pay, and when you would like to pay it.</p>
-            <p>Tada! Your friends love you, you always pay back your debts!</p>
             <div>
+                <p>Ready to pay someone back, click the 'Settle Up' button in the upper middle section of the page.</p>
+                <p>Select which expense you would like to pay towards, how much you are going to pay, and when you would like to pay it.</p>
+                <p>Tada! Your friends love you, you always pay back your debts!</p>
+            </div>
+            <div className='walkthrough-modal-btn'>
                 <button onClick={handleModalSwap}>Next</button>
                 <p>5/6</p>
             </div>
@@ -127,12 +136,13 @@ const WalkthroughModal6 = () => {
     const { closeModal } = useModal();
 
     return (
-        <div>
+        <div className='walkthrough-modal-container' >
             <h1>Get Sharing!</h1>
-
-            <p>It's time to get out there and enjoy the world with the people you care about!</p>
-            <p>Don't worry, we will make sure everyone plays fair!</p>
             <div>
+                <p>It's time to get out there and enjoy the world with the people you care about!</p>
+                <p>Don't worry, we will make sure everyone plays fair!</p>
+            </div>
+            <div className='walkthrough-modal-btn'>
                 <button onClick={() => closeModal()}>Finish</button>
                 <p>6/6</p>
             </div>
