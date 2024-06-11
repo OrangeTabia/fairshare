@@ -14,7 +14,7 @@ function LandingPageLayout () {
     return (
         <div id='landingPage-main-container'>
             <div className='elements-landing-container'>
-                <div className='landingPage-moto-container'>
+                <div className='landing-motto-container'>
                     <div id="landing-mottos">
                         <h1 className='first-mot-line'>You want to share?</h1>
                         <h1 className='second-mot-line'>We make it fair!</h1>
@@ -44,6 +44,9 @@ function LandingPageLayout () {
 
                 </div>
             </div>
+            <footer id='main-footer'>
+            <h1>footer here</h1>
+            </footer>
         </div>
     )
 }
