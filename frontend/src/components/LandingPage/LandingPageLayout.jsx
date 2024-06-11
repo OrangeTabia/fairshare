@@ -5,6 +5,8 @@ import { useModal } from '../../context/Modal';
 
 import LandingPageImg from '../../../images/landing-page-img2.png';
 import HousematesIcon from '../../../images/housemates.png'
+import LandingPageImg3 from '../../../images/landing3.png';
+import LandingPageImg4 from '../../../images/landing2.png';
 import TravelIcon from '../../../images/travel.png';
 import GroupsIcon from '../../../images/groups.png';
 import Friends from '../../../images/friends.png';
@@ -13,8 +15,8 @@ function LandingPageLayout () {
     const { closeModal } = useModal();
     return (
         <div id='landing-main-container'>
-            <div className='elements-landing-container'>
-                <div className='landing-motto-container'>
+            <div className='landing-elements-container1'>
+                <div id='left-container1'>
                     <div id="landing-mottos">
                         <h1 className='first-mot-line'>You want to share?</h1>
                         <h1 className='second-mot-line'>We make it fair!</h1>
@@ -37,22 +39,29 @@ function LandingPageLayout () {
                     </div>
 
                 </div>
-                <div className='landing-image-container'>
-                </div>
+                {/* <div id='right-container1'>
+                </div> */}
             </div>
-            <div className='elements-landing-container'>
-                <div className='landing-motto-container'>
-                    <div id="landing-mottos">
-                        <h1 className='first-mot-line'>You want to share?</h1>
-                        <h1 className='second-mot-line'>We make it fair!</h1>
-                    </div>
 
+            <div className='landing-elements-container2'>
+                <div id='left-container2'>
+                    <h2>Pay friends back</h2>
+                    <p>Settle up with a friend and record any <br></br>cash or online payment.</p>
+                    <img src={LandingPageImg3} alt='settle-up-image'></img>
                 </div>
-                <div className='landing-image-container'>
-                    <img className='landingPage-image' src={LandingPageImg} />
-                    <p>Payments can be made through Venmo, PayPal, or your bank account.</p>
-                    <p>Android and iOS application features coming soon!</p>
+                {/* <div id='right-container2'>
+                    will add things there
+                </div> */}
+            </div>
 
+            <div className='landing-elements-container3'>
+                {/* <div id='left-container2'>
+                    will add things here
+                </div> */}
+                <div id='right-container2'>
+                    <h2>Add expenses easily</h2>
+                    <p>Quickly add expenses before you forget who paid.</p>
+                    <img src={LandingPageImg4} alt='add-expense-image'></img>
                 </div>
             </div>
         </div>
