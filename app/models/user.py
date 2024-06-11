@@ -83,7 +83,7 @@ class User(db.Model, UserMixin):
             "name": self.name,
             "email": self.email,
             "profileImage": self.profile_image,
-            # "createdAt": self.created_at,
+            "createdAt": self.created_at,
             # "updatedAt": self.updated_at,
         }
 
