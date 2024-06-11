@@ -40,7 +40,6 @@ function FriendsSummary() {
 // For each payment, find the expense that the payment is associated with, and reduce the remaining amount column by the payments amount
 // I think we are only pulling in the payments the user has made and not all payments
     Object.values(payments).forEach(payment => {
-        console.log(payment)
         if (friendsExpenses[payment.expenseId]) {
             friendsExpenses[payment.expenseId].remainingAmount -= payment.amount;
         }
