@@ -7,8 +7,6 @@ import './FriendsExpenseList.css';
 
 function FriendsExpensesList() {
   const { friendId } = useParams();
-  // const currFriend = useSelector(state => state = state.friends[friendId])
-  // const [expensePayments, setExpensePayments] = useState([])
   const allExpenses = useSelector(state => state.friendsExpenses)
   const currUser = useSelector(state => state.session.user)
   const currFriend = useSelector(state => state.friends[parseInt(friendId)])
@@ -18,8 +16,6 @@ function FriendsExpensesList() {
   const [payments, setPayments] = useState([])
 
   const [openCards, setOpenCards] = useState([])
-
-
 
 
   useEffect(() => {
@@ -67,7 +63,7 @@ function FriendsExpensesList() {
           {expenses.length
               ? <div>
                   {expenses.map((expense, idx)=> (
-                  <div key={idx} className='friend-expense'>
+                  <div key={idx} className='friend-expense' >
                     <div className="friends-expense-title" onClick={() => handleClick(idx)}>
                       <div>{expense.description}</div>
                       {!expense.settled
@@ -94,8 +90,8 @@ function FriendsExpensesList() {
           {payments.length
           ? <div>
                 {payments.map((payment, idx)=> (
-                <div key={idx + 200} className='friend-payments'>
-                  <div className="friends-expense-title" onClick={() => handleClick(idx + 200)}>
+                <div key={idx + 200} className='friend-payments' onClick={() => handleClick(idx + 200)}>
+                  <div className="friends-expense-title" >
                     <div >{`paid: ${centsToUSD(payment.amount)}`}</div>
                     <div>{payment.paymentDate.slice(0, -12)}</div>
                   </div>

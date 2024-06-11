@@ -9,8 +9,9 @@
     justify-content: space-between;
     align-items: center;
 
-    border: 2px solid var(--theme-m-gray);
-    border-radius: 2.5px;
+    border: 1px solid var(--theme-m-gray);
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.336);
 }
 
 #page-title {

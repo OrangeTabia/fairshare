@@ -1,3 +1,9 @@
+.left-column,
+.middle-column,
+.right-column {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.356);
+}
+
 .middle-column {
     height: 800px;
 }
