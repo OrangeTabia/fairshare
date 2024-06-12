@@ -3,7 +3,7 @@ body {
 }
 
 #landing-main-container {
-    background: linear-gradient(430deg, #49aef1d2, #fd9934be);
+    background: linear-gradient(425deg, #49aef1d2, #fd9934be);
 }
 
 .landing-elements-container1 {
@@ -112,7 +112,7 @@ body {
     gap: 50px;
     padding-bottom: 50px;
     padding-top: 25px;
-    background-image: url('../../../images/5.png');
+    background-image: url('../../../images/2.png');
     /* border: 1px solid blue; */
 }
 

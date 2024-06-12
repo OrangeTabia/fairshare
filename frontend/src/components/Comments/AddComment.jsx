@@ -19,8 +19,6 @@ function AddComment({ comments, expense }) {
   const friends = Object.values(friendsFlattened);
   const currentUser = useSelector((state) => state.session.user);
 
-  console.log("EXPENSE", expense);
-
   useEffect(() => {
     const errors = {};
     if (comment.length > 200)
@@ -58,7 +56,12 @@ function AddComment({ comments, expense }) {
         {expense.comments.length ? 
         <div id="existing-comments">
           {comments &&
-            comments.map((comment) => (
+            comments.map((comment) => {
+              let commentDate = (comment.createdAt).split(' ').slice(0, -1).join(' '); 
+              // let formattedCommentDate = commentDate.toLocaleString('en-US', { hour: 'numeric', hour12: true })
+              // console.log("COMMENT DATE",  formattedCommentDate); 
+              
+              return (
               <div key={comment.id}>
                 <div id="comment-name-date-buttons">
                   <div id="name-and-date">
@@ -66,7 +69,8 @@ function AddComment({ comments, expense }) {
                     ? currentUser.name
                     : friends?.find((friend) => friend.id === comment?.userId)
                         ?.name}
-                        <span id="comment-createdAt"> - {comment.createdAt}</span>
+                        
+                        <span id="comment-createdAt"> - {commentDate}</span>
                   </div>
                   <div id="comment-edit-delete-btns">
                   <OpenModalButton
@@ -89,7 +93,7 @@ function AddComment({ comments, expense }) {
                 <div id="comment-edit-delete">
                 </div>
               </div>
-            ))}
+            )})}
         </div>
         : '' }
         <div id="new-comment">
