@@ -2,3 +2,11 @@
     display: flex;
     justify-content: space-around;
 }
+
+.cant-delete-friend {
+    width: 520px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
