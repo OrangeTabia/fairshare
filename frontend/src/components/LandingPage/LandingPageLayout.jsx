@@ -3,7 +3,6 @@ import SignupFormModal from '../modals/SignupFormModal';
 import OpenModalButton from '../modals/OpenModalButton';
 import { useModal } from '../../context/Modal'; 
 
-import LandingPageImg from '../../../images/landing-page-img2.png';
 import HousematesIcon from '../../../images/housemates.png'
 import LandingPageImg3 from '../../../images/landing3.png';
 import LandingPageImg4 from '../../../images/landing2.png';
