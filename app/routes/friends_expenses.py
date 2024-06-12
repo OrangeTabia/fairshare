@@ -69,7 +69,7 @@ def create_friends_expense():
     if form.validate_on_submit():
 
         formatted_date = datetime.strptime(
-            format_input_date(form.data["expense_date"]), "%Y-%m-%d %H:%M:%S"
+            format_input_date(form.data["expense_date"]), "%Y-%m-%d"
         )
 
         new_friends_expense = FriendsExpense(

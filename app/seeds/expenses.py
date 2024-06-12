@@ -2,90 +2,91 @@ from app.models import db, FriendsExpense, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import datetime
 
+
 def seed_expenses():
 
     demo1 = FriendsExpense(
         payer_id=1,
         receiver_id=100,
-        description='Pizza night!',
+        description="Pizza night!",
         amount=4000,
-        expense_date=datetime(2023, 2, 28, 0, 0, 0),
+        expense_date=datetime(2023, 2, 28),
         settled=False,
-        notes='Extra peperoni for Stacy'
-        )
+        notes="Extra peperoni for Stacy",
+    )
     demo2 = FriendsExpense(
         payer_id=2,
         receiver_id=100,
-        description='Night on the Town!',
+        description="Night on the Town!",
         amount=6500,
-        expense_date=datetime(2023, 2, 28, 0, 0, 0),
+        expense_date=datetime(2023, 2, 28),
         settled=False,
-        )
+    )
     demo3 = FriendsExpense(
         payer_id=3,
         receiver_id=100,
-        description='Rent',
+        description="Rent",
         amount=60000,
-        expense_date=datetime(2023, 2, 28, 0, 0, 0),
+        expense_date=datetime(2023, 2, 28),
         settled=False,
-        notes='May rent'
-        )
+        notes="May rent",
+    )
     demo4 = FriendsExpense(
         payer_id=100,
         receiver_id=4,
-        description='Wine Tasting!',
+        description="Wine Tasting!",
         amount=5500,
-        expense_date=datetime(2023, 2, 28, 0, 0, 0),
+        expense_date=datetime(2023, 2, 28),
         settled=False,
-        )
+    )
     demo5 = FriendsExpense(
         payer_id=100,
         receiver_id=5,
-        description='Lazer tag',
+        description="Lazer tag",
         amount=2500,
-        expense_date=datetime(2023, 4, 28, 0, 0, 0),
+        expense_date=datetime(2023, 4, 28),
         settled=False,
-        )
+    )
     demo6 = FriendsExpense(
         payer_id=100,
         receiver_id=6,
-        description='Hiking!',
+        description="Hiking!",
         amount=5500,
-        expense_date=datetime(2023, 5, 28, 0, 0, 0),
+        expense_date=datetime(2023, 5, 28),
         settled=False,
-        )
+    )
     demo7 = FriendsExpense(
         payer_id=100,
         receiver_id=7,
-        description='Brunch!',
+        description="Brunch!",
         amount=2500,
-        expense_date=datetime(2023, 2, 28, 0, 0, 0),
+        expense_date=datetime(2023, 2, 28),
         settled=True,
-        )
+    )
     demo8 = FriendsExpense(
         payer_id=100,
         receiver_id=8,
-        description='Zoo Visit',
+        description="Zoo Visit",
         amount=4300,
-        expense_date=datetime(2023, 2, 28, 0, 0, 0),
+        expense_date=datetime(2023, 2, 28),
         settled=False,
-        )
+    )
     demo9 = FriendsExpense(
         payer_id=100,
         receiver_id=9,
-        description='Party!',
+        description="Party!",
         amount=8700,
-        expense_date=datetime(2023, 2, 28, 0, 0, 0),
+        expense_date=datetime(2023, 2, 28),
         settled=False,
-        )
+    )
     demo10 = FriendsExpense(
         payer_id=100,
         receiver_id=12,
-        description='Beach trip',
+        description="Beach trip",
         amount=12400,
-        expense_date=datetime(2023, 2, 28, 0, 0, 0),
+        expense_date=datetime(2023, 2, 28),
         settled=False,
-        )
+    )
 
     db.session.add(demo1)
     db.session.add(demo2)
@@ -98,7 +99,6 @@ def seed_expenses():
     db.session.add(demo9)
     db.session.add(demo10)
 
-
     db.session.commit()
 
 
@@ -110,7 +110,9 @@ def seed_expenses():
 # it will reset the primary keys for you as well.
 def undo_expenses():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.friends_expenses RESTART IDENTITY CASCADE;")
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.friends_expenses RESTART IDENTITY CASCADE;"
+        )
     else:
         db.session.execute(text("DELETE FROM friends_expenses"))
 

@@ -233,6 +233,7 @@ function SettleUpModal() {
               id="settle-payment-date"
               type="date"
               value={paymentDate}
+              min={new Date(Date.now()).toISOString().split("T")[0]}
               onChange={(e) => setPaymentDate(e.target.value)}
               required
             />
