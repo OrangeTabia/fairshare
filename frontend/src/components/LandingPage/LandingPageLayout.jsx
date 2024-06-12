@@ -45,22 +45,20 @@ function LandingPageLayout () {
 
             <div className='landing-elements-container2'>
                 <div id='left-container2'>
-                    <h2>Pay friends back</h2>
-                    <p>Settle up with a friend and record any <br></br>cash or online payment.</p>
                     <img src={LandingPageImg3} alt='settle-up-image'></img>
                 </div>
-                {/* <div id='right-container2'>
-                    will add things there
-                </div> */}
+                <div id='right-container2'>
+                    <h1>Pay friends back</h1>
+                    <p>Settle up with a friend and record any <br></br>cash or online payment.</p>
+                </div>
             </div>
 
             <div className='landing-elements-container3'>
-                {/* <div id='left-container2'>
-                    will add things here
-                </div> */}
-                <div id='right-container2'>
-                    <h2>Add expenses easily</h2>
+                <div id='left-container2'>
+                    <h1>Add expenses easily</h1>
                     <p>Quickly add expenses before you forget who paid.</p>
+                </div>
+                <div id='right-container2'>
                     <img src={LandingPageImg4} alt='add-expense-image'></img>
                 </div>
             </div>

@@ -3,7 +3,7 @@ body {
 }
 
 #landing-main-container {
-    background: linear-gradient(400deg, #49aef1a1, #fd99344e);
+    background: linear-gradient(430deg, #49aef1d2, #fd9934be);
 }
 
 .landing-elements-container1 {
@@ -54,10 +54,6 @@ body {
     font-weight: bold;
 }
 
-.landingPage-image {
-    margin-top: 25px;
-}
-
 #landing-icons {
     display: flex;
     flex-direction: row;
@@ -82,11 +78,20 @@ body {
 .big-signup > button {
     width: 180px;
     height: 45px;
-    font-size: 16px;
-    font-weight: 660;
-    border: none;
     border-radius: 10px;
-    background: linear-gradient(454deg,#EFCEAD, #FD9934);
+    border: none;
+    cursor: pointer;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    background: linear-gradient(120deg, #49AEF1, #F1AD69, #FD9934);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    transition: background-position .5s;
+}
+
+.big-signup > button:hover {
+    background-position: 0 0;
 }
 
 #main-footer {
@@ -102,23 +107,24 @@ body {
 .landing-elements-container2 {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-evenly;
     align-items: center;
-    gap: 200px;
+    gap: 50px;
     padding-bottom: 50px;
     padding-top: 25px;
-    border: 1px solid blue;
+    background-image: url('../../../images/5.png');
+    /* border: 1px solid blue; */
 }
 
 .landing-elements-container3 {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-evenly;
     align-items: center;
-    gap: 200px;
+    gap: 50px;
     padding-bottom: 50px;
     padding-top: 25px;
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
 }
 
 #left-container2 {
@@ -126,10 +132,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
     text-align: center;
-    margin-left: 200px;
-    border: 1px solid green;
+    /* border: 1px solid green; */
 }
 
 #right-container2 {
@@ -139,16 +143,17 @@ body {
     justify-content: center;
     gap: 10px;
     text-align: center;
-    margin-right: 200px;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
-#left-container2 > h2, #right-container2 > h2 {
+#left-container2 > h1, #right-container2 > h1 {
     margin-bottom: 0px;
+    font-size: 40px;
 }
 
 #left-container2 > p, #right-container2 > p {
     font-weight: 660;
+    font-size: 20px;
 }
 
 #footer-container {
@@ -162,7 +167,7 @@ body {
 #developers-container {
     display: flex;
     flex-direction: row;
-    gap: 300px;
+    gap: 250px;
 }
 
 #footer-name {
