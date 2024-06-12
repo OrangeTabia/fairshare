@@ -69,7 +69,7 @@ const WalkthroughModal3 = () => {
             <h1>Friends</h1>
             <div>
                 <p>On the your left you will find a list of all your friends</p>
-                <p>You can add more friends by clicking the 'Invite a Friend' button below. Or, you can click on a
+                <p>You can add more friends by clicking the 'Invite a Friend' button. Or, you can click on a
                     friend to see details about all the expenses and payments there are between you and
                     your selected friend</p>
             </div>
@@ -95,7 +95,7 @@ const WalkthroughModal4 = () => {
             <h1>Add an Expense</h1>
             <div>
                 <p>To add an expense between you and a friend, click the 'Add Expense' button in the upper middle section of the page.</p>
-                <p>fill out a short form and your friend will be notified they still owe you for that slice of pizza
+                <p>Fill out a short form and your friend will be notified they still owe you for that slice of pizza
                     you bought them last week.</p>
             </div>
             <div className='walkthrough-modal-btn'>

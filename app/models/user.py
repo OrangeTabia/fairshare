@@ -35,6 +35,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(50), nullable=False, unique=True)
     profile_image = db.Column(db.String(1000), nullable=False)
     hashed_password = db.Column(db.String(255), nullable=False)
+    seen_walkthrough = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now())
 
@@ -83,7 +84,8 @@ class User(db.Model, UserMixin):
             "name": self.name,
             "email": self.email,
             "profileImage": self.profile_image,
-            "createdAt": self.created_at,
+            "seen_walkthrough": self.seen_walkthrough,
+            # "createdAt": self.created_at,
             # "updatedAt": self.updated_at,
         }
 

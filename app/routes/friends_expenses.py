@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 from datetime import datetime
 
-from app.models import FriendsExpense, Payment, db
+from app.models import FriendsExpense, db
 from app.forms import CreateFriendsExpenseForm
 
 friends_expenses_routes = Blueprint("friends_expenses", __name__)
