@@ -89,9 +89,6 @@ function AddExpenseModal({ friendName }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Store todays date and update the submitted state
-    const newDate = new Date(expenseDate);
-
     if (!hasSubmitted) {
       setHasSubmitted(true);
       const newValidations = getValidations();
@@ -104,7 +101,7 @@ function AddExpenseModal({ friendName }) {
       receiverId: currentUser.id,
       description,
       amount: getIntegerAmount(),
-      expenseDate: newDate,
+      expenseDate,
       settled: false,
       notes,
     };
