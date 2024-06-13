@@ -1,0 +1,42 @@
+
+.walkthrough-modal-container {
+    width: 500px;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.walkthrough-modal-container h1 {
+    border-bottom: 1px solid rgb(192, 191, 191);
+    margin-bottom: 0px;
+}
+
+.walkthrough-modal-container div p {
+    text-align: center;
+}
+
+.walkthrough-modal-container h1 {
+    padding-left: 20px;
+}
+
+.walkthrough-modal-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.walkthrough-modal-btn button {
+    width: 170px;
+    height: 28px;
+    font-size: 1rem;
+    background-color: var(--theme-xl-blue);
+    border: 2px solid var(--theme-blue);
+    border-radius: 5px;
+}
+
+.walkthrough-modal-btn button:hover {
+    background-color: var(--theme-l-blue);
+    border: 2px solid var(--theme-d-blue);
+}

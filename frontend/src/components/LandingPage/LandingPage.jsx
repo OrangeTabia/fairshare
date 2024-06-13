@@ -22,6 +22,27 @@ export default function LandingPage() {
           <LandingPageLayout />
         </main>
         <Modal />
+        <footer id='main-footer'>
+          <div id='footer-container'>
+            <div id='developers-container'>
+              <div className='footer-devs'>
+                <a href="https://github.com/llfbh33" target="_blank" rel="noreferrer">Aubrie Woodbine</a>
+              </div>
+              <div className='footer-devs'>
+                <a href="https://github.com/ethanharrasser" target="_blank" rel="noreferrer">Ethan Harrasser</a>
+              </div>
+              <div className='footer-devs'>
+                <a href="https://github.com/jeramief" target="_blank" rel="noreferrer">Jeramie Forbes</a>
+              </div>
+              <div className='footer-devs'>
+                <a href="https://github.com/OrangeTabia" target="_blank" rel="noreferrer">Tabia Ye</a>
+              </div>
+            </div>
+            <div id='footer-name'>
+              &copy;&nbsp;fairshare 2024
+            </div>
+          </div>
+        </footer>
       </ModalProvider>
     </>
   );

@@ -1,6 +1,6 @@
-import { clearFriendsExpenses } from './friends_expenses'; 
-import { clearPayments } from './payments'; 
-import { clearFriends } from './friends'; 
+import { clearFriendsExpenses } from './friends_expenses';
+import { clearPayments } from './payments';
+import { clearFriends } from './friends';
 
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
@@ -25,6 +25,24 @@ export const thunkAuthenticate = () => async (dispatch) => {
 
 		dispatch(setUser(data));
 	}
+};
+
+export const thunkUpdateWalkthrough = (id) => async dispatch => {
+  const response = await fetch(`/api/users/${id}/update`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({seen_walkthrough: 'true'})
+  });
+
+  if(response.ok) {
+    const data = await response.json();
+    dispatch(setUser(data));
+  } else if (response.status < 500) {
+    const errorMessages = await response.json();
+    return errorMessages
+  } else {
+    return { server: "Something went wrong. Please try again" }
+  }
 };
 
 export const thunkLogin = (credentials) => async dispatch => {
@@ -68,7 +86,7 @@ export const thunkLogout = () => async (dispatch) => {
   await dispatch(removeUser());
   await dispatch(clearFriendsExpenses());
   await dispatch(clearPayments());
-  await dispatch(clearFriends()); 
+  await dispatch(clearFriends());
 };
 
 const initialState = { user: null };
