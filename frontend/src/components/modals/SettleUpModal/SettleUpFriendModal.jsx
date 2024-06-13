@@ -61,6 +61,10 @@ function SettleUpFriendModal() {
       newValidations.amount =
         "Payment must be the same or less than what is owed";
     }
+    if (!expense) {
+      newValidations.expense = "Please choose an expense";
+    }
+
     const date = new Date(paymentDate.split("-").join(" "));
     const today = new Date(Date.now());
 
@@ -75,7 +79,7 @@ function SettleUpFriendModal() {
       newValidations.paymentDate = "Payment date must be in the future";
     }
     return newValidations;
-  }, [amount, amountDue, paymentDate]);
+  }, [amount, amountDue, expense, paymentDate]);
 
   useEffect(() => {
     if (!hasSubmitted) return;
@@ -185,6 +189,9 @@ function SettleUpFriendModal() {
                 Between <span>you</span> and <span>{currFriend.name}</span>
               </p>
             </div>
+            {validations.expense && (
+              <span className="form-error">{validations.amount}</span>
+            )}
             <div>
               <label htmlFor="expense">Which Expense?&nbsp;&nbsp;&nbsp;</label>
               <select
@@ -204,7 +211,7 @@ function SettleUpFriendModal() {
             <br></br>
             <div className="form-label">
               <label htmlFor="amount"></label>
-              {validations.amount && (
+              {expense && validations.amount && (
                 <span className="form-error">{validations.amount}</span>
               )}
             </div>
