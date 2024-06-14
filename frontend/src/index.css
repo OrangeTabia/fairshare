@@ -114,7 +114,6 @@ html, body {
 #main-content {
     width: 100%;
     /* position: fixed; */
-    margin-top: 42px;
 }
 
 .columns-wrapper {

@@ -6,7 +6,7 @@
   flex-flow: row nowrap;
   justify-content: right;
   align-items: center;
-  gap: 10px;
+  gap: 50px;
 }
 
 .nav-header li,
