@@ -34,25 +34,22 @@ Render
 
 # Endpoints
 
-## `Auth`
-
-## Teams
-## Games
-## Odds
-## Results
+## Auth
+## Expenses
+## Comments
+## Friends
+## Settle Up
 
 
 # Feature List
-1. Teams
-2. Games
-3. Odds
-4. Results
+1. Expenses
+2. Comments
+3. Friends
+4. Settle Up
 
 # Future Implementation Goals
-1. User role for 'betters' 
-2. API for live games
-3. Betters can make single game bets or parlays
-4. Betters can join groups with friends and see each others' bets
+1. Create a groups feature where users can create, update, delete reoccurring expenses within that group of friends.
+2. Create a toggle in the expenses that will split fees between friends and groups by a certain percentage.
 
 # Connect
 [LinkedIn](https://www.linkedin.com/in/tabiaye/)
