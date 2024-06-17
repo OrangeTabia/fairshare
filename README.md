@@ -52,6 +52,8 @@ Render
 2. Create a toggle in the expenses that will split fees between friends and groups by a certain percentage.
 
 # Connect
-[Jeramie Forbes](https://www.linkedin.com/in/jeramieforbes/)
+Aubrie Woodbine | 
+Ethan Harrasser | 
+[Jeramie Forbes](https://www.linkedin.com/in/jeramieforbes/) | 
 [Tabia Ye](https://www.linkedin.com/in/tabiaye/)
 
