@@ -1,9 +1,9 @@
-# DraftQueens 
-DraftQueens is inspired by sports betting website 'DraftKings'. DraftQueens focuses on professional and amateur female sports such as the WNBA and the NWSL. At the moment, the site offers book keepers the ability to create teams, games, odds for each game, and results for each game. Eventually, there will be user roles for both betters and book keepers to bet on games and create games, respectively. 
+# fairshare 
+Fairshare is inspired by the website/app 'Splitwise'. 
 
 
 # Live Link
-https://draft-queens.onrender.com/
+[https://fairshare-f8a7.onrender.com](https://fairshare-f8a7.onrender.com)
 
 
 # Tech Stack
