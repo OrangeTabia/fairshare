@@ -35,6 +35,24 @@ Render
 # Endpoints
 
 ## Auth
+### Log In User
+- Method: `POST`
+- URL: `/api/auth/login`
+- Body: 
+```json
+{
+    "username": "Joe Burrow",
+    "password": "password"
+}
+```
+- Successful Response: 
+```json
+{
+    "id": 1,
+    "username": "Joe Burrow", 
+    "email": "joeburrow@gmail.com"
+}
+```
 ## Expenses
 ## Comments
 ## Friends
