@@ -19,7 +19,7 @@ Render
 
 
 # Index
-[Features List](https://github.com/OrangeTabia/Draft-Queens/wiki/MVP-Features-List) | [Database Schema](https://github.com/OrangeTabia/Draft-Queens/wiki/Database-Schema) | [User Stories](https://github.com/OrangeTabia/Draft-Queens/wiki/User-Stories) | [Wireframes](https://github.com/OrangeTabia/Draft-Queens/wiki/Wireframes)
+[Features List](https://github.com/OrangeTabia/Python-Project/wiki/Features) | [Database Schema](https://github.com/OrangeTabia/Python-Project/wiki/Database-Schema) | [User Stories](https://github.com/OrangeTabia/Python-Project/wiki/User-Stories)
 
 
 # Landing Page
