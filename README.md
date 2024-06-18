@@ -1,5 +1,5 @@
 # fairshare 
-Fairshare is inspired by the website/app 'Splitwise'. 
+Fairshare is a partial clone inspired by 'Splitwise' that allows consumers to split expenses with friends. 
 
 
 # Live Link
