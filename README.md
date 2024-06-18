@@ -95,7 +95,11 @@ Render
     "updatedAt": "Tue, 18 Jun 2024 14:32:58 GMT"
 }
 ```
-### View all Expenses
+### View all Expenses (comments included)
+- Method: `GET`
+- URL: `/api/friends_expenses`
+- Body: none
+- Successful Response:
 ```json
 {
     "payerFriendsExpenses": [
@@ -133,7 +137,8 @@ Render
             "receiverId": 7,
             "settled": true,
             "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT"
-        },
+        }
+    ],
     "receiverFriendsExpenses": [
         {
             "amount": 4000,
@@ -179,6 +184,7 @@ Render
             "settled": false,
             "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT"
         },
+    ]
 }
 ```
 ### Edit an Expense
@@ -222,7 +228,83 @@ Render
 ```
 
 ## Comments
+### Create a Comment
+- Method: `POST`
+- URL: `/api/comments/new`
+- Body:
+```json
+{
+    "user_id": 100,
+    "friends_expense_id": 4,
+    "comments": "I can't beleive I am paying this much money!"
+}
+```
+- Successful Response:
+```json
+{
+    "id": 6,
+    "expenseId": 1,
+    "userId": 100,
+    "comment": "I can't beleive I am paying this much money!",
+    "updatedAt": "Tue, 18 Jun 2024 14:32:58 GMT",
+    "createdAt": "Tue, 18 Jun 2024 14:32:58 GMT"
+}
+```
+### Edit a Comment
+- Method: `POST`
+- URL: `/api/comments/:comment_id/update`
+- Body:
+```json
+{
+    "user_id": 100,
+    "friends_expense_id": 1,
+    "comment": "money!"
+}
+```
+- Successful Response:
+```json
+{
+    "id": 6,
+    "expenseId": 1,
+    "userId": 100,
+    "comment": "money!",
+    "updatedAt": "Tue, 18 Jun 2024 14:32:58 GMT",
+    "createdAt": "Tue, 18 Jun 2024 14:32:58 GMT"
+}
+```
+### Delete a Comment
+- Method: `GET`
+- URL: `/api/comments/:comment_id/delete
+- Body: none
+- Successful Response:
+```json
+{
+    "message": "Comment has been successfully deleted"
+}
+```
+
 ## Friends
+### Add a Friend
+- Method: `POST`
+- URL: `/api/friends/new`
+- Body:
+```json
+{
+    "user_id": 100,
+    "email": "joeburrow@gmail.com"
+}
+```
+- Successful Response:
+```json
+{
+    "id": 47,
+    "email": "shaneguerrero@example.net",
+    "name": "Lori Brown",
+    "profileImage": "https://images.unsplash.com/photo-1612487528505-d2338264c821?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "seen_walkthrough": false
+}
+```
+
 ## Settle Up
 
 
