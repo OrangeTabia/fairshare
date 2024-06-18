@@ -59,7 +59,122 @@ Render
     "email": "joeburrow@gmail.com"
 }
 ```
+### Sign Up User
+- Method: `POST`,
+- URL:
+- Body:
+- Successful Respone:
+
 ## Expenses
+### Create an Expense
+- Method: `POST`
+- URL: `/api/friends_expenses/new`
+- Body:
+```json
+{
+    "payer_id": 1,
+    "receiver_id": 2,
+    "description": "brunch",
+    "amount": 30,
+    "expense_date": "2024-06-30",
+    "notes": "the eggs and bacon were great!"
+}
+```
+- Successful Response:
+```json
+{
+    
+}
+```
+### View all Expenses
+```json
+{
+    "payerFriendsExpenses": [
+        {
+            "amount": 5500,
+            "comments": [
+                {
+                    "comment": "I smell hints of vanilla",
+                    "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+                    "expenseId": 4,
+                    "id": 4,
+                    "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+                    "userId": 4
+                }
+            ],
+            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+            "description": "Wine Tasting!",
+            "expenseDate": "Tue, 28 Feb 2023 00:00:00 GMT",
+            "id": 4,
+            "notes": null,
+            "payerId": 100,
+            "receiverId": 4,
+            "settled": false,
+            "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT"
+        },
+        {
+            "amount": 2500,
+            "comments": [],
+            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+            "description": "Brunch!",
+            "expenseDate": "Tue, 28 Feb 2023 00:00:00 GMT",
+            "id": 7,
+            "notes": null,
+            "payerId": 100,
+            "receiverId": 7,
+            "settled": true,
+            "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT"
+        },
+    "receiverFriendsExpenses": [
+        {
+            "amount": 4000,
+            "comments": [
+                {
+                    "comment": "I wanted Pinapple!",
+                    "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+                    "expenseId": 1,
+                    "id": 1,
+                    "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+                    "userId": 100
+                }
+            ],
+            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+            "description": "Pizza night!",
+            "expenseDate": "Tue, 28 Feb 2023 00:00:00 GMT",
+            "id": 1,
+            "notes": "Extra peperoni for Stacy",
+            "payerId": 1,
+            "receiverId": 100,
+            "settled": false,
+            "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT"
+        },
+        {
+            "amount": 6500,
+            "comments": [
+                {
+                    "comment": "Never drinking this much again! Ugh!",
+                    "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+                    "expenseId": 2,
+                    "id": 2,
+                    "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+                    "userId": 2
+                }
+            ],
+            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+            "description": "Night on the Town!",
+            "expenseDate": "Tue, 28 Feb 2023 00:00:00 GMT",
+            "id": 2,
+            "notes": null,
+            "payerId": 2,
+            "receiverId": 100,
+            "settled": false,
+            "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT"
+        },
+}
+```
+### Edit an Expense
+
+### Delete an Expense
 ## Comments
 ## Friends
 ## Settle Up
