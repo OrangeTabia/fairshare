@@ -23,13 +23,16 @@ Render
 
 
 # Landing Page
-- pic or video of landing page
+![fairshare-landing](https://github.com/OrangeTabia/Python-Project/assets/131227932/db9e6272-a64c-4064-8c89-b64238cb0f1a)
 
-# Teams
-- pic or video of teams page
+# Expenses
 
-# Games
-- pic or video of games page
+# Settle Up
+
+# Comments
+
+# Friends
+
 
 
 # Endpoints
