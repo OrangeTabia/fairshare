@@ -26,14 +26,16 @@ Render
 ![fairshare-landing](https://github.com/OrangeTabia/Python-Project/assets/131227932/db9e6272-a64c-4064-8c89-b64238cb0f1a)
 
 # Expenses
+![fairshare-friends](https://github.com/OrangeTabia/Python-Project/assets/131227932/cb7f3425-ac84-4f65-9782-c5f907d69f57)
 
 # Settle Up
+![fairshare-settleup](https://github.com/OrangeTabia/Python-Project/assets/131227932/54947616-f4a0-4bb1-8e60-e2987ba62662)
 
 # Comments
+![fairshare-comments](https://github.com/OrangeTabia/Python-Project/assets/131227932/fd88f191-7ab0-42b4-a421-eb39e686cf5e)
 
 # Friends
-
-
+![fairshare-friends](https://github.com/OrangeTabia/Python-Project/assets/131227932/0befc03e-1140-4c34-8368-dea5a13fc60f)
 
 # Endpoints
 
