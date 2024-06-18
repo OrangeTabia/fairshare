@@ -1,9 +1,9 @@
-# DraftQueens 
-DraftQueens is inspired by sports betting website 'DraftKings'. DraftQueens focuses on professional and amateur female sports such as the WNBA and the NWSL. At the moment, the site offers book keepers the ability to create teams, games, odds for each game, and results for each game. Eventually, there will be user roles for both betters and book keepers to bet on games and create games, respectively. 
+# fairshare 
+Fairshare is inspired by the website/app 'Splitwise'. 
 
 
 # Live Link
-https://draft-queens.onrender.com/
+[https://fairshare-f8a7.onrender.com](https://fairshare-f8a7.onrender.com)
 
 
 # Tech Stack
@@ -19,41 +19,62 @@ Render
 
 
 # Index
-[Features List](https://github.com/OrangeTabia/Draft-Queens/wiki/MVP-Features-List) | [Database Schema](https://github.com/OrangeTabia/Draft-Queens/wiki/Database-Schema) | [User Stories](https://github.com/OrangeTabia/Draft-Queens/wiki/User-Stories) | [Wireframes](https://github.com/OrangeTabia/Draft-Queens/wiki/Wireframes)
+[Features List](https://github.com/OrangeTabia/Python-Project/wiki/Features) | [Database Schema](https://github.com/OrangeTabia/Python-Project/wiki/Database-Schema) | [User Stories](https://github.com/OrangeTabia/Python-Project/wiki/User-Stories)
 
 
 # Landing Page
-- pic or video of landing page
+![fairshare-landing](https://github.com/OrangeTabia/Python-Project/assets/131227932/db9e6272-a64c-4064-8c89-b64238cb0f1a)
 
-# Teams
-- pic or video of teams page
+# Expenses
 
-# Games
-- pic or video of games page
+# Settle Up
+
+# Comments
+
+# Friends
+
 
 
 # Endpoints
 
-## `Auth`
-
-## Teams
-## Games
-## Odds
-## Results
+## Auth
+### Log In User
+- Method: `POST`
+- URL: `/api/auth/login`
+- Body: 
+```json
+{
+    "username": "Joe Burrow",
+    "password": "password"
+}
+```
+- Successful Response: 
+```json
+{
+    "id": 1,
+    "username": "Joe Burrow", 
+    "email": "joeburrow@gmail.com"
+}
+```
+## Expenses
+## Comments
+## Friends
+## Settle Up
 
 
 # Feature List
-1. Teams
-2. Games
-3. Odds
-4. Results
+1. Expenses
+2. Comments
+3. Friends
+4. Settle Up
 
 # Future Implementation Goals
-1. User role for 'betters' 
-2. API for live games
-3. Betters can make single game bets or parlays
-4. Betters can join groups with friends and see each others' bets
+1. Create a groups feature where users can create, update, delete reoccurring expenses within that group of friends.
+2. Create a toggle in the expenses that will split fees between friends and groups by a certain percentage.
 
 # Connect
-[LinkedIn](https://www.linkedin.com/in/tabiaye/)
+Aubrie Woodbine | 
+Ethan Harrasser | 
+[Jeramie Forbes](https://www.linkedin.com/in/jeramieforbes/) | 
+[Tabia Ye](https://www.linkedin.com/in/tabiaye/)
 
