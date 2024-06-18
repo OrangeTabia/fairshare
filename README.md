@@ -83,7 +83,16 @@ Render
 - Successful Response:
 ```json
 {
-    
+    "id": 11,
+    "payerId": 1,
+    "receiverId": 2,
+    "description": "brunch",
+    "amount": 30,
+    "expenseDate": "Sun, 30 Jun 2024 00:00:00 GMT",
+    "settled": false,
+    "notes": "the eggs and bacon were great!",
+    "createdAt": "Tue, 18 Jun 2024 14:32:58 GMT",
+    "updatedAt": "Tue, 18 Jun 2024 14:32:58 GMT"
 }
 ```
 ### View all Expenses
@@ -173,8 +182,45 @@ Render
 }
 ```
 ### Edit an Expense
-
+- Method: `POST`,
+- URL: `/api/friends_expenses/:friends_expense_id/update
+- Body:
+```json
+{
+    "payer_id": 1,
+    "receiver_id": 2,
+    "description": "brunch",
+    "amount": 30,
+    "expense_date": "2024-06-30",
+    "notes": "nvm the eggs were awful! i'll still pay you back"
+}
+```
+- Successful Response:
+```json
+{
+    "id": 11,
+    "payerId": 1,
+    "receiverId": 2,
+    "description": "brunch",
+    "amount": 30,
+    "expenseDate": "Sun, 30 Jun 2024 00:00:00 GMT",
+    "settled": false,
+    "notes": "nvm the eggs were awful! i'll still pay you back",
+    "createdAt": "Tue, 18 Jun 2024 14:32:58 GMT",
+    "updatedAt": "Tue, 18 Jun 2024 14:32:58 GMT"
+}
+```
 ### Delete an Expense
+- Method: `GET`
+- URL: `/api/friends_expenses/:friends_expense_id/delete
+- Body: none
+- Successful Response:
+```json  
+{
+    "message": "Friends Expense successfully deleted"
+}
+```
+
 ## Comments
 ## Friends
 ## Settle Up
