@@ -9,13 +9,19 @@ Fairshare is a partial clone inspired by 'Splitwise' that allows consumers to sp
 # Tech Stack
 
 ### Frameworks and Libraries
-Python, Flask, JavaScript, React, Redux, CSS3, HTML5
+![Static Badge](https://img.shields.io/badge/PYTHON-%233776AB?style=for-the-badge&logo=python&labelColor=black)
+![Static Badge](https://img.shields.io/badge/FLASK-%23000000?style=for-the-badge&logo=FLASK&labelColor=black)
+![Static Badge](https://img.shields.io/badge/JAVASCRIPT-%23F7DF1E?style=for-the-badge&logo=javascript&labelColor=black)
+![Static Badge](https://img.shields.io/badge/REACT-%2361DAFB?style=for-the-badge&logo=react&labelColor=black)
+![Static Badge](https://img.shields.io/badge/REDUX-%23764ABC?style=for-the-badge&logo=REDUX&labelColor=black)
+![Static Badge](https://img.shields.io/badge/CSS-%231572B6?style=for-the-badge&logo=CSS3&labelColor=black)
+![Static Badge](https://img.shields.io/badge/HTML-%23E34F26?style=for-the-badge&logo=HTML5&labelColor=black)
 
 ### Database: 
-Postgres
+![Static Badge](https://img.shields.io/badge/POSTGRESQL-%234169E1?style=for-the-badge&logo=POSTGRESQL&labelColor=black)
 
 ### Hosting: 
-Render
+![Static Badge](https://img.shields.io/badge/RENDER-%23000000?style=for-the-badge&logo=RENDER&labelColor=black)
 
 
 # Index
