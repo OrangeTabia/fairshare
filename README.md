@@ -304,9 +304,89 @@ Render
     "seen_walkthrough": false
 }
 ```
+### View all Friends
+- Method: `GET`
+- URL: `/api/friends`
+- Body: none
+- Successful Response:
+```json
+[
+    {
+        "email": "shaneguerrero@example.net",
+        "id": 47,
+        "name": "Lori Brown",
+        "profileImage": "https://images.unsplash.com/photo-1612487528505-d2338264c821?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "seen_walkthrough": false
+    }
+]
+```
+### Delete a Friend
+- Method: `GET`
+- URL: `/api/friends/:friend_id/delete`
+- Body: none
+- Successful Response: 
+```json
+{
+    "message": "Friend successfully deleted"
+}
+```
 
-## Settle Up
-
+## Payments (Settle Up)
+### Pay (Settle Up) an Expense
+- Method: `POST`
+- URL: `/api/payments/new`
+- Body:
+```json
+{
+    "user_id": 100,
+    "friends_expense_id": 8,
+    "amount": 43,
+    "payment_date": "2024-06-19 00:00:00"
+}
+```
+- Successful Response:
+```json
+{
+    "id": 6,
+    "userId": 100,
+    "expenseId": 8,
+    "amount": 43,
+    "paymentDate": "Wed, 19 Jun 2024 00:00:00 GMT",
+    "createdAt": "Tue, 18 Jun 2024 14:32:58 GMT",
+    "updatedAt": "Tue, 18 Jun 2024 14:32:58 GMT"
+}
+```
+### View all Payments
+- Method: `GET`
+- URL: `/api/payments`
+- Body: none
+- Successful Response:
+```json
+{
+    "payerPayments": [
+        {
+            "amount": 1000,
+            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+            "expenseId": 6,
+            "id": 3,
+            "paymentDate": "Wed, 10 May 2023 00:00:00 GMT",
+            "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+            "userId": 100
+        }
+    ],
+    "receiverPayments": [
+        {
+            "amount": 1000,
+            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+            "expenseId": 1,
+            "id": 1,
+            "paymentDate": "Wed, 10 May 2023 00:00:00 GMT",
+            "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+            "userId": 1
+        }
+    ]
+}
+```
 
 # Feature List
 1. Expenses
