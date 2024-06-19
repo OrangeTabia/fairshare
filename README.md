@@ -59,11 +59,6 @@ Render
     "email": "joeburrow@gmail.com"
 }
 ```
-### Sign Up User
-- Method: `POST`,
-- URL: 
-- Body:
-- Successful Respone:
 
 ## Expenses
 ### Create an Expense
