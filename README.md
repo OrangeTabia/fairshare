@@ -29,7 +29,7 @@ Render
 ![fairshare-expenses](https://github.com/OrangeTabia/Python-Project/assets/131227932/f3d0e51e-3423-49d7-9cb9-4ec6de1f11ed)
 
 
-# Settle Up
+# Payments (Settle Up)
 ![fairshare-settleup](https://github.com/OrangeTabia/Python-Project/assets/131227932/54947616-f4a0-4bb1-8e60-e2987ba62662)
 
 # Comments
@@ -61,7 +61,7 @@ Render
 ```
 ### Sign Up User
 - Method: `POST`,
-- URL:
+- URL: 
 - Body:
 - Successful Respone:
 
@@ -392,7 +392,7 @@ Render
 1. Expenses
 2. Comments
 3. Friends
-4. Settle Up
+4. Payments (Settle Up)
 
 # Future Implementation Goals
 1. Create a groups feature where users can create, update, delete reoccurring expenses within that group of friends.
