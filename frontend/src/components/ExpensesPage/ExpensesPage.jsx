@@ -41,21 +41,26 @@ function ExpensesPage() {
     }, [])
 
     return (
-        <div className="columns-wrapper">
-          <section className="left-column" >
-            <FriendsList />
-          </section>
-          <section className="middle-column">
-            <SecondaryNavigation pageTitle="All Expenses" />
-            <main >
-              <ExpensesList />
-            </main>
-          </section>
-          {/* if page size is less than 1000px, do not display this section */}
-          <section className="right-column" style={{ display: !devInvisible ? 'block' : 'none' }}>
-            <DevLinksList />
-          </section>
-        </div>
+      <div className="columns-main-container">
+          <div className="columns-wrapper">
+            <section className="left-column" >
+              <FriendsList />
+            </section>
+            <section className="middle-column">
+              <SecondaryNavigation pageTitle="All Expenses" />
+              <main >
+                <ExpensesList />
+              </main>
+            </section>
+            {/* if page size is less than 1000px, do not display this section */}
+            <section className="right-column" style={{ display: !devInvisible ? 'block' : 'none' }}>
+              <DevLinksList />
+            </section>
+          </div>
+          <section className="right-column" style={{ display: devInvisible ? 'block' : 'none' }}>
+          <DevLinksList />
+        </section>
+      </div>
     )
 }
 

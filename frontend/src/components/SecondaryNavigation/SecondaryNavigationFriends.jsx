@@ -14,7 +14,7 @@ function SecondaryNavigation({ pageTitle, profileImage }) {
                  :
                 <h1 id="page-title">{pageTitle}</h1>
             }
-            <nav>
+            <nav className="secondary-nav-nav">
               <div className="secondary-nav-buttons">
                 <OpenModalButton
                   buttonText="Add Expense"

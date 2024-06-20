@@ -64,21 +64,27 @@ function DashboardPage() {
   }, [])
 
   return (
-    <div className="columns-wrapper">
-    {/* if page size is less than 800px, do not display this section */}
-      <section className="left-column" style={{ display: !friendInvisible ? 'block' : 'none'}}>
-        <FriendsList />
-      </section>
-      <section className="middle-column">
-        <SecondaryNavigation pageTitle="Dashboard" />
-        <main>
-          <FriendsSummary />
-        </main>
-      </section>
-      {/* if page size is less than 1000px, do not display this section */}
-      <section className="right-column" style={{ display: !devInvisible ? 'block' : 'none' }}>
-        <DevLinksList />
-      </section>
+    <div className="columns-main-container">
+        <div className="columns-wrapper">
+        {/* if page size is less than 800px, do not display this section */}
+          <section className="left-column" style={{ display: !friendInvisible ? 'block' : 'none'}}>
+            <FriendsList />
+          </section>
+          <section className="middle-column">
+            <SecondaryNavigation pageTitle="Dashboard" />
+            <main>
+              <FriendsSummary />
+            </main>
+          </section>
+          {/* if page size is less than 1000px, do not display this section */}
+          <section className="right-column" style={{ display: !devInvisible ? 'block' : 'none' }}>
+            <DevLinksList />
+          </section>
+        </div>
+
+        <section className="right-column" style={{ display: devInvisible ? 'block' : 'none' }}>
+          <DevLinksList />
+        </section>
     </div>
   )
 }

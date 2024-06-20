@@ -90,3 +90,14 @@
     display: block
   }
 }
+
+@media (max-width: 600px) {
+  .nav-header {
+    margin-left: 90%
+  }
+
+  .nav-header li,
+  .nav-header a {
+    font-size: .8rem;
+  }
+}

@@ -37,7 +37,6 @@
     height: 100%;
     width: 12ch;
     margin: 0;
-
     font-size: 1rem;
 }
 
@@ -72,4 +71,51 @@
 .secondary-nav-buttons > button:hover {
     background-color: var(--theme-l-blue);
     border: 2px solid var(--theme-d-blue);
+}
+
+
+@media (max-width: 600px) {
+    #secondary-nav-header {
+        height: 100%;
+        height: 170px;
+        flex-direction: column;
+    }
+
+    #page-title {
+        margin: 8px 20px 20px;
+        text-align: center;
+
+    }
+
+    .secondary-nav-nav {
+        width: 100%;
+        max-height: 40px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+    }
+
+    .secondary-nav-buttons {
+        width: 100%;
+        height: 85px;
+        gap: 8px;
+        flex-direction: column;
+    }
+
+    #secondary-nav-header button,
+    .secondary-nav-buttons button {
+        width: 100%;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+    }
+
+    .title-with-profile-image {
+        width: 100%;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: start;
+    }
 }

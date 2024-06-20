@@ -69,3 +69,10 @@
     flex-direction: column;
     width: 45%;
 }
+
+
+@media (max-width: 600px) {
+    #expenses-list-container {
+        height: 660px
+    }
+}

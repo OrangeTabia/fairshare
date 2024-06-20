@@ -104,3 +104,20 @@ button {
     background-color: var(--theme-l-blue);
     border: 2px solid var(--theme-d-blue);
 }
+
+
+@media (max-width: 800px) {
+    #friends-list-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        border: none;
+        width: 100%;
+        text-align: center;
+        cursor: pointer;
+        transition: box-shadow 0.2s ease;
+    }
+
+    #friends-list-title:hover {
+        box-shadow: 0 6px 4px -4px rgba(0, 0, 0, 0.356);
+    }
+}
