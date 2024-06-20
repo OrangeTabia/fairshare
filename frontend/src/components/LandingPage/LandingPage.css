@@ -162,12 +162,14 @@ body {
     align-items: center;
     justify-content: center;
     gap: 20px;
+    width: 100%;
 }
 
 #developers-container {
+    width: 100%;
     display: flex;
     flex-direction: row;
-    gap: 250px;
+    justify-content: space-around;
 }
 
 #footer-name {
