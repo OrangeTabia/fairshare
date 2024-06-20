@@ -7,7 +7,6 @@ import ExpensesList from "../ExpensesList";
 
 function ExpensesPage() {
   const [devInvisible, setDevInvisible] = useState(window.innerWidth < 1000);
-  const [friendInvisible, setFriendInvisible] = useState(window.innerWidth < 800);
 
     // used to track the size of the page and remove sections based on the size
     useEffect(() => {
@@ -25,20 +24,6 @@ function ExpensesPage() {
 
     }, [])
 
-    useEffect(() => {
-      const mediaQuery = window.matchMedia('(min-width: 800px)');
-
-      const removeFriendSection = (e) => {
-        setFriendInvisible(!e.matches)
-      }
-      removeFriendSection(mediaQuery);
-
-      mediaQuery.addEventListener('change', removeFriendSection);
-      return () => {
-        mediaQuery.removeEventListener('change', removeFriendSection)
-      }
-
-    }, [])
 
     return (
       <div className="columns-main-container">
@@ -57,9 +42,10 @@ function ExpensesPage() {
               <DevLinksList />
             </section>
           </div>
+          {/* if page size is less than 1000px, display this section */}
           <section className="right-column" style={{ display: devInvisible ? 'block' : 'none' }}>
-          <DevLinksList />
-        </section>
+              <DevLinksList />
+          </section>
       </div>
     )
 }

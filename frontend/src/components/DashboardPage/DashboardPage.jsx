@@ -48,6 +48,7 @@ function DashboardPage() {
 
   }, [])
 
+  
   useEffect(() => {
     const mediaQuery = window.matchMedia('(min-width: 800px)');
 
