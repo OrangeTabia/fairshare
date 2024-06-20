@@ -1,7 +1,7 @@
-import './LandingPage.css'; 
+import './LandingPage.css';
 import SignupFormModal from '../modals/SignupFormModal';
 import OpenModalButton from '../modals/OpenModalButton';
-import { useModal } from '../../context/Modal'; 
+import { useModal } from '../../context/Modal';
 
 import HousematesIcon from '../../../images/housemates.png'
 import LandingPageImg3 from '../../../images/landing3.png';

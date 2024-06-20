@@ -12,3 +12,9 @@
     height: 820px;
 }
 
+
+@media (max-width: 1000px) {
+    #developers-container {
+        display: none;
+    }
+}

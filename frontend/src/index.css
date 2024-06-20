@@ -172,3 +172,30 @@ html, body {
 #modal-content {
     z-index: 210;
 }
+
+
+@media (max-width: 1000px) {
+    .middle-column {
+        margin-right: 20px;
+    }
+}
+
+
+@media (max-width: 800px) {
+    .middle-column {
+        margin: 0px;
+    }
+
+    #main-content {
+        display: flex;
+        justify-content: center;
+    }
+
+    .columns-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: none;
+        width: 90%
+    }
+}

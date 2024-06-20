@@ -25,6 +25,9 @@ function LoggedInNavigation() {
         <NavLink to="/expenses">
           <span className="animated-text-underline">Expenses</span>
         </NavLink>
+        <div className='media-less-than-1000'>
+          <span className="animated-text-underline">Developers</span>
+        </div>
       </nav>
     </>
   );
