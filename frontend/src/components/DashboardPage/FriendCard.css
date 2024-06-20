@@ -16,6 +16,7 @@
 
 .friend-info:hover {
   background-color: #DEDEDE;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.356);
 }
 
 .friend-info-text {
