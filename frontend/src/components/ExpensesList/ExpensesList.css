@@ -20,10 +20,14 @@
 
 .all-expenses-payer {
     color: #F1AD69;
+    text-align: center;
+    margin: 0px 18px;
 }
 
 .all-expenses-receiver {
     color: #2DA2EF;
+    text-align: center;
+    margin: 0px 18px;
 }
 
 .expense-container {

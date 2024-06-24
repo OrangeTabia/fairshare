@@ -120,4 +120,8 @@ button {
     #friends-list-title:hover {
         box-shadow: 0 6px 4px -4px rgba(0, 0, 0, 0.356);
     }
+
+    .friends-list-ele span{
+        width: 100%
+    }
 }
