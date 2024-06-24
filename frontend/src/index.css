@@ -175,6 +175,7 @@ html, body {
 
 
 @media (max-width: 1000px) {
+
     .middle-column {
         margin-right: 20px;
         /* height: 900px */
@@ -187,14 +188,16 @@ html, body {
     }
 
     .right-column {
-        max-width: 95%;
+        max-width: 95.4%;
+        width: 100%;
         margin-top: 6px;
+        /* margin: 500px; */
+
     }
 }
 
 
 @media (max-width: 800px) {
-
 
     .middle-column {
         margin-right: 0px;
@@ -204,7 +207,7 @@ html, body {
     }
 
     .right-column {
-        max-width: 100vw;
+        max-width: 100%;
         margin-top: 6px;
     }
 
