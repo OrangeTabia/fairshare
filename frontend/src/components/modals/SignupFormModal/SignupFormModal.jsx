@@ -11,7 +11,7 @@ import "./SignupFormModal.css";
 function SignupFormModal() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { closeModal, setModalContent } = useModal();
+  const { closeModal } = useModal();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

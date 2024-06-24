@@ -15,11 +15,11 @@ import { useEffect, useState } from "react";
 
 function FriendsList({currFriend}) {
     const navigate = useNavigate()
-    const user = useSelector(state => state.session.user)
+    // const user = useSelector(state => state.session.user)
     const friends = useSelector(state => state.friends)
     const expenses = useSelector(state => state.friendsExpenses)
     const [orderedFriends, setOrderedFriends] = useState([])
-    const [smallScreen, setSmallScreen] = useState(window.innerWidth < 800)
+    const [smallScreen, setSmallScreen] = useState(window.innerWidth < 801)
     const [selectedSection, setSelectedSection] = useState('')
 
     useEffect(() => {
@@ -29,7 +29,7 @@ function FriendsList({currFriend}) {
 
     // checks window for screem width - sets small screen state to change when screen size shanges
     useEffect(() => {
-        const mediaQuery = window.matchMedia('(min-width: 800px)');
+        const mediaQuery = window.matchMedia('(min-width: 801px)');
 
         const adjustFriendSection = (e) => {
           setSmallScreen(!e.matches)
@@ -72,7 +72,7 @@ function FriendsList({currFriend}) {
 
     return (
         <div className="fiends-list-container">
-            <h4 id="friends-list-title" onClick={() => smallScreen ? handleSectionClick('friends') : ''}>FRIENDS</h4>
+            <h4 id="friends-list-title" onClick={() => smallScreen ? handleSectionClick('friends') : handleFriendClick('')}>FRIENDS</h4>
             <div className="friends-list" hidden={smallScreen && selectedSection !== 'friends'}>
                 {orderedFriends.map(friend => (
                     <div key={friend.id} className={currFriend && currFriend?.name === friend?.name ? 'on-friends-page':'friends-list-ele'}>

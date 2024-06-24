@@ -9,7 +9,7 @@ function SecondaryNavigation({ pageTitle, profileImage }) {
             {profileImage ?
                 <div className="title-with-profile-image">
                     <img className='profile-image' src={profileImage} />
-                    <h1 id="page-title">{pageTitle}</h1>
+                    <h1 id="page-title" className="friends-name">{pageTitle}</h1>
                 </div>
                  :
                 <h1 id="page-title">{pageTitle}</h1>

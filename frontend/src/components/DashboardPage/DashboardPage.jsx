@@ -14,27 +14,28 @@ import { thunkUpdateWalkthrough } from "../../redux/session";
 function DashboardPage() {
   const dispatch = useDispatch()
   const user = useSelector(state => state.session.user);
-  const [devInvisible, setDevInvisible] = useState(window.innerWidth < 1000);
-  const [friendInvisible, setFriendInvisible] = useState(window.innerWidth < 800);
+  // need to set to one pixle over the change or else at 1000 and 800 the change has a glitch
+  const [devInvisible, setDevInvisible] = useState(window.innerWidth < 1001);
   const { setModalContent } = useModal();
 
 
-  const handleResources = async () => {
-    await dispatch(thunkUpdateWalkthrough(user.id))
-    const modalComponent = <WalkthroughModal />
-    setModalContent(modalComponent);
 
-  }
 
   useEffect(() => {
+    const handleResources = async () => {
+      await dispatch(thunkUpdateWalkthrough(user.id))
+      const modalComponent = <WalkthroughModal />
+      setModalContent(modalComponent);
+    }
+
     if (!user.seen_walkthrough) {
       handleResources()
     }
-  }, [])
+  }, [user, dispatch, setModalContent])
 
   // used to track the size of the page and remove sections based on the size
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 1000px)');
+    const mediaQuery = window.matchMedia('(min-width: 1001px)');
 
     const removeDevSection = (e) => {
       setDevInvisible(!e.matches)
@@ -47,28 +48,12 @@ function DashboardPage() {
     }
 
   }, [])
-
   
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 800px)');
-
-    const removeFriendSection = (e) => {
-      setFriendInvisible(!e.matches)
-    }
-    removeFriendSection(mediaQuery);
-
-    mediaQuery.addEventListener('change', removeFriendSection);
-    return () => {
-      mediaQuery.removeEventListener('change', removeFriendSection)
-    }
-
-  }, [])
 
   return (
     <div className="columns-main-container">
         <div className="columns-wrapper">
-        {/* if page size is less than 800px, do not display this section */}
-          <section className="left-column" style={{ display: !friendInvisible ? 'block' : 'none'}}>
+          <section className="left-column">
             <FriendsList />
           </section>
           <section className="middle-column">

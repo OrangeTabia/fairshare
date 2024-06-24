@@ -1,14 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import FriendCard from "./FriendCard";
 import "./FriendsSummary.css";
 import { useEffect, useState } from "react";
-import { thunkLoadFriendsExpenses } from "../../redux/friends_expenses";
-import { thunkLoadPayments } from "../../redux/payments";
+// import { thunkLoadFriendsExpenses } from "../../redux/friends_expenses";
+// import { thunkLoadPayments } from "../../redux/payments";
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
 
 function FriendsSummary() {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
     const friends = useSelector(state => state.friends);
     const friendsExpenses = useSelector(state => state.friendsExpenses);
