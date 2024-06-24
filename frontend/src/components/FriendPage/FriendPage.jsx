@@ -10,12 +10,11 @@ import './FriendPage.css'
 function FriendPage() {
     const { friendId } = useParams();
     const currFriend = useSelector(state => state = state.friends[friendId])
-    const [devInvisible, setDevInvisible] = useState(window.innerWidth < 1000);
-    const [friendInvisible, setFriendInvisible] = useState(window.innerWidth < 800);
+    const [devInvisible, setDevInvisible] = useState(window.innerWidth < 1001);
 
     // used to track the size of the page and remove sections based on the size
     useEffect(() => {
-      const mediaQuery = window.matchMedia('(min-width: 1000px)');
+      const mediaQuery = window.matchMedia('(min-width: 1001px)');
 
       const removeDevSection = (e) => {
         setDevInvisible(!e.matches)
@@ -29,26 +28,10 @@ function FriendPage() {
 
     }, [])
 
-
-    useEffect(() => {
-      const mediaQuery = window.matchMedia('(min-width: 800px)');
-
-      const removeFriendSection = (e) => {
-        setFriendInvisible(!e.matches)
-      }
-      removeFriendSection(mediaQuery);
-
-      mediaQuery.addEventListener('change', removeFriendSection);
-      return () => {
-        mediaQuery.removeEventListener('change', removeFriendSection)
-      }
-
-    }, [])
-
     return (
           <div>
               <div className="columns-wrapper">
-              <section className="left-column" style={{ display: !friendInvisible ? 'block' : 'none'}}>
+              <section className="left-column" >
                   <FriendsList currFriend={currFriend}/>
                 </section>
                 <section className="middle-column">

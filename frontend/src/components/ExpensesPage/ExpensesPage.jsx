@@ -6,11 +6,11 @@ import ExpensesList from "../ExpensesList";
 
 
 function ExpensesPage() {
-  const [devInvisible, setDevInvisible] = useState(window.innerWidth < 1000);
+  const [devInvisible, setDevInvisible] = useState(window.innerWidth < 1001);
 
     // used to track the size of the page and remove sections based on the size
     useEffect(() => {
-      const mediaQuery = window.matchMedia('(min-width: 1000px)');
+      const mediaQuery = window.matchMedia('(min-width: 1001px)');
 
       const removeDevSection = (e) => {
         setDevInvisible(!e.matches)
