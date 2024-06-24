@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import ExpenseCard from "./ExpenseCard";
 import { centsToUSD } from "../../utils/formatters";
@@ -12,25 +12,6 @@ function ExpensesList() {
   const currUser = useSelector(state => state.session.user)
   const allFriends = useSelector((state) => state.friends)
   const allPayments = useSelector((state) => state.payments)
-  const [friendInvisible, setFriendInvisible] = useState(window.innerWidth < 800);
-
-
-
-  // useEffect(() => {
-  //   const mediaQuery = window.matchMedia('(min-width: 800px)');
-
-  //   const removeFriendSection = (e) => {
-  //     setFriendInvisible(!e.matches)
-  //   }
-  //   removeFriendSection(mediaQuery);
-
-  //   mediaQuery.addEventListener('change', removeFriendSection);
-  //   return () => {
-  //     mediaQuery.removeEventListener('change', removeFriendSection)
-  //   }
-
-  // }, [])
-
 
 
   const handleClick = (expenseId) => {

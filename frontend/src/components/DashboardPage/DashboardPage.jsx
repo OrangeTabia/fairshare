@@ -19,18 +19,19 @@ function DashboardPage() {
   const { setModalContent } = useModal();
 
 
-  const handleResources = async () => {
-    await dispatch(thunkUpdateWalkthrough(user.id))
-    const modalComponent = <WalkthroughModal />
-    setModalContent(modalComponent);
 
-  }
 
   useEffect(() => {
+    const handleResources = async () => {
+      await dispatch(thunkUpdateWalkthrough(user.id))
+      const modalComponent = <WalkthroughModal />
+      setModalContent(modalComponent);
+    }
+
     if (!user.seen_walkthrough) {
       handleResources()
     }
-  }, [])
+  }, [user, dispatch, setModalContent])
 
   // used to track the size of the page and remove sections based on the size
   useEffect(() => {
@@ -48,7 +49,7 @@ function DashboardPage() {
 
   }, [])
 
-  
+
   useEffect(() => {
     const mediaQuery = window.matchMedia('(min-width: 800px)');
 

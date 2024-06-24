@@ -181,7 +181,7 @@ html, body {
     }
 
     .left-column {
-        max-width: 100%;
+        max-width: 30%;
         margin-bottom: 6px;
         height: 821px;
     }
@@ -209,7 +209,8 @@ html, body {
     }
 
     .left-column {
-        height: 114px;
+        max-width: 100%;
+        height: auto;
         border: 1px solid rgb(143, 142, 142);
     }
 
