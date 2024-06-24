@@ -19,7 +19,7 @@ function FriendsList({currFriend}) {
     const friends = useSelector(state => state.friends)
     const expenses = useSelector(state => state.friendsExpenses)
     const [orderedFriends, setOrderedFriends] = useState([])
-    const [smallScreen, setSmallScreen] = useState(window.innerWidth < 800)
+    const [smallScreen, setSmallScreen] = useState(window.innerWidth < 801)
     const [selectedSection, setSelectedSection] = useState('')
 
     useEffect(() => {
@@ -29,7 +29,7 @@ function FriendsList({currFriend}) {
 
     // checks window for screem width - sets small screen state to change when screen size shanges
     useEffect(() => {
-        const mediaQuery = window.matchMedia('(min-width: 800px)');
+        const mediaQuery = window.matchMedia('(min-width: 801px)');
 
         const adjustFriendSection = (e) => {
           setSmallScreen(!e.matches)

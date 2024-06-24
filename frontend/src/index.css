@@ -154,6 +154,7 @@ html, body {
 }
 
 .middle-column {
+    min-width: 48%;
     max-width: 100ch;
     margin: 20px 0px;
 
@@ -177,6 +178,7 @@ html, body {
 @media (max-width: 1000px) {
 
     .middle-column {
+        max-width: 65%;
         margin-right: 20px;
         /* height: 900px */
     }
@@ -204,6 +206,7 @@ html, body {
         margin-top: 6px;
         margin-bottom: 6px;
         width: 90vw;
+        max-width: 90vw;
     }
 
     .right-column {

@@ -15,7 +15,7 @@
 }
 
 #page-title {
-    min-width: 12ch;
+    /* min-width: 10ch; */
     max-width: 20ch;
     font-size: 1.5rem;
     line-height: 1.5rem;
@@ -73,6 +73,12 @@
     border: 2px solid var(--theme-d-blue);
 }
 
+
+@media (max-width: 1000px) {
+    .friends-name {
+
+    }
+}
 
 @media (max-width: 600px) {
     #secondary-nav-header {
