@@ -116,3 +116,10 @@
     flex-direction: column;
   }
 }
+
+
+@media (max-width: 600px) {
+    #expenses-list {
+        height: 650px;
+    }
+}
