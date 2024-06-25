@@ -8,7 +8,7 @@ Fairshare is a partial clone inspired by 'Splitwise' that allows consumers to sp
 
 # Tech Stack
 
-### Frameworks and Libraries
+### Languages, Frameworks, and Libraries
 ![Static Badge](https://img.shields.io/badge/PYTHON-%233776AB?style=for-the-badge&logo=python&labelColor=black)
 ![Static Badge](https://img.shields.io/badge/FLASK-%23000000?style=for-the-badge&logo=FLASK&labelColor=black)
 ![Static Badge](https://img.shields.io/badge/JAVASCRIPT-%23F7DF1E?style=for-the-badge&logo=javascript&labelColor=black)
