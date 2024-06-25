@@ -160,7 +160,7 @@ function AddExpenseModal({ friendName }) {
             $
             <input
               id="amount"
-              type="text"
+              type="number"
               inputMode="decimal"
               value={amount}
               placeholder="amount"
