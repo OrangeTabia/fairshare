@@ -190,7 +190,7 @@ Fairshare is a partial clone inspired by 'Splitwise' that allows consumers to sp
 ```
 ### Edit an Expense
 - Method: `POST`,
-- URL: `/api/friends_expenses/:friends_expense_id/update
+- URL: `/api/friends_expenses/:friends_expense_id/update`
 - Body:
 ```json
 {
@@ -219,7 +219,7 @@ Fairshare is a partial clone inspired by 'Splitwise' that allows consumers to sp
 ```
 ### Delete an Expense
 - Method: `GET`
-- URL: `/api/friends_expenses/:friends_expense_id/delete
+- URL: `/api/friends_expenses/:friends_expense_id/delete`
 - Body: none
 - Successful Response:
 ```json  
@@ -275,7 +275,7 @@ Fairshare is a partial clone inspired by 'Splitwise' that allows consumers to sp
 ```
 ### Delete a Comment
 - Method: `GET`
-- URL: `/api/comments/:comment_id/delete
+- URL: `/api/comments/:comment_id/delete`
 - Body: none
 - Successful Response:
 ```json
