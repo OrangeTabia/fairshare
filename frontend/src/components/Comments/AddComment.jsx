@@ -112,7 +112,6 @@ function AddComment({ comments, expense }) {
             <textarea
               id="comment-box"
               rows="3"
-              // cols="10"
               type="text"
               placeholder="Add a comment"
               value={comment}
