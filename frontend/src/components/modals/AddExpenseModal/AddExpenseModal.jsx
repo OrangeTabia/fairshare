@@ -121,24 +121,21 @@ function AddExpenseModal({ friendName }) {
             {friendName ? (
               <span id="add-expense-name">{friendName}</span>
             ) : (
-              <label className="add-expense-modal-inputs">
-                With you and:
-                <select
-                  id="payer"
-                  value={payer}
-                  onChange={(e) => setPayer(e.target.value)}
-                  required
-                >
-                  <option value={""} disabled>
-                    Select a Friend
+              <select
+                id="payer"
+                value={payer}
+                onChange={(e) => setPayer(e.target.value)}
+                required
+              >
+                <option value={""} disabled>
+                  Select a Friend
+                </option>
+                {friendsListArray.map((friend) => (
+                  <option value={friend.id} key={friend.id}>
+                    {friend.name}
                   </option>
-                  {friendsListArray.map((friend) => (
-                    <option value={friend.id} key={friend.id}>
-                      {friend.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
+                ))}
+              </select>
             )}
             {validations.payer && (
               <span className="form-error">{validations.payer}</span>
@@ -146,6 +143,12 @@ function AddExpenseModal({ friendName }) {
           </div>
 
           <div className="form-label">
+            <label htmlFor="description">Describe the expense</label>
+            {validations.description && (
+              <span className="form-error">{validations.description}</span>
+            )}
+          </div>
+          <div className="form-item">
             <input
               id="description"
               type="text"
@@ -154,13 +157,10 @@ function AddExpenseModal({ friendName }) {
               onChange={(e) => setDescription(e.target.value)}
               required
             />
-            {validations.description && (
-              <span className="form-error">{validations.description}</span>
-            )}
           </div>
 
           <div className="form-label">
-            <label htmlFor="amount">Expense Amount</label>
+            <label htmlFor="amount">Add an amount</label>
             {validations.amount && (
               <span className="form-error">{validations.amount}</span>
             )}
@@ -172,14 +172,14 @@ function AddExpenseModal({ friendName }) {
               type="number"
               inputMode="decimal"
               value={amount}
-              placeholder="amount"
+              placeholder="Enter an amount"
               onChange={(e) => setAmount(e.target.value)}
               required
             />
           </div>
 
           <div className="form-label">
-            <label htmlFor="expense-date">Choose an Expense Date</label>
+            <label htmlFor="expense-date">Choose a date</label>
             {validations.expenseDate && (
               <span className="form-error">{validations.expenseDate}</span>
             )}
@@ -195,16 +195,19 @@ function AddExpenseModal({ friendName }) {
           </div>
 
           <div className="form-label">
+            <label htmlFor="notes">Add additional notes</label>
+            {validations.notes && (
+              <span className="form-error">{validations.notes}</span>
+            )}
+          </div>
+          <div className="form-item">
             <input
               id="notes"
-              placeholder="Leave a note!"
+              placeholder="Enter a note"
               type="text"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
             />
-            {validations.notes && (
-              <span className="form-error">{validations.notes}</span>
-            )}
           </div>
 
           <div className="submit-cancel-btns">
