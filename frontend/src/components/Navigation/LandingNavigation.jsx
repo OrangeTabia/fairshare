@@ -25,7 +25,7 @@ function LandingNavigation() {
   const closeMenu = () => setShowMenu(false);
 
   return (
-    <nav className="nav-header">
+    <nav className="nav-header-landing">
       <OpenModalMenuItem
         itemText="Log In"
         onItemClick={closeMenu}
