@@ -72,7 +72,7 @@ body {
 
 .icons:hover {
     color: #FAFAFA;
-    cursor: default;
+    cursor: text;
 }
 
 .big-signup > button {
