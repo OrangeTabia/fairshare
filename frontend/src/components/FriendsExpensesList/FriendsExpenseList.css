@@ -1,112 +1,118 @@
 #expenses-list {
-    margin: 0;
-    padding: 0;
-    height: 750px;
-    list-style: none;
-    display: flex;
-    flex-flow: column nowrap;
-    overflow:scroll;
-    overflow-x:hidden;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(128, 128, 128, 0.183) rgba(0, 0, 255, 0);
+  margin: 0;
+  padding: 0;
+  height: 750px;
+  list-style: none;
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: scroll;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(128, 128, 128, 0.183) rgba(0, 0, 255, 0);
 }
 
 .expense-card {
-    padding: 5px;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
+  padding: 5px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
 }
 
 /* Borders are temporary to show payer vs. receiver expense type */
 
 .friend-expense,
 .friend-payments {
-    border: 2px solid rgba(75, 74, 74, 0.228);
-    border-radius: 3px;
-    margin: 14px;
-    transition: box-shadow 0.2s ease; /* Add transition for smooth effect */
+  border: 2px solid rgba(75, 74, 74, 0.228);
+  border-radius: 3px;
+  margin: 14px;
+  transition: box-shadow 0.2s ease; /* Add transition for smooth effect */
 }
 
 .friend-expense:hover,
 .friend-payments:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.356);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.356);
 }
 
 .receiver-expense {
-    border: 1px solid var(--theme-blue);
+  border: 1px solid var(--theme-blue);
 }
 
 .friends-expense-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 16px;
 }
 
 .expense-details-card {
-    border-top: 2px solid rgba(99, 98, 98, 0.228);
-    border-radius: 3px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+  border-top: 2px solid rgba(99, 98, 98, 0.228);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
-
 .details-header {
-    margin: 16px;
-    padding: 6px 20px
+  margin: 16px;
+  padding: 6px 20px;
 }
 
 .owed-or-still-owe {
-    border-bottom: 1px solid rgba(99, 98, 98, 0.228);
-    width: 100%;
-    margin-bottom: 10px;
-    font-weight: bold;
-    font-size: 18px;
-    padding-bottom: 6px;
+  border-bottom: 1px solid rgba(99, 98, 98, 0.228);
+  width: 100%;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  padding-bottom: 6px;
 }
 
 .a-payment {
-    font-size: 12px;
+  font-size: 12px;
 }
 .a-payment > div {
-    font-size: 12px;
-    padding: 16px;
-    border-top: 2px solid rgba(99, 98, 98, 0.228);
+  font-size: 12px;
+  padding: 16px;
+  border-top: 2px solid rgba(99, 98, 98, 0.228);
 }
 
 .no-expenses,
 .no-payments {
-    margin: 14px;
-    border: 2px solid rgba(99, 98, 98, 0.228);
-    border-radius: 3px;
-    padding: 16px;
+  margin: 14px;
+  border: 2px solid rgba(99, 98, 98, 0.228);
+  border-radius: 3px;
+  padding: 16px;
 }
 
 #expense-set-by-you {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
 }
 
 #expense-set-by-you > div > button {
-    background-color: #FAFAFA;
-    border: none;
-    cursor: pointer;
-    font-size: 15px;
-    margin: 10px
+  background-color: #fafafa;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  margin: 10px;
 }
 
 #expense-set-by-you > div > button:hover {
-    color: orange;
+  color: orange;
 }
 
 .all-expenses-payer {
-    color: #F1AD69;
+  color: #f1ad69;
 }
 
 .all-expenses-receiver {
-    color: #2DA2EF;
+  color: #2da2ef;
+}
+
+@media screen and (max-width: 600px) {
+  .expense-details-card {
+    display: flex;
+    flex-direction: column;
+  }
 }
