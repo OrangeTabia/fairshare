@@ -180,13 +180,12 @@ html, body {
     .middle-column {
         max-width: 65%;
         margin-right: 20px;
-        /* height: 900px */
+        margin-bottom: 6px;
     }
 
     .left-column {
         max-width: 30%;
         margin-bottom: 6px;
-        height: 821px;
     }
 
     .right-column {
