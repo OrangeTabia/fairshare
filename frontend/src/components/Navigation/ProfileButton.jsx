@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
 import { thunkLogout } from "../../redux/session";
 import { useNavigate } from "react-router-dom";
+import WalkthroughModal from "../modals/WalkthroughModal/WalkthroughModal";
+import { useModal } from "../../context/Modal";
+
 // import OpenModalMenuItem from "./OpenModalMenuItem";
 // import LoginFormModal from "../LoginFormModal";
 // import SignupFormModal from "../SignupFormModal";
@@ -10,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 function ProfileButton() {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  const { setModalContent } = useModal();
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
   const navigate = useNavigate();
@@ -35,6 +39,11 @@ function ProfileButton() {
 
   const closeMenu = () => setShowMenu(false);
 
+  const handleResources = () => {
+    const modalComponent = <WalkthroughModal />
+    setModalContent(modalComponent);
+  }
+
   const logout = (e) => {
     e.preventDefault();
     dispatch(thunkLogout());
@@ -51,6 +60,7 @@ function ProfileButton() {
         <ul className={"profile-dropdown"} ref={ulRef}>
           <li>{user.name}</li>
           <li>{user.email}</li>
+          <span className="website-walkthrough" onClick={handleResources} >Resources</span>
           <li>
             <button onClick={logout}>Log Out</button>
           </li>
