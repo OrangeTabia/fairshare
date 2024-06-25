@@ -115,6 +115,10 @@
     display: flex;
     flex-direction: column;
   }
+
+  .comments-card {
+    width: 100%;
+  }
 }
 
 

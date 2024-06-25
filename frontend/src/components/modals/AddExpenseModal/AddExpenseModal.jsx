@@ -121,21 +121,24 @@ function AddExpenseModal({ friendName }) {
                 With you and: <span id="add-expense-name">{friendName}</span>
               </span>
             ) : (
-              <select
-                id="payer"
-                value={payer}
-                onChange={(e) => setPayer(e.target.value)}
-                required
-              >
-                <option value={""} disabled>
-                  Select a Friend
-                </option>
-                {friendsListArray.map((friend) => (
-                  <option value={friend.id} key={friend.id}>
-                    {friend.name}
+              <label className="add-expense-modal-inputs">
+                With you and:
+                <select
+                  id="payer"
+                  value={payer}
+                  onChange={(e) => setPayer(e.target.value)}
+                  required
+                >
+                  <option value={""} disabled>
+                    Select a Friend
                   </option>
-                ))}
-              </select>
+                  {friendsListArray.map((friend) => (
+                    <option value={friend.id} key={friend.id}>
+                      {friend.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
             )}
             {validations.payer && (
               <span className="form-error">{validations.payer}</span>

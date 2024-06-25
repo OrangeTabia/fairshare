@@ -1,56 +1,65 @@
 #modal-content {
-    padding: 20px;
+  padding: 20px;
 
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 
-    border: 2px solid var(--theme-d-gray);
-    border-radius: 10px;
-    background-clip: border-box;
+  border: 2px solid var(--theme-d-gray);
+  border-radius: 10px;
+  background-clip: border-box;
 }
 
 #modal-content h2 {
-    margin: 0 0 10px;
+  margin: 0 0 10px;
 
-    font-size: 2rem;
-    line-height: 2rem;
+  font-size: 2rem;
+  line-height: 2rem;
 }
 
-#add-expense-form{
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: left;
-    gap: 10px;
+#add-expense-form {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: left;
+  gap: 10px;
 }
 
 .form-label {
-    width: 30ch;
+  width: 30ch;
 
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: left;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: left;
+  align-items: center;
+  gap: 10px;
+}
+
+.add-expense-modal-inputs {
+  display: flex;
+  height: 30px;
+}
+
+.add-expense-modal-inputs #payer {
+  width: 60%;
 }
 
 #add-expense-form input {
-    width: 100%;
-    height: 30px;
-    margin: 6px;;
-    background-color: var(--theme-white);
-    border: 1px solid var(--theme-m-gray);
-    border-radius: 2.5px;
+  width: 100%;
+  height: 30px;
+  margin: 6px;
+  background-color: var(--theme-white);
+  border: 1px solid var(--theme-m-gray);
+  border-radius: 2.5px;
 }
 
 .submit-cancel-btns {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 #add-expense-name {
-    font-weight: bold;
+  font-weight: bold;
 }
