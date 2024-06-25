@@ -34,6 +34,10 @@
     line-height: 1.7;
 }
 
+.friends-list-ele span {
+    width: 100%;
+}
+
 .friends-list-ele:hover {
     /* color: #2DA2EF */
     background-color: #DEDEDE;
@@ -72,12 +76,16 @@
     align-items: center;
 }
 
+.on-friends-page span {
+    width: 100%;
+}
+
 .on-friends-page > button {
     background-color: #FAFAFA;
     color: #2DA2EF;
     display: flex;
     align-items: center;
-    height: 30px;
+    height: 28px;
     font-size: 1rem;
     border: none;
     cursor: pointer;
