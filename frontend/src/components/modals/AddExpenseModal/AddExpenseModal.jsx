@@ -118,7 +118,7 @@ function AddExpenseModal({ friendName }) {
           <div className="form-label">
             {friendName ? (
               <span>
-                With you and: <span id="add-expense-name">{friendName}</span>
+                Between you and <span id="add-expense-name">{friendName}</span>
               </span>
             ) : (
               <select
@@ -141,7 +141,6 @@ function AddExpenseModal({ friendName }) {
               <span className="form-error">{validations.payer}</span>
             )}
           </div>
-          <br></br>
           <div className="form-label">
             <input
               id="description"

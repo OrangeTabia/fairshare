@@ -12,24 +12,18 @@
     background-clip: border-box;
 }
 
-#modal-content h2 {
-    margin: 0 0 10px;
-
-    font-size: 2rem;
-    line-height: 2rem;
-}
-
 #add-expense-form{
+    width: 100%;
+    min-width: 40ch;
+
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
-    align-items: left;
+    align-items: center;
     gap: 10px;
 }
 
 .form-label {
-    width: 30ch;
-
     display: flex;
     flex-flow: row nowrap;
     justify-content: left;

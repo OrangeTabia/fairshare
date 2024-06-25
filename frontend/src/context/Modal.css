@@ -22,3 +22,9 @@
   position: absolute;
   background-color:white;
 }
+
+#modal-content h2 {
+  margin: 20px 0px;
+  font-size: 2rem;
+  line-height: 2rem;
+}
