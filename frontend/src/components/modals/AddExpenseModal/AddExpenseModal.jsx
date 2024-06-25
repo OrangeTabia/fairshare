@@ -113,13 +113,13 @@ function AddExpenseModal({ friendName }) {
   return (
     <>
       <h2>Add an expense</h2>
-      <form onSubmit={handleSubmit} id="add-expense-form">
-        <div>
-          <div className="form-label">
+      <form id="add-expense-form" onSubmit={handleSubmit}>
+        <div className="form-content-container">
+
+          <div className="form-item">
+            <p>Between you and</p>
             {friendName ? (
-              <span>
-                Between you and <span id="add-expense-name">{friendName}</span>
-              </span>
+              <span id="add-expense-name">{friendName}</span>
             ) : (
               <label className="add-expense-modal-inputs">
                 With you and:
@@ -144,6 +144,7 @@ function AddExpenseModal({ friendName }) {
               <span className="form-error">{validations.payer}</span>
             )}
           </div>
+
           <div className="form-label">
             <input
               id="description"
@@ -157,8 +158,14 @@ function AddExpenseModal({ friendName }) {
               <span className="form-error">{validations.description}</span>
             )}
           </div>
+
           <div className="form-label">
-            <label htmlFor="amount"></label>
+            <label htmlFor="amount">Expense Amount</label>
+            {validations.amount && (
+              <span className="form-error">{validations.amount}</span>
+            )}
+          </div>
+          <div className="form-item">
             $
             <input
               id="amount"
@@ -169,22 +176,24 @@ function AddExpenseModal({ friendName }) {
               onChange={(e) => setAmount(e.target.value)}
               required
             />
-            {validations.amount && (
-              <span className="form-error">{validations.amount}</span>
+          </div>
+
+          <div className="form-label">
+            <label htmlFor="expense-date">Choose an Expense Date</label>
+            {validations.expenseDate && (
+              <span className="form-error">{validations.expenseDate}</span>
             )}
           </div>
-          <div className="form-label">
+          <div className="form-item">
             <input
-              id="expense_date"
+              id="expense-date"
               type="date"
               value={expenseDate}
               onChange={(e) => setExpenseDate(e.target.value)}
               required
             />
-            {validations.expenseDate && (
-              <span className="form-error">{validations.expenseDate}</span>
-            )}
           </div>
+
           <div className="form-label">
             <input
               id="notes"
@@ -197,6 +206,7 @@ function AddExpenseModal({ friendName }) {
               <span className="form-error">{validations.notes}</span>
             )}
           </div>
+
           <div className="submit-cancel-btns">
             <button className={submitClass} disabled={submitDisabled}>
               Save
@@ -205,6 +215,7 @@ function AddExpenseModal({ friendName }) {
               Cancel
             </button>
           </div>
+
         </div>
       </form>
     </>
