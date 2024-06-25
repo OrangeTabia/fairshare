@@ -400,7 +400,7 @@ Fairshare is a partial clone inspired by 'Splitwise' that allows consumers to sp
 2. Create a toggle in the expenses that will split fees between friends and groups by a certain percentage.
 
 # Connect
-Aubrie Woodbine | 
+[Aubrie Woodbine](https://www.linkedin.com/in/aubriewoodbine/) | 
 Ethan Harrasser | 
 [Jeramie Forbes](https://www.linkedin.com/in/jeramieforbes/) | 
 [Tabia Ye](https://www.linkedin.com/in/tabiaye/)
