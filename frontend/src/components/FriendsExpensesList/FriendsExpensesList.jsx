@@ -23,6 +23,11 @@ function FriendsExpensesList() {
       const friendPayer = Object.values(allExpenses).filter(expense => expense.payerId === parseInt(friendId) && expense.receiverId === currUser.id)
       const friendExpenses = [...friendReceiver, ...friendPayer]
 
+      // formatter to help sort by date by user location
+      const formatter = new Intl.DateTimeFormat('en');
+      // a and b are expenses from the expenses list being compared then sorted
+      friendExpenses.sort((a, b) => formatter.format(new Date(b.expenseDate)).localeCompare(formatter.format(new Date(a.expenseDate))))
+
       setExpenses(Object.values(friendExpenses))
 
   }, [allExpenses, friendId, currUser])
@@ -65,7 +70,7 @@ function FriendsExpensesList() {
                   {expenses.map((expense, idx)=> (
                   <div key={idx} className='friend-expense' >
                     <div className="friends-expense-title" onClick={() => handleClick(idx)}>
-                      <div>{expense.description}</div>
+                      <div>{`${expense.description}`}</div>
                       {!expense.settled
                       ? <div className={expense.payerId === currUser.id
                         ? 'all-expenses-payer'
@@ -76,7 +81,7 @@ function FriendsExpensesList() {
                           : `You still owe ${currFriend.name} : `}{whatsLeftToPay(expense)}
                         </div>
                       : <div hidden={!expense.settled}>Expense Settled</div> }
-                      <div >{`Total: ${centsToUSD(expense.amount)}`}</div>
+                      <div >{`${expense.expenseDate.slice(0, 17)}`}</div>
                     </div>
                     {openCards.includes(idx)
                       ? <div><FriendsExpenseCard  expenseId={expense.id} /></div>
