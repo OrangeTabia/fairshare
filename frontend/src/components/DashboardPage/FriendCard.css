@@ -16,6 +16,7 @@
 
 .friend-info:hover {
   background-color: #DEDEDE;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.356);
 }
 
 .friend-info-text {
@@ -47,4 +48,15 @@
 
 .negative {
   color: var(--theme-d-orange);
+}
+
+
+
+@media (max-width: 600px) {
+  .friend-info-text h3,
+  .friend-info-text p ,
+  .friend-info-text span {
+    font-size: 3vw;
+  }
+
 }

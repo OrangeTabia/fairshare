@@ -4,6 +4,17 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.356);
 }
 
+.columns-wrapper {
+    padding-top: 42px;
+}
+
 .middle-column {
     height: 820px;
+}
+
+
+@media (max-width: 1000px) {
+    #developers-container {
+        display: none;
+    }
 }

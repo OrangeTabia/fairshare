@@ -18,3 +18,8 @@
     border: 1px solid var(--theme-m-gray);
     border-radius: 2.5px;
 }
+
+.friends-owed-by,
+.friends-owed-to {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.356);
+}

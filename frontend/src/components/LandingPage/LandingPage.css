@@ -109,11 +109,11 @@ body {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    gap: 50px;
+    gap: 5%;
     padding-bottom: 50px;
     padding-top: 25px;
     background-image: url('../../../images/2.png');
-    /* border: 1px solid blue; */
+    border: 1px solid blue;
 }
 
 .landing-elements-container3 {
@@ -162,12 +162,14 @@ body {
     align-items: center;
     justify-content: center;
     gap: 20px;
+    width: 100%;
 }
 
 #developers-container {
+    width: 100%;
     display: flex;
     flex-direction: row;
-    gap: 250px;
+    justify-content: space-around;
 }
 
 #footer-name {
@@ -184,4 +186,13 @@ body {
 .footer-devs > a:hover {
     color: white;
     text-decoration: underline;
+}
+
+
+@media (max-width: 1000px) {
+
+    .landing-elements-container2,
+    .landing-elements-container3 {
+        flex-direction: column;
+    }
 }

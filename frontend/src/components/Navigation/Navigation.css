@@ -4,9 +4,7 @@
 
   display: flex;
   flex-flow: row nowrap;
-  justify-content: right;
-  align-items: center;
-  gap: 10px;
+  gap: 10%;
 }
 
 .nav-header li,
@@ -81,4 +79,25 @@
 
 .profile-button:hover {
   background-color: #DEDEDE;
+}
+
+.media-less-than-1000 {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .media-less-than-1000 {
+    display: block
+  }
+}
+
+@media (max-width: 600px) {
+  .nav-header {
+    margin-left: 90%
+  }
+
+  .nav-header li,
+  .nav-header a {
+    font-size: .8rem;
+  }
 }

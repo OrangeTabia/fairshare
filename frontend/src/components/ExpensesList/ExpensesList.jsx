@@ -14,7 +14,6 @@ function ExpensesList() {
   const allPayments = useSelector((state) => state.payments)
 
 
-
   const handleClick = (expenseId) => {
     if (selectedExpense === expenseId) setSelectedExpense("")
     else setSelectedExpense(expenseId);

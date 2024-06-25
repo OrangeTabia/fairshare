@@ -1,132 +1,407 @@
-# Flask React Project
+# fairshare 
+Fairshare is a partial clone inspired by 'Splitwise' that allows consumers to split expenses with friends. 
 
-This is the starter for the Flask React project.
 
-## Getting started
+# Live Link
+[https://fairshare-f8a7.onrender.com](https://fairshare-f8a7.onrender.com)
 
-1. Clone this repository (only this branch).
 
-2. Install dependencies.
+# Tech Stack
 
-   ```bash
-   pipenv install -r requirements.txt
-   ```
+### Frameworks and Libraries
+![Static Badge](https://img.shields.io/badge/PYTHON-%233776AB?style=for-the-badge&logo=python&labelColor=black)
+![Static Badge](https://img.shields.io/badge/FLASK-%23000000?style=for-the-badge&logo=FLASK&labelColor=black)
+![Static Badge](https://img.shields.io/badge/JAVASCRIPT-%23F7DF1E?style=for-the-badge&logo=javascript&labelColor=black)
+![Static Badge](https://img.shields.io/badge/REACT-%2361DAFB?style=for-the-badge&logo=react&labelColor=black)
+![Static Badge](https://img.shields.io/badge/REDUX-%23764ABC?style=for-the-badge&logo=REDUX&labelColor=black)
+![Static Badge](https://img.shields.io/badge/CSS-%231572B6?style=for-the-badge&logo=CSS3&labelColor=black)
+![Static Badge](https://img.shields.io/badge/HTML-%23E34F26?style=for-the-badge&logo=HTML5&labelColor=black)
 
-3. Create a __.env__ file based on the example with proper settings for your
-   development environment.
+### Database: 
+![Static Badge](https://img.shields.io/badge/POSTGRESQL-%234169E1?style=for-the-badge&logo=POSTGRESQL&labelColor=black)
 
-4. Make sure the SQLite3 database connection URL is in the __.env__ file.
+### Hosting: 
+![Static Badge](https://img.shields.io/badge/RENDER-%23000000?style=for-the-badge&logo=RENDER&labelColor=black)
 
-5. This starter organizes all tables inside the `flask_schema` schema, defined
-   by the `SCHEMA` environment variable.  Replace the value for
-   `SCHEMA` with a unique name, **making sure you use the snake_case
-   convention.**
 
-6. Get into your pipenv, migrate your database, seed your database, and run your
-   Flask app:
+# Index
+[Features List](https://github.com/OrangeTabia/Python-Project/wiki/Features) | [Database Schema](https://github.com/OrangeTabia/Python-Project/wiki/Database-Schema) | [User Stories](https://github.com/OrangeTabia/Python-Project/wiki/User-Stories)
 
-   ```bash
-   pipenv shell
-   ```
 
-   ```bash
-   flask db upgrade
-   ```
+# Landing Page
+![fairshare-landing](https://github.com/OrangeTabia/Python-Project/assets/131227932/db9e6272-a64c-4064-8c89-b64238cb0f1a)
 
-   ```bash
-   flask seed all
-   ```
+# Expenses
+![fairshare-expenses](https://github.com/OrangeTabia/Python-Project/assets/131227932/f3d0e51e-3423-49d7-9cb9-4ec6de1f11ed)
 
-   ```bash
-   flask run
-   ```
 
-7. The React frontend has no styling applied. Copy the __.css__ files from your
-   Authenticate Me project into the corresponding locations in the
-   __react-vite__ folder to give your project a unique look.
+# Payments (Settle Up)
+![fairshare-settleup](https://github.com/OrangeTabia/Python-Project/assets/131227932/54947616-f4a0-4bb1-8e60-e2987ba62662)
 
-8. To run the React frontend in development, `cd` into the __react-vite__
-   directory and run `npm i` to install dependencies. Next, run `npm run build`
-   to create the `dist` folder. The starter has modified the `npm run build`
-   command to include the `--watch` flag. This flag will rebuild the __dist__
-   folder whenever you change your code, keeping the production version up to
-   date.
+# Comments
+![fairshare-comments](https://github.com/OrangeTabia/Python-Project/assets/131227932/fd88f191-7ab0-42b4-a421-eb39e686cf5e)
 
-## Deployment through Render.com
+# Friends
+![fairshare-friends](https://github.com/OrangeTabia/Python-Project/assets/131227932/0befc03e-1140-4c34-8368-dea5a13fc60f)
 
-First, recall that Vite is a development dependency, so it will not be used in
-production. This means that you must already have the __dist__ folder located in
-the root of your __react-vite__ folder when you push to GitHub. This __dist__
-folder contains your React code and all necessary dependencies minified and
-bundled into a smaller footprint, ready to be served from your Python API.
+# Endpoints
 
-Begin deployment by running `npm run build` in your __react-vite__ folder and
-pushing any changes to GitHub.
+## Auth
+### Log In User
+- Method: `POST`
+- URL: `/api/auth/login`
+- Body: 
+```json
+{
+    "username": "Joe Burrow",
+    "password": "password"
+}
+```
+- Successful Response: 
+```json
+{
+    "id": 1,
+    "username": "Joe Burrow", 
+    "email": "joeburrow@gmail.com"
+}
+```
 
-Refer to your Render.com deployment articles for more detailed instructions
-about getting started with [Render.com], creating a production database, and
-deployment debugging tips.
+## Expenses
+### Create an Expense
+- Method: `POST`
+- URL: `/api/friends_expenses/new`
+- Body:
+```json
+{
+    "payer_id": 1,
+    "receiver_id": 2,
+    "description": "brunch",
+    "amount": 30,
+    "expense_date": "2024-06-30",
+    "notes": "the eggs and bacon were great!"
+}
+```
+- Successful Response:
+```json
+{
+    "id": 11,
+    "payerId": 1,
+    "receiverId": 2,
+    "description": "brunch",
+    "amount": 30,
+    "expenseDate": "Sun, 30 Jun 2024 00:00:00 GMT",
+    "settled": false,
+    "notes": "the eggs and bacon were great!",
+    "createdAt": "Tue, 18 Jun 2024 14:32:58 GMT",
+    "updatedAt": "Tue, 18 Jun 2024 14:32:58 GMT"
+}
+```
+### View all Expenses (comments included)
+- Method: `GET`
+- URL: `/api/friends_expenses`
+- Body: none
+- Successful Response:
+```json
+{
+    "payerFriendsExpenses": [
+        {
+            "amount": 5500,
+            "comments": [
+                {
+                    "comment": "I smell hints of vanilla",
+                    "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+                    "expenseId": 4,
+                    "id": 4,
+                    "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+                    "userId": 4
+                }
+            ],
+            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+            "description": "Wine Tasting!",
+            "expenseDate": "Tue, 28 Feb 2023 00:00:00 GMT",
+            "id": 4,
+            "notes": null,
+            "payerId": 100,
+            "receiverId": 4,
+            "settled": false,
+            "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT"
+        },
+        {
+            "amount": 2500,
+            "comments": [],
+            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+            "description": "Brunch!",
+            "expenseDate": "Tue, 28 Feb 2023 00:00:00 GMT",
+            "id": 7,
+            "notes": null,
+            "payerId": 100,
+            "receiverId": 7,
+            "settled": true,
+            "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT"
+        }
+    ],
+    "receiverFriendsExpenses": [
+        {
+            "amount": 4000,
+            "comments": [
+                {
+                    "comment": "I wanted Pinapple!",
+                    "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+                    "expenseId": 1,
+                    "id": 1,
+                    "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+                    "userId": 100
+                }
+            ],
+            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+            "description": "Pizza night!",
+            "expenseDate": "Tue, 28 Feb 2023 00:00:00 GMT",
+            "id": 1,
+            "notes": "Extra peperoni for Stacy",
+            "payerId": 1,
+            "receiverId": 100,
+            "settled": false,
+            "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT"
+        },
+        {
+            "amount": 6500,
+            "comments": [
+                {
+                    "comment": "Never drinking this much again! Ugh!",
+                    "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+                    "expenseId": 2,
+                    "id": 2,
+                    "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+                    "userId": 2
+                }
+            ],
+            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+            "description": "Night on the Town!",
+            "expenseDate": "Tue, 28 Feb 2023 00:00:00 GMT",
+            "id": 2,
+            "notes": null,
+            "payerId": 2,
+            "receiverId": 100,
+            "settled": false,
+            "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT"
+        },
+    ]
+}
+```
+### Edit an Expense
+- Method: `POST`,
+- URL: `/api/friends_expenses/:friends_expense_id/update
+- Body:
+```json
+{
+    "payer_id": 1,
+    "receiver_id": 2,
+    "description": "brunch",
+    "amount": 30,
+    "expense_date": "2024-06-30",
+    "notes": "nvm the eggs were awful! i'll still pay you back"
+}
+```
+- Successful Response:
+```json
+{
+    "id": 11,
+    "payerId": 1,
+    "receiverId": 2,
+    "description": "brunch",
+    "amount": 30,
+    "expenseDate": "Sun, 30 Jun 2024 00:00:00 GMT",
+    "settled": false,
+    "notes": "nvm the eggs were awful! i'll still pay you back",
+    "createdAt": "Tue, 18 Jun 2024 14:32:58 GMT",
+    "updatedAt": "Tue, 18 Jun 2024 14:32:58 GMT"
+}
+```
+### Delete an Expense
+- Method: `GET`
+- URL: `/api/friends_expenses/:friends_expense_id/delete
+- Body: none
+- Successful Response:
+```json  
+{
+    "message": "Friends Expense successfully deleted"
+}
+```
 
-From the Render [Dashboard], click on the "New +" button in the navigation bar,
-and click on "Web Service" to create the application that will be deployed.
+## Comments
+### Create a Comment
+- Method: `POST`
+- URL: `/api/comments/new`
+- Body:
+```json
+{
+    "user_id": 100,
+    "friends_expense_id": 4,
+    "comments": "I can't beleive I am paying this much money!"
+}
+```
+- Successful Response:
+```json
+{
+    "id": 6,
+    "expenseId": 1,
+    "userId": 100,
+    "comment": "I can't beleive I am paying this much money!",
+    "updatedAt": "Tue, 18 Jun 2024 14:32:58 GMT",
+    "createdAt": "Tue, 18 Jun 2024 14:32:58 GMT"
+}
+```
+### Edit a Comment
+- Method: `POST`
+- URL: `/api/comments/:comment_id/update`
+- Body:
+```json
+{
+    "user_id": 100,
+    "friends_expense_id": 1,
+    "comment": "money!"
+}
+```
+- Successful Response:
+```json
+{
+    "id": 6,
+    "expenseId": 1,
+    "userId": 100,
+    "comment": "money!",
+    "updatedAt": "Tue, 18 Jun 2024 14:32:58 GMT",
+    "createdAt": "Tue, 18 Jun 2024 14:32:58 GMT"
+}
+```
+### Delete a Comment
+- Method: `GET`
+- URL: `/api/comments/:comment_id/delete
+- Body: none
+- Successful Response:
+```json
+{
+    "message": "Comment has been successfully deleted"
+}
+```
 
-Select that you want to "Build and deploy from a Git repository" and click
-"Next". On the next page, find the name of the application repo you want to
-deploy and click the "Connect" button to the right of the name.
+## Friends
+### Add a Friend
+- Method: `POST`
+- URL: `/api/friends/new`
+- Body:
+```json
+{
+    "user_id": 100,
+    "email": "joeburrow@gmail.com"
+}
+```
+- Successful Response:
+```json
+{
+    "id": 47,
+    "email": "shaneguerrero@example.net",
+    "name": "Lori Brown",
+    "profileImage": "https://images.unsplash.com/photo-1612487528505-d2338264c821?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "seen_walkthrough": false
+}
+```
+### View all Friends
+- Method: `GET`
+- URL: `/api/friends`
+- Body: none
+- Successful Response:
+```json
+[
+    {
+        "email": "shaneguerrero@example.net",
+        "id": 47,
+        "name": "Lori Brown",
+        "profileImage": "https://images.unsplash.com/photo-1612487528505-d2338264c821?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "seen_walkthrough": false
+    }
+]
+```
+### Delete a Friend
+- Method: `GET`
+- URL: `/api/friends/:friend_id/delete`
+- Body: none
+- Successful Response: 
+```json
+{
+    "message": "Friend successfully deleted"
+}
+```
 
-Now you need to fill out the form to configure your app. Most of the setup will
-be handled by the __Dockerfile__, but you do need to fill in a few fields.
+## Payments (Settle Up)
+### Pay (Settle Up) an Expense
+- Method: `POST`
+- URL: `/api/payments/new`
+- Body:
+```json
+{
+    "user_id": 100,
+    "friends_expense_id": 8,
+    "amount": 43,
+    "payment_date": "2024-06-19 00:00:00"
+}
+```
+- Successful Response:
+```json
+{
+    "id": 6,
+    "userId": 100,
+    "expenseId": 8,
+    "amount": 43,
+    "paymentDate": "Wed, 19 Jun 2024 00:00:00 GMT",
+    "createdAt": "Tue, 18 Jun 2024 14:32:58 GMT",
+    "updatedAt": "Tue, 18 Jun 2024 14:32:58 GMT"
+}
+```
+### View all Payments
+- Method: `GET`
+- URL: `/api/payments`
+- Body: none
+- Successful Response:
+```json
+{
+    "payerPayments": [
+        {
+            "amount": 1000,
+            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+            "expenseId": 6,
+            "id": 3,
+            "paymentDate": "Wed, 10 May 2023 00:00:00 GMT",
+            "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+            "userId": 100
+        }
+    ],
+    "receiverPayments": [
+        {
+            "amount": 1000,
+            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+            "expenseId": 1,
+            "id": 1,
+            "paymentDate": "Wed, 10 May 2023 00:00:00 GMT",
+            "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+            "userId": 1
+        }
+    ]
+}
+```
 
-Start by giving your application a name.
+# Feature List
+1. Expenses
+2. Comments
+3. Friends
+4. Payments (Settle Up)
 
-Make sure the Region is set to the location closest to you, the Branch is set to
-"main", and Runtime is set to "Docker". You can leave the Root Directory field
-blank. (By default, Render will run commands from the root directory.)
+# Future Implementation Goals
+1. Create a groups feature where users can create, update, delete reoccurring expenses within that group of friends.
+2. Create a toggle in the expenses that will split fees between friends and groups by a certain percentage.
 
-Select "Free" as your Instance Type.
+# Connect
+Aubrie Woodbine | 
+Ethan Harrasser | 
+[Jeramie Forbes](https://www.linkedin.com/in/jeramieforbes/) | 
+[Tabia Ye](https://www.linkedin.com/in/tabiaye/)
 
-### Add environment variables
-
-In the development environment, you have been securing your environment
-variables in a __.env__ file, which has been removed from source control (i.e.,
-the file is gitignored). In this step, you will need to input the keys and
-values for the environment variables you need for production into the Render
-GUI.
-
-Add the following keys and values in the Render GUI form:
-
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
-
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
-
-Add the following keys and values:
-
-- DATABASE_URL (copy value from the **External Database URL** field)
-
-**Note:** Add any other keys and values that may be present in your local
-__.env__ file. As you work to further develop your project, you may need to add
-more environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment.
-
-### Deploy
-
-Now you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your Dockerfile
-commands being executed and any errors that occur.
-
-When deployment is complete, open your deployed site and check to see that you
-have successfully deployed your Flask application to Render! You can find the
-URL for your site just below the name of the Web Service at the top of the page.
-
-**Note:** By default, Render will set Auto-Deploy for your project to true. This
-setting will cause Render to re-deploy your application every time you push to
-main, always keeping it up to date.
-
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
-# Python-Project

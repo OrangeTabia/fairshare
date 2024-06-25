@@ -114,7 +114,6 @@ html, body {
 #main-content {
     width: 100%;
     /* position: fixed; */
-    margin-top: 42px;
 }
 
 .columns-wrapper {
@@ -155,6 +154,7 @@ html, body {
 }
 
 .middle-column {
+    min-width: 48%;
     max-width: 100ch;
     margin: 20px 0px;
 
@@ -172,4 +172,71 @@ html, body {
 
 #modal-content {
     z-index: 210;
+}
+
+
+@media (max-width: 1000px) {
+
+    .middle-column {
+        max-width: 65%;
+        margin-right: 20px;
+        margin-bottom: 6px;
+    }
+
+    .left-column {
+        max-width: 30%;
+        margin-bottom: 6px;
+    }
+
+    .right-column {
+        max-width: 95.4%;
+        width: 100%;
+        margin-top: 6px;
+        /* margin: 500px; */
+
+    }
+}
+
+
+@media (max-width: 800px) {
+
+    .middle-column {
+        margin-right: 0px;
+        margin-top: 6px;
+        margin-bottom: 6px;
+        width: 90vw;
+        max-width: 90vw;
+    }
+
+    .right-column {
+        max-width: 100%;
+        margin-top: 6px;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .left-column {
+        max-width: 100%;
+        height: auto;
+        border: 1px solid rgb(143, 142, 142);
+    }
+
+    #main-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .columns-main-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .columns-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%
+    }
 }

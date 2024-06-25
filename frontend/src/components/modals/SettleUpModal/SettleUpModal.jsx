@@ -54,6 +54,10 @@ function SettleUpModal() {
       newValidations.amount =
         "Payment must be the same or less than what is owed";
     }
+    if (!expense) {
+      newValidations.expense = "Please choose an expense";
+    }
+
     const date = new Date(paymentDate.split("-").join(" "));
     const today = new Date(Date.now());
 
@@ -68,7 +72,7 @@ function SettleUpModal() {
       newValidations.paymentDate = "Payment date must be in the future";
     }
     return newValidations;
-  }, [amount, amountDue, paymentDate]);
+  }, [amount, amountDue, expense, paymentDate]);
 
   useEffect(() => {
     if (!hasSubmitted) return;
@@ -169,6 +173,9 @@ function SettleUpModal() {
         <h3>All your expenses are settled!</h3>
       ) : (
         <form onSubmit={handleSubmit} id="settle-up-form">
+          {validations.expense && (
+            <span className="form-error">{validations.amount}</span>
+          )}
           <div>
             <label htmlFor="expense">Which Expense?&nbsp;&nbsp;&nbsp;</label>
             <select
@@ -199,7 +206,7 @@ function SettleUpModal() {
           <div>
             <div className="form-label">
               <label htmlFor="amount"></label>
-              {validations.amount && (
+              {expense && validations.amount && (
                 <span className="form-error">{validations.amount}</span>
               )}
             </div>
@@ -233,6 +240,7 @@ function SettleUpModal() {
               id="settle-payment-date"
               type="date"
               value={paymentDate}
+              min={new Date(Date.now()).toISOString().split("T")[0]}
               onChange={(e) => setPaymentDate(e.target.value)}
               required
             />

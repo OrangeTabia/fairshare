@@ -25,7 +25,7 @@ function FriendsExpensesList() {
 
       setExpenses(Object.values(friendExpenses))
 
-  }, [allExpenses, friendId])
+  }, [allExpenses, friendId, currUser])
 
   // would like to also show all the payments made to the current user
   useEffect(() => {
@@ -34,7 +34,7 @@ function FriendsExpensesList() {
     const currPayments = myPayments.filter(payment => expenseIds.includes(payment.expenseId) )
 
     setPayments(Object.values(currPayments))
-  }, [allPayments, expenses])
+  }, [allPayments, expenses, currUser])
 
   useEffect(() => {
     setOpenCards([])
