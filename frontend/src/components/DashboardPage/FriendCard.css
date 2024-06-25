@@ -52,3 +52,11 @@
 
 
 
+@media (max-width: 600px) {
+  .friend-info-text h3,
+  .friend-info-text p ,
+  .friend-info-text span {
+    font-size: 3vw;
+  }
+
+}

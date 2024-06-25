@@ -43,82 +43,98 @@ function AddComment({ comments, expense }) {
 
   return (
     <>
-      <div id="comments-and-notes-title"><FaComment /> NOTES AND COMMENTS</div>
-      {expense.notes ? 
-      <div id="existing-note">
-        <label id="note-label">Notes</label>
-        <div id="expense-note">{expense?.notes}</div>
+      <div id="comments-and-notes-title">
+        <FaComment /> NOTES AND COMMENTS
       </div>
-      : '' }
-
-      
-      <div id="existing-and-new-comments">
-        {expense.comments.length ? 
-        <div id="existing-comments">
-          {comments &&
-            comments.map((comment) => {
-              let commentDate = (comment.createdAt).split(' ').slice(0, -1).join(' '); 
-              // let formattedCommentDate = commentDate.toLocaleString('en-US', { hour: 'numeric', hour12: true })
-              // console.log("COMMENT DATE",  formattedCommentDate); 
-              
-              return (
-              <div key={comment.id}>
-                <div id="comment-name-date-buttons">
-                  <div id="name-and-date">
-                  {comment.userId === currentUser.id
-                    ? currentUser.name
-                    : friends?.find((friend) => friend.id === comment?.userId)
-                        ?.name}
-                        
-                        <span id="comment-createdAt"> - {commentDate}</span>
-                  </div>
-                  <div id="comment-edit-delete-btns">
-                  <OpenModalButton
-                    id="edit-expense-modal-button"
-                    buttonText={<TfiPencilAlt style={{fontSize: '19px'}}/>}
-                    modalComponent={
-                      <EditComment comments={comment} expense={expense} />
-                    }
-                  />
-                  <OpenModalButton
-                    id="delete-expense-modal-button"
-                    buttonText={<HiOutlineX style={{fontSize: '19px'}}/>}
-                    modalComponent={<DeleteComment comments={comment} />}
-                  />
-                </div>
-                </div>
-                <div id="comment">
-                  {comment.comment}
-                </div>
-                <div id="comment-edit-delete">
-                </div>
-              </div>
-            )})}
+      {expense.notes ? (
+        <div id="existing-note">
+          <label id="note-label">Notes</label>
+          <div id="expense-note">{expense?.notes}</div>
         </div>
-        : '' }
-        <div id="new-comment">
-          <div className="form-label">
-            <form onSubmit={handleSubmit} id="add-comment-form">
-              <textarea
-                id="comment-box"
-                rows="3"
-                cols="45"
-                type="text"
-                placeholder="Add a comment"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-              />
-              {errors.comment ?
-                <span className="form-error">{errors.comment}</span> :
-                '' }
-              <br></br>
-              <p className="char-count"
-              >{comment && comment.length <= 200
-                  ? `You have ${200 - comment.length} characters left`
-                  : ``}</p>
-              <button disabled={!comment || errors.comment} className="form-submit">Submit</button>
-            </form>
+      ) : (
+        ""
+      )}
+
+      <div id="existing-and-new-comments">
+        {expense.comments.length ? (
+          <div id="existing-comments">
+            {comments &&
+              comments.map((comment) => {
+                let commentDate = comment.createdAt
+                  .split(" ")
+                  .slice(0, -1)
+                  .join(" ");
+                // let formattedCommentDate = commentDate.toLocaleString('en-US', { hour: 'numeric', hour12: true })
+                // console.log("COMMENT DATE",  formattedCommentDate);
+
+                return (
+                  <div key={comment.id}>
+                    <div id="comment-name-date-buttons">
+                      <div id="name-and-date">
+                        {comment.userId === currentUser.id
+                          ? currentUser.name
+                          : friends?.find(
+                              (friend) => friend.id === comment?.userId
+                            )?.name}
+
+                        <span id="comment-createdAt"> - {commentDate}</span>
+                      </div>
+                      <div id="comment-edit-delete-btns">
+                        <OpenModalButton
+                          id="edit-expense-modal-button"
+                          buttonText={
+                            <TfiPencilAlt style={{ fontSize: "19px" }} />
+                          }
+                          modalComponent={
+                            <EditComment comments={comment} expense={expense} />
+                          }
+                        />
+                        <OpenModalButton
+                          id="delete-expense-modal-button"
+                          buttonText={
+                            <HiOutlineX style={{ fontSize: "19px" }} />
+                          }
+                          modalComponent={<DeleteComment comments={comment} />}
+                        />
+                      </div>
+                    </div>
+                    <div id="comment">{comment.comment}</div>
+                    <div id="comment-edit-delete"></div>
+                  </div>
+                );
+              })}
           </div>
+        ) : (
+          ""
+        )}
+        <div id="new-comment">
+          <form onSubmit={handleSubmit} id="add-comment-form">
+            <textarea
+              id="comment-box"
+              rows="3"
+              type="text"
+              placeholder="Add a comment"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
+            {errors.comment ? (
+              <span className="form-error">{errors.comment}</span>
+            ) : (
+              ""
+            )}
+            <br></br>
+            <p className="char-count">
+              {comment && comment.length <= 200
+                ? `You have ${200 - comment.length} characters left`
+                : ``}
+            </p>
+            <button
+              disabled={!comment || errors.comment}
+              className="form-submit"
+            >
+              Submit
+            </button>
+          </form>
         </div>
       </div>
     </>
