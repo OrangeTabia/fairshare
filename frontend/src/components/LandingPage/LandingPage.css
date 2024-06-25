@@ -3,7 +3,7 @@ body {
 }
 
 #landing-main-container {
-    background: linear-gradient(425deg, #49aef1d2, #fd9934be);
+    background: linear-gradient(100deg, var(--theme-l-blue) 0%, white 50%, var(--theme-orange) 100%);
 }
 
 .landing-elements-container1 {
