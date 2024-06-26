@@ -35,6 +35,10 @@ function AddExpenseModal({ friendName }) {
     setSubmitDisabled(disabled);
   };
 
+  useEffect(() => {
+    if (!friendId) closeModal();
+  }, [friendId])
+
   const getIntegerAmount = () => {
     if (!amount.split(".")[1]) {
       return amount + "00";
@@ -50,7 +54,7 @@ function AddExpenseModal({ friendName }) {
       let selectedFriend = friendsListArray.find(
         (friend) => friend.id === parseInt(friendId)
       );
-      setPayer(selectedFriend.id);
+      setPayer(selectedFriend?.id);
     }
   }, [friendName, friendsListArray, friendId]);
 
