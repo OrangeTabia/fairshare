@@ -114,13 +114,6 @@ def update_friends_expense(friends_expense_id):
         setattr(current_friends_expense, "settled", form.data["settled"])
         setattr(current_friends_expense, "notes", form.data["notes"])
 
-        print("==================>", current_friends_expense)
-
-        # setattr(current_friends_expense, "payer_id", current_friends_expense.payer_id)
-        # setattr(
-        #     current_friends_expense, "receiver_id", current_friends_expense.receiver_id
-        # )
-
         db.session.commit()
 
         return current_friends_expense.to_dict()
