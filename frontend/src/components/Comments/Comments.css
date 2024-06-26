@@ -8,6 +8,9 @@
   margin-bottom: 0px;
   font-size: 14px;
   font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 #existing-note {

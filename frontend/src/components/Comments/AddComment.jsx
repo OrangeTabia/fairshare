@@ -44,7 +44,7 @@ function AddComment({ comments, expense }) {
   return (
     <>
       <div id="comments-and-notes-title">
-        <FaComment /> NOTES AND COMMENTS
+        <FaComment /> &nbsp; NOTES AND COMMENTS
       </div>
       {expense.notes ? (
         <div id="existing-note">
