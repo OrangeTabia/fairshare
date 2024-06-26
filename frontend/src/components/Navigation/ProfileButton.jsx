@@ -60,7 +60,7 @@ function ProfileButton() {
         <ul className={"profile-dropdown"} ref={ulRef}>
           <li>{user.name}</li>
           <li>{user.email}</li>
-          <span className="website-walkthrough" onClick={handleResources} >Resources</span>
+          <span className="website-walkthrough" onClick={handleResources} >Feature Tutorial</span>
           <li>
             <button onClick={logout}>Log Out</button>
           </li>

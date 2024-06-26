@@ -27,16 +27,16 @@
     justify-content: center;
 }
 
-.walkthrough-modal-btn button {
-    width: 170px;
-    height: 28px;
-    font-size: 1rem;
-    background-color: var(--theme-xl-blue);
-    border: 2px solid var(--theme-blue);
-    border-radius: 5px;
+.walkthrough-modal-buttons {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    gap: 10%
 }
 
-.walkthrough-modal-btn button:hover {
-    background-color: var(--theme-l-blue);
-    border: 2px solid var(--theme-d-blue);
+.button-stay,
+.button-leave {
+    max-width: 100%;
+    width: 400px;
+    height: 28px;
 }
