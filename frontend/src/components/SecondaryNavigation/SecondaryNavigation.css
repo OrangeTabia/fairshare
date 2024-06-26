@@ -73,13 +73,6 @@
     border: 2px solid var(--theme-d-blue);
 }
 
-
-@media (max-width: 1000px) {
-    .friends-name {
-
-    }
-}
-
 @media (max-width: 600px) {
     #secondary-nav-header {
         height: 100%;
