@@ -6,7 +6,6 @@
     flex-direction: column;
     justify-content: space-between;
     padding-bottom: 15px;
-    border: 1px solid red;
 }
 
 .walkthrough-modal-container h1 {
@@ -43,9 +42,18 @@
     border: 2px solid var(--theme-d-blue);
 }
 
-@media (min-width: 376px) and (max-width: 600px) {
+@media (376px <= width < 600px) {
     #modal-content {
-        width: 90%;
+        width: 100%;
+    }
+    .walkthrough-modal-container {
+        width: 100%;
+    }
+    .walkthrough-modal-container h1 {
+        font-size: 24px;
+    }
+    .walkthrough-modal-container div p {
+        font-size: 16px;
     }
 }
 
