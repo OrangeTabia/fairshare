@@ -71,7 +71,7 @@ body {
 }
 
 .icons:hover {
-    color: #FAFAFA;
+    color: #49AEF1;
     cursor: text;
 }
 
@@ -115,7 +115,6 @@ body {
     gap: 50px;
     padding-bottom: 50px;
     padding-top: 25px;
-    /* border: 1px solid yellow; */
 }
 
 #left-container2 {
@@ -124,7 +123,6 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    /* border: 1px solid green; */
 }
 
 #right-container2 {
@@ -134,7 +132,6 @@ body {
     justify-content: center;
     gap: 10px;
     text-align: center;
-    /* border: 1px solid red; */
 }
 
 #left-container2 > h1, #right-container2 > h1 {
