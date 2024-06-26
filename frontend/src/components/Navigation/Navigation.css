@@ -96,5 +96,17 @@
   display: none;
 }
 
+.website-walkthrough {
+  cursor: pointer;
+}
 
+.website-walkthrough:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 1000px) {
+  .media-less-than-1000 {
+    display: block
+  }
+}
 
