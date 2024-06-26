@@ -42,6 +42,11 @@ function SettleUpFriendModal() {
     format: new Date(Date.now()).toISOString().split("T")[0],
   });
 
+// Modal checks for params, if they don't exist it will close
+  useEffect(() => {
+    if (!friendId) closeModal();
+  }, [friendId])
+
   const setSubmitDisabledStatus = (disabled) => {
     disabled
       ? setSubmitClass("form-submit disabled")
@@ -186,7 +191,7 @@ function SettleUpFriendModal() {
             <div>
               {/* set you and friend name in spans so we can make them clickable to change in the future */}
               <p>
-                Between <span>you</span> and <span>{currFriend.name}</span>
+                Between <span>you</span> and <span>{currFriend?.name}</span>
               </p>
             </div>
             {validations.expense && (
