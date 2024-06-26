@@ -35,6 +35,11 @@ function AddExpenseModal({ friendName }) {
     setSubmitDisabled(disabled);
   };
 
+// Modal checks for params, if they don't exist it will close
+  useEffect(() => {
+    if (!friendId) closeModal();
+  }, [friendId])
+
   const getIntegerAmount = () => {
     if (!amount.split(".")[1]) {
       return amount + "00";
@@ -50,7 +55,7 @@ function AddExpenseModal({ friendName }) {
       let selectedFriend = friendsListArray.find(
         (friend) => friend.id === parseInt(friendId)
       );
-      setPayer(selectedFriend.id);
+      setPayer(selectedFriend?.id);
     }
   }, [friendName, friendsListArray, friendId]);
 
