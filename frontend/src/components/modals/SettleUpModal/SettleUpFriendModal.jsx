@@ -37,10 +37,6 @@ function SettleUpFriendModal() {
   const [submitClass, setSubmitClass] = useState("form-submit");
   const [submitDisabled, setSubmitDisabled] = useState(false);
 
-  console.log({
-    date: new Date(Date.now()),
-    format: new Date(Date.now()).toISOString().split("T")[0],
-  });
 
 // Modal checks for params, if they don't exist it will close
   useEffect(() => {

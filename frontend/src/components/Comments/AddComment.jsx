@@ -65,7 +65,6 @@ function AddComment({ comments, expense }) {
                   .slice(0, -1)
                   .join(" ");
                 // let formattedCommentDate = commentDate.toLocaleString('en-US', { hour: 'numeric', hour12: true })
-                // console.log("COMMENT DATE",  formattedCommentDate);
 
                 return (
                   <div key={comment.id}>

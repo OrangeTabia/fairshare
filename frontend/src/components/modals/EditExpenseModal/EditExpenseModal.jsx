@@ -128,8 +128,6 @@ function EditExpenseModal({ expense }) {
       newAmount = parseInt(adjustedAmount.toString() + "00");
     }
 
-    console.log(newAmount)
-
     const updatedExpense = {
       payerId: expense.payerId,
       receiverId: expense.receiverId,
