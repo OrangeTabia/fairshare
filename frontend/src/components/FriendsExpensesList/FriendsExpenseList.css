@@ -110,6 +110,11 @@
   color: #2da2ef;
 }
 
+.payment-expense-title {
+  font-size: 16px;
+  text-decoration: underline;
+}
+
 @media screen and (max-width: 600px) {
   .expense-details-card {
     display: flex;

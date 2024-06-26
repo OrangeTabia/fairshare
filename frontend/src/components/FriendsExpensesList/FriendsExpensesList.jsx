@@ -46,7 +46,7 @@ function FriendsExpensesList() {
     setPayments(Object.values(currPayments))
   }, [allPayments, expenses, currUser])
 
-  
+
   useEffect(() => {
     setOpenCards([])
   }, [friendId, allPayments])
@@ -109,6 +109,7 @@ function FriendsExpensesList() {
                   {openCards.includes(idx + 200)
                     ? <div className="a-payment">
                           <div>
+                            <div className="payment-expense-title">{`Expense: ${expenses.find(expense => expense.id === payment.expenseId).description}`}</div>
                             <p>{`Payment of ${centsToUSD(payment.amount)}`}</p>
                             <p>{payment.userId === currUser.id ? `Paid by you` : `Paid by ${currFriend.name}`}</p>
                             <p>{`Paid on ${payment.paymentDate.slice(0, -12)}`}</p>
