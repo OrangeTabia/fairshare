@@ -35,6 +35,7 @@ function AddExpenseModal({ friendName }) {
     setSubmitDisabled(disabled);
   };
 
+// Modal checks for params, if they don't exist it will close
   useEffect(() => {
     if (!friendId) closeModal();
   }, [friendId])

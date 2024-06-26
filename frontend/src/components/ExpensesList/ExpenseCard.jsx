@@ -41,9 +41,15 @@ function ExpenseCard({ expenseId }) {
     <div className="expense-details-card">
       <div className="details-header">
         {expense.receiverId !== currUser.id
-          ? <div className="owed-or-still-owe">{expense.settled ? `This expense is all paid up` : `You still owe: ${whatsLeftToPay(expense)}`}</div>
+          ? <div className="owed-or-still-owe">
+              <div >{`Total: ${centsToUSD(expense.amount)}`}</div>
+              {expense.settled ? `This expense is all paid up` : `You still owe: ${whatsLeftToPay(expense)}`}
+            </div>
           :  <div className="owed-or-still-owe-container">
-                <div className="owed-or-still-owe">{expense.settled ? `This expense is all paid up` : `You are owed: ${whatsLeftToPay(expense)}`}</div>
+                <div className="owed-or-still-owe">
+                    <div>{`Total: ${centsToUSD(expense.amount)}`}</div>
+                    {expense.settled ? `This expense is all paid up` : `You are owed: ${whatsLeftToPay(expense)}`}
+                </div>
                 <div id='expense-set-by-you'>
                   <div className="expense-set-by-you-delete">
                       <OpenModalButton

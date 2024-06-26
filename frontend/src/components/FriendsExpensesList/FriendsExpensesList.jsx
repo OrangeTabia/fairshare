@@ -23,7 +23,7 @@ function FriendsExpensesList() {
       const friendPayer = Object.values(allExpenses).filter(expense => expense.payerId === parseInt(friendId) && expense.receiverId === currUser.id)
       const friendExpenses = [...friendReceiver, ...friendPayer]
 
-      // formatter to help sort by date by user location
+      // formatter to help sort by date by user date
       const formatter = new Intl.DateTimeFormat('en');
       // a and b are expenses from the expenses list being compared then sorted
       friendExpenses.sort((a, b) => formatter.format(new Date(b.expenseDate)).localeCompare(formatter.format(new Date(a.expenseDate))))
@@ -32,15 +32,21 @@ function FriendsExpensesList() {
 
   }, [allExpenses, friendId, currUser])
 
-  // would like to also show all the payments made to the current user
+  // would like to also show all the payments made by the current user
   useEffect(() => {
     const myPayments = Object.values(allPayments).filter(payment => payment.userId === currUser.id)
     const expenseIds = expenses.map(expense => expense.id)
     const currPayments = myPayments.filter(payment => expenseIds.includes(payment.expenseId) )
 
+    // formatter to help sort by date by user date
+    const formatter = new Intl.DateTimeFormat('en');
+    // a and b are expenses from the expenses list being compared then sorted
+    currPayments.sort((a, b) => formatter.format(new Date(b.paymentDate)).localeCompare(formatter.format(new Date(a.paymentDate))))
+
     setPayments(Object.values(currPayments))
   }, [allPayments, expenses, currUser])
 
+  
   useEffect(() => {
     setOpenCards([])
   }, [friendId, allPayments])
