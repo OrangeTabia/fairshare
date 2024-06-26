@@ -237,8 +237,8 @@ body {
   }
 }
 
-/* @media screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
   #site-name {
     font-size: 1.25rem;
   }
-} */
+}
