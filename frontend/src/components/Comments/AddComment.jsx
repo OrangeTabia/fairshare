@@ -62,9 +62,10 @@ function AddComment({ comments, expense }) {
               comments.map((comment) => {
                 let commentDate = comment.createdAt
                   .split(" ")
-                  .slice(0, -1)
+                  .slice(0, -2)
                   .join(" ");
-                // let formattedCommentDate = commentDate.toLocaleString('en-US', { hour: 'numeric', hour12: true })
+                // formats the time to "6:30 PM"
+                let commentTime = new Date(comment.createdAt).toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
 
                 return (
                   <div key={comment.id}>
@@ -76,7 +77,7 @@ function AddComment({ comments, expense }) {
                               (friend) => friend.id === comment?.userId
                             )?.name}
 
-                        <span id="comment-createdAt"> - {commentDate}</span>
+                        <span id="comment-createdAt"> - {commentDate}&nbsp;{commentTime}</span>
                       </div>
                       <div id="comment-edit-delete-btns">
                         <OpenModalButton
