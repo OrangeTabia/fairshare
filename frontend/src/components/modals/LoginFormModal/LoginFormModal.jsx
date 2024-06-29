@@ -70,50 +70,58 @@ function LoginFormModal() {
         onSubmit={handleSubmit}
         id="login-form"
       >
-        <div>
+        <div className="form-content-container">
           <div className="form-label">
             <label htmlFor="email">Email</label>
             {validations.email && (
               <span className="form-error">{validations.email}</span>
             )}
           </div>
-          <input
-            id="email"
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
+          <div className="form-item">
+            <input
+              id="email"
+              type="text"
+              placeholder="Enter an email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+
           <div className="form-label">
             <label htmlFor="password">Password</label>
             {validations.password && (
               <span className="form-error">{validations.password}</span>
             )}
           </div>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div className="form-item">
+            <input
+              id="password"
+              type="password"
+              placeholder="Enter a password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="form-buttons-container">
+            <button
+              className={submitClass}
+              disabled={submitDisabled}
+              type="submit"
+            >
+              Log In
+            </button>
+            <button
+              className="form-submit"
+              onClick={handleDemo}
+              type="submit"
+            >
+              Demo Log In
+            </button>
+          </div>
         </div>
-        <button
-          className={submitClass}
-          disabled={submitDisabled}
-          type="submit"
-        >
-          Log In
-        </button>
-        <button
-          className="form-submit"
-          onClick={handleDemo}
-          type="submit"
-        >
-          Demo User
-        </button>
       </form>
     </>
   );

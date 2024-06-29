@@ -93,7 +93,7 @@ function SignupFormModal() {
         onSubmit={handleSubmit}
         id="signup-form"
       >
-        <div>
+        <div className="form-content-container">
           <div className="form-label">
             <label htmlFor="name">Name</label>
             {validations.name && (
@@ -102,15 +102,16 @@ function SignupFormModal() {
               <span className="form-error">{errors.name}</span>
             )}
           </div>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-        <div>
+          <div className="form-item">
+            <input
+              id="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+
           <div className="form-label">
             <label htmlFor="email">Email</label>
             {validations.email && (
@@ -126,8 +127,7 @@ function SignupFormModal() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </div>
-        <div>
+
           <div className="form-label">
             <label htmlFor="password">
               Password
@@ -145,29 +145,31 @@ function SignupFormModal() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </div>
-        <div>
+
           <div className="form-label">
             <label htmlFor="confirm-password">Confirm Password</label>
             {validations.confirmPassword && (
               <span className="form-error">{validations.confirmPassword}</span>
             )}
           </div>
-        <input
-          id="confirm-password"
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
+          <div className="form-item">
+            <input
+              id="confirm-password"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </div>
+
+          <button
+            className={submitClass}
+            type="submit"
+            disabled={submitDisabled}
+            >
+            Sign Up
+          </button>
         </div>
-        <button
-          className={submitClass}
-          type="submit"
-          disabled={submitDisabled}
-        >
-          Sign Up
-        </button>
       </form>
     </>
   );

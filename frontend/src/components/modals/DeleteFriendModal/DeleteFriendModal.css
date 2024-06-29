@@ -8,14 +8,7 @@
     align-items: center;
     gap: 10px;
 
-    p {
+    :is(p) {
         margin: 0;
-    }
-
-    .form-buttons-container {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        gap: 20px;
     }
 }

@@ -38,7 +38,7 @@ function AddExpenseModal({ friendName }) {
 // Modal checks for params, if they don't exist it will close
   useEffect(() => {
     if (!friendId && friendName) closeModal();
-  }, [friendId, friendName])
+  }, [friendId, friendName, closeModal])
 
   const getIntegerAmount = () => {
     if (!amount.split(".")[1]) {

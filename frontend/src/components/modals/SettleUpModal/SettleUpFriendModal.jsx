@@ -41,7 +41,7 @@ function SettleUpFriendModal() {
 // Modal checks for params, if they don't exist it will close
   useEffect(() => {
     if (!friendId) closeModal();
-  }, [friendId])
+  }, [friendId, closeModal])
 
   const setSubmitDisabledStatus = (disabled) => {
     disabled

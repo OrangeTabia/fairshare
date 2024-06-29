@@ -1,24 +1,35 @@
+#walkthrough-modal-container {
+    width: 100%;
+    min-width: 40ch;
+    max-width: 60ch;
 
-.walkthrough-modal-container {
-    width: 500px;
-    height: 380px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-bottom: 15px;
-}
+    flex-flow: column nowrap;
+    justify-content: center;
+    gap: 10px;
 
-.walkthrough-modal-container h1 {
-    border-bottom: 1px solid rgb(192, 191, 191);
-    margin-bottom: 0px;
-}
+    :is(h2) {
+        border-bottom: 1px solid rgb(192, 191, 191);
+        margin: 20px 0 0;
+        padding: 0 0 20px 0;
+    }
 
-.walkthrough-modal-container div p {
-    text-align: center;
-}
+    :is(div) p {
+        text-align: center;
+    }
 
-.walkthrough-modal-container h1 {
-    padding-left: 20px;
+    :is(p) {
+        margin: 0;
+    }
+
+    .walkthrough-text {
+        width: 100%;
+        margin: 10px 0;
+
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 1rem;
+    }
 }
 
 .walkthrough-modal-btn {
@@ -26,20 +37,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
+    gap: 10px;
 
-.walkthrough-modal-buttons {
-    width: 100%;
-    justify-content: center;
-    display: flex;
-    gap: 10%
-}
-
-.button-stay,
-.button-leave {
-    max-width: 100%;
-    width: 400px;
-    height: 28px;
+    :is(button) {
+        margin: 0;
+    }
 }
 
 @media (376px <= width < 600px) {
