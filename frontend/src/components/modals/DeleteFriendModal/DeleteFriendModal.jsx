@@ -25,14 +25,14 @@ function DeleteFriendModal({ friend }) {
   };
 
     return (
-        <div>
-            <p>Are you sure you want to remove {friend.name} as a friend?</p>
-            <div className="delete-friend-buttons">
-                <button className="form-submit" onClick={deleteFriend}>Yes</button>
-                <button className="form-cancel" onClick={doNotDelete}>No</button>
-            </div>
+      <div className="delete-friend">
+        <h2>Remove Friend</h2>
+        <p>Are you sure you want to remove {friend.name} as a friend?</p>
+        <div className="form-buttons-container">
+          <button className="form-submit" onClick={deleteFriend}>Yes</button>
+          <button className="form-cancel" onClick={doNotDelete}>No</button>
         </div>
-
+      </div>
     )
   }
 

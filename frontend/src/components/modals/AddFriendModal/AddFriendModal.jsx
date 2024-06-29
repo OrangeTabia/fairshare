@@ -92,7 +92,6 @@ function AddFriendModal() {
               ? 'form-item selected-friend-container'
               : 'no-display'
             }
-            hidden={!friendSelected}
           >
             <img
               className='user-profile-image'
