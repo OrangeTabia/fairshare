@@ -37,15 +37,15 @@ function AddFriendModal() {
   }, [email, allUsers, currFriends, currUser]);
 
   const selectingUser = (friend) => {
-    setFriendSelected(friend)
-    setSuggestedFriends([])
-    setEmail('')
+    setFriendSelected(friend);
   };
 
   const handleAddFriend = async (e) => {
     e.preventDefault();
-    await dispatch(thunkAddFriend(friendSelected.email));
+    dispatch(thunkAddFriend(friendSelected.email));
     setFriendSelected('');
+    setSuggestedFriends([]);
+    setEmail('');
     closeModal();
     navigate(`friend/${friendSelected.id}`);
   };
@@ -68,18 +68,40 @@ function AddFriendModal() {
             </input>
           </div>
 
-          <div className='select-a-friend'>
-            <p className="select-friend-small-label">click email to select</p>
-            {suggestedFriends.map(friend => (
-              <div key={friend.id}>
-                <div className='list-user-email-item' onClick={() => selectingUser(friend)} >{friend.email}</div>
-              </div>
-            ))}
+          <p className="select-friend-label">Select an email</p>
+          <div className='form-item'>
+            <ul className='email-select-list'>
+              {suggestedFriends.length > 0 ? (
+                suggestedFriends.map(friend => (
+                  <li
+                    className='email-select-item'
+                    key={friend.id}
+                    onClick={() => selectingUser(friend)}
+                  >
+                    {friend.email}
+                  </li>
+                ))) : (
+                  <li className="no-results-item">No results found</li>
+                )
+              }
+            </ul>
           </div>
 
-          <div className='chosen-user-container' hidden={!friendSelected}>
-            <img className='user-profile-image' src={friendSelected.profileImage} hidden={!friendSelected}/>
-            <div hidden={!friendSelected} >add {friendSelected.name} as a friend?</div>
+          <div
+            className={(friendSelected)
+              ? 'form-item selected-friend-container'
+              : 'no-display'
+            }
+            hidden={!friendSelected}
+          >
+            <img
+              className='user-profile-image'
+              src={friendSelected.profileImage}
+              hidden={!friendSelected}
+            />
+            <div hidden={!friendSelected}>
+              Add {friendSelected.name} as a friend?
+            </div>
           </div>
 
           <button
