@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding-bottom: 15px;
 }
 
 .walkthrough-modal-container h1 {
@@ -27,16 +28,46 @@
     justify-content: center;
 }
 
-.walkthrough-modal-btn button {
-    width: 170px;
-    height: 28px;
-    font-size: 1rem;
-    background-color: var(--theme-xl-blue);
-    border: 2px solid var(--theme-blue);
-    border-radius: 5px;
+.walkthrough-modal-buttons {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    gap: 10%
 }
 
-.walkthrough-modal-btn button:hover {
-    background-color: var(--theme-l-blue);
-    border: 2px solid var(--theme-d-blue);
+.button-stay,
+.button-leave {
+    max-width: 100%;
+    width: 400px;
+    height: 28px;
+}
+
+@media (376px <= width < 600px) {
+    #modal-content {
+        width: 100%;
+    }
+    .walkthrough-modal-container {
+        width: 100%;
+    }
+    .walkthrough-modal-container h1 {
+        font-size: 24px;
+    }
+    .walkthrough-modal-container div p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 375px) {
+    #modal-content {
+        width: 100%;
+    }
+    .walkthrough-modal-container {
+        width: 100%;
+    }
+    .walkthrough-modal-container h1 {
+        font-size: 20px;
+    }
+    .walkthrough-modal-container div p {
+        font-size: 14px;
+    }
 }

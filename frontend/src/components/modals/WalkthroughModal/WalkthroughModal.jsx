@@ -3,7 +3,7 @@ import './WalkthroughModal.css'
 
 
 const WalkthroughModal = () => {
-    const { setModalContent } = useModal();
+    const { setModalContent, closeModal } = useModal();
 
     const handleModalSwap = () => {
         const modalComponent = <WalkthroughModal2 />
@@ -18,7 +18,10 @@ const WalkthroughModal = () => {
                 <p>Click next to continue.</p>
             </div>
             <div className='walkthrough-modal-btn'>
-                <button onClick={handleModalSwap}>Next</button>
+                <div className='walkthrough-modal-buttons'>
+                    <button className='form-submit button-stay' onClick={handleModalSwap}>Next</button>
+                    <button className='form-cancel button-leave' onClick={() => closeModal()}>Return</button>
+                </div>
                 <p>1/6</p>
             </div>
         </div>
@@ -47,7 +50,7 @@ const WalkthroughModal2 = () => {
                     tab in the navigation bar above.</p>
             </div>
             <div className='walkthrough-modal-btn'>
-                <button onClick={handleModalSwap}>Next</button>
+                <button className='form-submit' onClick={handleModalSwap}>Next</button>
                 <p>2/6</p>
             </div>
         </div>
@@ -74,7 +77,7 @@ const WalkthroughModal3 = () => {
                     your selected friend</p>
             </div>
             <div className='walkthrough-modal-btn'>
-                <button onClick={handleModalSwap}>Next</button>
+                <button className='form-submit' onClick={handleModalSwap}>Next</button>
                 <p>3/6</p>
             </div>
         </div>
@@ -99,7 +102,7 @@ const WalkthroughModal4 = () => {
                     you bought them last week.</p>
             </div>
             <div className='walkthrough-modal-btn'>
-                <button onClick={handleModalSwap}>Next</button>
+                <button className='form-submit' onClick={handleModalSwap}>Next</button>
                 <p>4/6</p>
             </div>
         </div>
@@ -124,7 +127,7 @@ const WalkthroughModal5 = () => {
                 <p>Tada! Your friends love you, you always pay back your debts!</p>
             </div>
             <div className='walkthrough-modal-btn'>
-                <button onClick={handleModalSwap}>Next</button>
+                <button className='form-submit' onClick={handleModalSwap}>Next</button>
                 <p>5/6</p>
             </div>
         </div>
@@ -143,7 +146,7 @@ const WalkthroughModal6 = () => {
                 <p>Don&apos;t worry, we will make sure everyone plays fair!</p>
             </div>
             <div className='walkthrough-modal-btn'>
-                <button onClick={() => closeModal()}>Finish</button>
+                <button className='form-submit' onClick={() => closeModal()}>Finish</button>
                 <p>6/6</p>
             </div>
         </div>

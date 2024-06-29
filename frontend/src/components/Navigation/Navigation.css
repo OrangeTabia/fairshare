@@ -3,12 +3,23 @@
   padding: 0;
 
   display: flex;
-  flex-flow: row nowrap;
+  flex-direction: row;
   gap: 10%;
 }
 
+.nav-header-landing {
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
 .nav-header li,
-.nav-header a {
+.nav-header a, 
+.nav-header-landing li,
+.nav-header-landing a {
   font-size: 1rem;
   font-weight: 500;
   color: black;
@@ -44,6 +55,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 13px;
 }
 
 .profile-dropdown button {
@@ -99,13 +111,3 @@
   }
 }
 
-@media (max-width: 600px) {
-  .nav-header {
-    margin-left: 90%
-  }
-
-  .nav-header li,
-  .nav-header a {
-    font-size: .8rem;
-  }
-}

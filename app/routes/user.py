@@ -25,9 +25,6 @@ def user(id):
 
     user = User.query.get(id)
 
-
-    print('----->', user.friends.all())
-
     print("user_routes", current_user)
     return user.to_dict()
 
@@ -39,7 +36,6 @@ def update_walkthrough(id):
     form = UpdateForm()
     # Get the csrf_token from the request cookie and put it into the
     # form manually to validate_on_submit can be used
-    print('form data ====>', form.data)
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         # update the seen_walkthrough field for the user

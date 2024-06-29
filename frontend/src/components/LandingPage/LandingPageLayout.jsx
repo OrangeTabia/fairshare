@@ -38,13 +38,11 @@ function LandingPageLayout () {
                     </div>
 
                 </div>
-                {/* <div id='right-container1'>
-                </div> */}
             </div>
 
             <div className='landing-elements-container2'>
                 <div id='left-container2'>
-                    <img src={LandingPageImg3} alt='settle-up-image'></img>
+                    <img className='landing-image' src={LandingPageImg3} alt='settle-up-image'></img>
                 </div>
                 <div id='right-container2'>
                     <h1>Pay friends back</h1>
@@ -58,7 +56,7 @@ function LandingPageLayout () {
                     <p>Quickly add expenses before you forget who paid.</p>
                 </div>
                 <div id='right-container2'>
-                    <img src={LandingPageImg4} alt='add-expense-image'></img>
+                    <img className='landing-image' src={LandingPageImg4} alt='add-expense-image'></img>
                 </div>
             </div>
         </div>

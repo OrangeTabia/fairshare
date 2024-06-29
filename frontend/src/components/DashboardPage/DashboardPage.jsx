@@ -20,7 +20,7 @@ function DashboardPage() {
 
 
 
-
+// Checks if the user has seen the walkthrough yet, if not then they are shown on signup
   useEffect(() => {
     const handleResources = async () => {
       await dispatch(thunkUpdateWalkthrough(user.id))
@@ -32,6 +32,7 @@ function DashboardPage() {
       handleResources()
     }
   }, [user, dispatch, setModalContent])
+
 
   // used to track the size of the page and remove sections based on the size
   useEffect(() => {
@@ -48,7 +49,7 @@ function DashboardPage() {
     }
 
   }, [])
-  
+
 
   return (
     <div className="columns-main-container">

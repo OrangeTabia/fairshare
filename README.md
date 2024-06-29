@@ -8,7 +8,7 @@ Fairshare is a partial clone inspired by 'Splitwise' that allows consumers to sp
 
 # Tech Stack
 
-### Frameworks and Libraries
+### Languages, Frameworks, and Libraries
 ![Static Badge](https://img.shields.io/badge/PYTHON-%233776AB?style=for-the-badge&logo=python&labelColor=black)
 ![Static Badge](https://img.shields.io/badge/FLASK-%23000000?style=for-the-badge&logo=FLASK&labelColor=black)
 ![Static Badge](https://img.shields.io/badge/JAVASCRIPT-%23F7DF1E?style=for-the-badge&logo=javascript&labelColor=black)
@@ -108,35 +108,35 @@ Fairshare is a partial clone inspired by 'Splitwise' that allows consumers to sp
             "amount": 5500,
             "comments": [
                 {
+                    "id": 4,
+                    "userId": 4,
+                    "expenseId": 4,
                     "comment": "I smell hints of vanilla",
                     "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
-                    "expenseId": 4,
-                    "id": 4,
-                    "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT",
-                    "userId": 4
+                    "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT"
                 }
             ],
-            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
-            "description": "Wine Tasting!",
-            "expenseDate": "Tue, 28 Feb 2023 00:00:00 GMT",
             "id": 4,
-            "notes": null,
             "payerId": 100,
             "receiverId": 4,
+            "description": "Wine Tasting!",
+            "expenseDate": "Tue, 28 Feb 2023 00:00:00 GMT",
+            "notes": null,
             "settled": false,
+            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
             "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT"
         },
         {
-            "amount": 2500,
-            "comments": [],
-            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
-            "description": "Brunch!",
-            "expenseDate": "Tue, 28 Feb 2023 00:00:00 GMT",
             "id": 7,
-            "notes": null,
             "payerId": 100,
             "receiverId": 7,
+            "amount": 2500,
+            "description": "Brunch!",
+            "expenseDate": "Tue, 28 Feb 2023 00:00:00 GMT",
+            "notes": null,
             "settled": true,
+            "comments": [],
+            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
             "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT"
         }
     ],
@@ -145,44 +145,44 @@ Fairshare is a partial clone inspired by 'Splitwise' that allows consumers to sp
             "amount": 4000,
             "comments": [
                 {
+                    "id": 1,
+                    "userId": 100,
+                    "expenseId": 1,
                     "comment": "I wanted Pinapple!",
                     "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
-                    "expenseId": 1,
-                    "id": 1,
-                    "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT",
-                    "userId": 100
+                    "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT"
                 }
             ],
-            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
-            "description": "Pizza night!",
-            "expenseDate": "Tue, 28 Feb 2023 00:00:00 GMT",
             "id": 1,
-            "notes": "Extra peperoni for Stacy",
             "payerId": 1,
             "receiverId": 100,
+            "description": "Pizza night!",
+            "expenseDate": "Tue, 28 Feb 2023 00:00:00 GMT",
+            "notes": "Extra peperoni for Stacy",
             "settled": false,
+            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
             "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT"
         },
         {
             "amount": 6500,
             "comments": [
                 {
+                    "id": 2,
+                    "expenseId": 2,
+                    "userId": 2,
                     "comment": "Never drinking this much again! Ugh!",
                     "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
-                    "expenseId": 2,
-                    "id": 2,
-                    "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT",
-                    "userId": 2
+                    "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT"
                 }
             ],
-            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
-            "description": "Night on the Town!",
-            "expenseDate": "Tue, 28 Feb 2023 00:00:00 GMT",
             "id": 2,
-            "notes": null,
             "payerId": 2,
             "receiverId": 100,
+            "description": "Night on the Town!",
+            "expenseDate": "Tue, 28 Feb 2023 00:00:00 GMT",
+            "notes": null,
             "settled": false,
+            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
             "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT"
         },
     ]
@@ -190,7 +190,7 @@ Fairshare is a partial clone inspired by 'Splitwise' that allows consumers to sp
 ```
 ### Edit an Expense
 - Method: `POST`,
-- URL: `/api/friends_expenses/:friends_expense_id/update
+- URL: `/api/friends_expenses/:friends_expense_id/update`
 - Body:
 ```json
 {
@@ -219,7 +219,7 @@ Fairshare is a partial clone inspired by 'Splitwise' that allows consumers to sp
 ```
 ### Delete an Expense
 - Method: `GET`
-- URL: `/api/friends_expenses/:friends_expense_id/delete
+- URL: `/api/friends_expenses/:friends_expense_id/delete`
 - Body: none
 - Successful Response:
 ```json  
@@ -275,7 +275,7 @@ Fairshare is a partial clone inspired by 'Splitwise' that allows consumers to sp
 ```
 ### Delete a Comment
 - Method: `GET`
-- URL: `/api/comments/:comment_id/delete
+- URL: `/api/comments/:comment_id/delete`
 - Body: none
 - Successful Response:
 ```json
@@ -301,7 +301,7 @@ Fairshare is a partial clone inspired by 'Splitwise' that allows consumers to sp
     "id": 47,
     "email": "shaneguerrero@example.net",
     "name": "Lori Brown",
-    "profileImage": "https://images.unsplash.com/photo-1612487528505-d2338264c821?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "profileImage": "image url",
     "seen_walkthrough": false
 }
 ```
@@ -316,7 +316,7 @@ Fairshare is a partial clone inspired by 'Splitwise' that allows consumers to sp
         "email": "shaneguerrero@example.net",
         "id": 47,
         "name": "Lori Brown",
-        "profileImage": "https://images.unsplash.com/photo-1612487528505-d2338264c821?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "profileImage": "image url",
         "seen_walkthrough": false
     }
 ]
@@ -366,24 +366,24 @@ Fairshare is a partial clone inspired by 'Splitwise' that allows consumers to sp
 {
     "payerPayments": [
         {
-            "amount": 1000,
-            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
-            "expenseId": 6,
             "id": 3,
+            "userId": 100,
+            "expenseId": 6,
+            "amount": 1000,
             "paymentDate": "Wed, 10 May 2023 00:00:00 GMT",
+            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
             "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT",
-            "userId": 100
         }
     ],
     "receiverPayments": [
         {
-            "amount": 1000,
-            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
-            "expenseId": 1,
             "id": 1,
+            "userId": 1,
+            "expenseId": 1,
+            "amount": 1000,
             "paymentDate": "Wed, 10 May 2023 00:00:00 GMT",
-            "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT",
-            "userId": 1
+            "createdAt": "Fri, 14 Jun 2024 10:40:05 GMT",
+            "updatedAt": "Fri, 14 Jun 2024 10:40:05 GMT"
         }
     ]
 }
@@ -400,7 +400,7 @@ Fairshare is a partial clone inspired by 'Splitwise' that allows consumers to sp
 2. Create a toggle in the expenses that will split fees between friends and groups by a certain percentage.
 
 # Connect
-Aubrie Woodbine | 
+[Aubrie Woodbine](https://www.linkedin.com/in/aubriewoodbine/) | 
 Ethan Harrasser | 
 [Jeramie Forbes](https://www.linkedin.com/in/jeramieforbes/) | 
 [Tabia Ye](https://www.linkedin.com/in/tabiaye/)

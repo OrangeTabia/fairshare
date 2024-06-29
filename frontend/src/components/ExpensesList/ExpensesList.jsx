@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ExpenseCard from "./ExpenseCard";
 import { centsToUSD } from "../../utils/formatters";
@@ -11,7 +11,8 @@ function ExpensesList() {
   const expenses = useSelector((state) => state.friendsExpenses);
   const currUser = useSelector(state => state.session.user)
   const allFriends = useSelector((state) => state.friends)
-  const allPayments = useSelector((state) => state.payments)
+  const allPayments = useSelector((state) => state.payments);
+  const [sortedExpenses, setSortedExpenses] = useState(Object.values(expenses));
 
 
   const handleClick = (expenseId) => {
@@ -39,12 +40,19 @@ function ExpensesList() {
     return centsToUSD(adjustTotal)
   }
 
+  useEffect(() => {
+  // formating dates to order them by date
+    const formatter = new Intl.DateTimeFormat('en');
+  // a and b are expenses from the expenses list being compared then sorted
+    sortedExpenses.sort((a, b) => formatter.format(new Date(b.expenseDate)).localeCompare(formatter.format(new Date(a.expenseDate))))
+  }, [expenses])
+
 
   return (
     <section id="expenses-list-container">
       {Object.values(expenses).length
         ? <div>
-        {Object.values(expenses).map((expense) => (
+        {sortedExpenses.map((expense) => (
           <div key={expense.id} className='all-expenses' >
             <div
               onClick={() => handleClick(expense.id)}
@@ -61,7 +69,7 @@ function ExpensesList() {
                             : `You still owe ${getCurrFriend(expense)}: `}{whatsLeftToPay(expense)}
                         </div>
                       : <div hidden={!expense.settled}>Expense Settled</div> }
-              <div >{centsToUSD(expense.amount)}</div>
+                        <div >{`${expense.expenseDate.slice(0, 17)}`}</div>
             </div>
             {selectedExpense === expense.id && <ExpenseCard expenseId={expense.id} />}
           </div>
