@@ -1,11 +1,10 @@
-#settle-up-form {
+#delete-friends-expense {
     width: 100%;
     min-width: 40ch;
 
     display: flex;
     flex-flow: column nowrap;
-    justify-content: center;
-    align-items: left;
+    align-items: center;
     gap: 10px;
 
     .form-content-container {
@@ -36,7 +35,7 @@
         flex-flow: row nowrap;
         justify-content: center;
         align-items: center;
-        gap: 10px;
+        gap: 0.5ch;
     }
 
     input {
@@ -48,31 +47,14 @@
         border-radius: 2.5px;
     }
 
-    .your-name-text,
-    .friend-name-text {
-        font-weight: 600;
-    }
-
     p {
         margin: 0;
     }
-}
 
-#settle-expense-option:hover {
-    cursor: pointer;
-}
-
-#settle-up-name-img {
-    font-weight: 600;
-
-    .user-profile-image {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
+    .form-buttons-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
     }
-}
-
-.dollarsign-for-amount {
-    display: flex;
-    gap: 6px;
 }

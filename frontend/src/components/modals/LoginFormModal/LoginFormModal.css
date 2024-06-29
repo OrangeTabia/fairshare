@@ -1,70 +1,44 @@
-#modal-content {
-    padding: 20px;
-
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-
-    border: 2px solid var(--theme-d-gray);
-    border-radius: 10px;
-    background-clip: border-box;
-}
-
 #login-form {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: left;
     gap: 10px;
-}
 
-.form-label {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: left;
-    align-items: center;
-    gap: 10px;
-}
+    .form-content-container {
+        width: 100%;
 
-#login-form input {
-    width: 100%;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        gap: 10px;
+    }
 
-    background-color: var(--theme-white);
-    border: 1px solid var(--theme-m-gray);
-    border-radius: 2.5px;
-}
+    .form-label {
+        width: 100%;
+        display: flex;
 
-.form-error {
-    color: var(--theme-error);
-}
+        font-size: 1rem;
+        line-height: 1rem;
+        font-weight: 500;
+    }
 
-.form-submit {
-    width: 200px;
-    margin-top: 10px;
-    align-self: center;
+    .form-item {
+        width: 100%;
 
-    font-size: 0.8rem;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
 
-    background-color: var(--theme-xl-blue);
-    border: 2px solid var(--theme-blue);
-    border-radius: 5px;
-}
+    input {
+        width: 100%;
+        height: 30px;
 
-.form-submit:hover {
-    background-color: var(--theme-l-blue);
-    border: 2px solid var(--theme-d-blue);
-}
-
-.form-submit:hover {
-    background-color: var(--theme-l-blue);
-    border: 2px solid var(--theme-d-blue);
-}
-
-.form-submit.disabled,
-.form-submit.disabled:hover {
-    background-color: var(--theme-xl-gray);
-    border: 2px solid var(--theme-l-gray);
-    cursor: default;
+        background-color: var(--theme-white);
+        border: 1px solid var(--theme-m-gray);
+        border-radius: 2.5px;
+    }
 }

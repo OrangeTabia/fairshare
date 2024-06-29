@@ -1,8 +1,12 @@
 #add-expense-form {
     width: 100%;
     min-width: 60ch;
+
     display: flex;
+    flex-flow: column nowrap;
     justify-content: center;
+    align-items: left;
+    gap: 10px;
 
     .form-content-container {
         width: 100%;
@@ -42,13 +46,6 @@
         background-color: var(--theme-white);
         border: 1px solid var(--theme-m-gray);
         border-radius: 2.5px;
-    }
-
-    .submit-cancel-btns {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        gap: 20px;
     }
 
     p {

@@ -168,18 +168,17 @@ function SettleUpModal() {
 
   return (
     <>
-      <h2>Settle up</h2>
+      <h2>Settle Up</h2>
       {expenseSelection.length <= 0 ? (
-        <h3>All your expenses are settled!</h3>
+        <p>All your expenses are settled!</p>
       ) : (
         <form onSubmit={handleSubmit} id="settle-up-form">
-          {validations.expense && (
-            <span className="form-error">{validations.amount}</span>
-          )}
-          <div>
+          <div className="form-label">
             <label htmlFor="expense">Which Expense?&nbsp;&nbsp;&nbsp;</label>
+          </div>
+          <div className="form-item">
             <select
-              id="settle-expense-option"
+              id="expense"
               value={expense}
               onChange={(e) => setExpense(e.target.value)}
             >
@@ -194,48 +193,46 @@ function SettleUpModal() {
             </select>
           </div>
 
-          <div id="settle-up-name-img">
+          <div className="form-item" id="settle-up-name-img">
             <img
               className="user-profile-image"
               src={receiver?.profileImage}
-              hidden={receiver == null}
+              hidden={!receiver}
             />
             <span>{receiver?.name}</span>
           </div>
 
-          <div>
-            <div className="form-label">
-              <label htmlFor="amount"></label>
-              {expense && validations.amount && (
-                <span className="form-error">{validations.amount}</span>
-              )}
-            </div>
-            <div className="dollarsign-for-amount">
-              <div>$</div>
-              <input
-                id="amount"
-                type="number"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                placeholder={
-                  expense
-                    ? `You owe $${amountDue.toString().slice(0, -2)}.${amountDue
-                        .toString()
-                        .slice(-2)}`
-                    : "amount"
-                }
-                required
-              ></input>
-            </div>
+          <div className="form-label">
+            <label htmlFor="amount">Enter an amount</label>
+            {validations.expense && (
+              <span className="form-error">{validations.amount}</span>
+            )}
+          </div>
+          <div className="dollarsign-for-amount">
+            <div>$</div>
+            <input
+              id="amount"
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              placeholder={
+                expense
+                  ? `You owe $${amountDue.toString().slice(0, -2)}.${amountDue
+                      .toString()
+                      .slice(-2)}`
+                  : "amount"
+              }
+              required
+            ></input>
           </div>
 
-          <div>
-            <div className="form-label">
-              <label htmlFor="payment-date">Payment Date</label>
-              {validations.paymentDate && (
-                <span className="form-error">{validations.paymentDate}</span>
-              )}
-            </div>
+          <div className="form-label">
+            <label htmlFor="payment-date">Payment Date</label>
+            {validations.paymentDate && (
+              <span className="form-error">{validations.paymentDate}</span>
+            )}
+          </div>
+          <div className="form-item">
             <input
               id="settle-payment-date"
               type="date"
@@ -246,7 +243,7 @@ function SettleUpModal() {
             />
           </div>
 
-          <div className="form-buttons">
+          <div className="form-buttons-container">
             <button
               className={submitClass}
               disabled={submitDisabled}

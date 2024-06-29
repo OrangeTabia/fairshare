@@ -19,8 +19,19 @@
 }
 
 #modal-content {
+  padding: 20px;
   position: absolute;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
   background-color:white;
+  background-clip: border-box;
+  border: 2px solid var(--theme-d-gray);
+  border-radius: 10px;
 }
 
 #modal-content h2 {

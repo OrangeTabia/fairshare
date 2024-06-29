@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import { thunkDeleteFriendsExpense, thunkLoadFriendsExpenses } from "../../../redux/friends_expenses";
 import { thunkLoadPayments } from "../../../redux/payments";
+import "./DeleteFriendsExpenseModal";
 
 function DeleteFriendsExpenseModal({ expense }) {
   // const navigate = useNavigate();
@@ -24,10 +25,10 @@ function DeleteFriendsExpenseModal({ expense }) {
   };
 
   return (
-    <div>
+    <div id="delete-friends-expense">
       <h2>Delete Expense</h2>
       <p>Are you sure you want to remove this expense?</p>
-      <div className="submit-cancel-btns">
+      <div className="form-buttons-container">
         <button onClick={deleteExpense} className="form-submit">Yes</button>
         <button onClick={closeModal} className="form-cancel">No</button>
       </div>

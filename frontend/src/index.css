@@ -242,3 +242,63 @@ body {
     font-size: 1.25rem;
   }
 }
+
+/* Common form stylings */
+
+.form-error {
+  color: var(--theme-error);
+}
+
+.form-buttons-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.form-submit {
+  width: 120px;
+  margin-top: 10px;
+  align-self: center;
+
+  font-size: 0.8rem;
+
+  background-color: var(--theme-xl-blue);
+  border: 2px solid var(--theme-blue);
+  border-radius: 5px;
+}
+
+.form-submit:hover {
+  background-color: var(--theme-l-blue);
+  border: 2px solid var(--theme-d-blue);
+}
+
+.form-submit:hover {
+  background-color: var(--theme-l-blue);
+  border: 2px solid var(--theme-d-blue);
+}
+
+.form-submit.disabled,
+.form-submit.disabled:hover {
+  background-color: var(--theme-xl-gray);
+  border: 2px solid var(--theme-l-gray);
+  cursor: default;
+}
+
+.form-cancel {
+  width: 120px;
+  margin-top: 10px;
+  align-self: center;
+
+  font-size: 0.8rem;
+  cursor: pointer;
+
+  background-color: var(--theme-xl-orange);
+  border: 2px solid var(--theme-orange);
+  border-radius: 5px;
+}
+
+.form-cancel:hover {
+  background-color: var(--theme-l-orange);
+  border: 2px solid var(--theme-d-orange);
+}

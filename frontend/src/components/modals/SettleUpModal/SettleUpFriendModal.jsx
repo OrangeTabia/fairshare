@@ -178,24 +178,31 @@ function SettleUpFriendModal() {
     <>
       <h2>Settle up</h2>
       {friendId && expenseSelection.length <= 0 ? (
-        <h3>{`You do not currently owe ${currFriend?.name} any money`}</h3>
+        <p>{`You do not currently owe ${currFriend?.name} any money`}</p>
       ) : !friendId && expenseSelection.length <= 0 ? (
-        <h3>All your expenses are settled!</h3>
+        <p>All your expenses are settled!</p>
       ) : (
         <form onSubmit={handleSubmit} id="settle-up-form">
-          <div>
-            <div>
+          <div className="form-content-container">
+            <div className="form-item">
               {/* set you and friend name in spans so we can make them clickable to change in the future */}
               <p>
-                Between <span>you</span> and <span>{currFriend?.name}</span>
+                Between
+                <span className="your-name-text"> you </span>
+                and
+                <span className="friend-name-text"> {currFriend?.name}</span>
               </p>
             </div>
             {validations.expense && (
               <span className="form-error">{validations.amount}</span>
             )}
-            <div>
+
+            <div className="form-label">
               <label htmlFor="expense">Which Expense?&nbsp;&nbsp;&nbsp;</label>
+            </div>
+            <div className="form-item">
               <select
+                id="expense"
                 value={expense}
                 onChange={(e) => setExpense(e.target.value)}
               >
@@ -209,15 +216,15 @@ function SettleUpFriendModal() {
                 ))}
               </select>
             </div>
-            <br></br>
+
             <div className="form-label">
-              <label htmlFor="amount"></label>
+              <label htmlFor="amount">Enter an amount</label>
               {expense && validations.amount && (
                 <span className="form-error">{validations.amount}</span>
               )}
             </div>
-            <div className="dollarsign-for-amount">
-              <div>$</div>
+            <div className="form-item dollarsign-for-amount">
+              $
               <input
                 id="amount"
                 type="number"
@@ -229,26 +236,26 @@ function SettleUpFriendModal() {
                 required
               />
             </div>
-          </div>
-          <div>
+
             <div className="form-label">
               <label htmlFor="payment-date">Payment Date</label>
               {validations.paymentDate && (
                 <span className="form-error">{validations.paymentDate}</span>
               )}
             </div>
-            <input
-              id="payment-date"
-              type="date"
-              value={paymentDate}
-              min={new Date(Date.now()).toISOString().split("T")[0]}
-              onChange={(e) => setPaymentDate(e.target.value)}
-              placeholder="Payment Date"
-              required
-            />
-          </div>
-          <div>
-            <div className="form-buttons">
+            <div className="form-item">
+              <input
+                id="payment-date"
+                type="date"
+                value={paymentDate}
+                min={new Date(Date.now()).toISOString().split("T")[0]}
+                onChange={(e) => setPaymentDate(e.target.value)}
+                placeholder="Payment Date"
+                required
+              />
+            </div>
+
+            <div className="form-buttons-container">
               <button
                 className={submitClass}
                 disabled={submitDisabled}

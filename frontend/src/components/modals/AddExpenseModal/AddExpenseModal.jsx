@@ -215,7 +215,7 @@ function AddExpenseModal({ friendName }) {
             />
           </div>
 
-          <div className="submit-cancel-btns">
+          <div className="form-buttons-container">
             <button className={submitClass} disabled={submitDisabled}>
               Save
             </button>

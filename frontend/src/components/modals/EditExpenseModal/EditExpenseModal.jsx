@@ -145,72 +145,87 @@ function EditExpenseModal({ expense }) {
 
   return (
     <>
-      <h2>Edit an expense</h2>
+      <h2>Edit an Expense</h2>
       <form onSubmit={handleSubmit} id="edit-expense-form">
-        <div>
-          <div>With You and: {payer?.name}</div>
+        <div className="form-item">
+          <p>Between you and
+            <span className="payer-name"> {payer?.name}</span>
+          </p>
+        </div>
 
-          <div className="form-label">
-            <input
-              id="description"
-              type="text"
-              value={description}
-              placeholder="Enter a description"
-              onChange={(e) => setDescription(e.target.value)}
-              required
+        <div className="form-label">
+          <label htmlFor="description">Describe the expense</label>
+          {validations.description && hasSubmitted && (
+            <span className="form-error">{validations.description}</span>
+          )}
+        </div>
+        <div className="form-item">
+          <input
+            id="description"
+            type="text"
+            value={description}
+            placeholder="Enter a description"
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-label">
+          <label htmlFor="amount">Change the amount</label>
+          {validations.amount && hasSubmitted && (
+            <span className="form-error">{validations.amount}</span>
+          )}
+        </div>
+        <div className="form-item">
+          $
+          <input
+            id="amount"
+            type="text"
+            value={amount}
+            placeholder="0.00"
+            onChange={(e) => setAmount(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-label">
+          <label htmlFor="expense-date">Modify the date</label>
+          {validations.expenseDate && hasSubmitted && (
+            <span className="form-error">{validations.expenseDate}</span>
+          )}
+        </div>
+        <div className="form-item">
+          <input
+            id="expense-date"
+            type="date"
+            value={expenseDate}
+            onChange={(e) => setExpenseDate(e.target.value)}
+            required
             />
-            {validations.description && hasSubmitted && (
-              <span className="form-error">{validations.description}</span>
-            )}
-          </div>
+        </div>
 
-          <div className="form-label">
-            <input
-              id="amount"
-              type="text"
-              value={amount}
-              placeholder="0.00"
-              onChange={(e) => setAmount(e.target.value)}
-              required
-            />
-            {validations.amount && hasSubmitted && (
-              <span className="form-error">{validations.amount}</span>
-            )}
-          </div>
+        <div className="form-label">
+          <label htmlFor="notes">Edit additional notes</label>
+          {validations.notes && hasSubmitted && (
+            <span className="form-error">{validations.notes}</span>
+          )}
+        </div>
+        <div className="form-item">
+          <input
+            id="notes"
+            type="text"
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+          />
+        </div>
 
-          <div className="form-label">
-            <input
-              id="expense_date"
-              type="date"
-              value={expenseDate}
-              onChange={(e) => setExpenseDate(e.target.value)}
-              required
-            />
-            {validations.expenseDate && hasSubmitted && (
-              <span className="form-error">{validations.expenseDate}</span>
-            )}
-          </div>
-
-          <div className="form-label">
-            <input
-              id="notes"
-              type="text"
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-            />
-            {validations.notes && hasSubmitted && (
-              <span className="form-error">{validations.notes}</span>
-            )}
-          </div>
-
-          <div className="submit-cancel-btns">
-            <button className={submitClass} disabled={submitDisabled}>
-              Save
-            </button>
-            <button className="form-cancel" onClick={closeModal}>
-              Cancel
-            </button>
-          </div>
+        <div className="form-buttons-container">
+          <button className={submitClass} disabled={submitDisabled}>
+            Save
+          </button>
+          <button className="form-cancel" onClick={closeModal}>
+            Cancel
+          </button>
         </div>
       </form>
     </>
