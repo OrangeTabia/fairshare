@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField
-from wtforms.validators import DataRequired, Email, ValidationError
+from wtforms.validators import InputRequired, Email, ValidationError
 from flask_login import current_user
 
 from app.models import User
@@ -24,4 +24,4 @@ def user_is_valid(form, field):
 
 
 class AddFriendForm(FlaskForm):
-    email = StringField("Email", validators=[DataRequired(), user_is_valid])
+    email = StringField("Email", validators=[InputRequired(), user_is_valid])
