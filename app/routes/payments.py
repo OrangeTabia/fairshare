@@ -53,8 +53,6 @@ def add_payment():
         db.session.add(new_payment)
         db.session.commit()
 
-        print(new_payment)
-
         return new_payment.to_dict()
     else:
         return form.errors, 401

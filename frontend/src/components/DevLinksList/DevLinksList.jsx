@@ -15,9 +15,9 @@ function DevLinksList() {
                 </div>
 
                 <div className="dev-name">
-                    <span>Ethan Harrasser&nbsp;&nbsp;
-                    <span><a href="https://github.com/ethanharrasser" target="_blank" rel="noreferrer"><img src={GitHubIcon} alt="github-icon" className="github-icon"></img></a></span>
-                    <span>&nbsp;&nbsp;<img src={LinkedInIcon} alt="linkedin-icon" className="linkedin-icon"></img></span>
+                    <span>Ella Harrasser&nbsp;&nbsp;
+                    <span><a href="https://github.com/ellaharrasser" target="_blank" rel="noreferrer"><img src={GitHubIcon} alt="github-icon" className="github-icon"></img></a></span>
+                    <span>&nbsp;&nbsp;<a href="https://www.linkedin.com/in/ellaharrasser/" target="_blank" rel="noreferrer"><img src={LinkedInIcon} alt="linkedin-icon" className="linkedin-icon"></img></a></span>
                     </span>
                 </div>
 

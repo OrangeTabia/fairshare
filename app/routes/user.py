@@ -25,7 +25,6 @@ def user(id):
 
     user = User.query.get(id)
 
-    print("user_routes", current_user)
     return user.to_dict()
 
 @user_routes.route('/<int:id>/update', methods=['POST'])
